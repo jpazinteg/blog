@@ -3,30 +3,32 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Title (display)
-title: Japan CSS Support Example Blog
+title: Japan Azure Integration Support Blog
 # Sub Title (display)
-subtitle: Japan CSS Support Example Blog
+subtitle: 日本マイクロソフトの Azure Integration に関するサポート情報のブログです。
+
 # Description
-description: Japan CSS Support Example Blog
+description: 日本マイクロソフトの Azure Integration に関するサポート情報のブログです。
 
 # Keywords
 keywords:
-  - Information
-  - Example
+  - Azure
+  - Azure Logic Apps
 
-author: CSS Japan
+author: Japan Azure Integration Support Team
 
 # Tag (hexo helper)
 root_tag_generator:
   root_tag_names:
-    - Information
+    - Azure
+    - Azure Logic Apps
   sub_tag_limit: 20
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://cssjpn.github.io/blog/
+url: https://jpazinteg.github.io/blog/
 github:
-  url: https://github.com/cssjpn/blog-example/
+  url: https://github.com/jpazinteg/blog/
   posts_dir: articles
   default_branch: main
 
@@ -41,7 +43,7 @@ skip_render:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:cssjpn/blog-example.git
+  repo: git@github.com:jpazinteg/blog.git
   branch: gh-pages
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }} [skip ci]"
 
