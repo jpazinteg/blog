@@ -6,7 +6,7 @@
   <link href="https://jpazinteg.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jpazinteg.github.io/blog/"/>
-  <updated>2022-03-14T00:31:48.338Z</updated>
+  <updated>2022-03-18T08:28:48.221Z</updated>
   <id>https://jpazinteg.github.io/blog/</id>
   
   <author>
@@ -17,46 +17,21 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>サンプル記事 - タイトル</title>
-    <link href="https://jpazinteg.github.io/blog/information/example/"/>
-    <id>https://jpazinteg.github.io/blog/information/example/</id>
-    <published>2021-01-01T03:00:00.000Z</published>
-    <updated>2022-03-14T00:31:48.338Z</updated>
+    <title>Integration サポート チームの Blog リニューアルのお知らせ</title>
+    <link href="https://jpazinteg.github.io/blog/IntroduceOurBlog/"/>
+    <id>https://jpazinteg.github.io/blog/IntroduceOurBlog/</id>
+    <published>2022-03-18T07:50:00.000Z</published>
+    <updated>2022-03-18T08:28:48.221Z</updated>
     
-    <content type="html"><![CDATA[<p>記事概要</p><span id="more"></span><p>記事本文</p><!-- 文字修飾 --><p><strong>太字</strong></p><p><del>訂正せん</del></p><p><em>斜め文字</em></p><!-- 引用 --><blockquote><p>引用</p><blockquote><p>引用</p></blockquote></blockquote><!-- 見出し --><h2 id="見出し-大"><a href="#見出し-大" class="headerlink" title="見出し (大)"></a>見出し (大)</h2><h3 id="見出し-中"><a href="#見出し-中" class="headerlink" title="見出し (中)"></a>見出し (中)</h3><h4 id="見出し-小"><a href="#見出し-小" class="headerlink" title="見出し (小)"></a>見出し (小)</h4><!-- リスト --><ul><li>リスト<ul><li>リスト</li><li>リスト</li></ul></li><li>リスト</li></ul><!-- 数字リスト --><ol><li>数字リスト<ol><li>数字リスト</li><li>数字リスト</li></ol></li><li>数字リスト</li><li>数字リスト</li></ol><!-- 区切り線 --><hr><!-- リンク --><p><a href="https://jpaztech.github.io/blog/">Japan Azure IaaS Core Support Blog</a></p><!-- 画像 (リポジトリ内ファイルを参照 --><p><img src="/blog/information/example/example01.png"></p><!-- 画像 (外部 URL を参照) --><p><img src="https://jpaztech.github.io/blog/vm/re-install-windows-azure-guest-agent/service.png"></p><!-- コード ブロック --><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> stop rdagent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureGuestAgent</span><br><span class="line"><span class="built_in">net</span> stop WindowsAzureTelemetryService</span><br></pre></td></tr></table></figure><!-- 表 --><table><thead><tr><th>見出し</th><th>見出し</th></tr></thead><tbody><tr><td>セル</td><td>セル</td></tr><tr><td>セル</td><td>セル</td></tr></tbody></table><!-- ノート --><div class="alert is-info"><p class="alert-title">Note</p><p>THIS IS NOTE</p><p><code>[!NOTE]</code> と書くと <code>Note</code> になります。</p><p>これだけ MS 公式ドキュメントと異なります。 (公式ドキュメントだと <code>NOTE</code> も <code>注意</code> に変換される…)</p></div><!-- ヒント --><div class="alert is-success"><p class="alert-title">ヒント</p><p>THIS IS TIP</p><p><code>[!TIP]</code> とかくと <code>ヒント</code> になります。</p></div><!-- 重要 --><div class="alert is-important"><p class="alert-title">重要</p><p>THIS IS IMPORTANT</p><p><code>[!IMPORTANT]</code> とかくと <code>重要</code> になります。</p></div><!-- 注意事項 --><blockquote><p>[!CAUTION]<br>THIS IS CAUTION<br><code>[!CAUTION]</code> と書くと <code>注意事項</code> になります。</p></blockquote><!-- 注意 --><div class="alert is-warning"><p class="alert-title">警告</p><p>THIS IS WARNING</p><p><code>[!WARNING]</code> と書くと <code>警告</code> になります。</p></div>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;記事概要&lt;/p&gt;</summary>
+    <content type="html"><![CDATA[<h2 id="Blog-リニューアルのお知らせ"><a href="#Blog-リニューアルのお知らせ" class="headerlink" title="Blog リニューアルのお知らせ"></a>Blog リニューアルのお知らせ</h2><p>こんにちは、Integration サポート チームです。<br>この度、Integration サポート チームのブログをリニューアルいたしましたのでお知らせします！</p><span id="more"></span><p>こちらのブログでは、Integration 製品のテクノロジーに関する話題を中心に情報を発信していきます。<br>開発部門などからも多くの公式な公開情報を提供しておりますが、私たちのブログでは、新機能に関してのご紹介だけでなく、日本の多くの Integration 製品のご利用者からサポートの依頼を直接受けているサポート エンジニアという立場から、時には私どもの視点を交えて、皆様のお役に立つ情報をご案内したいと思います。<br>これから本ブログで公開していく情報の一例を以下に記載しました。</p><h3 id="公開する情報の例"><a href="#公開する情報の例" class="headerlink" title="公開する情報の例"></a>公開する情報の例</h3><ul><li>リリースされたばかりの新機能に関する情報</li><li>よくサポート チームにお問い合わせいただく “あるある” な問題への対処方法</li><li>Integration 製品 を利用するユーザーの方に是非お伝えしたい情報 </li><li>ある問題についてサポートにお問い合わせいただく際、スムーズに調査を進めるために事前に採取いただきたい情報</li></ul><h3 id="本ブログで扱うテクノロジーの例"><a href="#本ブログで扱うテクノロジーの例" class="headerlink" title="本ブログで扱うテクノロジーの例"></a>本ブログで扱うテクノロジーの例</h3><ul><li>Azure Logic Apps</li><li>Microsoft BizTalk Server</li><li>Microsoft Host Integration Server</li><li>Microsoft Message Queue (MSMQ) </li><li>Workflow Manager</li></ul><p>これから様々な情報を発信しますので、こちらのブログが皆さまのお役に立てれば幸いです。<br>また、実際のサポート サービスでは、製品動作に関する正式な見解のご提供、そして問題解決のサポートを行っていますので、こちらも併せてよろしくお願いいたします！</p><p>※ これまで公開していたフォーラムは以下のリンクからアクセスできますので、過去の情報はこちらからご確認ください。<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/home">以前のフォーラム (アーカイブ) はこちら</a></p>]]></content>
     
     
-    
-    
-    <category term="Information" scheme="https://jpazinteg.github.io/blog/tags/Information/"/>
-    
-    <category term="Example" scheme="https://jpazinteg.github.io/blog/tags/Example/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Example article</title>
-    <link href="https://jpazinteg.github.io/blog/information/test/"/>
-    <id>https://jpazinteg.github.io/blog/information/test/</id>
-    <published>2020-12-21T06:00:00.000Z</published>
-    <updated>2022-03-14T00:31:48.342Z</updated>
-    
-    <content type="html"><![CDATA[<p>hello, world!</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;hello, world!&lt;/p&gt;
-</summary>
-      
+    <summary type="html">&lt;h2 id=&quot;Blog-リニューアルのお知らせ&quot;&gt;&lt;a href=&quot;#Blog-リニューアルのお知らせ&quot; class=&quot;headerlink&quot; title=&quot;Blog リニューアルのお知らせ&quot;&gt;&lt;/a&gt;Blog リニューアルのお知らせ&lt;/h2&gt;&lt;p&gt;こんにちは、Integration サポート チームです。&lt;br&gt;この度、Integration サポート チームのブログをリニューアルいたしましたのでお知らせします！&lt;/p&gt;</summary>
     
     
     
     
-    <category term="Information" scheme="https://jpazinteg.github.io/blog/tags/Information/"/>
+    <category term="General" scheme="https://jpazinteg.github.io/blog/tags/General/"/>
     
   </entry>
   
