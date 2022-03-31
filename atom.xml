@@ -6,7 +6,7 @@
   <link href="https://jpazinteg.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jpazinteg.github.io/blog/"/>
-  <updated>2022-03-21T12:41:15.505Z</updated>
+  <updated>2022-03-31T13:42:00.654Z</updated>
   <id>https://jpazinteg.github.io/blog/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jpazinteg.github.io/blog/general/IntroduceOurBlog/"/>
     <id>https://jpazinteg.github.io/blog/general/IntroduceOurBlog/</id>
     <published>2022-03-18T07:50:00.000Z</published>
-    <updated>2022-03-21T12:41:15.505Z</updated>
+    <updated>2022-03-31T13:42:00.654Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Blog-リニューアルのお知らせ"><a href="#Blog-リニューアルのお知らせ" class="headerlink" title="Blog リニューアルのお知らせ"></a>Blog リニューアルのお知らせ</h2><p>こんにちは、Integration サポート チームです。<br>この度、Integration サポート チームのブログをリニューアルいたしましたのでお知らせします！</p><span id="more"></span><p>こちらのブログでは、Integration 製品のテクノロジーに関する話題を中心に情報を発信していきます。<br>開発部門などからも多くの公式な公開情報を提供しておりますが、私たちのブログでは、新機能に関してのご紹介だけでなく、日本の多くの Integration 製品のご利用者からサポートの依頼を直接受けているサポート エンジニアという立場から、時には私どもの視点を交えて、皆様のお役に立つ情報をご案内したいと思います。<br>これから本ブログで公開していく情報の一例を以下に記載しました。</p><h3 id="公開する情報の例"><a href="#公開する情報の例" class="headerlink" title="公開する情報の例"></a>公開する情報の例</h3><ul><li>リリースされたばかりの新機能に関する情報</li><li>よくサポート チームにお問い合わせいただく “あるある” な問題への対処方法</li><li>Integration 製品 を利用するユーザーの方に是非お伝えしたい情報 </li><li>ある問題についてサポートにお問い合わせいただく際、スムーズに調査を進めるために事前に採取いただきたい情報</li></ul><h3 id="本ブログで扱うテクノロジーの例"><a href="#本ブログで扱うテクノロジーの例" class="headerlink" title="本ブログで扱うテクノロジーの例"></a>本ブログで扱うテクノロジーの例</h3><ul><li>Azure Logic Apps</li><li>Microsoft BizTalk Server</li><li>Microsoft Host Integration Server</li><li>Microsoft Message Queue (MSMQ) </li><li>Workflow Manager</li></ul><p>これから様々な情報を発信しますので、こちらのブログが皆さまのお役に立てれば幸いです。<br>また、実際のサポート サービスでは、製品動作に関する正式な見解のご提供、そして問題解決のサポートを行っていますので、こちらも併せてよろしくお願いいたします！</p><p>※ これまで公開していたフォーラムは以下のリンクからアクセスできますので、過去の情報はこちらからご確認ください。<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/home">以前のフォーラム (アーカイブ) はこちら</a></p>]]></content>
     
