@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps の Availability Zone 対応に伴う通知メールについて | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps の Availability Zone 対応に伴う通知メールについて">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image02.png">
+<meta property="article:published_time" content="2022-04-06T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-07T02:51:59.870Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/AzNotificationMail" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps の Availability Zone 対応に伴う通知メールについて
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-04-06T15:00:00.000Z" itemprop="datePublished">2022-04-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c5c3cf06-6fdd-51bf-aabb-812d15509bc9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+Availability+Zone+%E5%AF%BE%E5%BF%9C%E3%81%AB%E4%BC%B4%E3%81%86%E9%80%9A%E7%9F%A5%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FAzNotificationMail%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FAzNotificationMail.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FAzNotificationMail.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/" data-id="cl1oel9x300000mnwhrhd62qw" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-availability-zone-support-is-coming-soon/ba-p/3254456">Azure Logic Apps - Availability Zone support is coming soon</a></li>
+</ul>
+<p>こちらの要件に伴い、お客様の中では以下の件名でメールが届いた方もいらっしゃるのではないでしょうか。</p>
+<p><strong>Action required: Update firewall configurations that allow or deny IP addresses of Azure Logic Apps</strong></p>
+<p>今回は上記メール本文の概要と、お客様にてご対応いただく内容について整理いたしましたのでご案内させていただきます。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>メール本文の概要について</li>
+<li>本メールに対するアクション</li>
+<li>まとめ</li>
+</ul>
+<h2 id="メール本文の概要について"><a href="#メール本文の概要について" class="headerlink" title="メール本文の概要について"></a>メール本文の概要について</h2><p>まず、本メールの概要については大きく以下の内容となります。</p>
+<p><img src="/blog/LogicApps/AzNotificationMail/image01.png"></p>
+<p>・2022 年 3 月 25 日より、アベイラビリティ ゾーンをサポートするため Azure Logic Apps で利用する IP アドレスの追加が予定されている。<br>・Azure Logic Apps の IP アドレスとの通信を許可するファイアウォール設定がある場合、2022 年 5 月 15 日までに Azure Logic Apps とコネクタの両方について新しいアドレスに更新する必要がある。<br>・既存および新規で作成する Azure Logic Apps に今回追加される IP アドレスが利用される。</p>
+<p>以上が本メールの概要となります。</p>
+<h2 id="本メールに対するアクション"><a href="#本メールに対するアクション" class="headerlink" title="本メールに対するアクション"></a>本メールに対するアクション</h2><p>お客様にご対応いただく内容として、メールにも記載されております通り ファイアウォール の設定変更がございます。</p>
+<p>ここで記載されております　<strong>ファイアウォール</strong>　が何を指しているかですが、Azure Firewall だけではなく、ネットワーク セキュリティ グループやストレージ アカウントのファイアウォール等、Azure Logic Apps からの IP アドレス通信制御を行っている全てのリソースを指します。</p>
+<p>また、通信制御については受信規則と送信規則の大きく二つの考え方がございます。 Azure Logic Apps から送られてくる通信に対して制御をしている場合は受信規則のルールに対して Azure Logic Apps の IP アドレスを設定する必要がございます。逆に Azure Logic Apps へ送信するような通信制御をされている場合は、送信規則のルールに対して Azure Logic Apps の IP アドレスを設定いただく必要がございます。</p>
+<p>例えば、ストレージ アカウントのファイアウォールにて、Azure Logic Apps の送信 IP アドレスを許可されている場合、<br>IP アドレスが変更となりますのでファイアウォール側の設定を見直していただく必要がございます。</p>
+<p><img src="/blog/LogicApps/AzNotificationMail/image02.png"></p>
+<p>ファイアウォールに対して設定すべき IP アドレスにつきましては、以下の通りご利用いただいておりますコネクタの種類によって異なります。</p>
+<p>マネージド コネクタをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
+<p>&lt;ご参考情報&gt;</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス</a></li>
+</ul>
+<p>組み込みトリガー、アクションをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
+<p>&lt;ご参考情報&gt;</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#multi-tenant--single-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナントとシングルテナント - 送信 IP アドレス</a></li>
+</ul>
+<p>ファイアウォール経由で、Azure Logic Apps への 通信を制御している際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
+<p>&lt;ご参考情報&gt;</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#inbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # 受信 IP アドレス</a></li>
+</ul>
+<p>なお、お客様のコネクタでご利用されているサービスについて、これまで特にファイアウォール等の設定をしておらず、<br>Azure Logic Apps の送信 IP アドレスをブロックしていない際には、対応は不要となります。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>メール本文の概要について</li>
+<li>本メールに対するアクション</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/AzNotificationMail.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../general/IntroduceOurBlog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Integration サポート チームの Blog リニューアルのお知らせ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</a>
+          </li>
+        
+          <li>
+            <a href="../../general/IntroduceOurBlog/">Integration サポート チームの Blog リニューアルのお知らせ</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">1</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 10px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 10px;">Azure Logic Apps</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/How-To/" style="font-size: 10px;">How-To</a> <a href="../../tags/Tips/" style="font-size: 10px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

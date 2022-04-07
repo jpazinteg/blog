@@ -6,7 +6,7 @@
   <link href="https://jpazinteg.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://jpazinteg.github.io/blog/"/>
-  <updated>2022-03-31T13:44:42.194Z</updated>
+  <updated>2022-04-07T02:51:59.870Z</updated>
   <id>https://jpazinteg.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</title>
+    <link href="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/"/>
+    <id>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</id>
+    <published>2022-04-06T15:00:00.000Z</published>
+    <updated>2022-04-07T02:51:59.870Z</updated>
+    
+    <content type="html"><![CDATA[<p>こんにちは！Azure Integration サポート チームの 川合 です。<br>つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。</p><ul><li><a href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-availability-zone-support-is-coming-soon/ba-p/3254456">Azure Logic Apps - Availability Zone support is coming soon</a></li></ul><p>こちらの要件に伴い、お客様の中では以下の件名でメールが届いた方もいらっしゃるのではないでしょうか。</p><p><strong>Action required: Update firewall configurations that allow or deny IP addresses of Azure Logic Apps</strong></p><p>今回は上記メール本文の概要と、お客様にてご対応いただく内容について整理いたしましたのでご案内させていただきます。</p><span id="more"></span><h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul><li>メール本文の概要について</li><li>本メールに対するアクション</li><li>まとめ</li></ul><h2 id="メール本文の概要について"><a href="#メール本文の概要について" class="headerlink" title="メール本文の概要について"></a>メール本文の概要について</h2><p>まず、本メールの概要については大きく以下の内容となります。</p><p><img src="/blog/LogicApps/AzNotificationMail/image01.png"></p><p>・2022 年 3 月 25 日より、アベイラビリティ ゾーンをサポートするため Azure Logic Apps で利用する IP アドレスの追加が予定されている。<br>・Azure Logic Apps の IP アドレスとの通信を許可するファイアウォール設定がある場合、2022 年 5 月 15 日までに Azure Logic Apps とコネクタの両方について新しいアドレスに更新する必要がある。<br>・既存および新規で作成する Azure Logic Apps に今回追加される IP アドレスが利用される。</p><p>以上が本メールの概要となります。</p><h2 id="本メールに対するアクション"><a href="#本メールに対するアクション" class="headerlink" title="本メールに対するアクション"></a>本メールに対するアクション</h2><p>お客様にご対応いただく内容として、メールにも記載されております通り ファイアウォール の設定変更がございます。</p><p>ここで記載されております　<strong>ファイアウォール</strong>　が何を指しているかですが、Azure Firewall だけではなく、ネットワーク セキュリティ グループやストレージ アカウントのファイアウォール等、Azure Logic Apps からの IP アドレス通信制御を行っている全てのリソースを指します。</p><p>また、通信制御については受信規則と送信規則の大きく二つの考え方がございます。 Azure Logic Apps から送られてくる通信に対して制御をしている場合は受信規則のルールに対して Azure Logic Apps の IP アドレスを設定する必要がございます。逆に Azure Logic Apps へ送信するような通信制御をされている場合は、送信規則のルールに対して Azure Logic Apps の IP アドレスを設定いただく必要がございます。</p><p>例えば、ストレージ アカウントのファイアウォールにて、Azure Logic Apps の送信 IP アドレスを許可されている場合、<br>IP アドレスが変更となりますのでファイアウォール側の設定を見直していただく必要がございます。</p><p><img src="/blog/LogicApps/AzNotificationMail/image02.png"></p><p>ファイアウォールに対して設定すべき IP アドレスにつきましては、以下の通りご利用いただいておりますコネクタの種類によって異なります。</p><p>マネージド コネクタをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p><p>&lt;ご参考情報&gt;</p><ul><li><a href="https://docs.microsoft.com/ja-JP/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス</a></li></ul><p>組み込みトリガー、アクションをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p><p>&lt;ご参考情報&gt;</p><ul><li><a href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#multi-tenant--single-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナントとシングルテナント - 送信 IP アドレス</a></li></ul><p>ファイアウォール経由で、Azure Logic Apps への 通信を制御している際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p><p>&lt;ご参考情報&gt;</p><ul><li><a href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#inbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # 受信 IP アドレス</a></li></ul><p>なお、お客様のコネクタでご利用されているサービスについて、これまで特にファイアウォール等の設定をしておらず、<br>Azure Logic Apps の送信 IP アドレスをブロックしていない際には、対応は不要となります。</p><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p><ul><li>メール本文の概要について</li><li>本メールに対するアクション</li></ul><p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p><p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;こんにちは！Azure Integration サポート チームの 川合 です。&lt;br&gt;つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-availability-zone-support-is-coming-soon/ba-p/3254456&quot;&gt;Azure Logic Apps - Availability Zone support is coming soon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;こちらの要件に伴い、お客様の中では以下の件名でメールが届いた方もいらっしゃるのではないでしょうか。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Action required: Update firewall configurations that allow or deny IP addresses of Azure Logic Apps&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;今回は上記メール本文の概要と、お客様にてご対応いただく内容について整理いたしましたのでご案内させていただきます。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="How-To" scheme="https://jpazinteg.github.io/blog/tags/How-To/"/>
+    
+    <category term="Tips" scheme="https://jpazinteg.github.io/blog/tags/Tips/"/>
+    
+    <category term="Azure Integration" scheme="https://jpazinteg.github.io/blog/tags/Azure-Integration/"/>
+    
+    <category term="Azure Logic Apps" scheme="https://jpazinteg.github.io/blog/tags/Azure-Logic-Apps/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Integration サポート チームの Blog リニューアルのお知らせ</title>
     <link href="https://jpazinteg.github.io/blog/general/IntroduceOurBlog/"/>
     <id>https://jpazinteg.github.io/blog/general/IntroduceOurBlog/</id>
     <published>2022-03-18T07:50:00.000Z</published>
-    <updated>2022-03-31T13:44:42.194Z</updated>
+    <updated>2022-04-07T02:51:59.870Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Blog-リニューアルのお知らせ"><a href="#Blog-リニューアルのお知らせ" class="headerlink" title="Blog リニューアルのお知らせ"></a>Blog リニューアルのお知らせ</h2><p>こんにちは、Integration サポート チームです。<br>この度、Integration サポート チームのブログをリニューアルいたしましたのでお知らせします！</p><span id="more"></span><p>こちらのブログでは、Integration 製品のテクノロジーに関する話題を中心に情報を発信していきます。<br>開発部門などからも多くの公式な公開情報を提供しておりますが、私たちのブログでは、新機能に関してのご紹介だけでなく、日本の多くの Integration 製品のご利用者からサポートの依頼を直接受けているサポート エンジニアという立場から、時には私どもの視点を交えて、皆様のお役に立つ情報をご案内したいと思います。<br>これから本ブログで公開していく情報の一例を以下に記載しました。</p><h3 id="公開する情報の例"><a href="#公開する情報の例" class="headerlink" title="公開する情報の例"></a>公開する情報の例</h3><ul><li>リリースされたばかりの新機能に関する情報</li><li>よくサポート チームにお問い合わせいただく “あるある” な問題への対処方法</li><li>Integration 製品 を利用するユーザーの方に是非お伝えしたい情報 </li><li>ある問題についてサポートにお問い合わせいただく際、スムーズに調査を進めるために事前に採取いただきたい情報</li></ul><h3 id="本ブログで扱うテクノロジーの例"><a href="#本ブログで扱うテクノロジーの例" class="headerlink" title="本ブログで扱うテクノロジーの例"></a>本ブログで扱うテクノロジーの例</h3><ul><li>Azure Logic Apps</li><li>Microsoft BizTalk Server</li><li>Microsoft Host Integration Server</li><li>Microsoft Message Queue (MSMQ) </li><li>Workflow Manager</li></ul><p>これから様々な情報を発信しますので、こちらのブログが皆さまのお役に立てれば幸いです。<br>また、実際のサポート サービスでは、製品動作に関する正式な見解のご提供、そして問題解決のサポートを行っていますので、こちらも併せてよろしくお願いいたします！</p><p>※ これまで公開していたフォーラムは以下のリンクからアクセスできますので、過去の情報はこちらからご確認ください。<br><a href="https://social.technet.microsoft.com/Forums/ja-JP/home">以前のフォーラム (アーカイブ) はこちら</a></p>]]></content>
     
