@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MSMQ をドメインモードでインストールする手順について | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っておりますが、今回はその中でも MSMQ についてのご紹介と、ドメインモードでのインストール手順についてご紹介します。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MSMQ をドメインモードでインストールする手順について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っておりますが、今回はその中でも MSMQ についてのご紹介と、ドメインモードでのインストール手順についてご紹介します。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image08.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image09.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image10.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image11.png">
+<meta property="article:published_time" content="2022-05-13T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-13T02:54:44.919Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="MSMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MSMQ/MsmqCleanInstall" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MSMQ をドメインモードでインストールする手順について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-05-13T15:00:00.000Z" itemprop="datePublished">2022-05-14</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+0ef925af-f497-57cd-82a3-a9e84330c747%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMSMQ+%E3%82%92%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FMSMQ%2FMsmqCleanInstall%2F%29%0A*+Content+Source%3A+%5Barticles%2FMSMQ%2FMsmqCleanInstall.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FMSMQ%2FMsmqCleanInstall.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/" data-id="cl33ujgw800010no066s0d6rb" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っておりますが、今回はその中でも MSMQ についてのご紹介と、ドメインモードでのインストール手順についてご紹介します。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>MSMQ について</li>
+<li>MSMQ をドメインモードでインストールする手順について</li>
+<li>ドメインモードのインストール失敗時の修正手順について</li>
+<li>まとめ</li>
+</ul>
+<h2 id="MSMQ-について"><a href="#MSMQ-について" class="headerlink" title="MSMQ について"></a>MSMQ について</h2><p>MSMQ とは、弊社が提供するオンプレミス製品のメッセージ キューイング サービスです。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
+</ul>
+<p>通常のプログラムでは、実行中のプログラムはプログラム間のデータの送受信のタイミングを同期する必要があり、処理の開始・完了を待機する必要があります。<br>それに対してメッセージ キューイングでは、メッセージ ブローカーと呼ばれるソフトウェアがメッセージ キューと呼ばれるデータ保存領域に対してデータを管理し、データの送信側はデータの受信側の処理を待たなくてもデータをキューに書き出したタイミングで処理を完了させることができます。また、受信側も任意のタイミングでキューから取り出すことができ、非同期での処理が可能になります。</p>
+<h2 id="MSMQ-をドメインモードでインストールする手順について"><a href="#MSMQ-をドメインモードでインストールする手順について" class="headerlink" title="MSMQ をドメインモードでインストールする手順について"></a>MSMQ をドメインモードでインストールする手順について</h2><p>MSMQ のインストールに関する公開情報については以下に記載がありますので、ご興味あります方はぜひご覧ください。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/dotnet/framework/wcf/samples/installing-message-queuing-msmq">メッセージ キュー (MSMQ) のインストール</a></li>
+</ul>
+<p>公開情報には Windows Vista や Windows 7 等の記載がありますが、お使いの Windows 10 や Windows Server 2008 以降の Windows Server 製品であればご利用いただくことが可能です。<br>ドメインに参加せずに MSMQ をご利用になられたい場合は、以下のように設定いただくことでワークグループモードとしてご利用いただくことが可能です。</p>
+<p><img src="/blog/MSMQ/MsmqCleanInstall/image01.png"></p>
+<p>ドメインに参加して MSMQ をご利用になられたい場合、公開情報に記載のあります通り、<br><strong>[ディレクトリ サービス統合] をクリックし (ドメインに参加するコンピューターの場合)、 [HTTP サポート] をクリックします。</strong><br>のように、[ディレクトリ サービス統合 (Directory Services Integration) ]  と [HTTP サポート]  のチェックボックスにチェックを設定し、ドメインモードとしてインストールしてください。</p>
+<p><img src="/blog/MSMQ/MsmqCleanInstall/image02.png"></p>
+<p>この時、それ以外のチェックについてはお客様のご要件に合わせて必要な項目のみチェックいただく必要がございます。<br>マルチキャスティング サポートやルーティング サービスについては、以下の公開情報の通り Active Directory Domain Servicesで適切なアクセス許可設定が必要となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-US/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc730960(v=ws.11)?redirectedfrom=MSDN#to-grant-permissions-for-a-computer-object-to-the-servers-object-in-active-directory-domain-services-before-installing-the-routing-service-feature-on-a-computer-that-is-not-a-domain-controller">To grant permissions for a computer object to the Servers object in Active Directory Domain Services before installing the Routing Service feature on a computer that is not a domain controller</a></li>
+</ul>
+<p>【翻訳】<br>ドメインコントローラーではない Windows Server 2008 R2 のコンピューターにルーティングサービス機能を、ドメインコントローラーである Windows Server 2008 R2 のコンピューターにメッセージキューイングのディレクトリサービス統合機能を正しくインストールするには、Active Directory Domain Servicesに特定のアクセス許可を設定することが必要です。これらの機能をインストールする前に、以下の手順に従ってActive Directory Domain Servicesで適切なアクセス許可を付与してください<br>※ここで Windows Server 2008 R2 といった記載がありますが他の OS に関しても同様です。</p>
+<p>上記の設定をせずにマルチキャスティング サポートやルーティング サービスのチェックボックスに設定をしてインストールした場合、正しくインストール出来ない場合がございますのでご留意ください。</p>
+<h2 id="ドメインモードのインストール失敗時の修正手順について"><a href="#ドメインモードのインストール失敗時の修正手順について" class="headerlink" title="ドメインモードのインストール失敗時の修正手順について"></a>ドメインモードのインストール失敗時の修正手順について</h2><p>上記の公開情報を基にインストール作業を実施いただくことですぐに MSMQ をご利用いただくことが可能ですが、お客様の環境によってはインストール作業時にエラーになったり、ワークグループモードからドメインモードにインストールが出来ない場合がございます。どうしてもワークグループモードからドメインモードに変更できない場合、以下の操作を実施いただくことでドメインモードに切り替えることが出来ます。操作の実施にあたっては、レジストリの変更やサーバーの再起動を伴います。十分に作業計画を立て、事前に検証を実施したうえで実施をお願いいたします。</p>
+<p>【修正手順】<br>1．MSMQ がインストールされているサーバーにログインし、サーバーマネージャーを起動する。</p>
+<p>2．[役割と機能の追加]を選択する。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image03.png"></p>
+<p>3．[役割と機能の削除ウィザードの起動] を選択する。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image04.png"></p>
+<p>4．[Message Queuing] サービスについて全てチェックを外す。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image05.png"></p>
+<p>5．アンインストールが完了したら [閉じる] を選択する。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image06.png"></p>
+<p>※反映には再起動が必要となりますが、この時点では再起動はしません。</p>
+<p>6．Windows キー + R キーを同時に押下し、[ファイル名を指定して実行] に “ regedit ” と入力して [OK] を選択。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image07.png"></p>
+<p>7．以下のレジストリキーを確認し、 “Workgroup”=dword:00000001 の場合、値を0に変更する。</p>
+<p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters<br>存在しない場合は手順の実施は不要。<br><img src="/blog/MSMQ/MsmqCleanInstall/image08.png"></p>
+<p>8．ドメインコントローラーがインストールされているサーバーへログイン後、<br>[Active Directory ユーザーとコンピューター] を開き、[表示] を以下の設定にする。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image09.png"></p>
+<p>9．MSMQ がインストールされているサーバーより、MSMQ オブジェクトを削除する。<br>存在しない場合は手順の実施は不要。<br><img src="/blog/MSMQ/MsmqCleanInstall/image10.png"></p>
+<p>10．以上の作業が完了後、MSMQ がインストールされているサーバーの再起動を実施する。<br>ドメインコントローラーがインストールされているサーバーについては作業は不要。</p>
+<p>11．MSMQ がインストールされているサーバーに再度ログインし、<br>[ディレクトリ サービス統合 (Directory Services Integration) ] を有効にしてMSMQサービスを再インストールする。 </p>
+<p>12．インストール完了後、MSMQ がインストールされているサーバーの再起動を実施する。<br>ドメインコントローラーがインストールされているサーバーについては作業は不要。</p>
+<p>＜作業結果確認＞<br>作業後に以下の内容になっていることを確認。<br>・コンピューターの管理にパブリックキューが表示されている。<br>・Workgroup の値が 0 になっている。<br><img src="/blog/MSMQ/MsmqCleanInstall/image11.png"></p>
+<p>以上、 MSMQ をドメインモードでインストールする方法と、インストール失敗時の修正手順についてご紹介させていただきました。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>MSMQ の概要</li>
+<li>MSMQ をドメインモードでインストールする方法とインストール失敗時の修正手順</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/MSMQ/MsmqCleanInstall.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../LogicApps/AzNotificationMail/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">MSMQ をドメインモードでインストールする手順について</a>
+          </li>
+        
+          <li>
+            <a href="../../LogicApps/AzNotificationMail/">Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</a>
+          </li>
+        
+          <li>
+            <a href="../../general/IntroduceOurBlog/">Integration サポート チームの Blog リニューアルのお知らせ</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">1</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 10px;">Azure Logic Apps</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
