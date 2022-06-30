@@ -10,12 +10,12 @@ tags:
 ---
 
 こんにちは。  Azure Integration サポート チームの北山です。  
-ログ アラート発報時に出力されたデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。
+ログ アラート発報時に出力されるデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。
 
 
 # こんな方におすすめです
 - ログ アラート発報時に、ロジック アプリを使ってメール通知されたい方、通知されるメールにクエリの結果を含めたい方
-- アラート発報時に評価されたログを別のシステムへ連携されたい方
+- アラート発報時に評価されたクエリの結果を別のシステムへ連携されたい方
 
 
 # 前提条件
@@ -33,17 +33,17 @@ tags:
 ![](./Integration-logAlertRule/create-logicapp01.png)
 
 
-ロジック アプリ作成後に、テンプレートとして [HTTP 要求の受信時] を選択します。
+ロジック アプリ作成後に、テンプレートとして **[HTTP 要求の受信時]** を選択します。
 
 ![](./Integration-logAlertRule/create-logicapp02.png)
 
 
-[サンプルのペイロードを使用してスキーマを生成する] をクリックします。
+**[サンプルのペイロードを使用してスキーマを生成する]** をクリックします。
 
 ![](./Integration-logAlertRule/create-logicapp03.png)
 
 
-下記の JSON データをそのままコピー & ペーストして、[完了] をクリックします。
+下記の JSON データをそのままコピー & ペーストして、**[完了]** をクリックします。
 
 ```json
 {
@@ -119,19 +119,20 @@ tags:
 
 ![](./Integration-logAlertRule/managedid-creation01.png)
 
-Log Analytics API を使用するためには Azure への認証が必要ですが、今回はロジック アプリのマネージド ID を用いて認証する方法を選択します。  
+Log Analytics API を使用するためには Azure への認証が必要です。  
+今回はロジック アプリのマネージド ID を用いて認証する方法を選択します。  
 
-有効化するために、当該ロジック アプリのページへ移動し、左側ペインより [ID] をクリックします。  
+有効化するために、当該ロジック アプリのページへ移動し、左側ペインより **[ID]** をクリックします。  
 その後、状態の箇所をオフからオンに変更します。
 
 ![](./Integration-logAlertRule/managedid-creation02.png)
 
-有効化したマネージド ID に対してロールを付与するために、[Azure ロールの割り当て] をクリックします。
+有効化したマネージド ID に対してロールを付与するために、**[Azure ロールの割り当て]** をクリックします。
 
 ![](./Integration-logAlertRule/managedid-creation03.png)
 
 
-[ロールの割り当ての追加] をクリックし、ログが保存された Log Analytics ワークスペースを管理しているリソース グループをスコープに、[閲覧者] ロールを指定します。  
+**[ロールの割り当ての追加]** をクリックし、ログが保存された Log Analytics ワークスペースを管理しているリソース グループをスコープに、**[閲覧者]** ロールを指定します。  
 > 検索対象のワークスペースが Log Analytics ではなく Application Insights の場合は、当該 Application Insights リソースを管理しているリソース グループをスコープとしてください。
 
 ![](./Integration-logAlertRule/managedid-creation04.png)
@@ -140,17 +141,17 @@ Log Analytics API を使用するためには Azure への認証が必要です�
 
 
 ## 3. Log Analytics API にアクセスし、クエリ結果を取得するワークフローを作成する
-当該ロジック アプリ ページから [ロジック アプリ デザイナー] をクリックし、ワークフローを編集する画面へ移動します。
+当該ロジック アプリ ページから **[ロジック アプリ デザイナー]** をクリックし、ワークフローを編集する画面へ移動します。
 
-HTTP 組み込みコネクタの [HTTP] アクションを追加します。
+HTTP 組み込みコネクタの **[HTTP]** アクションを追加します。
 
 ![](./Integration-logAlertRule/create-workflow-01.png)
 
-方法の箇所には [GET] をご指定いただき、URI の箇所には [動的なコンテンツ - linkToSearchResultsAPI] を指定します。
+方法の箇所には **[GET]** をご指定いただき、URI の箇所には **[動的なコンテンツ - linkToSearchResultsAPI]** を指定します。
 
 ![](./Integration-logAlertRule/create-workflow-02.png)
 
-その後、自動的に [For each] が追加されますが、そのままで問題ありません。  
+その後、自動的に **[For each]** が追加されますが、そのままで問題ありません。  
 これは、linkToSearchResultsAPI オブジェクトを保持している親オブジェクト (allOf オブジェクト) のデータ型が配列であるため、自動的に For each が作成され配列内のオブジェクト一つ一つにアクセスする必要があるためです。  
 ログ アラート ルールが出力する JSON データの allOf オブジェクトは要素数が必ず 1 つであるため、そのままで問題ありません。
 
@@ -159,11 +160,11 @@ HTTP 組み込みコネクタの [HTTP] アクションを追加します。
 ![](./Integration-logAlertRule/create-workflow-04.png)
 
 
-引き続き HTTP アクションの編集画面に戻り、[Add new parameter] から [認証] をクリックします。
+引き続き HTTP アクションの編集画面に戻り、**[Add new parameter]** から **[認証]** をクリックします。
 
 ![](./Integration-logAlertRule/create-workflow-05.png)
 
-認証の種類に [マネージド ID]、マネージド ID に [システム割り当てマネージド ID]、対象ユーザー に [https://api.loganalytics.io] を指定します。
+認証の種類に **[マネージド ID]**、マネージド ID に **[システム割り当てマネージド ID]**、対象ユーザー に **[https://api.loganalytics.io]** を指定します。
 
 > Application Insights のログ アラート ルールの場合は、対象ユーザーに [https://api.applicationinsights.io] をご指定ください。
 
@@ -174,7 +175,7 @@ HTTP 組み込みコネクタの [HTTP] アクションを追加します。
 
 
 試しに、意図的にログ アラートを発報してみます。  
-すると、下図のようにデータが取得出来ている事が確認できました。
+すると、下図のようにデータの取得が確認できました。
 
 ![](./Integration-logAlertRule/create-workflow-07.png)
 
@@ -306,9 +307,9 @@ HTTP アクションの出力結果
 
 
 ## 番外編. ログ クエリの結果が記載されたメールを通知する
-ここでは、[HTML テーブルの作成] アクションと [Office 365 Outlook] コネクタを用いて、ログ クエリの結果が記載されたメールを通知する方法について説明します。
+ここでは、**[HTML テーブルの作成]** アクションと **[Office 365 Outlook]** コネクタを用いて、ログ クエリの結果が記載されたメールを通知する方法について説明します。
 
-まず、データ操作組み込みコネクタの [HTML テーブルの作成] を追加します。
+まず、データ操作組み込みコネクタの **[HTML テーブルの作成]** を追加します。
 
 ![](./Integration-logAlertRule/mail-setting-01.png)
 
@@ -322,7 +323,7 @@ array(outputs('HTTP')['body']['tables'][0]['rows'])
 ![](./Integration-logAlertRule/mail-setting-02.png)
 
 
-列に [カスタム] を指定し、ヘッダーに対して下記のコードをコピー & ペーストします。
+列に **[カスタム]** を指定し、ヘッダーに対して下記のコードをコピー & ペーストします。
 
 ```
 outputs('HTTP')['body']['tables'][0]['columns'][0]['name']
@@ -355,12 +356,12 @@ Heartbeat
 ![](./Integration-logAlertRule/mail-setting-06.png)
 
 
-その後、Office 365 Outlook コネクタの [メールの送信 (V2)] アクションを使って、[HTML テーブルの作成] アクションで作成した HTML オブジェクトを含めたメールを送信します。
+その後、Office 365 Outlook コネクタの **[メールの送信 (V2)]** アクションを使って、**[HTML テーブルの作成]** アクションで作成した HTML オブジェクトを含めたメールを送信します。
 
 ![](./Integration-logAlertRule/mail-setting-07.png)
 
 
-下図のように、本文の箇所に [HTML テーブルの作成] アクションの出力を指定します。
+下図のように、本文の箇所に **[HTML テーブルの作成]** アクションの出力を指定します。
 > 出力が表示されない場合は、[もっと見る] をクリックしてみてください。
 
 ![](./Integration-logAlertRule/mail-setting-08.png)
