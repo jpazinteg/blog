@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。  今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。  今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image08.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image09.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image10.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image11.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image12.png">
+<meta property="article:published_time" content="2022-06-29T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-30T00:42:01.887Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/ApiConnectionsDelete" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-06-29T15:00:00.000Z" itemprop="datePublished">2022-06-30</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d7e04806-25ad-5424-8b4b-7ca8fca5ad3f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E4%B8%8D%E8%A6%81%E3%81%AA%E6%8E%A5%E7%B6%9A%E6%83%85%E5%A0%B1%E3%81%AE%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FApiConnectionsDelete%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FApiConnectionsDelete.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FApiConnectionsDelete.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/" data-id="cl50axooh00000npr1frc3rig" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image01.png"></p>
+<p>今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>接続情報 (API 接続) のリソースの確認方法について</li>
+<li>接続情報 (API 接続) のリソースの削除方法について</li>
+<li>まとめ</li>
+</ul>
+<h2 id="接続情報-API-接続-のリソースの確認方法について"><a href="#接続情報-API-接続-のリソースの確認方法について" class="headerlink" title="接続情報 (API 接続) のリソースの確認方法について"></a>接続情報 (API 接続) のリソースの確認方法について</h2><p>まず、この接続情報がどのように作成されるかご説明させていただきます。<br>Azure Logic Apps でコネクタをご利用になられる場合、以下のように当該サービスの認証に必要な接続情報を入力する画面が表示されます。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image02.png"></p>
+<p>ここで認証に必要な情報を入力し接続情報を作成すると、自動的にワークフローと同一のリソース グループに [API 接続]というリソースが作成されます。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image03.png"></p>
+<p>こちらのリソースがコネクタの接続情報を設定する画面で表示されている接続情報の内容になります。<br>なお、従量課金タイプの Azure Logic Apps ですと、ワークフローの画面左部より [開発者ツール] - [API 接続] を選択いただくことで内容を確認することが可能でございます。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image04.png"></p>
+<p>Standard タイプの Azure Logic Apps の場合は、[ワークフロー] - [接続] を選択頂くことで API 接続 を確認いただくことが可能でございます。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image05.png"></p>
+<p>以上が接続情報のリソースである [API 接続] の確認方法でした。</p>
+<h2 id="接続情報-API-接続-のリソースの削除方法について"><a href="#接続情報-API-接続-のリソースの削除方法について" class="headerlink" title="接続情報 (API 接続) のリソースの削除方法について"></a>接続情報 (API 接続) のリソースの削除方法について</h2><p>次に、接続情報の削除方法についてご案内申し上げます。<br>本記事では従量課金タイプの Azure Logic Apps で利用している API 接続の削除方法をご説明いたします。</p>
+<p>こちらにつきましては、当該リソースを削除することで既存の接続先を削除することが可能でございます。<br>以下にキャプチャと併せて削除例を記載いたしますので、参考までにご確認いただけますと幸いです。</p>
+<p>＜削除例＞<br>1．対象の接続情報を確認する。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image06.png"> </p>
+<p>2．リソース グループを開く。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image07.png"> </p>
+<p>3．対象の API 接続が存在することを確認し、削除を選択。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image08.png"> </p>
+<p>4．再度、対象のリソースが表示されていることを確認し、削除の確認欄に “はい” と入力し、削除ボタンを選択。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image09.png"> </p>
+<p>5．削除されたことを確認したのち、Logic Apps のワークフローの接続情報作成時に削除した接続情報が表示されないことを確認する。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image10.png"><br><img src="/blog/LogicApps/ApiConnectionsDelete/image11.png"> </p>
+<p>以上より、誤った接続情報や不要になった接続情報を削除することが可能でございます。<br>ただし、こちらのリソースについては削除すると復元が出来ませんので、影響範囲を十分調査いただいたうえで削除頂ければと存じます。</p>
+<p>参考までに、API 接続がどのリソースに紐づいているかを確認されたい場合、同一のリソース グループに閉じた情報ではありますが、リソース グループの画面より、以下のリソース ビジュアライザー という機能を利用することで視覚的に確認いただくことが可能です。</p>
+<p><img src="/blog/LogicApps/ApiConnectionsDelete/image12.png"> </p>
+<p>こちらも併せてご確認いただけますと幸いでございます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>接続情報 (API 接続) のリソースの確認方法について</li>
+<li>接続情報 (API 接続) のリソースの削除方法について</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/ApiConnectionsDelete.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../MSMQ/MsmqCleanInstall/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">MSMQ をドメインモードでインストールする手順について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqCleanInstall/">MSMQ をドメインモードでインストールする手順について</a>
+          </li>
+        
+          <li>
+            <a href="../AzNotificationMail/">Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</a>
+          </li>
+        
+          <li>
+            <a href="../../general/IntroduceOurBlog/">Integration サポート チームの Blog リニューアルのお知らせ</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">2</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 15px;">Azure Logic Apps</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
