@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの北山です。ログ アラート発報時に出力されるデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。  ログ アラート発報時に、ロジック アプリを使ってメール通知されたい方、通知されるメールにクエリの結果を含めたい方 アラート発報時に評価されたクエリの結果を別のシステムへ連携されたい">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの北山です。ログ アラート発報時に出力されるデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。  ログ アラート発報時に、ロジック アプリを使ってメール通知されたい方、通知されるメールにクエリの結果を含めたい方 アラート発報時に評価されたクエリの結果を別のシステムへ連携されたい">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/managedid-creation01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/managedid-creation02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/managedid-creation03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/managedid-creation04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-workflow-07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-08.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-09.png">
+<meta property="article:published_time" content="2022-04-06T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-30T23:58:27.060Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Azure Monitor">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/Integration-logAlertRule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-04-06T15:00:00.000Z" itemprop="datePublished">2022-04-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+57aab1ce-0d2a-5cb0-86c3-10fdce157034%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%AD%E3%82%B0+%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88+%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E7%99%BA%E5%A0%B1%E6%99%82%E3%81%AB%E5%87%BA%E5%8A%9B%E3%81%95%E3%82%8C%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8B%E3%82%89%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%AE%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FIntegration-logAlertRule%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FIntegration-logAlertRule.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FIntegration-logAlertRule.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/" data-id="cl51otj1v000u0no02k12hy7h" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。  Azure Integration サポート チームの北山です。<br>ログ アラート発報時に出力されるデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。</p>
+<ul>
+<li>ログ アラート発報時に、ロジック アプリを使ってメール通知されたい方、通知されるメールにクエリの結果を含めたい方</li>
+<li>アラート発報時に評価されたクエリの結果を別のシステムへ連携されたい方</li>
+</ul>
+<h1 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h1><ul>
+<li>今回の記事では従量課金版ロジック アプリを利用します。ただし、スタンダード版のロジック アプリでも問題ありません。</li>
+<li>ログ アラート ルールの API バージョンは、2022 年 6 月 30 日時点で最新版の 2021-08-01 を想定しています。<ul>
+<li>これはアラート スキーマが <strong>monitoringService = Log Alerts V2</strong> を想定しております。</li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema-definitions#monitoringservice--log-alerts-v2">共通アラート スキーマ定義</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="1-アラート発報時に実行されるロジック-アプリの作成"><a href="#1-アラート発報時に実行されるロジック-アプリの作成" class="headerlink" title="1. アラート発報時に実行されるロジック アプリの作成"></a>1. アラート発報時に実行されるロジック アプリの作成</h2><p>アラート発報時に実行されるロジック アプリを、Azure portal から作成します。  </p>
+<blockquote>
+<p>今回の記事では従量課金版ロジック アプリを利用しております。</p>
+</blockquote>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-logicapp01.png"></p>
+<p>ロジック アプリ作成後に、テンプレートとして <strong>[HTTP 要求の受信時]</strong> を選択します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-logicapp02.png"></p>
+<p><strong>[サンプルのペイロードを使用してスキーマを生成する]</strong> をクリックします。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-logicapp03.png"></p>
+<p>下記の JSON データをそのままコピー &amp; ペーストして、**[完了]** をクリックします。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;schemaId&quot;</span>: <span class="string">&quot;azureMonitorCommonAlertSchema&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;essentials&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;alertId&quot;</span>: <span class="string">&quot;/subscriptions/SUBSCRIPTION_ID/providers/Microsoft.AlertsManagement/alerts/8f29da04-5533-c8d1-d84d-b76efde41881&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;alertRule&quot;</span>: <span class="string">&quot;test-log-alert-forBlog&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;severity&quot;</span>: <span class="string">&quot;Sev3&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;signalType&quot;</span>: <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;monitorCondition&quot;</span>: <span class="string">&quot;Fired&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;monitoringService&quot;</span>: <span class="string">&quot;Log Alerts V2&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;alertTargetIDs&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCEGROUP_NAME/providers/microsoft.hybridcompute/machines/RESOURCE_NAME&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">&quot;configurationItems&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;/subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCEGROUP_NAME/providers/microsoft.hybridcompute/machines/RESOURCE_NAME&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">&quot;originAlertId&quot;</span>: <span class="string">&quot;eeb6feef-927a-4b69-8d56-bfa33f6bb32d&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;firedDateTime&quot;</span>: <span class="string">&quot;2022-06-20T22:20:00.1015418Z&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;essentialsVersion&quot;</span>: <span class="string">&quot;1.0&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;alertContextVersion&quot;</span>: <span class="string">&quot;1.0&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;alertContext&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;properties&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">&quot;conditionType&quot;</span>: <span class="string">&quot;LogQueryCriteria&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;condition&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;windowSize&quot;</span>: <span class="string">&quot;PT15M&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;allOf&quot;</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="attr">&quot;searchQuery&quot;</span>: <span class="string">&quot;Heartbeat\n&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;metricMeasureColumn&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">                        <span class="attr">&quot;targetResourceTypes&quot;</span>: <span class="string">&quot;[&#x27;Microsoft.OperationalInsights/workspaces&#x27;]&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;operator&quot;</span>: <span class="string">&quot;LessThan&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;threshold&quot;</span>: <span class="string">&quot;10&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;timeAggregation&quot;</span>: <span class="string">&quot;Count&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;dimensions&quot;</span>: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;_ResourceId&quot;</span>,</span><br><span class="line">                                <span class="attr">&quot;value&quot;</span>: <span class="string">&quot;/subscriptions/SUBSCRIPTION_ID/resourcegroups/RESOURCEGROUP_NAME/providers/microsoft.hybridcompute/machines/RESOURCE_NAME&quot;</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        ],</span><br><span class="line">                        <span class="attr">&quot;metricValue&quot;</span>: <span class="number">9</span>,</span><br><span class="line">                        <span class="attr">&quot;failingPeriods&quot;</span>: &#123;</span><br><span class="line">                            <span class="attr">&quot;numberOfEvaluationPeriods&quot;</span>: <span class="number">1</span>,</span><br><span class="line">                            <span class="attr">&quot;minFailingPeriodsToAlert&quot;</span>: <span class="number">1</span></span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">&quot;linkToSearchResultsUI&quot;</span>: <span class="string">&quot;https://portal.azure.com#@12345a-1234b-123c-123d-12345678e/blade/Microsoft_Azure_Monitoring_Logs/LogsBlade/source/Alerts.EmailLinks/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%212345a-1234b-123c-123d-12345678e%2FresourceGroups%2FContoso%2Fproviders%2FMicrosoft.Compute%2FvirtualMachines%2FContoso%22%7D%5D%7D/q/eJzzSE0sKklKTSypUSjPSC1KVQjJzE11T81LLUosSU1RSEotKU9NzdNIAfJKgDIaRgZGBroG5roGliGGxlYmJlbGJnoGEKCpp4dDmSmKMk0A/prettify/1/timespan/2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;linkToFilteredSearchResultsUI&quot;</span>: <span class="string">&quot;https://portal.azure.com#@12345a-1234b-123c-123d-12345678e/blade/Microsoft_Azure_Monitoring_Logs/LogsBlade/source/Alerts.EmailLinks/scope/%7B%22resources%22%3A%5B%7B%22resourceId%22%3A%22%2Fsubscriptions%212345a-1234b-123c-123d-12345678e%2FresourceGroups%2FContoso%2Fproviders%2FMicrosoft.Compute%2FvirtualMachines%2FContoso%22%7D%5D%7D/q/eJzzSE0sKklKTSypUSjPSC1KVQjJzE11T81LLUosSU1RSEotKU9NzdNIAfJKgDIaRgZGBroG5roGliGGxlYmJlbGJnoGEKCpp4dDmSmKMk0A/prettify/1/timespan/2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;linkToSearchResultsAPI&quot;</span>: <span class="string">&quot;https://api.loganalytics.io/v1/subscriptions/12345a-1234b-123c-123d-12345678e/resourceGroups/Contoso/providers/Microsoft.Compute/virtualMachines/Contoso/query?query=Heartbeat%7C%20where%20TimeGenerated%20between%28datetime%282020-07-09T13%3A44%3A34.0000000%29..datetime%282020-07-09T13%3A54%3A34.0000000%29%29&amp;timespan=2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z&quot;</span>,</span><br><span class="line">                        <span class="attr">&quot;linkToFilteredSearchResultsAPI&quot;</span>: <span class="string">&quot;https://api.loganalytics.io/v1/subscriptions/12345a-1234b-123c-123d-12345678e/resourceGroups/Contoso/providers/Microsoft.Compute/virtualMachines/Contoso/query?query=Heartbeat%7C%20where%20TimeGenerated%20between%28datetime%282020-07-09T13%3A44%3A34.0000000%29..datetime%282020-07-09T13%3A54%3A34.0000000%29%29&amp;timespan=2020-07-07T13%3a54%3a34.0000000Z%2f2020-07-09T13%3a54%3a34.0000000Z&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                <span class="attr">&quot;windowStartTime&quot;</span>: <span class="string">&quot;2022-06-20T22:02:28Z&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;windowEndTime&quot;</span>: <span class="string">&quot;2022-06-20T22:17:28Z&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;customProperties&quot;</span>: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-logicapp04.png"></p>
+<p>その後ワークフローを保存します。<br>これでロジック アプリのスケルトンの作成は完了です。後ほどクエリを実行するための必要なアクションなどについて説明します。</p>
+<h2 id="2-ログ-クエリを実行するためのマネージド-ID-を作成する"><a href="#2-ログ-クエリを実行するためのマネージド-ID-を作成する" class="headerlink" title="2. ログ クエリを実行するためのマネージド ID を作成する"></a>2. ログ クエリを実行するためのマネージド ID を作成する</h2><p>クエリの実行結果の取得は、下記の公開情報に記載がある Log Analytics API を用いて取得します。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema-definitions#monitoringservice--log-alerts-v2">共通アラート スキーマ定義</a></li>
+</ul>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/managedid-creation01.png"></p>
+<p>Log Analytics API を使用するためには Azure への認証が必要です。<br>今回はロジック アプリのマネージド ID を用いて認証する方法を選択します。  </p>
+<p>有効化するために、当該ロジック アプリのページへ移動し、左側ペインより <strong>[ID]</strong> をクリックします。<br>その後、状態の箇所をオフからオンに変更します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/managedid-creation02.png"></p>
+<p>有効化したマネージド ID に対してロールを付与するために、**[Azure ロールの割り当て]** をクリックします。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/managedid-creation03.png"></p>
+<p><strong>[ロールの割り当ての追加]</strong> をクリックし、ログが保存された Log Analytics ワークスペースを管理しているリソース グループをスコープに、**[閲覧者]** ロールを指定します。  </p>
+<blockquote>
+<p>検索対象のワークスペースが Log Analytics ではなく Application Insights の場合は、当該 Application Insights リソースを管理しているリソース グループをスコープとしてください。</p>
+</blockquote>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/managedid-creation04.png"></p>
+<p>その後保存して、マネージド ID の有効化作業は完了です。</p>
+<h2 id="3-Log-Analytics-API-にアクセスし、クエリ結果を取得するワークフローを作成する"><a href="#3-Log-Analytics-API-にアクセスし、クエリ結果を取得するワークフローを作成する" class="headerlink" title="3. Log Analytics API にアクセスし、クエリ結果を取得するワークフローを作成する"></a>3. Log Analytics API にアクセスし、クエリ結果を取得するワークフローを作成する</h2><p>当該ロジック アプリ ページから <strong>[ロジック アプリ デザイナー]</strong> をクリックし、ワークフローを編集する画面へ移動します。</p>
+<p>HTTP 組み込みコネクタの <strong>[HTTP]</strong> アクションを追加します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-01.png"></p>
+<p>方法の箇所には <strong>[GET]</strong> をご指定いただき、URI の箇所には <strong>[動的なコンテンツ - linkToSearchResultsAPI]</strong> を指定します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-02.png"></p>
+<p>その後、自動的に <strong>[For each]</strong> が追加されますが、そのままで問題ありません。<br>これは、linkToSearchResultsAPI オブジェクトを保持している親オブジェクト (allOf オブジェクト) のデータ型が配列であるため、自動的に For each が作成され配列内のオブジェクト一つ一つにアクセスする必要があるためです。<br>ログ アラート ルールが出力する JSON データの allOf オブジェクトは要素数が必ず 1 つであるため、そのままで問題ありません。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-03.png"></p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-04.png"></p>
+<p>引き続き HTTP アクションの編集画面に戻り、**[Add new parameter]** から <strong>[認証]</strong> をクリックします。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-05.png"></p>
+<p>認証の種類に **[マネージド ID]**、マネージド ID に **[システム割り当てマネージド ID]**、対象ユーザー に <strong>[<a href="https://api.loganalytics.io]">https://api.loganalytics.io]</a></strong> を指定します。</p>
+<blockquote>
+<p>Application Insights のログ アラート ルールの場合は、対象ユーザーに [<a href="https://api.applicationinsights.io]">https://api.applicationinsights.io]</a> をご指定ください。</p>
+</blockquote>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-06.png"></p>
+<p>その後、編集した内容を保存して完了です。</p>
+<p>試しに、意図的にログ アラートを発報してみます。<br>すると、下図のようにデータの取得が確認できました。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-07.png"></p>
+<p>参考までに、実際に実行されたクエリと HTTP アクションによって取得出来たデータを下記に記載します。</p>
+<p>ログ アラート ルールに指定したクエリ</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Heartbeat</span><br><span class="line">| project TimeGenerated, Computer, OSType, ResourceGroup, Resource</span><br></pre></td></tr></table></figure>
+
+<p>HTTP アクションの出力結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;statusCode&quot;: 200,</span><br><span class="line">    &quot;headers&quot;: &#123;</span><br><span class="line">        &quot;Transfer-Encoding&quot;: &quot;chunked&quot;,</span><br><span class="line">        &quot;Connection&quot;: &quot;keep-alive&quot;,</span><br><span class="line">        &quot;Strict-Transport-Security&quot;: &quot;max-age=15724800; includeSubDomains&quot;,</span><br><span class="line">        &quot;X-Content-Type-Options&quot;: &quot;nosniff&quot;,</span><br><span class="line">        &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,</span><br><span class="line">        &quot;Access-Control-Expose-Headers&quot;: &quot;Retry-After,Age,WWW-Authenticate,x-resource-identities,x-ms-status-location&quot;,</span><br><span class="line">        &quot;Vary&quot;: &quot;Accept-Encoding&quot;,</span><br><span class="line">        &quot;Date&quot;: &quot;Thu, 30 Jun 2022 01:07:22 GMT&quot;,</span><br><span class="line">        &quot;Via&quot;: &quot;1.1 draft-oms-7b456954c5-bww9q&quot;,</span><br><span class="line">        &quot;Content-Type&quot;: &quot;application/json; charset=utf-8&quot;,</span><br><span class="line">        &quot;Content-Length&quot;: &quot;1056&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;body&quot;: &#123;</span><br><span class="line">        &quot;tables&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;name&quot;: &quot;PrimaryResult&quot;,</span><br><span class="line">                &quot;columns&quot;: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;TimeGenerated&quot;,</span><br><span class="line">                        &quot;type&quot;: &quot;datetime&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;Computer&quot;,</span><br><span class="line">                        &quot;type&quot;: &quot;string&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;OSType&quot;,</span><br><span class="line">                        &quot;type&quot;: &quot;string&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;ResourceGroup&quot;,</span><br><span class="line">                        &quot;type&quot;: &quot;string&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;Resource&quot;,</span><br><span class="line">                        &quot;type&quot;: &quot;string&quot;</span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                &quot;rows&quot;: [</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:50:14.933Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T01:04:14.927Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:52:14.953Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:55:15.057Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:58:14.94Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T01:02:14.923Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:53:15.227Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T00:56:14.947Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    [</span><br><span class="line">                        &quot;2022-06-30T01:00:14.93Z&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;,</span><br><span class="line">                        &quot;Linux&quot;,</span><br><span class="line">                        &quot;jk-rg-azurearc-myLab01&quot;,</span><br><span class="line">                        &quot;mylab-mc-02&quot;</span><br><span class="line">                    ]</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>このように HTTP アクションをご利用いただく事で、アラート発報時に評価されたログが取得可能です。<br>この方法をもとに、お客様の要件にあったワークフローを作成いただければ幸いです。</p>
+<h2 id="番外編-ログ-クエリの結果が記載されたメールを通知する"><a href="#番外編-ログ-クエリの結果が記載されたメールを通知する" class="headerlink" title="番外編. ログ クエリの結果が記載されたメールを通知する"></a>番外編. ログ クエリの結果が記載されたメールを通知する</h2><p>ここでは、**[HTML テーブルの作成]** アクションと <strong>[Office 365 Outlook]</strong> コネクタを用いて、ログ クエリの結果が記載されたメールを通知する方法について説明します。</p>
+<p>まず、データ操作組み込みコネクタの <strong>[HTML テーブルの作成]</strong> を追加します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-01.png"></p>
+<p>開始の箇所をクリックし、式に対して下記のコードをコピー &amp; ペーストします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array(outputs(&#x27;HTTP&#x27;)[&#x27;body&#x27;][&#x27;tables&#x27;][0][&#x27;rows&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-02.png"></p>
+<p>列に <strong>[カスタム]</strong> を指定し、ヘッダーに対して下記のコードをコピー &amp; ペーストします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputs(&#x27;HTTP&#x27;)[&#x27;body&#x27;][&#x27;tables&#x27;][0][&#x27;columns&#x27;][0][&#x27;name&#x27;]</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-03.png"></p>
+<p>値に対して下記のコードをコピー &amp; ペーストします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">item()[0]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-04.png"></p>
+<p>このヘッダーと値の組み合わせを、ログ アラート ルールで指定したクエリで取得できる列の数だけ追加します。<br>私がログ アラート ルールに指定した下記のクエリの場合は、project 句に 5 種類の列を指定しています。<br>そのため、ヘッダーと値の組み合わせを 5 つ作成する必要があります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Heartbeat</span><br><span class="line">| project TimeGenerated, Computer, OSType, ResourceGroup, Resource</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-05.png"></p>
+<p>ヘッダーと値の組み合わせを追加する際は、配列に指定する要素数を変更する必要がありますので、予めご留意ください。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-06.png"></p>
+<p>その後、Office 365 Outlook コネクタの <strong>[メールの送信 (V2)]</strong> アクションを使って、**[HTML テーブルの作成]** アクションで作成した HTML オブジェクトを含めたメールを送信します。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-07.png"></p>
+<p>下図のように、本文の箇所に <strong>[HTML テーブルの作成]</strong> アクションの出力を指定します。</p>
+<blockquote>
+<p>出力が表示されない場合は、[もっと見る] をクリックしてみてください。</p>
+</blockquote>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-08.png"></p>
+<p>その後ワークフローを保存し、意図的にログ アラートを発報させます。<br>すると下図のような、クエリ実行結果が HTML テーブル形式で記載されたメールが通知される事を確認しました。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-09.png"></p>
+<p>こちらは、単純にクエリ実行結果を記載したのみのメールですが、お客様の要件を満たすようなメール内容にカスタマイズいただけますと幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/Integration-logAlertRule.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../AzNotificationMail/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          Azure Logic Apps の Availability Zone 対応に伴う通知メールについて
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../general/IntroduceOurBlog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Integration サポート チームの Blog リニューアルのお知らせ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../ApiConnectionsDelete/">Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqCleanInstall/">MSMQ をドメインモードでインストールする手順について</a>
+          </li>
+        
+          <li>
+            <a href="../AzNotificationMail/">Azure Logic Apps の Availability Zone 対応に伴う通知メールについて</a>
+          </li>
+        
+          <li>
+            <a href="">ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する</a>
+          </li>
+        
+          <li>
+            <a href="../../general/IntroduceOurBlog/">Integration サポート チームの Blog リニューアルのお知らせ</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">3</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 15px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
