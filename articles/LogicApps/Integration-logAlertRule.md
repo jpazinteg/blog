@@ -308,5 +308,68 @@ HTTP アクションの出力結果
 ## 番外編. ログ クエリの結果が記載されたメールを通知する
 ここでは、[HTML テーブルの作成] アクションと [Office 365 Outlook] コネクタを用いて、ログ クエリの結果が記載されたメールを通知する方法について説明します。
 
+まず、データ操作組み込みコネクタの [HTML テーブルの作成] を追加します。
 
+![](./Integration-logAlertRule/mail-setting-01.png)
+
+
+開始の箇所をクリックし、式に対して下記のコードをコピー & ペーストします。
+
+```
+array(outputs('HTTP')['body']['tables'][0]['rows'])
+```
+
+![](./Integration-logAlertRule/mail-setting-02.png)
+
+
+列に [カスタム] を指定し、ヘッダーに対して下記のコードをコピー & ペーストします。
+
+```
+outputs('HTTP')['body']['tables'][0]['columns'][0]['name']
+```
+![](./Integration-logAlertRule/mail-setting-03.png)
+
+
+値に対して下記のコードをコピー & ペーストします。
+
+```
+item()[0]
+```
+
+![](./Integration-logAlertRule/mail-setting-04.png)
+
+
+このヘッダーと値の組み合わせを、ログ アラート ルールで指定したクエリで取得できる列の数だけ追加します。  
+私がログ アラート ルールに指定した下記のクエリの場合は、project 句に 5 種類の列を指定しています。  
+そのため、ヘッダーと値の組み合わせを 5 つ作成する必要があります。
+
+```
+Heartbeat
+| project TimeGenerated, Computer, OSType, ResourceGroup, Resource
+```
+
+![](./Integration-logAlertRule/mail-setting-05.png)
+
+ヘッダーと値の組み合わせを追加する際は、配列に指定する要素数を変更する必要がありますので、予めご留意ください。
+
+![](./Integration-logAlertRule/mail-setting-06.png)
+
+
+その後、Office 365 Outlook コネクタの [メールの送信 (V2)] アクションを使って、[HTML テーブルの作成] アクションで作成した HTML オブジェクトを含めたメールを送信します。
+
+![](./Integration-logAlertRule/mail-setting-07.png)
+
+
+下図のように、本文の箇所に [HTML テーブルの作成] アクションの出力を指定します。
+> 出力が表示されない場合は、[もっと見る] をクリックしてみてください。
+
+![](./Integration-logAlertRule/mail-setting-08.png)
+
+
+その後ワークフローを保存し、意図的にログ アラートを発報させます。  
+すると下図のような、クエリ実行結果が HTML テーブル形式で記載されたメールが通知される事を確認しました。
+
+![](./Integration-logAlertRule/mail-setting-09.png)
+
+こちらは、単純にクエリ実行結果を記載したのみのメールですが、お客様の要件を満たすようなメール内容にカスタマイズいただけますと幸いです。
 
