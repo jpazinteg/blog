@@ -43,7 +43,7 @@ Azure Active Directory にて、アプリの登録 (サービス プリンシパ
 「登録」ボタンを押下します。
 ![](./Integration-graphApi/create_application02.PNG)
 
-作成が完了しましたら、**[管理 - アプリの登録]**  にて該当するアプリを選択します。
+作成が完了しましたら、**[管理 - アプリの登録]** にて該当するアプリを選択します。
 **[概要]** にて「アプリケーション (クライアント) ID」、および「ディレクトリ (テナント) ID」をコピーし、控えておきます。
 ![](./Integration-graphApi/create_application03.PNG)
 
