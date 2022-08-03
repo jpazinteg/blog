@@ -36,8 +36,6 @@ Graph API の実行には、トークンが必要となります。
 Azure Active Directory にて、アプリの登録 (サービス プリンシパルの作成) を行います。
 **[Azure Active Directory] - [管理 - アプリの登録]** と遷移し、「+ 新規登録」ボタンを押下します。
 ![](./Integration-graphApi/create_application01.PNG)
-![](./Integration-logAlertRule/create-logicapp01.png)
-
 
 アプリの名前を任意に設定し、今回は「サポートされているアカウントの種類」にて「この組織ディレクトリのみに含まれるアカウント (<テナント名> のみ - シングル テナント)」を選択し、
 「登録」ボタンを押下します。
