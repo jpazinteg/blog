@@ -127,7 +127,9 @@ grant_type = client_credentials
 始めに、HTTP リクエストは以下の通り設定いただきます。
 
 ・PUT メソッド
+```
 https://management.azure.com/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Web/sites/{logicAppName}/config/authsettingsV2?api-version=2021-02-01
+```
 
 ・subscriptionId = Standard Logic Apps が作成されている サブスクリプション ID
 ・resourceGroupName = Standard Logic Apps が作成されている リソースグループ
@@ -269,10 +271,15 @@ Status 200 が返却されていればこちらの手順については完了で
 
 ## AAD 認証による Standard Logic Apps の実行
 以上の事前準備が出来ましたら、以下の REST API を実行し、Standard Logic Apps を実行致します。
+なお、AAD 認証で呼び出す Standard Logic Apps のトリガーについては "HTTP 要求の受信時" トリガーである必要がございますため、ご留意いただきますようお願い申し上げます。
+
+![](./AadAuthentication/image01101.png)
 
 
 ・POST メソッド
+```
 https://{logicAppName}.azurewebsites.net:443/api/{workflowName}/triggers/manual/invoke?api-version=2020-05-01-preview
+```
 
 ・logicAppName = Standard Logic Apps （ワークフロー名ではない）
 ・workflowName = Standard Logic Apps に構築しているワークフロー名
