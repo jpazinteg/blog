@@ -4,26 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>Azure Logic Apps の Availability Zone 対応に伴う通知メールについて | Japan Azure Integration Support Blog</title>
+  <title>Logic Apps (Standard) を作成するために必要な最小権限 | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの継松です。Azure では各ユーザーやグループなどに対して特定の権限を付与し、Azure リソースへのアクセスを制御することが可能です。今回は、 Logic Apps (Standard) を作成するために必要な最小権限についてご紹介します。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure Logic Apps の Availability Zone 対応に伴う通知メールについて">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/index.html">
+<meta property="og:title" content="Logic Apps (Standard) を作成するために必要な最小権限">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの継松です。Azure では各ユーザーやグループなどに対して特定の権限を付与し、Azure リソースへのアクセスを制御することが可能です。今回は、 Logic Apps (Standard) を作成するために必要な最小権限についてご紹介します。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image02.png">
-<meta property="article:published_time" content="2022-04-06T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-24T08:07:08.588Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/error.png">
+<meta property="article:published_time" content="2022-08-15T07:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-24T08:07:08.600Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/error.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -85,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/AzNotificationMail" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/StandardLogicApps-Authorization" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -94,7 +93,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Azure Logic Apps の Availability Zone 対応に伴う通知メールについて
+      Logic Apps (Standard) を作成するために必要な最小権限
     </h1>
   
 
@@ -102,64 +101,51 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-04-06T15:00:00.000Z" itemprop="datePublished">2022-04-07</time>
+  <time datetime="2022-08-15T07:00:00.000Z" itemprop="datePublished">2022-08-15</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c5c3cf06-6fdd-51bf-aabb-812d15509bc9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+Availability+Zone+%E5%AF%BE%E5%BF%9C%E3%81%AB%E4%BC%B4%E3%81%86%E9%80%9A%E7%9F%A5%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FAzNotificationMail%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FAzNotificationMail.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FAzNotificationMail.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+cf7dc55e-012b-5c1a-b227-b81f112319ad%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%28Standard%29+%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicApps-Authorization%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicApps-Authorization.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicApps-Authorization.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/" data-id="cl77c200700030mp89nex6b4a" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/" data-id="cl77c200a00050mp8g76k8kri" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-availability-zone-support-is-coming-soon/ba-p/3254456">Azure Logic Apps - Availability Zone support is coming soon</a></li>
-</ul>
-<p>こちらの要件に伴い、お客様の中では以下の件名でメールが届いた方もいらっしゃるのではないでしょうか。</p>
-<p><strong>Action required: Update firewall configurations that allow or deny IP addresses of Azure Logic Apps</strong></p>
-<p>今回は上記メール本文の概要と、お客様にてご対応いただく内容について整理いたしましたのでご案内させていただきます。</p>
+        <p>こんにちは。  Azure Integration サポート チームの継松です。<br>Azure では各ユーザーやグループなどに対して特定の権限を付与し、Azure リソースへのアクセスを制御することが可能です。<br>今回は、 Logic Apps (Standard) を作成するために必要な最小権限についてご紹介します。</p>
 <span id="more"></span>
 
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>初めて Logic Apps (Standard) での開発をされる方</li>
+<li>Azure リソースの管理者</li>
+</ul>
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>メール本文の概要について</li>
-<li>本メールに対するアクション</li>
+<li>権限が不足している場合に発生するエラーの例</li>
+<li>必要となる組み込みロールについて</li>
+<li>組み込みロールの付与方法について</li>
 <li>まとめ</li>
 </ul>
-<h2 id="メール本文の概要について"><a href="#メール本文の概要について" class="headerlink" title="メール本文の概要について"></a>メール本文の概要について</h2><p>まず、本メールの概要については大きく以下の内容となります。</p>
-<p><img src="/blog/LogicApps/AzNotificationMail/image01.png"></p>
-<p>・2022 年 3 月 25 日より、アベイラビリティ ゾーンをサポートするため Azure Logic Apps で利用する IP アドレスの追加が予定されている。<br>・Azure Logic Apps の IP アドレスとの通信を許可するファイアウォール設定がある場合、2022 年 5 月 15 日までに Azure Logic Apps とコネクタの両方について新しいアドレスに更新する必要がある。<br>・既存および新規で作成する Azure Logic Apps に今回追加される IP アドレスが利用される。</p>
-<p>以上が本メールの概要となります。</p>
-<h2 id="本メールに対するアクション"><a href="#本メールに対するアクション" class="headerlink" title="本メールに対するアクション"></a>本メールに対するアクション</h2><p>お客様にご対応いただく内容として、メールにも記載されております通り ファイアウォール の設定変更がございます。</p>
-<p>ここで記載されております　<strong>ファイアウォール</strong>　が何を指しているかですが、Azure Firewall だけではなく、ネットワーク セキュリティ グループやストレージ アカウントのファイアウォール等、Azure Logic Apps からの IP アドレス通信制御を行っている全てのリソースを指します。</p>
-<p>また、通信制御については受信規則と送信規則の大きく二つの考え方がございます。 Azure Logic Apps から送られてくる通信に対して制御をしている場合は受信規則のルールに対して Azure Logic Apps の IP アドレスを設定する必要がございます。逆に Azure Logic Apps へ送信するような通信制御をされている場合は、送信規則のルールに対して Azure Logic Apps の IP アドレスを設定いただく必要がございます。</p>
-<p>例えば、ストレージ アカウントのファイアウォールにて、Azure Logic Apps の送信 IP アドレスを許可されている場合、<br>IP アドレスが変更となりますのでファイアウォール側の設定を見直していただく必要がございます。</p>
-<p><img src="/blog/LogicApps/AzNotificationMail/image02.png"></p>
-<p>ファイアウォールに対して設定すべき IP アドレスにつきましては、以下の通りご利用いただいておりますコネクタの種類によって異なります。</p>
-<p>マネージド コネクタをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス</a></li>
+<h2 id="権限が不足している場合に発生するエラー例"><a href="#権限が不足している場合に発生するエラー例" class="headerlink" title="権限が不足している場合に発生するエラー例"></a>権限が不足している場合に発生するエラー例</h2><p>権限が不足した状態で Logic Apps (Standard) のデプロイをしますと下図のようなエラーが発生します。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-Authorization/error.png"></p>
+<h2 id="必要となる組み込みロール"><a href="#必要となる組み込みロール" class="headerlink" title="必要となる組み込みロール"></a>必要となる組み込みロール</h2><ul>
+<li>Logic App Contributor (ロジック アプリの共同作成者)</li>
+<li>Storage Account Contributor (ストレージ アカウントの共同作成者)</li>
+<li>Web Plan Contributor (Web プラン共同作成者)</li>
+<li>Website Contributor (Web サイト共同作成者)</li>
 </ul>
-<p>組み込みトリガー、アクションをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
+<p>参考資料 :<br>Azure 組み込みロール - Azure RBAC | Microsoft Docs # Logic App Contributor (ロジック アプリの共同作成者)<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#logic-app-contributor">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#logic-app-contributor</a></p>
+<p>Azure 組み込みロール - Azure RBAC | Microsoft Docs # Storage Account Contributor (ストレージ アカウントの共同作成者)<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#storage-account-contributor">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#storage-account-contributor</a> </p>
+<p>Azure 組み込みロール - Azure RBAC | Microsoft Docs # Web Plan Contributor (Web プラン共同作成者)<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#web-plan-contributor">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#web-plan-contributor</a> </p>
+<p>Azure 組み込みロール - Azure RBAC | Microsoft Docs # Website Contributor (Web サイト共同作成者)<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#website-contributor">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#website-contributor</a> </p>
+<h2 id="組み込みロールの付与方法について"><a href="#組み込みロールの付与方法について" class="headerlink" title="組み込みロールの付与方法について"></a>組み込みロールの付与方法について</h2><p>実際に組み込みロールを付与するにあたっては、以下が必要です。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#multi-tenant--single-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナントとシングルテナント - 送信 IP アドレス</a></li>
+<li>Microsoft.Authorization/roleAssignments/write アクセス許可 (ユーザー アクセス管理者や所有者など)</li>
 </ul>
-<p>ファイアウォール経由で、Azure Logic Apps への 通信を制御している際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#inbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # 受信 IP アドレス</a></li>
-</ul>
-<p>なお、お客様のコネクタでご利用されているサービスについて、これまで特にファイアウォール等の設定をしておらず、<br>Azure Logic Apps の送信 IP アドレスをブロックしていない際には、対応は不要となります。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
-<ul>
-<li>メール本文の概要について</li>
-<li>本メールに対するアクション</li>
-</ul>
-<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>また、スコープについては、サブスクリプション全体での制御を許可するのか、または特定のリソース グループに対してのみに対しての制御とするのか、ご検討の上ご指定ください。</p>
+<p>詳しくは下記の公開資料をご参考ください。</p>
+<p>Azure portal を使用して Azure ロールを割り当てる - Azure RBAC | Microsoft Docs<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/role-assignments-portal?tabs=current">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/role-assignments-portal?tabs=current</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps Standard タイプを作成するにあたって必要な権限についてご紹介しました。<br>他にも、 Azure リソースを作成・制御・管理するにあたって必要な権限を確認する必要がありましたら、下記の公開資料をご参考くださいませ。</p>
+<p>Azure 組み込みロール - Azure RBAC | Microsoft Docs<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles">https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles</a></p>
 
       
       
@@ -176,7 +162,7 @@
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/AzNotificationMail.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicApps-Authorization.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -184,19 +170,19 @@
     
 <nav id="article-nav">
   
-    <a href="../../MSMQ/MsmqCleanInstall/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../AadAuthentication/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          MSMQ をドメインモードでインストールする手順について
+          Standard Logic Apps で AAD 認証する方法について
         
       </div>
     </a>
   
   
-    <a href="../../general/IntroduceOurBlog/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../Integration-graphApi/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Integration サポート チームの Blog リニューアルのお知らせ</div>
+      <div class="article-nav-title">Logic Apps から Graph API を実行する</div>
     </a>
   
 </nav>
@@ -219,7 +205,7 @@
           </li>
         
           <li>
-            <a href="../StandardLogicApps-Authorization/">Logic Apps (Standard) を作成するために必要な最小権限</a>
+            <a href="">Logic Apps (Standard) を作成するために必要な最小権限</a>
           </li>
         
           <li>
