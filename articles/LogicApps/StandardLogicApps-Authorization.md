@@ -10,7 +10,7 @@ tags:
 
 こんにちは。  Azure Integration サポート チームの継松です。  
 Azure では各ユーザーやグループなどに対して特定の権限を付与し、Azure リソースへのアクセスを制御することが可能です。
-今回は、 Logic Apps (Standard) を作成するために必要な最小権限についてご紹介します。
+今回は、 Logic Apps (Standard) を作成するために割り当てが必要な Azure 組み込みロールについてご紹介します。
 
 <!-- more -->
 
@@ -58,6 +58,7 @@ https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#
 - Microsoft.Authorization/roleAssignments/write アクセス許可 (ユーザー アクセス管理者や所有者など)
 
 また、スコープについては、サブスクリプション全体での制御を許可するのか、または特定のリソース グループに対してのみに対しての制御とするのか、ご検討の上ご指定ください。
+Standard Logic Apps と同じリソースグループ内に API 接続を作成する仕様のため、リソース スコープではなくリソースグループ スコープ以上でのロールの割り当てを推奨しております。
 
 詳しくは下記の公開資料をご参考ください。
 
@@ -66,8 +67,8 @@ https://docs.microsoft.com/ja-jp/azure/role-based-access-control/role-assignment
 
 ## まとめ
 
-本記事では、Logic Apps Standard タイプを作成するにあたって必要な権限についてご紹介しました。
-他にも、 Azure リソースを作成・制御・管理するにあたって必要な権限を確認する必要がありましたら、下記の公開資料をご参考くださいませ。
+本記事では、Logic Apps Standard タイプを作成するにあたって割り当てが必要な Azure 組み込みロールについてご紹介しました。
+他にも、 Azure リソースを作成・制御・管理するにあたって必要な権限を含む Azure 組み込みロールを確認する必要がありましたら、下記の公開資料をご参考くださいませ。
 
 Azure 組み込みロール - Azure RBAC | Microsoft Docs
 https://docs.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles
