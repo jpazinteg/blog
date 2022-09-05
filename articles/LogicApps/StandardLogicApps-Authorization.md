@@ -1,6 +1,6 @@
 ---
 title: Logic Apps (Standard) を作成するために必要な最小権限
-date: 2022-08-15 16:00:00
+date: 2022-08-26 16:00:00
 tags:
   - How-To
   - Tips
