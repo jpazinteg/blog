@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。 Azure Integration サポート チームの大田です。Logic Apps の HTTP アクションから長時間の処理を伴うサービスをリクエストする場合、下図のようにタイムアウト エラーを生じます。  本エラーは下記の公開情報にございます HTTP 要求のタイムアウト期間に関する制限が原因となります。  HTTP 要求のタイムアウト期間に関する制限  本記事では非同期ポーリン">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。 Azure Integration サポート チームの大田です。Logic Apps の HTTP アクションから長時間の処理を伴うサービスをリクエストする場合、下図のようにタイムアウト エラーを生じます。  本エラーは下記の公開情報にございます HTTP 要求のタイムアウト期間に関する制限が原因となります。  HTTP 要求のタイムアウト期間に関する制限  本記事では非同期ポーリン">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/timeout-error.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-6.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-7.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-6.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/async-polling-pattern.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-6.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-7.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-8.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-9.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-10.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-17.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-11.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-12.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-13.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-14.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-15.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-16.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-5.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-6.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-7.png">
+<meta property="article:published_time" content="2022-09-01T01:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-06T12:44:14.648Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="HTTP アクション">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/timeout-error.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/HttpAction-AsyncPattern-Polling" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-09-01T01:00:00.000Z" itemprop="datePublished">2022-09-01</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+47491400-0bf4-5dbc-a34c-6d8ae0e17f8a%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BHTTP+%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%A2%E3%82%A6%E3%83%88+%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E5%9B%9E%E9%81%BF%E6%96%B9%E6%B3%95+-+%E9%9D%9E%E5%90%8C%E6%9C%9F%E3%83%9D%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0+%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FHttpAction-AsyncPattern-Polling%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FHttpAction-AsyncPattern-Polling.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FHttpAction-AsyncPattern-Polling.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/" data-id="cl7q6oemp001s0nql53oo0uda" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。 Azure Integration サポート チームの大田です。<br>Logic Apps の HTTP アクションから長時間の処理を伴うサービスをリクエストする場合、下図のようにタイムアウト エラーを生じます。</p>
+<p><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/timeout-error.png"></p>
+<p>本エラーは下記の公開情報にございます HTTP 要求のタイムアウト期間に関する制限が原因となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#http-request-limits">HTTP 要求のタイムアウト期間に関する制限</a></li>
+</ul>
+<p>本記事では非同期ポーリング パターンを用いて HTTP アクションのタイムアウト エラーを回避する方法をサンプルを用いてご紹介します。</p>
+<span id="more"></span>
+
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>今回の記事では従量課金版ロジック アプリを利用しますが、スタンダード版のロジック アプリでも問題ありません。</li>
+</ul>
+<h2 id="サンプルによる解説の流れ"><a href="#サンプルによる解説の流れ" class="headerlink" title="サンプルによる解説の流れ"></a>サンプルによる解説の流れ</h2><p>本記事では、最終的に非同期ポーリング パターンにより HTTP アクションのタイムアウト エラーを回避するサンプルを構築いたします。</p>
+<p>まずは タイムアウト エラーを生じる状況を再現するサンプルを構築いたします。<br>その後、サンプルを改修し非同期ポーリング パターンによってタイムアウト エラーが解消されることを確認いたします。</p>
+<h3 id="1-タイムアウト-エラーが生じる状況の再現"><a href="#1-タイムアウト-エラーが生じる状況の再現" class="headerlink" title="1. タイムアウト エラーが生じる状況の再現"></a>1. タイムアウト エラーが生じる状況の再現</h3><p>タイムアウト エラーを生じる状況をクライアント側とサーバー側の 2 つのロジック アプリによって再現いたします。</p>
+<h4 id="1-1-サーバー側ロジック-アプリの構築"><a href="#1-1-サーバー側ロジック-アプリの構築" class="headerlink" title="1-1. サーバー側ロジック アプリの構築"></a>1-1. サーバー側ロジック アプリの構築</h4><p>サーバー側のロジック アプリ（<strong>SampleServerSide</strong>）を、Azure portal から作成します。</p>
+<blockquote>
+<p>今回の記事では従量課金版ロジック アプリを利用しております。</p>
+</blockquote>
+<p><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-1.png"></p>
+<p>ロジックアプリ作成後にテンプレートから <strong>HTTP 要求の受信時</strong> を選択します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-2.png"></p>
+<p>HTTP 要求の受信時 トリガーの <strong>Add new parameter</strong> から <strong>メソッド</strong> を選択します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-6.png"></p>
+<p><strong>メソッド</strong> を <strong>GET</strong> に設定します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-7.png"></p>
+<p>作成されたテンプレートに<strong>応答アクション</strong>を追加して、ワークフローを保存します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-3.png"></p>
+<p>ワークフローを保存すると、本ロジック アプリへの HTTP アクセス用 URL が発行されます。<br>本 URL はクライアント側の設定で使用するのでメモをしておいてください。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-4.png"></p>
+<p>この URL にアクセスすることで、本ロジック アプリに設定したワークフローが実行されます。<br>タイムアウト エラーを起こすために、<strong>応答アクション</strong> の前に 3 分の <strong>待ち時間アクション</strong> を追加して保存します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server1-5.png"><br>長時間の処理を疑似的に待ち時間アクションで再現したような状態となります。</p>
+<p>本章における、サーバー側ロジック アプリの設定は以上となります。</p>
+<h4 id="1-2-クライアント側ロジック-アプリの構築"><a href="#1-2-クライアント側ロジック-アプリの構築" class="headerlink" title="1-2. クライアント側ロジック アプリの構築"></a>1-2. クライアント側ロジック アプリの構築</h4><p>サーバー側のロジック アプリと同様に、クライアント側のロジック アプリ（<strong>SampleClientSide</strong>）を Azure portal から作成します。</p>
+<blockquote>
+<p>今回の記事では従量課金版ロジック アプリを利用しております。</p>
+</blockquote>
+<p>ロジックアプリ作成後にテンプレートから <strong>繰り返し</strong> を選択します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-1.png"></p>
+<p><strong>繰り返し（Recurrence）トリガー</strong> の頻度を <strong>3 ヶ月</strong> に設定してワークフローを保存します。<br>クライアント側ロジック アプリが短い間隔で自動起動しないように長期間の間隔を設定しております。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-2.png"></p>
+<p><strong>HTTP アクション</strong> を下記の設定で追加します。</p>
+<ul>
+<li>方法 : GET</li>
+<li>URI : サーバー側ロジック アプリの URI（メモしたものを貼付）<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-3.png"></li>
+</ul>
+<p><strong>HTTP アクション</strong> の右上メニューから設定を開きます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-4.png"></p>
+<p><strong>再試行 ポリシー</strong> を <strong>なし</strong> に設定して <strong>完了</strong> を押下します。<br>本設定は効率的にサンプルの検証を行う目的で設定しております。<br>本設定によりタイムアウト エラー後の HTTP アクションの再試行が抑制されます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client1-5.png"></p>
+<p>上記の設定完了後にワークフローを保存します。</p>
+<p>本章における、クライアント側ロジック アプリの設定は以上となります。</p>
+<h4 id="1-3-サンプルの実行"><a href="#1-3-サンプルの実行" class="headerlink" title="1-3. サンプルの実行"></a>1-3. サンプルの実行</h4><p>現時点のサンプルを実行し、タイムアウト エラーが発生する事を確認します。</p>
+<p>クライアント側のロジック アプリの概要からトリガーの実行を行います。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-1.png"></p>
+<p><strong>実行の履歴</strong> タブから約 2 分の経過後に実行が失敗する事を確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-2.png"></p>
+<p>上図の失敗した実行を押下すると、失敗した実行の履歴を閲覧可能です。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-3.png"></p>
+<p>失敗したアクションの右上には赤色のアイコンでその旨がマークされます。<br><strong>HTTP アクション</strong> を押下して詳細を確認するとタイムアウト エラーにて失敗した旨が表示されます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-4.png"></p>
+<p>本エラーは下図（公開情報の抜粋）のマルチテナントの送信要求に関するタイムアウト期間制限のためとなります。<br>上図の通り、HTTP アクションが 2 分間を超える処理のリクエストにより失敗したことを確認可能です。<br>なお、マルチテナントとは従量課金ロジック アプリの事を表します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-5.png"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#http-request-limits">HTTP 要求のタイムアウト期間に関する制限</a></li>
+</ul>
+<p>次に、サーバー側ロジック アプリの実行履歴を同様に確認します。<br>サーバー側ロジック アプリの <strong>概要</strong> メニューから <strong>実行の履歴</strong> タブを選択いたします。<br>実行が約 3 分の経過後に実行が失敗している事を確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec1-6.png"></p>
+<p>本エラーはクライアント側のタイムアウト エラーにより接続が閉じているために応答ができず生じたエラーとなります。</p>
+<p>本章までの設定により、HTTP アクションがタイムアウト エラーにより失敗する状態を構築できました。<br>次章以降で、非同期ポーリング パターンによってタイムアウト エラーを解消するようにサンプルを改善していきます。</p>
+<h3 id="2-非同期ポーリング-パターンによる-タイムアウト-エラーの解消"><a href="#2-非同期ポーリング-パターンによる-タイムアウト-エラーの解消" class="headerlink" title="2. 非同期ポーリング パターンによる タイムアウト エラーの解消"></a>2. 非同期ポーリング パターンによる タイムアウト エラーの解消</h3><p>本章では、Logic Apps の HTTP アクションにおける非同期ポーリング パターンの概念を簡単に説明した後に、前章までで構築したロジック アプリのタイムアウト エラーを解消するようにサンプルを改善していきます。</p>
+<h4 id="2-1-非同期ポーリング-パターンの概要"><a href="#2-1-非同期ポーリング-パターンの概要" class="headerlink" title="2-1. 非同期ポーリング パターンの概要"></a>2-1. 非同期ポーリング パターンの概要</h4><p>Logic Apps の HTTP アクションにおける非同期ポーリング パターンはサーバー側の処理状況をクライアント側が定期的に確認するパターンとなります。<br>サーバーが処理中であれば一定時間の経過後に再度サーバーの状況を確認し、サーバーの処理が完了していればワークフローの後続のアクションを実行する動きとなります。</p>
+<p>HTTP アクションはサーバーの処理状況をレスポンスのステータス コードによって判断します。<br>ステータス コードが 202 番であれば処理中と判断し、一定時間の経過後に再度サーバーの状態を確認します。<br>また、ステータス コードが 200 番であれば処理が完了したと判断し、ワークフローの後続アクションを実行いたします。</p>
+<p>処理状況の確認先や処理状況の確認間隔などの制御はレスポンス ヘッダーにより行います。<br>サーバーは処理状況の確認先 URI を Location ヘッダーに設定し、確認間隔を Retry-after ヘッダーに設定することでクライアントにポーリング処理の動作を指示します。</p>
+<p>下図は公開ドキュメントから抜粋した非同期ポーリング パターンの概念図となります。<br>上記で説明した内容の図示となります。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/async-polling-pattern.png"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-create-api-app#perform-long-running-tasks-with-the-polling-action-pattern">非同期ポーリング パターンで長時間タスクを実行する</a></li>
+</ul>
+<p>非同期ポーリング パターンの実現に当たってはサーバーの処理状態を保存しておく仕組みと、サーバーが処理状態に応じてレスポンスを変更する仕組みの構築が必要となります。</p>
+<h4 id="2-2-サーバー側の処理状態の保存先"><a href="#2-2-サーバー側の処理状態の保存先" class="headerlink" title="2-2. サーバー側の処理状態の保存先"></a>2-2. サーバー側の処理状態の保存先</h4><p>まずは、サーバー側の処理状態を保持する仕組みを構築いたします。<br>今回は処理状態の保存先としてストレージ アカウントを使用いたします。</p>
+<p>ストレージ アカウントを Azure portal から作成します。<br>本記事では、<strong>testdata1234</strong> という名称のストレージ アカウントを作成いたします。<br>ストレージ アカウント名は重複して作成できませんので、任意の名前をお使いください。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-1.png"></p>
+<p>ストレージ アカウントのメニューからコンテナーを作成いたします。<br>本記事では、<strong>logic-apps</strong> という名前でサンプル用のコンテナを作成いたします。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-2.png"></p>
+<p>ロジック アプリからストレージ アカウントへ接続するための情報を取得します。<br>ストレージ アカウントの <strong>アクセス キー</strong> メニューから <strong>キー</strong> と <strong>接続文字列</strong> のペアをメモしておきます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-3.png"></p>
+<h4 id="2-3-クライアント側ロジック-アプリの改修"><a href="#2-3-クライアント側ロジック-アプリの改修" class="headerlink" title="2-3. クライアント側ロジック アプリの改修"></a>2-3. クライアント側ロジック アプリの改修</h4><p>クライアント側のロジック アプリを非同期ポーリング パターンに対応するように改修していきます。</p>
+<p>HTTP アクションは非同期処理オプションが有効であれば、特別な設定をしなくても非同期ポーリング パターンに従って動作いたします。<br>非同期処理オプションはデフォルトで有効となっておりますが下記の手順によりご確認可能です。<br>HTTP アクションの設定を開いていただきます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-3.png"><br>設定項目の非同期パターンが有効になっていることをご確認いただきます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-4.png"></p>
+<p>先述の通りレスポンスのステータス コードが 202 番であれば、HTTP アクションは一定時間の経過後に再度サーバーの処理状況を確認いたします。<br>具体的にはレスポンスの Retry-after ヘッダーに設定の時間が経過した後に Location ヘッダーに設定の URI 宛てに再度 HTTP リクエストを送信します。</p>
+<p>つまり、クライアント側ロジック アプリの HTTP アクションに関する追加の改修は不要で、サーバー側で適切な情報をレスポンスとして設定すれば非同期ポーリング パターンによるタイムアウト エラーの回避を行えます。</p>
+<p>また、HTTP アクションのレスポンスが 200 番となった場合にワークフローの後続処理が実施されるため確認用のアクションを下図のように設定いたします。<br>本アクションにより、HTTP アクションのレスポンスが 200 番だった場合の Body の内容を確認可能となります。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/client2-5.png"></p>
+<p>以上で、クライアント側ロジック アプリの改修は完了となります。</p>
+<h4 id="2-4-サーバー側ロジック-アプリの改修-処理状況の保存"><a href="#2-4-サーバー側ロジック-アプリの改修-処理状況の保存" class="headerlink" title="2-4. サーバー側ロジック アプリの改修 - 処理状況の保存"></a>2-4. サーバー側ロジック アプリの改修 - 処理状況の保存</h4><p>次に、サーバー側のロジック アプリを改修していきます。<br>改修内容はサーバー処理状況を保存する仕組みならびに処理状況に応じてレスポンスを変更する仕組みの構築となります。</p>
+<p>本小節では、サーバーの処理状況を保存できるようにワークフローの改修を行います。</p>
+<p>一般的にサーバーへのリクエストは並列に行われるため、リクエスト毎に実行状態を管理する必要がございます。<br>本記事ではリクエストを特定する識別子としてクライアント側ロジック アプリの実行 ID を用います。</p>
+<p>クライアント側ロジック アプリの実行 ID はリクエスト ヘッダーより取得可能です。<br>下図のように文字列変数 <strong>id</strong> にクライアント側ロジック アプリの実行 ID を格納いたします。<br>値に <strong>@{triggerOutputs()[&#39;headers&#39;][&#39;x-ms-workflow-run-id&#39;]}</strong> を設定することで本処理を実現できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-1.png"></p>
+<p>以上の設定により、id 変数を通じてサーバー側ロジック アプリからクライアント側ロジック アプリの実行 ID を利用可能となります。</p>
+<p>次に、取得した ID を利用してサーバー側ロジック アプリの実行状態をストレージ アカウントに保存していきます。<br><strong>変数を初期化する</strong> アクション（ID の取得処理）の後に <strong>BLOB を作成する（V2）</strong> アクションを追加します。</p>
+<p>以前に BLOB ストレージへの接続情報を作成していない場合、Blob ストレージへの接続情報を求められるので下図のように入力し <strong>作成</strong> を押下いたします。</p>
+<ul>
+<li>接続名 : 任意の名前</li>
+<li>認証の種類 : Access Key</li>
+<li>Azure Storage のアカウント名 : 作成したストレージ アカウントの名前</li>
+<li>Azure Storage アカウントのアクセス キー : 前小節でメモしたキー情報<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-4.png"></li>
+</ul>
+<p>以前に BLOB ストレージへの接続情報を作成している場合でも、<strong>接続を変更してください。</strong> を押下いただければ今回のサンプル用に新規の接続を作成可能です。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/storage2-5.png"></p>
+<p><strong>BLOB を作成する（V2）</strong> アクションのパラメータを下図の用に設定いたします。</p>
+<ul>
+<li>ストレージ アカウント名 : Use connection settings</li>
+<li>フォルダーのパス : /logic-apps/@{variables(&#39;id&#39;)}</li>
+<li>BLOB 名 : status.json</li>
+<li>BLOB コンテンツ : 後述の json データ<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-2.png"></li>
+</ul>
+<p>BLOB コンテンツについては下記の JSON データをそのままコピーしてご使用ください。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;running&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>次に、<strong>待ち時間</strong> アクションの後に <strong>BLOB を作成する（V2）</strong> アクションを追加します。<br>BLOB コンテンツは下記の JSON データをそのままコピーしてご使用いただき、その他のパラメータは上記の <strong>BLOBを作成する（V2）</strong> アクションで設定したパラメータと同様の内容をご設定ください。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;status&quot;</span>: <span class="string">&quot;finished&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本設定により、サーバー側の処理状態を <strong>status.json</strong> というファイル上で管理できるようになりました。<br>具体的には 待ち時間アクションの完了までは、json データの status 属性が running、待ち時間アクションの完了後は json データの status 属性が finished となります。</p>
+<p>なお、本ファイルは BLOB ストレージに <strong>/logic-apps/ [クライアント側ロジック アプリの実行 ID] /status.json</strong> というパスで保存されます。<br>そのため、要求毎に実行状態を保持しておくことが可能となります。</p>
+<p>現時点でのワークフローの全体図は下図の通りとなっております。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-6.png"></p>
+<p>現時点でのワーク フローは処理状態に応じたレスポンスの設定が出来ていないため引き続きタイム アウトエラーを生じるものとなります。<br>次小節で本問題を解決いたします。</p>
+<h4 id="2-5-サーバー側ロジック-アプリの改修-処理状態に応じたレスポンス内容の設定"><a href="#2-5-サーバー側ロジック-アプリの改修-処理状態に応じたレスポンス内容の設定" class="headerlink" title="2-5. サーバー側ロジック アプリの改修 - 処理状態に応じたレスポンス内容の設定"></a>2-5. サーバー側ロジック アプリの改修 - 処理状態に応じたレスポンス内容の設定</h4><p>前小節まででサーバー側ロジック アプリの処理状態の保存までを構築いたしました。<br>本小節では、処理状態に応じてレスポンス内容を変更するようにワークフローを改修していきます。</p>
+<p>まず、長時間の実行を伴う処理を行う前にクライアントに処理を受け付けた旨を示す応答を返します。<br>クライアント側ロジック アプリの <strong>待ち時間</strong> アクションの前に下図のような <strong>応答</strong> アクションを追加します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-7.png"></p>
+<p>状態コードに 202 を、Location ヘッダーにサーバー側ロジック アプリの URL を設定いたします。<br>本設定によりクライアント側ロジック アプリからのリクエストを受けた際に、処理を受け付けた旨と処理状況の確認はサーバー側ロジック アプリを再度呼び出すことで確認して欲しい旨を即時に伝えられます。<br>また、Retry-after ヘッダーに 30 を設定しているため、クライアント側ロジック アプリからの処理状況の確認リクエストは 30 秒毎に行われることとなります。</p>
+<p>クライアント側ロジック アプリはレスポンスを受けて、30 秒後に状況確認のためにサーバー側ロジック アプリを呼び出します。<br>現時点のワークフローですと、再度呼び出されたサーバー側ロジック アプリは 202 番応答をした後に待ち時間アクションを行います。<br>この動きは 1 回目のリクエストを受けた際の動きと同様となります。<br>つまり、実行状態を確認するだけのはずがサーバー側に再度処理の依頼を実施してしまっている状況となっております。</p>
+<p>上記を踏まえますと、1 回目のリクエストでは処理を実施し 2 回目以降のリクエストでは処理状態の確認を行うようにワークフローを改修する必要がございます。<br>そのために、処理状況の管理ファイル（<strong>status.json</strong>）の存在有無によって処理を分岐させます。</p>
+<p>下図のように 1 つめの <strong>BLOB を作成する（V2）</strong> アクションの前に <strong>BLOB コンテンツを取得する（V2）</strong> アクションを作成します。<br>BLOB パラメーターに <strong>/logic-apps/@{variables(‘id’)}/status.json</strong> を設定し、<strong>status.json</strong> の取得を試みます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-8.png"></p>
+<p>1 回目のリクエストでは <strong>status.json</strong> が作成されていないため 404 エラーを生じ、2 回目以降のリクエストでは <strong>status.json</strong> が存在するため実行が成功し <strong>status.json</strong> の内容が取得されます。<br>よって、<strong>BLOB コンテンツを取得する（V2）</strong> アクションの実行成否に応じて処理を分岐させることで 1 回目のリクエストと 2 回目以降のリクエストの区別が可能となります。</p>
+<p>1 つめの <strong>BLOB を作成する（V2）</strong> アクションの設定メニューから <strong>実行条件の構成</strong> を押下いたします。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-9.png"></p>
+<p><strong>BLOB　コンテンツを作成する（V2）</strong> アクションが失敗した場合のみにチェックを入れて <strong>完了</strong> ボタンを押下する事で、以降の処理を 1 回目のリクエストのみ実行するような構成となります。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-10.png"></p>
+<p><strong>BLOB　コンテンツを取得する（V2）</strong> の成否によって実行を分岐する都合上、実行が成功しているにも関わらずエラー終了と表示されてしまいます。<br>本事象の回避のために 2 つめの <strong>BLOB　コンテンツを作成する（V2）</strong> アクションの後に <strong>終了</strong> アクションを下図のように追加いたします。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-17.png"></p>
+<p>次に、2 回目以降のリクエストに対する処理、すなわちサーバー処理状態の確認を行う処理を追加いたします。<br><strong>BLOB　コンテンツを取得する（V2）</strong> アクションと <strong>BLOB を作成する（V2）</strong> アクションの間をマウスオーバーすると <strong>＋</strong> ボタンが表示されます。<br>こちらのボタンを押下して並列分岐の追加を選択いただくと分岐が作成されます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-11.png"></p>
+<p>作成された分岐のアクションに <strong>変数を初期化する</strong> アクションを追加し、下図のように設定いたします。<br>値に <strong>@{json(body(&#39;BLOB_コンテンツを取得する_(V2)&#39;))[&#39;status&#39;]}</strong> を設定することで <strong>status.json</strong> の status 属性を保持する文字列変数 <strong>status</strong> が作成されます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-12.png"></p>
+<p>次に、下図のように status 変数が finished という文字列に等しいか否かを判定する <strong>条件</strong> アクションを追加したします。<br>条件部の左辺に <strong>@variables(&#39;status&#39;)</strong> を右辺に <strong>&quot;finished&quot;</strong> を設定し、等しいか否かを判定いたします。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-13.png"></p>
+<p>上記のアクションが True の場合はサーバー側の処理が終わっているため、その旨を返すアクションを追加いたします。<br>True 側の <strong>アクションの追加</strong> を押下し、下図のような <strong>応答</strong> アクションを追加いたします。<br>状態コードに 200 を、本文に処理が終了した旨を示すメッセージを設定いたします。<br>本応答を受けたクライアント側ロジック アプリはポーリング処理を終了し、HTTP アクション以降の処理を行います。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-14.png"></p>
+<p>次に条件分岐が False の場合はサーバー側の処理が終わっていないため、その旨と再度の状況確認の依頼を返すアクションを追加いたします。<br>False 側の <strong>アクションの追加</strong> を押下し、下図のような <strong>応答</strong> アクションを追加いたします。<br>状態コードに 202 を、Location ヘッダーにサーバー側ロジック アプリの URL を設定いたします。<br>本設定により処理が継続中であるため、サーバー側ロジック アプリを再度呼び出すことで改めて処理状況を確認して欲しい旨をクライアント側ロジック アプリに伝えられます。<br>また、Retry-after ヘッダーに 30 を設定しているため、クライアント側ロジック アプリからの処理状況の確認リクエストは 30 秒毎に行われることとなります。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-15.png"></p>
+<p>以上の設定により非同期ポーリング パターンに対応するようなサーバー側ロジック アプリの構築を行えました。<br>ワークフローの全体像は下図の通りとなります。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/server2-16.png"></p>
+<h4 id="2-6-サンプルの動作"><a href="#2-6-サンプルの動作" class="headerlink" title="2-6. サンプルの動作"></a>2-6. サンプルの動作</h4><p>構築したサンプルを実行し、タイムアウト エラーが解消した事を確認します。</p>
+<p>クライアント側のロジック アプリの概要からトリガーの実行を行います。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-1.png"></p>
+<p><strong>実行の履歴</strong> タブから約 3 分の経過後に実行が成功する事を確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-2.png"></p>
+<p>上図の成功した実行を押下すると、成功した実行の履歴を閲覧可能です。<br>HTTP アクションの実行が 3 分の経過後に成功し、サーバーからの処理完了の旨を示すメッセージを取得できたことを確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-3.png"></p>
+<p>次に、サーバー側ロジック アプリの実行履歴を同様に確認します。<br>サーバー側ロジック アプリの <strong>概要</strong> メニューから <strong>実行の履歴</strong> タブを選択いたします。<br>約 3 分の経過後に成功する 1 つの実行と、1 秒未満に処理が成功する実行が 6 つ確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-4.png"></p>
+<p>約 3 分の処理を行っている実行はサーバーの処理を行っている実行となります。<br>実行履歴を押下し、こちらの内容を確認していきます。<br>下図のように、3 分の待ち時間処理の前後に <strong>BLOB を作成する（V2）</strong> で BLOB ストレージ上の処理状態の管理ファイル（status.json）を更新している様子を確認できます。<br>3 分の待ち時間処理が終了すると処理状態を “finished” に変更して処理を終了します。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-5.png"></p>
+<p>1 秒未満に処理が成功している 6 つの実行はクライアント側ロジック アプリがサーバーの処理状態を確認する際に行ったリクエストによるものとなります。<br>内訳は 5 回が処理中の旨を返しており、1 回が処理を完了した旨を返すものとなります。</p>
+<p>処理中の旨を返す実行の履歴をピックアップして表示すると下図のようになります。<br>下図のように処理状態が “finished” でないため、クライアント側に再度の確認を要求していることを確認できます。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-6.png"></p>
+<p>最後に、処理を完了した旨を返す実行について確認いたします。<br>実行履歴の内、一番新しいものが該当いたします。<br>詳細は下図の通りとなります。<br>処理状態が “finished” となっていることを確認できたため、クライアント側に処理が完了した旨とメッセージを返しております。<br><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/exec2-7.png"></p>
+<p>以上のように、非同期ポーリング パターンを用いる事で HTTP アクションのタイムアウト エラーを回避できることをサンプルにてご紹介いたしました。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、非同期ポーリング パターンを用いる事で HTTP アクションのタイムアウト エラーを回避できることをサンプルにてご紹介いたしました。<br>サーバー側の処理を HTTP アクションの非同期ポーリング パターンに沿うように工夫いただくことで HTTP アクションのタイムアウト期間の制限を超えるような処理も Logic Apps から呼び出し可能となります。<br>長時間の処理時間を伴う処理を Logic Apps から HTTP アクションで呼び出す場合は、非同期ポーリング パターンが有効となる可能性がございますのでご検討いただけますと幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/HttpAction-AsyncPattern-Polling.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../how-to-treat-json-in-logicApps/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="../StandardLogicApps-Authorization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Logic Apps (Standard) を作成するために必要な最小権限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../how-to-treat-json-in-logicApps/">Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法</a>
+          </li>
+        
+          <li>
+            <a href="">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-Authorization/">Logic Apps (Standard) を作成するために必要な最小権限</a>
+          </li>
+        
+          <li>
+            <a href="../AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
+          </li>
+        
+          <li>
+            <a href="../Integration-graphApi/">Logic Apps から Graph API を実行する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">8</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">8</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">8</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">8</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 15px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 10px;">Standard Logic Apps</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -37,6 +37,13 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/</loc>
+    
+    <lastmod>2022-09-06</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
     
     <lastmod>2022-09-06</lastmod>
@@ -44,7 +51,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/</loc>
     
     <lastmod>2022-09-06</lastmod>
     
@@ -124,6 +131,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/General/</loc>
+    <lastmod>2022-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/</loc>
     <lastmod>2022-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
