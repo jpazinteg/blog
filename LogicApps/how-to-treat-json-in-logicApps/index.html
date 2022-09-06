@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの 花井 です。本記事では Azure Logic Apps で JSON オブジェクトの特定のプロパティから値を取得する方法についてご説明します。 こんな方におすすめです 動的なコンテンツとして表示されないプロパティの値を取得されたい JSON の解析アクションを実行せず特定のプロパティの値を取得されたい  前提条件 本記事では従量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの 花井 です。本記事では Azure Logic Apps で JSON オブジェクトの特定のプロパティから値を取得する方法についてご説明します。 こんな方におすすめです 動的なコンテンツとして表示されないプロパティの値を取得されたい JSON の解析アクションを実行せず特定のプロパティの値を取得されたい  前提条件 本記事では従量">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image04.png">
+<meta property="article:published_time" content="2022-09-06T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-06T02:05:21.334Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/how-to-treat-json-in-logicApps" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-09-06T15:00:00.000Z" itemprop="datePublished">2022-09-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fbb69c14-712f-56c9-b11a-243820911eb9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%A7+JSON+%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E5%80%A4%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2Fhow-to-treat-json-in-logicApps%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2Fhow-to-treat-json-in-logicApps.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2Fhow-to-treat-json-in-logicApps.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/" data-id="cl7pjurgt00070nmn0xxr5gmx" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Integration サポート チームの 花井 です。<br>本記事では Azure Logic Apps で JSON オブジェクトの特定のプロパティから値を取得する方法についてご説明します。</p>
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>動的なコンテンツとして表示されないプロパティの値を取得されたい</li>
+<li>JSON の解析アクションを実行せず特定のプロパティの値を取得されたい</li>
+</ul>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>本記事では従量課金版 Logic Apps ワークフローを使用しますが、Standard Logic Apps、Power Automate のワークフローでも同様に動作します。</li>
+<li>どのトリガーを使用しても問題ございません。</li>
+<li>以下の JSON オブジェクトを格納した変数 obj を初期化するアクションを配置した Logic Apps ワークフローを用意します。<br>※事前準備の項目で詳細をご案内します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msgList&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;always&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>本記事の例では、上記の JSON オブジェクトが格納された変数 obj から、msgList プロパティ (配列) の 1 番目の要素の msg プロパティの値 “Hello.” を取得する関数をご案内します。</li>
+</ul>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>以下のように変数初期化アクションを追加し、変数 obj を定義します。<br><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image01.png"></p>
+<ul>
+<li>各パラメーターの設定<br>名前 : obj<br>種類 : オブジェクト<br>値 : (以下の JSON を入力します)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msgList&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;always&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="構築"><a href="#構築" class="headerlink" title="構築"></a>構築</h2><ol>
+<li><p>変数初期化アクションの次のステップとして、作成アクションを追加します。<br><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image02.png"></p>
+</li>
+<li><p>作成アクションの [入力] パラメーターに以下の関数を入力します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variables(&#x27;obj&#x27;)[&#x27;msgList&#x27;][1][&#x27;msg&#x27;]</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image03.png"></p>
+</li>
+<li><p>ワークフローを保存します。</p>
+</li>
+</ol>
+<h2 id="確認"><a href="#確認" class="headerlink" title="確認"></a>確認</h2><ol>
+<li>Azure ポータル上で、Logic Apps の概要ページの [トリガーの実行 - 実行] を選択し、トリガーを手動実行します。</li>
+<li>Azure ポータル上で、Logic Apps の概要ページの [実行の履歴] タブから、手動実行した実行のアクションの実行履歴を開きます。</li>
+<li>作成アクションの未加工入力から正常に値 “Hello.” が取得できていることを確認できます。<br><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image04.png"></li>
+</ol>
+<h2 id="入力した関数の解説"><a href="#入力した関数の解説" class="headerlink" title="入力した関数の解説"></a>入力した関数の解説</h2><p>variables 関数は、指定した変数の値を取得する関数です。<br>関数「variables(‘obj’)」の場合は変数 obj の値を取得する動作となる、以下の JSON オブジェクト型の値を取得します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msgList&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;always&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Logic Apps では JSON オブジェクトを取得する関数の末尾に以下の記述のいずれかを追加することで指定したプロパティの値を取得できます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 ?[&#x27;プロパティ名&#x27;] </span><br><span class="line">// 1 の記述では ? を付加することで Null 許容となり指定したプロパティが存在しない場合もエラーとなりません。</span><br><span class="line">2 [&#x27;プロパティ名&#x27;]</span><br><span class="line">3 .プロパティ名</span><br><span class="line">// 半角スペースを含むプロパティ名では 3 の記述はご利用いただけません。</span><br></pre></td></tr></table></figure>
+
+
+<p>関数「variables(‘obj’)[‘msgList’]」では以下の配列 (アレイ) 型の値を取得します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">    &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">    &quot;time&quot;: &quot;always&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">    &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">    &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>Logic Apps では JSON 配列 (アレイ) 型を取得する関数の末尾に以下のような記述を追加することで指定した要素番号の要素の値を取得できます。<br>なお要素番号は 0 からカウントします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[要素番号]</span><br></pre></td></tr></table></figure>
+
+<p>関数「variables(‘obj’)[‘msgList’][1]」では以下の JSON オブジェクト型の値を取得します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">  &quot;time&quot;: &quot;always&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作成アクションに入力した関数「variables(‘obj’)[‘msgList’][1][‘msg’]」では、上記のオブジェクトの msg プロパティを取得する動作であり、値 “Hello.” を取得します。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内しましたが、いかがでしたでしょうか。</p>
+<ul>
+<li>JSON オブジェクトから指定したプロパティの値を取得する方法</li>
+<li>配列の特定の要素から値を取得する方法</li>
+</ul>
+<p>本記事ではオブジェクト型の変数からプロパティを指定し値を取得しましたが、triggerBody 関数や body 関数を組み合わせ、アクションやトリガーの出力の body プロパティに格納されたオブジェクトから指定したプロパティの値を取得することも可能でございます。</p>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/how-to-treat-json-in-logicApps.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../StandardLogicApps-Authorization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Logic Apps (Standard) を作成するために必要な最小権限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-Authorization/">Logic Apps (Standard) を作成するために必要な最小権限</a>
+          </li>
+        
+          <li>
+            <a href="../AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
+          </li>
+        
+          <li>
+            <a href="../Integration-graphApi/">Logic Apps から Graph API を実行する</a>
+          </li>
+        
+          <li>
+            <a href="../Integration-logAlertRule/">ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">7</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">7</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">7</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 15px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/General/" style="font-size: 10px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 10px;">Standard Logic Apps</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
