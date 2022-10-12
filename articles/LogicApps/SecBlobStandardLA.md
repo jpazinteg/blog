@@ -34,9 +34,13 @@ Standard Logic Apps （シングルテナント） を作成するにはスト�
 - [ストレージ アカウントを作成する](https://learn.microsoft.com/ja-jp/azure/storage/common/storage-account-create?tabs=azure-portal)
 - [仮想ネットワークの作成、変更、削除](https://learn.microsoft.com/ja-jp/azure/virtual-network/manage-virtual-network)
 
-上記の環境が構築されており、かつストレージ アカウントがプライベートエンドポイントに接続されていることを前提に本手順を実施いただきます。
+上記の環境が構築されており、かつストレージ アカウントがプライベート エンドポイントに接続されていることを前提に本手順を実施いただきます。
+テーブル、キュー、BLOB、ファイル ストレージ サービスごとに異なるプライベート エンドポイントを作成することで、プライベートな環境から接続することが可能となります。
 
 - [Azure portal または Visual Studio Code を使用してデプロイする](https://learn.microsoft.com/ja-jp/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account#deploy-using-azure-portal-or-visual-studio-code)
+
+- [Azure Storage のプライベート エンドポイントを使用する](https://learn.microsoft.com/ja-jp/azure/storage/common/storage-private-endpoints)
+
 
 ## ARM テンプレートの編集
 本手順では、以下の通り ARM テンプレートを作成いたします。
@@ -240,8 +244,9 @@ Parameters.json についてはお客様環境に併せて変更を加えてい�
 }
 ```
 
-上記ファイルを作成いただきましたら、任意のフォルダにファイルを格納し、以下のようにコマンドを実行いただきます。
+CORS の設定につきましては、特に必須の設定ではございませんので、変更しなくてもデプロイ可能です。お客様のご要件に合わせまして適宜ご変更ください。
 
+上記ファイルを作成いただきましたら、任意のフォルダにファイルを格納し、以下のようにコマンドを実行いただきます。
 
 ・ARM テンプレート デプロイ サンプルコマンド
 ```
