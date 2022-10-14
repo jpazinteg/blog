@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。Standard Logic Apps （シングルテナント） を作成するにはストレージ アカウントを利用する必要がございます。しかし、ファイアウォールで通信制御を行ったストレージ アカウント配下には Azure Portal から Standard Logic Apps を構築することが出来ません。今回は ARM テン">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。Standard Logic Apps （シングルテナント） を作成するにはストレージ アカウントを利用する必要がございます。しかし、ファイアウォールで通信制御を行ったストレージ アカウント配下には Azure Portal から Standard Logic Apps を構築することが出来ません。今回は ARM テン">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/image000.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/image001.png">
+<meta property="article:published_time" content="2022-09-27T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-14T07:15:54.650Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Standard Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/image000.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/SecBlobStandardLA" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2022-09-27T15:00:00.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+35f61737-ca5f-5998-b4b3-08a3b582f457%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A%E9%85%8D%E4%B8%8B%E3%81%AE%E6%97%A2%E5%AD%98%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8+%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AB+Standard+Logic+Apps+%E3%82%92%E4%BD%9C%E6%88%90%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FSecBlobStandardLA%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FSecBlobStandardLA.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FSecBlobStandardLA.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/" data-id="cl985oik800050mqt9lcw6wn9" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>Standard Logic Apps （シングルテナント） を作成するにはストレージ アカウントを利用する必要がございます。<br>しかし、ファイアウォールで通信制御を行ったストレージ アカウント配下には Azure Portal から Standard Logic Apps を構築することが出来ません。<br>今回は ARM テンプレートを用いて ファイアウォール設定を有効にした既存のストレージ アカウント配下に Standard Logic Apps を構築する方法についてご案内します。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>前提</li>
+<li>ARM テンプレートの編集</li>
+<li>まとめ</li>
+</ul>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>今回の記事については以下の情報を参考にしております。</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account#deploy-using-azure-portal-or-visual-studio-code">Azure portal または Visual Studio Code を使用してデプロイする</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/VeeraMS/LogicApp-deployment-with-Secure-Storage">Deploy Logic App with Secured storage account having Private Endpoints</a></p>
+</li>
+</ul>
+<p>なお、今回の手順では ARM テンプレートを Azure PowerShell にてデプロイ致します。</p>
+<p>また、予めストレージ アカウントおよび Standard Logic Apps を構築する VNet を作成いただく必要がございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-account-create?tabs=azure-portal">ストレージ アカウントを作成する</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/virtual-network/manage-virtual-network">仮想ネットワークの作成、変更、削除</a></li>
+</ul>
+<p>上記の環境が構築されており、かつストレージ アカウントがプライベート エンドポイントに接続されていることを前提に本手順を実施いただきます。<br>テーブル、キュー、BLOB、ファイル ストレージ サービスごとに異なるプライベート エンドポイントを作成することで、プライベートな環境から接続することが可能となります。</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account#deploy-using-azure-portal-or-visual-studio-code">Azure portal または Visual Studio Code を使用してデプロイする</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-private-endpoints">Azure Storage のプライベート エンドポイントを使用する</a></p>
+</li>
+</ul>
+<h2 id="ARM-テンプレートの編集"><a href="#ARM-テンプレートの編集" class="headerlink" title="ARM テンプレートの編集"></a>ARM テンプレートの編集</h2><p>本手順では、以下の通り ARM テンプレートを作成いたします。<br>・Parameters.json<br>・DeployResources.json</p>
+<p>Parameters.json についてはお客様環境に併せて変更を加えていただく必要がございますが、DeployResources.json については特に変更は不要でございます。</p>
+<p>＜Parameters.json＞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;$schema&quot;: &quot;https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#&quot;,</span><br><span class="line">    &quot;contentVersion&quot;: &quot;1.0.0.0&quot;,</span><br><span class="line">    &quot;parameters&quot;: &#123;</span><br><span class="line">        &quot;logicAppFEname&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;Standard-LogicAppsTest&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;appInsightName&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;TestAppInsight&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;fileShareName&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;Standard-LogicAppsTest-Share&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;location&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;Central US&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;use32BitWorkerProcess&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: true</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;serverFarmId&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;/subscriptions/（お客様のサブスクリプション ID）/resourceGroups/（お客様のリソースグループ）/providers/Microsoft.Web/serverfarms/（お客様の App Service プラン）&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;contentStorageAccountName&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;teststorageaccount&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;vnetName&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;StandardLogicAppsNW&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;subnetName&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: &quot;LogicAppsSubnet&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>＜Parameters.json の各設定値＞<br>・logicAppFEname : 作成する Standard Logic Apps 名<br>・appInsightName : Standard Logic Apps が接続する既存の Application Insights 名<br>・fileShareName : 既存のファイル共有名<br>・location : Standard Logic Apps を構築するリージョン<br>・use32BitWorkerProcess : そのままで問題ありません<br>・serverFarmId: 利用する既存の App service プランのリソース ID<br>・contentStorageAccountName : 利用する既存のストレージアカウント名<br>・vnetName : ストレージアカウントおよび Standard Logic Apps が接続する既存の Vnet 名<br>・subnetName : Logic Apps が接続する既存のサブネット名 </p>
+<p>＜DeployResources.json（こちらは変更を加えなくても結構です）＞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;$schema&quot;: &quot;https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#&quot;,</span><br><span class="line">    &quot;contentVersion&quot;: &quot;1.0.0.0&quot;,</span><br><span class="line">    &quot;parameters&quot;: &#123;</span><br><span class="line">        &quot;logicAppFEname&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;fileShareName&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;appInsightName&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;use32BitWorkerProcess&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;Bool&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;location&quot;: &#123;</span><br><span class="line">            &quot;defaultValue&quot;: &quot;[resourceGroup().location]&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;,</span><br><span class="line">            &quot;metadata&quot;: &#123;</span><br><span class="line">                &quot;description&quot;: &quot;Location to deploy resources to.&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;serverFarmId&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;contentStorageAccountName&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;vnetName&quot;: &#123;</span><br><span class="line">            &quot;defaultValue&quot;: &quot;VirtualNetwork&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;,</span><br><span class="line">            &quot;metadata&quot;: &#123;</span><br><span class="line">                &quot;description&quot;: &quot;Name of the VNET that the Function App and Storage account will communicate over.&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;subnetName&quot;: &#123;</span><br><span class="line">            &quot;type&quot;: &quot;String&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;resources&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;type&quot;: &quot;Microsoft.Web/sites&quot;,</span><br><span class="line">            &quot;apiVersion&quot;: &quot;2018-11-01&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;[parameters(&#x27;logicAppFEname&#x27;)]&quot;,</span><br><span class="line">            &quot;location&quot;: &quot;[parameters(&#x27;location&#x27;)]&quot;,</span><br><span class="line">            &quot;tags&quot;: &#123;&#125;,</span><br><span class="line">            &quot;kind&quot;: &quot;functionapp,workflowapp&quot;,</span><br><span class="line">            &quot;identity&quot;: &#123;</span><br><span class="line">                &quot;type&quot;: &quot;SystemAssigned&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;properties&quot;: &#123;</span><br><span class="line">                &quot;name&quot;: &quot;[parameters(&#x27;logicAppFEname&#x27;)]&quot;,</span><br><span class="line">                &quot;siteConfig&quot;: &#123;</span><br><span class="line">                    &quot;appSettings&quot;: [</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;FUNCTIONS_EXTENSION_VERSION&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;~3&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;FUNCTIONS_WORKER_RUNTIME&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;node&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;APPINSIGHTS_INSTRUMENTATIONKEY&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[reference(resourceId(&#x27;Microsoft.Insights/components&#x27;, parameters(&#x27;appInsightName&#x27;)), &#x27;2015-05-01&#x27;).InstrumentationKey]&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;APPLICATIONINSIGHTS_CONNECTION_STRING&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[reference(resourceId(&#x27;Microsoft.Insights/components&#x27;, parameters(&#x27;appInsightName&#x27;)), &#x27;2015-05-01&#x27;).ConnectionString]&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;AzureWebJobsStorage&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[concat(&#x27;DefaultEndpointsProtocol=https;AccountName=&#x27;,parameters(&#x27;contentStorageAccountName&#x27;),&#x27;;AccountKey=&#x27;,listKeys(resourceId(&#x27;Microsoft.Storage/storageAccounts&#x27;, parameters(&#x27;contentStorageAccountName&#x27;)), &#x27;2019-06-01&#x27;).keys[0].value,&#x27;;EndpointSuffix=&#x27;,&#x27;core.windows.net&#x27;)]&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;WEBSITE_CONTENTAZUREFILECONNECTIONSTRING&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[concat(&#x27;DefaultEndpointsProtocol=https;AccountName=&#x27;,parameters(&#x27;contentStorageAccountName&#x27;),&#x27;;AccountKey=&#x27;,listKeys(resourceId(&#x27;Microsoft.Storage/storageAccounts&#x27;, parameters(&#x27;contentStorageAccountName&#x27;)), &#x27;2019-06-01&#x27;).keys[0].value,&#x27;;EndpointSuffix=&#x27;,&#x27;core.windows.net&#x27;)]&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;WEBSITE_CONTENTSHARE&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[toLower(parameters(&#x27;fileShareName&#x27;))]&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;APP_KIND&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;workflowApp&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;WEBSITE_VNET_ROUTE_ALL&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;1&quot;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;AzureFunctionsJobHost__extensionBundle__id&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;Microsoft.Azure.Functions.ExtensionBundle.Workflows&quot;,</span><br><span class="line">                            &quot;slotSetting&quot;: false</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;AzureFunctionsJobHost__extensionBundle__version&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;[1.*, 2.0.0)&quot;,</span><br><span class="line">                            &quot;slotSetting&quot;: false</span><br><span class="line">                        &#125;,</span><br><span class="line">                        &#123;</span><br><span class="line">                            &quot;name&quot;: &quot;WEBSITE_CONTENTOVERVNET&quot;,</span><br><span class="line">                            &quot;value&quot;: &quot;1&quot;,</span><br><span class="line">                            &quot;slotSetting&quot;: false</span><br><span class="line">                        &#125;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;use32BitWorkerProcess&quot;: &quot;[parameters(&#x27;use32BitWorkerProcess&#x27;)]&quot;,</span><br><span class="line">                    &quot;cors&quot;: &#123;</span><br><span class="line">                        &quot;allowedOrigins&quot;: [</span><br><span class="line">                            &quot;https://afd.hosting.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://afd.hosting-ms.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://hosting.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://ms.hosting.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://ema-ms.hosting.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://ema.hosting.portal.azure.net&quot;,</span><br><span class="line">                            &quot;https://ema.hosting.portal.azure.net&quot;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                &quot;serverFarmId&quot;: &quot;[parameters(&#x27;serverFarmId&#x27;)]&quot;,</span><br><span class="line">                &quot;clientAffinityEnabled&quot;: true</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;resources&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;type&quot;: &quot;networkconfig&quot;,</span><br><span class="line">                    &quot;apiVersion&quot;: &quot;2018-11-01&quot;,</span><br><span class="line">                    &quot;name&quot;: &quot;virtualNetwork&quot;,</span><br><span class="line">                    &quot;location&quot;: &quot;[parameters(&#x27;location&#x27;)]&quot;,</span><br><span class="line">                    &quot;dependsOn&quot;: [</span><br><span class="line">                        &quot;[parameters(&#x27;logicAppFEname&#x27;)]&quot;</span><br><span class="line">                    ],</span><br><span class="line">                    &quot;properties&quot;: &#123;</span><br><span class="line">                        &quot;subnetResourceId&quot;: &quot;[resourceId(&#x27;Microsoft.Network/virtualNetworks/subnets&#x27;,parameters(&#x27;vnetName&#x27;), parameters(&#x27;subnetName&#x27;))]&quot;,</span><br><span class="line">                        &quot;swiftSupported&quot;: true</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CORS の設定につきましては、特に必須の設定ではございませんので、変更しなくてもデプロイ可能です。お客様のご要件に合わせまして適宜ご変更ください。</p>
+<p>上記ファイルを作成いただきましたら、任意のフォルダにファイルを格納し、以下のようにコマンドを実行いただきます。</p>
+<p>・ARM テンプレート デプロイ サンプルコマンド</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">New-AzResourceGroupDeployment -Name DeployTest01 -ResourceGroupName kymiwaTestLogicApps2 -TemplateFile .\DeployResources.json -TemplateParameterFile .\Parameters.json</span><br></pre></td></tr></table></figure>
+
+<p>New-AzResourceGroupDeployment コマンドの詳細については以下の公開情報に記載がございますので、併せてご確認いただければと存じます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/az.resources/new-azresourcegroupdeployment?view=azps-8.3.0">New-AzResourceGroupDeployment</a></li>
+</ul>
+<p>コマンド実行後、以下のように ProvisioningState が “Succeeded” になっていることが確認できれば成功となります。<br><img src="/blog/LogicApps/SecBlobStandardLA/image000.png"> </p>
+<p>Azure Portal でも Standard Logic Apps が作成されていることを確認いただけます。<br><img src="/blog/LogicApps/SecBlobStandardLA/image001.png"> </p>
+<p>以上の手順にて、ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成することが可能でございます。<br>なお、上記のテンプレートについてはあくまでも本記事におけるサンプルとなります。<br>商用環境でご利用いただく場合につきましては、お客様の責任において十分に設計および検証をいただいたうえで採用要否について判断をいただければと存じます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>事前準備</li>
+<li>ARM テンプレートの編集</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/SecBlobStandardLA.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../general/Integration-teamInfo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          Azure Integration チームについて
+        
+      </div>
+    </a>
+  
+  
+    <a href="../how-to-treat-json-in-logicApps/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../../general/Integration-teamInfo/">Azure Integration チームについて</a>
+          </li>
+        
+          <li>
+            <a href="">ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成</a>
+          </li>
+        
+          <li>
+            <a href="../how-to-treat-json-in-logicApps/">Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法</a>
+          </li>
+        
+          <li>
+            <a href="../HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-Authorization/">Logic Apps (Standard) を作成するために必要な最小権限</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">9</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">9</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">9</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">9</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 16.67px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/General/" style="font-size: 13.33px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 20px;">How-To</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 13.33px;">Standard Logic Apps</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
