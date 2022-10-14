@@ -1,6 +1,6 @@
 ---
 title: ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成
-date: 2022-09-28 00:00:00
+date: 2022-10-14 00:00:00
 tags:
   - How-To
   - Tips
