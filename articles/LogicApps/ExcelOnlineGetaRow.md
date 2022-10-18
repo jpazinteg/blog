@@ -37,7 +37,7 @@ Logic Apps で利用できる Excel Online  (Business) コネクタにて、Exce
 ![](./ExcelOnlineGetaRow/image001.png)
 
 以上が本記事の事象となります。
-なお、こちらにつきましては Logic Apps のみの既知の事象でございます。Power Automate では事象は発生いたしません。
+なお、こちらにつきましては Logic Apps のみで発生する既知の事象でございます。Power Automate では事象は発生いたしません。
 また、お客様にはご不便をおかけしますが、上記の振る舞いについてはプログラムの変更等の予定はございません。
 その為、事象が発生した際の回避策につきまして、以下に記載いたします。
 
