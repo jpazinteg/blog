@@ -2,10 +2,10 @@
 title: Logic Apps で簡単に日付や時刻を用いる
 date: 2022-11-04 16:00:00
 tags:
-  - How-To
   - Tips
   - Azure Integration
   - Azure Logic Apps 
+  - 
 ---
 
 こんにちは。  Azure Integration サポート チームの山田です。  
@@ -33,7 +33,7 @@ tags:
 
 ![](./LogicApps-DateTime/image000.png) 
 
-ほか、[convertTimeZone](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#converttimezone)、[convertFromUtc](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc)､[converttoUtc](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#converttoutc) という関数を利用できます。
+ほか、[convertTimeZone](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#converttimezone)、[convertFromUtc](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc)、[converttoUtc](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#converttoutc) という関数を利用できます。
 
 
 ## フォーマットを指定して日時を表示する
