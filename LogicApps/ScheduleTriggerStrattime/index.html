@@ -4,26 +4,28 @@
   <meta charset="utf-8">
   
   
-  <title>Azure Logic Apps の Availability Zone 対応に伴う通知メールについて | Japan Azure Integration Support Blog</title>
+  <title>「繰り返し (Recurrence)」トリガーの起動時刻の差異について | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる仕様の動作について説明します。 こんな方におすすめです 「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる原因を知りたい方  前提条件 「繰り返し (Recurrence)」トリ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure Logic Apps の Availability Zone 対応に伴う通知メールについて">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/index.html">
+<meta property="og:title" content="「繰り返し (Recurrence)」トリガーの起動時刻の差異について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。  Azure Logic Apps - Availability Zone support is coming soon  こちらの要件に伴い、お客">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる仕様の動作について説明します。 こんな方におすすめです 「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる原因を知りたい方  前提条件 「繰り返し (Recurrence)」トリ">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image02.png">
-<meta property="article:published_time" content="2022-04-06T15:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-07T08:28:21.522Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/runHistory.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/triggerHistory1.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/triggerHistory2.jpg">
+<meta property="article:published_time" content="2022-11-06T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-07T08:28:21.570Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Trigger">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/image01.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/runHistory.jpg">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -85,7 +87,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/AzNotificationMail" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/ScheduleTriggerStrattime" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -94,7 +96,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Azure Logic Apps の Availability Zone 対応に伴う通知メールについて
+      「繰り返し (Recurrence)」トリガーの起動時刻の差異について
     </h1>
   
 
@@ -102,64 +104,40 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-04-06T15:00:00.000Z" itemprop="datePublished">2022-04-07</time>
+  <time datetime="2022-11-06T15:00:00.000Z" itemprop="datePublished">2022-11-07</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c5c3cf06-6fdd-51bf-aabb-812d15509bc9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+Availability+Zone+%E5%AF%BE%E5%BF%9C%E3%81%AB%E4%BC%B4%E3%81%86%E9%80%9A%E7%9F%A5%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FAzNotificationMail%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FAzNotificationMail.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FAzNotificationMail.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+763c4f36-e537-511d-af8c-9f9ffcca5881%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%80%8C%E7%B9%B0%E3%82%8A%E8%BF%94%E3%81%97+%28Recurrence%29%E3%80%8D%E3%83%88%E3%83%AA%E3%82%AC%E3%83%BC%E3%81%AE%E8%B5%B7%E5%8B%95%E6%99%82%E5%88%BB%E3%81%AE%E5%B7%AE%E7%95%B0%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FScheduleTriggerStrattime%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FScheduleTriggerStrattime.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FScheduleTriggerStrattime.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/" data-id="cla6iu4tg00030mnt34mw5sx6" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="cla6iu4tj00070mnthc271yvh" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>つい先日、Azure Logic Apps が Availability Zone に対応するという情報が Tech Community のブログ記事で公開されましたね。</p>
+        <p>こんにちは。Azure Integration サポート チームの髙橋です。<br>「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる仕様の動作について説明します。</p>
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる原因を知りたい方</li>
+</ul>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>「繰り返し (Recurrence)」トリガーに関連する公開情報は以下になります。<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows">Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h2><p>「繰り返し (Recurrence)」トリガーでは、想定される起動時刻よりも、稀に 0.5 秒 ～ 1 秒程度前後して起動することがございます。</p>
+<h2 id="仕様"><a href="#仕様" class="headerlink" title="仕様"></a>仕様</h2><p>「実行の履歴」タブでご確認いただける履歴では、分単位までの表示のため、1 分の差異が生じているように見受けられることがございます。<br>※ 以下の例ですと、想定起動時刻は 13:10 ですが、「実行の履歴」タブのログでは 13:09 に起動しております。<br><img src="/blog/LogicApps/ScheduleTriggerStrattime/runHistory.jpg"></p>
+<p>「トリガーの履歴」タブにて該当履歴の詳細をご確認いただきますと、1 秒程度の差となっております。<br>こちらは当該トリガーの仕様の動作となります。<br><img src="/blog/LogicApps/ScheduleTriggerStrattime/triggerHistory1.jpg"></p>
+<p><img src="/blog/LogicApps/ScheduleTriggerStrattime/triggerHistory2.jpg"></p>
+<p>Logic Apps では、定刻に処理を開始できるよう、トリガー起動時刻の約 1 秒前にストレージの読み込みを開始いたしますが、<br>その読み込み処理が想定より早く終わった、または遅く終わったことにより、このような差異が生じることがございます。</p>
+<h2 id="回避策"><a href="#回避策" class="headerlink" title="回避策"></a>回避策</h2><p>たとえば Logic Apps で現在時刻を取得し、日付によってその後の処理を分岐させるような処理の場合には、後続処理に影響が出る可能性がございます。</p>
+<p>例) 本来 10/1 0:00 に起動するところを、9/30 23:59:59 に起動したことにより、現在の日付が 9/30 と取得され、後続処理に影響が出る等</p>
+<p>そのため、たとえば当該トリガーの開始時刻を「10/1 0:00:00」ではなく、5 秒程度加算した「10/1 0:00:05」とする方法が考えられます。</p>
+<p>または、分岐処理にて現在時刻に 5 秒程度加算し、その上で日付を取得するような方法も考えられます。<br>現在時刻に 5 秒加算するには、addSeconds 関数もご用意もございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/azure-logic-apps-availability-zone-support-is-coming-soon/ba-p/3254456">Azure Logic Apps - Availability Zone support is coming soon</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#addSeconds">addSeconds</a></li>
 </ul>
-<p>こちらの要件に伴い、お客様の中では以下の件名でメールが届いた方もいらっしゃるのではないでしょうか。</p>
-<p><strong>Action required: Update firewall configurations that allow or deny IP addresses of Azure Logic Apps</strong></p>
-<p>今回は上記メール本文の概要と、お客様にてご対応いただく内容について整理いたしましたのでご案内させていただきます。</p>
-<span id="more"></span>
-
-<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>メール本文の概要について</li>
-<li>本メールに対するアクション</li>
-<li>まとめ</li>
-</ul>
-<h2 id="メール本文の概要について"><a href="#メール本文の概要について" class="headerlink" title="メール本文の概要について"></a>メール本文の概要について</h2><p>まず、本メールの概要については大きく以下の内容となります。</p>
-<p><img src="/blog/LogicApps/AzNotificationMail/image01.png"></p>
-<p>・2022 年 3 月 25 日より、アベイラビリティ ゾーンをサポートするため Azure Logic Apps で利用する IP アドレスの追加が予定されている。<br>・Azure Logic Apps の IP アドレスとの通信を許可するファイアウォール設定がある場合、2022 年 5 月 15 日までに Azure Logic Apps とコネクタの両方について新しいアドレスに更新する必要がある。<br>・既存および新規で作成する Azure Logic Apps に今回追加される IP アドレスが利用される。</p>
-<p>以上が本メールの概要となります。</p>
-<h2 id="本メールに対するアクション"><a href="#本メールに対するアクション" class="headerlink" title="本メールに対するアクション"></a>本メールに対するアクション</h2><p>お客様にご対応いただく内容として、メールにも記載されております通り ファイアウォール の設定変更がございます。</p>
-<p>ここで記載されております　<strong>ファイアウォール</strong>　が何を指しているかですが、Azure Firewall だけではなく、ネットワーク セキュリティ グループやストレージ アカウントのファイアウォール等、Azure Logic Apps からの IP アドレス通信制御を行っている全てのリソースを指します。</p>
-<p>また、通信制御については受信規則と送信規則の大きく二つの考え方がございます。 Azure Logic Apps から送られてくる通信に対して制御をしている場合は受信規則のルールに対して Azure Logic Apps の IP アドレスを設定する必要がございます。逆に Azure Logic Apps へ送信するような通信制御をされている場合は、送信規則のルールに対して Azure Logic Apps の IP アドレスを設定いただく必要がございます。</p>
-<p>例えば、ストレージ アカウントのファイアウォールにて、Azure Logic Apps の送信 IP アドレスを許可されている場合、<br>IP アドレスが変更となりますのでファイアウォール側の設定を見直していただく必要がございます。</p>
-<p><img src="/blog/LogicApps/AzNotificationMail/image02.png"></p>
-<p>ファイアウォールに対して設定すべき IP アドレスにつきましては、以下の通りご利用いただいておりますコネクタの種類によって異なります。</p>
-<p>マネージド コネクタをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス</a></li>
-</ul>
-<p>組み込みトリガー、アクションをご利用されている際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#multi-tenant--single-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナントとシングルテナント - 送信 IP アドレス</a></li>
-</ul>
-<p>ファイアウォール経由で、Azure Logic Apps への 通信を制御している際には、<br>以下の公開情報の該当リージョンの IP アドレスをすべて追加いただきますようお願いいたします。</p>
-<p>&lt;ご参考情報&gt;</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-JP/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#inbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # 受信 IP アドレス</a></li>
-</ul>
-<p>なお、お客様のコネクタでご利用されているサービスについて、これまで特にファイアウォール等の設定をしておらず、<br>Azure Logic Apps の送信 IP アドレスをブロックしていない際には、対応は不要となります。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
-<ul>
-<li>メール本文の概要について</li>
-<li>本メールに対するアクション</li>
-</ul>
-<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       
@@ -173,10 +151,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/AzNotificationMail.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/ScheduleTriggerStrattime.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -184,19 +162,10 @@
     
 <nav id="article-nav">
   
-    <a href="../../MSMQ/MsmqCleanInstall/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          MSMQ をドメインモードでインストールする手順について
-        
-      </div>
-    </a>
   
-  
-    <a href="../../general/IntroduceOurBlog/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../XmlBehaviorWithNumbers/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Integration サポート チームの Blog リニューアルのお知らせ</div>
+      <div class="article-nav-title">ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について</div>
     </a>
   
 </nav>
@@ -215,7 +184,7 @@
       <ul>
         
           <li>
-            <a href="../ScheduleTriggerStrattime/">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</a>
+            <a href="">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</a>
           </li>
         
           <li>
