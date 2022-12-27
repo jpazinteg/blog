@@ -4,26 +4,30 @@
   <meta charset="utf-8">
   
   
-  <title>ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について | Japan Azure Integration Support Blog</title>
+  <title>Azure Logic Apps の 条件アクションに関するTips | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは。  Azure Integration サポート チームの継松です。Azure Logic Apps では式関数を使用し、ワークフローの実行中にアクションから取得した値の参照や処理を行うことができます。今回は、式関数の 1 つである xml() の動作についてご紹介します。特に、 10 進数の値が含まれる場合に生じる事象および事象の回避策についてご案内します。">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps には以下の条件アクションを利用することでプログラミングでいう If 文の様な処理を構築することが可能です。  Azure Logic Apps のワークフロー アクションを制御する条件を追加する  今回は上記の条件アクションを利用する際に、公開情報に記載がない上限値に関する Ti">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/index.html">
+<meta property="og:title" content="Azure Logic Apps の 条件アクションに関するTips">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの継松です。Azure Logic Apps では式関数を使用し、ワークフローの実行中にアクションから取得した値の参照や処理を行うことができます。今回は、式関数の 1 つである xml() の動作についてご紹介します。特に、 10 進数の値が含まれる場合に生じる事象および事象の回避策についてご案内します。">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps には以下の条件アクションを利用することでプログラミングでいう If 文の様な処理を構築することが可能です。  Azure Logic Apps のワークフロー アクションを制御する条件を追加する  今回は上記の条件アクションを利用する際に、公開情報に記載がない上限値に関する Ti">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/issuewithxml.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/issuewithxml_workaround.png">
-<meta property="article:published_time" content="2022-10-27T06:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-27T00:08:16.625Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image02001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image05.png">
+<meta property="article:published_time" content="2022-12-21T15:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-27T00:08:16.577Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Issues">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/issuewithxml.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/image01.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -85,7 +89,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/XmlBehaviorWithNumbers" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/ConditionsTips" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -94,7 +98,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について
+      Azure Logic Apps の 条件アクションに関するTips
     </h1>
   
 
@@ -102,42 +106,62 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-10-27T06:00:00.000Z" itemprop="datePublished">2022-10-27</time>
+  <time datetime="2022-12-21T15:00:00.000Z" itemprop="datePublished">2022-12-22</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+43d05a47-411b-52c3-ab67-2323b17f7720%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E5%BC%8F%E9%96%A2%E6%95%B0+xml%28%29+%E3%82%92%E7%94%A8%E3%81%84%E3%81%A6+10+%E9%80%B2%E6%95%B0%E3%81%AE%E5%80%A4%E3%82%92%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AE%E5%8B%95%E4%BD%9C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FXmlBehaviorWithNumbers%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FXmlBehaviorWithNumbers.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FXmlBehaviorWithNumbers.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+480ac064-58de-5092-b2ff-b693b1236129%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+%E6%9D%A1%E4%BB%B6%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8BTips%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FConditionsTips%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FConditionsTips.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FConditionsTips.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/" data-id="clc5gzm02000h0mjzac7y5ze4" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="clc5gzlzt00040mjzek9d3ayk" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは。  Azure Integration サポート チームの継松です。<br>Azure Logic Apps では式関数を使用し、ワークフローの実行中にアクションから取得した値の参照や処理を行うことができます。<br>今回は、式関数の 1 つである xml() の動作についてご紹介します。<br>特に、 10 進数の値が含まれる場合に生じる事象および事象の回避策についてご案内します。</p>
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>Azure Logic Apps には以下の条件アクションを利用することでプログラミングでいう If 文の様な処理を構築することが可能です。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/logic-apps/logic-apps-control-flow-conditional-statement">Azure Logic Apps のワークフロー アクションを制御する条件を追加する</a></li>
+</ul>
+<p>今回は上記の条件アクションを利用する際に、公開情報に記載がない上限値に関する Tips をお届けします！</p>
 <span id="more"></span>
 
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>xml() 関数について</li>
-<li>10 進数の値を変換するときの動作について</li>
-<li>事象の回避策について</li>
+<li>1． 設定可能な条件の最大数</li>
+<li>2． 設定可能なグループの最大数</li>
+<li>3． 1 つのグループの中で設定可能な条件の最大数</li>
+<li>4． 1 つのグループの中で入れ子設定可能なグループの階層</li>
+<li>5． ワークフロー定義の制限</li>
 <li>まとめ</li>
 </ul>
-<h2 id="xml-関数について"><a href="#xml-関数について" class="headerlink" title="xml() 関数について"></a>xml() 関数について</h2><p>xml(‘<value>‘) では、JSON オブジェクトを含む文字列の XML バージョンを返します。</p>
-<p>例<br>xml(‘<name>Sophia Owen</name>‘)</p>
-<p>結果 : </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>Sophia Owen<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn #xml<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#xml">https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#xml</a></p>
-<h2 id="10-進数の値を変換するときの動作について"><a href="#10-進数の値を変換するときの動作について" class="headerlink" title="10 進数の値を変換するときの動作について"></a>10 進数の値を変換するときの動作について</h2><p>以下に示す通り、この xml() 関数を使用して 10 進数の  JSON オブジェクトを含む値を変換すると、浮動小数点の精度に問題が生じる場合がございます。</p>
-<p><img src="/blog/LogicApps/XmlBehaviorWithNumbers/issuewithxml.png"></p>
-<p>こちらはこの xml() 関数で使用される以下のサード パーティの NewtonSoft パッケージによる既知の問題です。</p>
-<p>JToken.ToObject(T) Method (JsonSerializer)<br><a target="_blank" rel="noopener" href="https://www.newtonsoft.com/json/help/html/M_Newtonsoft_Json_Linq_JToken_ToObject__1_1.htm">https://www.newtonsoft.com/json/help/html/M_Newtonsoft_Json_Linq_JToken_ToObject__1_1.htm</a></p>
-<p>NewtonSoft は浮動小数点数を .NET double 型にロードします。これにより、浮動小数点を文字列に変換する際に精度の損失が生じます。</p>
-<p>JsonSerializerSettings.FloatParseHandling Property<br><a target="_blank" rel="noopener" href="https://www.newtonsoft.com/json/help/html/P_Newtonsoft_Json_JsonSerializerSettings_FloatParseHandling.htm">https://www.newtonsoft.com/json/help/html/P_Newtonsoft_Json_JsonSerializerSettings_FloatParseHandling.htm</a></p>
-<h2 id="事象の回避策について"><a href="#事象の回避策について" class="headerlink" title="事象の回避策について"></a>事象の回避策について</h2><p>現時点では、以下に示す通り、値を文字列として指定することで、事象を回避いただけます。</p>
-<p><img src="/blog/LogicApps/XmlBehaviorWithNumbers/issuewithxml_workaround.png"></p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では xml() 関数の動作および 10 進数の値を変換する場合の事象回避策についてご紹介いたしました。<br>他にも、便利な式関数が複数ご用意ございますので、下記の公開資料からご参照いただけますと幸いでございます。</p>
-<p>式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference">https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference</a></p>
+<h2 id="1．設定可能な条件の最大数"><a href="#1．設定可能な条件の最大数" class="headerlink" title="1．設定可能な条件の最大数"></a>1．設定可能な条件の最大数</h2><p>一つの条件アクションに指定可能な条件の最大値につきましては、以下の通り 10 個が上限値となり、それ以上は指定できない挙動となっております。</p>
+<p><img src="/blog/LogicApps/ConditionsTips/image01.png"></p>
+<p>1 つ目の Tips については以上となります。</p>
+<h2 id="2．設定可能なグループの最大数"><a href="#2．設定可能なグループの最大数" class="headerlink" title="2．設定可能なグループの最大数"></a>2．設定可能なグループの最大数</h2><p>条件アクションには各条件をグループ化する機能がございます。</p>
+<p><img src="/blog/LogicApps/ConditionsTips/image02001.png"></p>
+<p>こちらの設定可能なグループの最大値につきましても同様に 10 個が上限値となり、それ以上は指定できない挙動となります。<br><img src="/blog/LogicApps/ConditionsTips/image02.png"></p>
+<p>2 つ目の Tips については以上となります。</p>
+<h2 id="3．1-つのグループの中で設定可能な条件の最大数"><a href="#3．1-つのグループの中で設定可能な条件の最大数" class="headerlink" title="3．1 つのグループの中で設定可能な条件の最大数"></a>3．1 つのグループの中で設定可能な条件の最大数</h2><p>条件とグループに関する上限値が分かったところで、これらを組み合わせた際の上限値について検証致しました。<br>こちらの結果につきましては、1 つのグループに対して最大 10 個の条件を指定することが可能でございました。</p>
+<p><img src="/blog/LogicApps/ConditionsTips/image03.png"></p>
+<p>その為、グループが 10 個、条件が各グループ内に 10 個と、合計 100 個まで条件を設定することが可能でございます。<br>3 つ目の Tips については以上となります。</p>
+<h2 id="4．1-つのグループの中で入れ子設定可能なグループの階層"><a href="#4．1-つのグループの中で入れ子設定可能なグループの階層" class="headerlink" title="4．1 つのグループの中で入れ子設定可能なグループの階層"></a>4．1 つのグループの中で入れ子設定可能なグループの階層</h2><p>それでは、1 つのグループ内にいくつまでグループを入れ子に出来るか検証致しました。<br>結果としましては、以下の通り 5 階層までグループを入れ子に設定することが可能でございました。</p>
+<p><img src="/blog/LogicApps/ConditionsTips/image04.png"></p>
+<p>4 つ目の Tips については以上となります。</p>
+<h2 id="5．ワークフロー定義の制限"><a href="#5．ワークフロー定義の制限" class="headerlink" title="5．ワークフロー定義の制限"></a>5．ワークフロー定義の制限</h2><p>本 Tips は条件アクションではなく以下の Logic Apps 自体のワークフロー定義の制限となりますが、<br>参考までに記載致します。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#workflow-definition-limits">Azure Logic Apps の制約と構成の参考文献 # ワークフロー定義の制限</a></li>
+</ul>
+<p>条件アクションの “True” もしくは “False” 内にさらに条件アクションを設定し、さらに入れ子に設定していく場合、8 個目の条件までは設定可能ですが、9　個目の条件については追加でのアクションが設定出来なくなります。<br><img src="/blog/LogicApps/ConditionsTips/image05.png"></p>
+<p>5 つ目の Tips については以上となります。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>1． 設定可能な条件の最大数</li>
+<li>2． 設定可能なグループの最大数</li>
+<li>3． 1 つのグループの中で設定可能な条件の最大数</li>
+<li>4． 1 つのグループの中で入れ子設定可能なグループの階層</li>
+<li>5． ワークフロー定義の制限</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       
@@ -151,10 +175,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/XmlBehaviorWithNumbers.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/ConditionsTips.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -162,19 +186,10 @@
     
 <nav id="article-nav">
   
-    <a href="../UnixTime/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Logic Apps の式関数で Unix Time を取得する方法
-        
-      </div>
-    </a>
   
-  
-    <a href="../ExcelOnlineGetaRow/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../ScheduleTriggerStrattime/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Excel Onlne コネクタでテーブルが一覧表示されない場合の回避策</div>
+      <div class="article-nav-title">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</div>
     </a>
   
 </nav>
@@ -193,7 +208,7 @@
       <ul>
         
           <li>
-            <a href="../ConditionsTips/">Azure Logic Apps の 条件アクションに関するTips</a>
+            <a href="">Azure Logic Apps の 条件アクションに関するTips</a>
           </li>
         
           <li>
@@ -209,7 +224,7 @@
           </li>
         
           <li>
-            <a href="">ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について</a>
+            <a href="../XmlBehaviorWithNumbers/">ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について</a>
           </li>
         
       </ul>
