@@ -80,6 +80,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LogicApps/Utf82SJIS" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="LogicApps/Utf82SJIS/" class="article-date">
+  <time datetime="2023-01-17T15:00:00.000Z" itemprop="datePublished">2023-01-18</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="LogicApps/Utf82SJIS/">Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。<br>しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。</p>
+<p>例えば、以下のように Azure Portal のデザイナーからファイルを新規作成した場合はデザイナーの仕様上、ファイルは UTF-8 として作成されます。<br><img src="/blog/LogicApps/Utf82SJIS/image01.png"></p>
+<p>作成されたファイル<br><img src="/blog/LogicApps/Utf82SJIS/image02.png"></p>
+<p>一方、以下の “BLOB コンテンツを取得する (V2)” ように既に作成されているファイルをコンテンツとして取得した場合、元の文字コードが維持されます。例えば、”test.csv” の文字コードが SJIS だった場合、SJIS のコンテンツとして扱われ、Azure Logic Apps では文字コードを変更することが出来ません。<br><img src="/blog/LogicApps/Utf82SJIS/image03.png"></p>
+<p>今回は Azure Logic Apps と Azure Automation を用いて、ファイルの文字コードを変更する小技をご案内しようと思います。<br>なお、本ブログでご案内する仕組みについてはあくまで参考情報となります。こちらをお客様の商用環境でご利用になる場合は十分にお客様環境で検証いただき、設計および製造、試験をお客様の責任で実施いただきますようお願い申し上げます。</p>
+        
+          <p class="article-more-link">
+            <a href="LogicApps/Utf82SJIS/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cld17g1pj000h0npf519mb4tk" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LogicApps/ConditionsTips" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -123,7 +178,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="clc5gzlzt00040mjzek9d3ayk" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="cld17g1p900040npf8ehx3vci" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -182,7 +237,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="clc5gzlzx000a0mjz1wmz0rd4" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="cld17g1pd000a0npf4btsc1oi" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Trigger/" rel="tag">Trigger</a></li></ul>
@@ -232,7 +287,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/" data-id="clc5gzlzw00080mjz35689gaq" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/" data-id="cld17g1pc00080npf1zqbgcoa" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -282,7 +337,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/UnixTime/" data-id="clc5gzm01000e0mjz99paenfl" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/UnixTime/" data-id="cld17g1ph000e0npf6qy4b21a" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Unix-Time/" rel="tag">Unix Time</a></li></ul>
@@ -332,7 +387,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/" data-id="clc5gzm02000h0mjzac7y5ze4" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/" data-id="cld17g1pk000j0npf7mltcxan" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Issues/" rel="tag">Issues</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -386,7 +441,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/" data-id="clc5gzlzu00050mjzfuss76eg" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/" data-id="cld17g1pa00050npf8u9ohuai" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -436,7 +491,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/" data-id="clc5gzlzz000b0mjzdutpdp8d" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/" data-id="cld17g1pf000b0npf9a5325hf" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -486,7 +541,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/general/Integration-teamInfo/" data-id="clc5gzm07000o0mjz5jqvhv0f" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/general/Integration-teamInfo/" data-id="cld17g1po000q0npfdl6tcy2h" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/General/" rel="tag">General</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>
@@ -542,66 +597,10 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/" data-id="clc5gzm03000j0mjz3as40qea" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/" data-id="cld17g1pl000l0npf8g9q10jq" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LogicApps/HttpAction-AsyncPattern-Polling" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="LogicApps/HttpAction-AsyncPattern-Polling/" class="article-date">
-  <time datetime="2022-09-01T01:00:00.000Z" itemprop="datePublished">2022-09-01</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="LogicApps/HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>こんにちは。 Azure Integration サポート チームの大田です。<br>Logic Apps の HTTP アクションから長時間の処理を伴うサービスをリクエストする場合、下図のようにタイムアウト エラーを生じます。</p>
-<p><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/timeout-error.png"></p>
-<p>本エラーは下記の公開情報にございます HTTP 要求のタイムアウト期間に関する制限が原因となります。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#http-request-limits">HTTP 要求のタイムアウト期間に関する制限</a></li>
-</ul>
-<p>本記事では非同期ポーリング パターンを用いて HTTP アクションのタイムアウト エラーを回避する方法をサンプルを用いてご紹介します。</p>
-        
-          <p class="article-more-link">
-            <a href="LogicApps/HttpAction-AsyncPattern-Polling/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/" data-id="clc5gzm0u00370mjz9vuu9lgy" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
 
     </footer>
   </div>
@@ -627,6 +626,10 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
       <ul>
         
           <li>
+            <a href="LogicApps/Utf82SJIS/">Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技</a>
+          </li>
+        
+          <li>
             <a href="LogicApps/ConditionsTips/">Azure Logic Apps の 条件アクションに関するTips</a>
           </li>
         
@@ -642,10 +645,6 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
             <a href="LogicApps/UnixTime/">Logic Apps の式関数で Unix Time を取得する方法</a>
           </li>
         
-          <li>
-            <a href="LogicApps/XmlBehaviorWithNumbers/">ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -655,8 +654,8 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
   <div class="widget-wrap">
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
-      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">15</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">15</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">13</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">15</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">16</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">16</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">14</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">16</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -666,7 +665,7 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/03/">2022 / 03</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/03/">2022 / 03</a></li></ul>
     </div>
   </div>
 
@@ -676,7 +675,7 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
   <div class="widget-wrap">
     <h3 class="widget-title">タグクラウド</h3>
     <div class="widget tagcloud">
-      <a href="tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="tags/Azure-Logic-Apps/" style="font-size: 17.5px;">Azure Logic Apps</a> <a href="tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="tags/General/" style="font-size: 12.5px;">General</a> <a href="tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="tags/How-To/" style="font-size: 15px;">How-To</a> <a href="tags/Issues/" style="font-size: 10px;">Issues</a> <a href="tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="tags/Standard-Logic-Apps/" style="font-size: 12.5px;">Standard Logic Apps</a> <a href="tags/Tips/" style="font-size: 20px;">Tips</a> <a href="tags/Trigger/" style="font-size: 10px;">Trigger</a> <a href="tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+      <a href="tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="tags/Azure-Logic-Apps/" style="font-size: 17.5px;">Azure Logic Apps</a> <a href="tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="tags/General/" style="font-size: 12.5px;">General</a> <a href="tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="tags/How-To/" style="font-size: 15px;">How-To</a> <a href="tags/Issues/" style="font-size: 10px;">Issues</a> <a href="tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="tags/Standard-Logic-Apps/" style="font-size: 12.5px;">Standard Logic Apps</a> <a href="tags/Tips/" style="font-size: 20px;">Tips</a> <a href="tags/Trigger/" style="font-size: 10px;">Trigger</a> <a href="tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
     </div>
   </div>
 
@@ -688,7 +687,7 @@ JSON の解析アクションを実行せず特定のプロパティの値を取
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2022 Japan Azure Integration Support Team<br>
+      &copy; 2023 Japan Azure Integration Support Team<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

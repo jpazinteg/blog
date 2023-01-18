@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。 例えば、以下のように Azure Portal のデザイナーから">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。 例えば、以下のように Azure Portal のデザイナーから">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image07.png">
+<meta property="article:published_time" content="2023-01-17T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-18T05:09:44.376Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Azure Automation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/Utf82SJIS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-01-17T15:00:00.000Z" itemprop="datePublished">2023-01-18</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+48218c0a-ed12-5898-aa78-3881cc22bcbe%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%A8+Azure+Automation+%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B%E5%B0%8F%E6%8A%80%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FUtf82SJIS%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FUtf82SJIS.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FUtf82SJIS.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cld17g1pj000h0npf519mb4tk" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。<br>しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。</p>
+<p>例えば、以下のように Azure Portal のデザイナーからファイルを新規作成した場合はデザイナーの仕様上、ファイルは UTF-8 として作成されます。<br><img src="/blog/LogicApps/Utf82SJIS/image01.png"></p>
+<p>作成されたファイル<br><img src="/blog/LogicApps/Utf82SJIS/image02.png"></p>
+<p>一方、以下の “BLOB コンテンツを取得する (V2)” ように既に作成されているファイルをコンテンツとして取得した場合、元の文字コードが維持されます。例えば、”test.csv” の文字コードが SJIS だった場合、SJIS のコンテンツとして扱われ、Azure Logic Apps では文字コードを変更することが出来ません。<br><img src="/blog/LogicApps/Utf82SJIS/image03.png"></p>
+<p>今回は Azure Logic Apps と Azure Automation を用いて、ファイルの文字コードを変更する小技をご案内しようと思います。<br>なお、本ブログでご案内する仕組みについてはあくまで参考情報となります。こちらをお客様の商用環境でご利用になる場合は十分にお客様環境で検証いただき、設計および製造、試験をお客様の責任で実施いただきますようお願い申し上げます。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>前提条件</li>
+<li>Azure Automation の設定方法とサンプルコード</li>
+<li>Azure Logic Apps の設定方法</li>
+<li>まとめ</li>
+</ul>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>今回ご案内させていただく小技では、ファイルの格納先をストレージ アカウント (Blob コンテナー)とします。<br>また、Azure Automation ではストレージ アカウントのモジュールを有効にし、Runbook の種類として PowerShell (ランタイム バージョン 5.1) を利用します。<br>Azure Logic Apps については従量課金タイプを利用致します。</p>
+<h2 id="Azure-Automation-の設定方法とサンプルコード"><a href="#Azure-Automation-の設定方法とサンプルコード" class="headerlink" title="Azure Automation の設定方法とサンプルコード"></a>Azure Automation の設定方法とサンプルコード</h2><p>まず、Azure Automation で Automation アカウントを構築いただき、[アカウント設定] - [ID] より “システム割り当て済み” のマネージド ID の状態を オンにします。<br><img src="/blog/LogicApps/Utf82SJIS/image04.png"></p>
+<p>その後、”ストレージ アカウント共同作成者” 等のストレージ アカウントを操作可能な権限を付与いたします。本構成では “共同作成者” の権限を付与しております。<br><img src="/blog/LogicApps/Utf82SJIS/image05.png"></p>
+<p>次に、任意の名前で Runbook を作成いただきます。<br><img src="/blog/LogicApps/Utf82SJIS/image06.png"></p>
+<p>＜設定値＞<br>・名前 : 任意<br>・Runbook の種類 : PowerShell<br>・ランタイム バージョン : 5.1 (2023/01/17 現在で 7.1 がプレビューであるため)<br>・説明 : 任意</p>
+<p>作成できましたら、以下のサンプルコードを基にスクリプトを構築いたします。</p>
+<p>・RunBook のサンプル（※こちらはあくまでもサンプルでございます。お客様の責任にて採用判断をお願いいたします。）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">Param</span><br><span class="line">(</span><br><span class="line">  [Parameter (Mandatory= $true)]</span><br><span class="line">  [String] $Blob,</span><br><span class="line">  [Parameter (Mandatory= $true)]</span><br><span class="line">  [String] $Container</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disable-AzContextAutosave -Scope Process</span><br><span class="line">$AzureContext = (Connect-AzAccount -Identity).context</span><br><span class="line">Set-AzContext -SubscriptionName $AzureContext.Subscription -DefaultProfile $AzureContext</span><br><span class="line"></span><br><span class="line"># Storage Acount information (任意のものに変更)</span><br><span class="line">$resourceGroup = &quot;●●●●&quot; #ストレージアカウントのリソースグループ名 </span><br><span class="line">$storageaccountName = &quot;●●●●&quot; #ストレージアカウント名</span><br><span class="line"></span><br><span class="line"># ファイル変換設定</span><br><span class="line">$CurrentPath = (pwd).path</span><br><span class="line">$EncodeTo = &quot;Shift-JIS&quot;</span><br><span class="line">$EncodingFrom = &quot;UTF-8&quot;</span><br><span class="line">$inputFileName = &quot;$&#123;CurrentPath&#125;\$&#123;Blob&#125;&quot;</span><br><span class="line">$outputFileName = &quot;$&#123;CurrentPath&#125;\SJIS_$&#123;Blob&#125;&quot;</span><br><span class="line"># Get csv from Storage Account</span><br><span class="line">$storageAccount = Get-AzStorageAccount -ResourceGroupName $resourceGroup -Name $storageaccountName</span><br><span class="line">$ctx = $storageAccount.Context</span><br><span class="line">Get-AzStorageBlobContent -Context $ctx -Blob $Blob -Container $Container -Path $CurrentPath</span><br><span class="line"></span><br><span class="line"># Transform</span><br><span class="line">$enc_t = [Text.Encoding]::GetEncoding($EncodeTo)</span><br><span class="line">$enc_f = [Text.Encoding]::GetEncoding($EncodingFrom)</span><br><span class="line"></span><br><span class="line"># 変換元ファイルをStreamReaderオブジェクトで読み込み</span><br><span class="line">$reader = New-Object IO.StreamReader($inputFileName, $enc_f)</span><br><span class="line"></span><br><span class="line"># 保存先ファイルをStreamWriterオブジェクトでオープン</span><br><span class="line">$writer = New-Object IO.StreamWriter($outputFileName, $false, $enc_t)</span><br><span class="line"></span><br><span class="line"># 変換元ファイルを順に読み込み、保存先ファイルに書き込み</span><br><span class="line">while(!$reader.EndOfStream)&#123;$writer.WriteLine($reader.ReadLine())&#125;</span><br><span class="line"></span><br><span class="line"># ファイルをすべてクローズ</span><br><span class="line">$reader.Close()</span><br><span class="line">$writer.Close()</span><br><span class="line"></span><br><span class="line"># Upload file</span><br><span class="line">Set-AzStorageBlobContent -File &quot;.\SJIS_$&#123;Blob&#125;&quot; -Container $Container -Blob &quot;SJIS_$&#123;Blob&#125;&quot; -Context $ctx</span><br></pre></td></tr></table></figure>
+
+<p>以上のスクリプトをご利用いただくことで、ストレージ アカウントからファイルを取得し、文字コードを変更後にリネームして再度ストレージ アカウントへアップロードすることが可能でございます。</p>
+<p>Azure Automation の設定としましては以上となります。</p>
+<h2 id="Azure-Logic-Apps-の設定方法"><a href="#Azure-Logic-Apps-の設定方法" class="headerlink" title="Azure Logic Apps の設定方法"></a>Azure Logic Apps の設定方法</h2><p>次に、Azure Logic Apps 側の設定となります。<br>本記事では従量課金タイプの Azure Logic Apps にて、以下のアクションを利用いたします。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azureautomation/#%E3%82%B8%E3%83%A7%E3%83%96%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">Azure Automation # ジョブを作成する</a></li>
+</ul>
+<p>こちらの設定につきましては以下の通りの設定を実施いただきます。<br><img src="/blog/LogicApps/Utf82SJIS/image07.png"></p>
+<p>＜設定値＞<br>・サブスクリプション : Azure Automation の Automation アカウントが存在するサブスクリプション。<br>・リソース グループ :  Azure Automation の Automation アカウントが存在するリソース グループ。<br>・Automation アカウント : 先ほど Runbook を作成した Automation アカウント<br>・ジョブの待機 : 任意<br>・Runbook 名 : 先ほど作成した Runbook<br>– Runbook Parameter<br>・BLOB : 文字コードを変更したいファイル名。必要に応じて動的コンテンツでファイル名を指定願います。<br>・CONTAINER : Blob コンテナ名</p>
+<p>以上より、先ほど作成した Runbook を Azure Logic Apps から呼び出すことが可能でございます。<br>こちらの ワークフローを実行することで、PowerShell で作り込める範囲には限りますが、既存のファイルに対して文字コードを変更することが可能でございます。</p>
+<p>設定内容としては以上となります。<br>こちらを参考に、お客様の環境におきましても検証および設計試験等実施いただいたうえで採用要否についてご検討いただければと思います。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>前提条件</li>
+<li>Azure Automation の設定方法とサンプルコード</li>
+<li>Azure Logic Apps の設定方法</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/Utf82SJIS.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../ConditionsTips/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Logic Apps の 条件アクションに関するTips</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技</a>
+          </li>
+        
+          <li>
+            <a href="../ConditionsTips/">Azure Logic Apps の 条件アクションに関するTips</a>
+          </li>
+        
+          <li>
+            <a href="../ScheduleTriggerStrattime/">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-DateTime/">Logic Apps で簡単に日付や時刻を用いる</a>
+          </li>
+        
+          <li>
+            <a href="../UnixTime/">Logic Apps の式関数で Unix Time を取得する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">16</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">16</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">14</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">16</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 17.5px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/General/" style="font-size: 12.5px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 15px;">How-To</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.5px;">Standard Logic Apps</a> <a href="../../tags/Tips/" style="font-size: 20px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 10px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
