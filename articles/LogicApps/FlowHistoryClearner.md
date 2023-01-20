@@ -22,41 +22,35 @@ tags:
 - 制限増減の設定箇所に関しても案内がございます。
     - [制約と構成の参考ガイド#実行継続時間とストレージでの履歴の保持期間を変更する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=standard%2Cazure-portal#change-run-duration-and-history-retention-in-storage)
 
-## Standard Logic Apps のワークフロー実行ログを削除したい
+## Standard Logic Apps のワークフロー実行ログを削除する「Flow History Clearner」
 
 - 前提条件を踏まえた「削除」手段としての「便利ツール」をご紹介いたします。
 - 手動でも削除が可能なことがご確認いただけます。
 
-### Flow History Cleaner
+### Flow History Cleaner について
 
 [Logic App Standard Flow History Cleaner - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/logic-app-standard-flow-history-cleaner/ba-p/3582258)
 
 > Application that deletes the Tables and the Queues in the Logic app Standard storage account.
->
 > it will help you in the development process, especially if there are stuck flows in the running state 
 >
 > How to download the application
->
 > Open the Kudo https://docs.microsoft.com/en-us/azure/app-service/resources-kudu from Logic app site
 
 > <日本語訳>
 >
 > 「フロー履歴クリーナー」
->
 > Logic Apps Standard のストレージアカウントにあるテーブルとキューを削除するアプリケーションです。
->
 > 実行中のフローを停止させている場合において、開発工程に役立ちます。
 >
 > アプリケーションのダウンロード方法
->
 > Logic Apps のサイトから Kudu を開きます。
 
-### Kudu
+### Kudu から Flow History Cleaner を利用する
 
 [Kudu サービスの概要 - Azure App Service | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/app-service/resources-kudu)
 
 Kudu は、以下のようにアクセスいたします。
-
 `https://<Logic Apps Standard名>.scm.azurewebsites.net`
 
 Kudo 上部から [Debug console] [CMD] に遷移いたします。
