@@ -53,7 +53,7 @@ tags:
 Kudu は、以下のようにアクセスいたします。
 `https://<Logic Apps Standard名>.scm.azurewebsites.net`
 
-Kudo 上部から [Debug console] [CMD] に遷移いたします。
+Kudu 上部から [Debug console] - [CMD] に遷移いたします。
  
 ![](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/390797iA3695041CA6B8D9A/image-dimensions/2500?v=v2&px=-1)
 
