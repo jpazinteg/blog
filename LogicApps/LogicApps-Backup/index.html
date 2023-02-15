@@ -4,27 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>Logic Apps の式関数で Unix Time を取得する方法 | Japan Azure Integration Support Blog</title>
+  <title>Logic Apps のバックアップ | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは。 Azure Integration サポート チームの大田です。本記事では、Logic Apps の式関数を組み合わせて Unix Time を取得する方法について説明いたします。">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの山田です。今回は、Logic Apps のワークフローにおけるバックアップについていくつかご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logic Apps の式関数で Unix Time を取得する方法">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/index.html">
+<meta property="og:title" content="Logic Apps のバックアップ">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは。 Azure Integration サポート チームの大田です。本記事では、Logic Apps の式関数を組み合わせて Unix Time を取得する方法について説明いたします。">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの山田です。今回は、Logic Apps のワークフローにおけるバックアップについていくつかご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_CurrentTime.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_SpecificTime.png">
-<meta property="article:published_time" content="2022-11-02T01:00:00.000Z">
-<meta property="article:modified_time" content="2023-02-15T01:34:18.774Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/image02.png">
+<meta property="article:published_time" content="2022-11-17T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-15T01:34:18.770Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Unix Time">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_CurrentTime.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/image01.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -86,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/UnixTime" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/LogicApps-Backup" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -95,7 +93,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Logic Apps の式関数で Unix Time を取得する方法
+      Logic Apps のバックアップ
     </h1>
   
 
@@ -103,47 +101,58 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-11-02T01:00:00.000Z" itemprop="datePublished">2022-11-02</time>
+  <time datetime="2022-11-17T07:00:00.000Z" itemprop="datePublished">2022-11-17</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7fbc8df8-ae00-5c5a-9901-cc7f3ce56b79%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E5%BC%8F%E9%96%A2%E6%95%B0%E3%81%A7+Unix+Time+%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FUnixTime%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FUnixTime.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FUnixTime.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c165d2d0-e545-50d5-9e99-1836ad943e9e%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-Backup%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-Backup.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-Backup.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/UnixTime/" data-id="cle502v4n000l0npe1t6hfy9r" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/" data-id="cle502v4h000b0npeek13gn3d" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは。 Azure Integration サポート チームの大田です。<br>本記事では、Logic Apps の式関数を組み合わせて Unix Time を取得する方法について説明いたします。</p>
+        <p>こんにちは。  Azure Integration サポート チームの山田です。<br>今回は、Logic Apps のワークフローにおけるバックアップについていくつかご紹介いたします。</p>
 <span id="more"></span>
 
-<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
-<li>今回の記事では従量課金版ロジック アプリを利用しますが、スタンダード版のロジック アプリでも問題ありません。</li>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>Logic Apps (Standard) でのバックアップ取得<ul>
+<li>アプリ コンテンツのダウンロード</li>
+<li>関数アプリ ファイルのダウンロード</li>
 </ul>
-<h2 id="Unix-Time-の取得サンプル"><a href="#Unix-Time-の取得サンプル" class="headerlink" title="Unix Time の取得サンプル"></a>Unix Time の取得サンプル</h2><p>Logic Apps が備える Unix Time と類似の機能として ticks 関数がございます。</p>
+</li>
+<li>Logic Apps (従量課金) では</li>
+<li>まとめ</li>
+</ul>
+<h2 id="Logic-Apps-Standard-でのバックアップ取得"><a href="#Logic-Apps-Standard-でのバックアップ取得" class="headerlink" title="Logic Apps (Standard) でのバックアップ取得"></a>Logic Apps (Standard) でのバックアップ取得</h2><h3 id="アプリ-コンテンツのダウンロード"><a href="#アプリ-コンテンツのダウンロード" class="headerlink" title="アプリ コンテンツのダウンロード"></a>アプリ コンテンツのダウンロード</h3><ol>
+<li>Azure Portal から該当のLogic Apps (Standard) に移動します。</li>
+<li>概要 をご覧いただきます。</li>
+</ol>
+<p><img src="/blog/LogicApps/LogicApps-Backup/image01.png"></p>
+<p>上部に [アプリ コンテンツのダウンロード] というメニューがございます。<br>こちらから zip ファイル形式でダウンロードいただけます。</p>
+<h3 id="関数アプリ-ファイルのダウンロード"><a href="#関数アプリ-ファイルのダウンロード" class="headerlink" title="関数アプリ ファイルのダウンロード"></a>関数アプリ ファイルのダウンロード</h3><p>Azure Functions のドキュメント内、「関数アプリ ファイルをダウンロードする」という説明があり、こちらをご利用可能でございます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/deployment-zip-push#download-your-function-app-files">Azure Functions の zip プッシュ デプロイ | Microsoft Learn</a></p>
+<blockquote>
+<p>REST API の使用:</p>
+<p><function_app> プロジェクトからファイルをダウンロードするには、以下の展開の GET API を使用します。<br>https://<function_app>.scm.azurewebsites.net/api/zip/site/wwwroot/</p>
+</blockquote>
+<p>したがいまして、この URL を Curl コマンドなどでご利用いただく場合は以下となります。</p>
+<p><code>curl -X GET -H &quot;Authorization: Bearer &lt;Token&gt;&quot; https://&lt;function_app&gt;.azurewebsites.net/api/zip/site/wwwroot/ -o download.zip</code></p>
+<p><code>&lt;Token&gt;</code> は取得した Bearer Token を入力いただきます。</p>
+<p>Token の扱いには例として Azure CLI など、以下ドキュメントなどを参照いただけます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/account?view=azure-cli-latest#az-account-get-access-token">az account | Microsoft Learn</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">az account get-access-token [--name]</span><br><span class="line">                            [--resource]</span><br><span class="line">                            [--resource-type &#123;aad-graph, arm, batch, data-lake, media, ms-graph, oss-rdbms&#125;]</span><br><span class="line">                            [--scope]</span><br><span class="line">                            [--tenant]</span><br></pre></td></tr></table></figure>
+
+<p>またこのダウンロードした zip ファイルは zip デプロイでも使用できます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app">Standard ロジック アプリの DevOps を設定する - Azure Logic Apps | Microsoft Learn</a></p>
+<h2 id="Logic-Apps-従量課金-では"><a href="#Logic-Apps-従量課金-では" class="headerlink" title="Logic Apps (従量課金) では"></a>Logic Apps (従量課金) では</h2><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/manage-logic-apps-with-azure-portal#manage-logic-app-versions">Azure portal でロジック アプリを管理する - Azure Logic Apps | Microsoft Learn</a></p>
+<p><img src="/blog/LogicApps/LogicApps-Backup/image02.png"></p>
+<p>ロジック アプリのメニューで、 [開発ツール] の下にある [バージョン] を選択します。こちらから履歴ごとにコードを確認可能です。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps のワークフローにおけるバックアップについてご紹介しました。バージョン管理の必要場面において、参考になれば幸いです。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
-</ul>
-<p>1 tick はグレゴリオ暦の 0001 年 1 月 1 日午前 12 時 00 分 00 分からの 100 ナノ秒単位の経過時間を表します。<br>ticks 関数は指定のタイムスタンプの tick 数を返す関数でございます。</p>
-<p>また、Unix Time は UTC 時間の 1970 年 1 月 1 日午前 12 時 00 分 00 分からの経過秒数を表します。<br>そのため、1970 年 1 月 1 日午前 12 時 00 分 00 分の tick 数と対象日時の tick 数に関する差分を 100 ナノ秒単位から秒単位に変換する事で対象日時の Unix Time を取得する事が可能です。<br>100 ナノ秒単位から秒単位への変換は 10^7 で割る事により行えます。</p>
-<p>下記が現在日時（UTC 時間）の Unix Time を取得するサンプルとなります。<br><img src="/blog/LogicApps/UnixTime/unixTime_CurrentTime.png"></p>
-<ul>
-<li>名前：unixTime</li>
-<li>種類：整数</li>
-<li>値：@div(sub(ticks(utcnow()),ticks(‘1970-01-01’)), 10000000)</li>
-</ul>
-<p>また下記のように値を設定する事で、指定日付の Unix Time の取得を行えます。<br>本サンプルでは UTC 時間の 2022 年 10 月 31 日午前 12 時 00 分 00 分の Unix Time を取得しております。<br><img src="/blog/LogicApps/UnixTime/unixTime_SpecificTime.png"></p>
-<ul>
-<li>名前：unixTime</li>
-<li>種類：整数</li>
-<li>値：@div(sub(ticks(formatDateTime(‘2022-10-31’)),ticks(‘1970-01-01’)), 10000000)</li>
-</ul>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では Logic Apps の式関数で Unix Time を取得する方法について説明いたしました。 Unix Time は Rest API で多く活用されているため、本記事がお客様のシステム構築の一助になりますと幸いです。</p>
-<h2 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#sub">sub 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#div">div 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#formatdatetime">formatDateTime 関数に関する公開情報</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/deployment-zip-push#download-your-function-app-files">Azure Functions の zip プッシュ デプロイ | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app">Standard ロジック アプリの DevOps を設定する - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/manage-logic-apps-with-azure-portal#manage-logic-app-versions">Azure portal でロジック アプリを管理する - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 
       
@@ -158,10 +167,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/UnixTime.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-Backup.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -169,19 +178,19 @@
     
 <nav id="article-nav">
   
-    <a href="../LogicApps-DateTime/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../ConditionsTips/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          Logic Apps で簡単に日付や時刻を用いる
+          Azure Logic Apps の 条件アクションに関するTips
         
       </div>
     </a>
   
   
-    <a href="../XmlBehaviorWithNumbers/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../ScheduleTriggerStrattime/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">ワークフロー式関数 xml() を用いて 10 進数の値を変換するときの動作について</div>
+      <div class="article-nav-title">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</div>
     </a>
   
 </nav>
@@ -216,7 +225,7 @@
           </li>
         
           <li>
-            <a href="../LogicApps-Backup/">Logic Apps のバックアップ</a>
+            <a href="">Logic Apps のバックアップ</a>
           </li>
         
       </ul>
