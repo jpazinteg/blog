@@ -98,10 +98,19 @@ array(outputs('Test_JSON'))
 3. “変数を初期化する” アクションで “文字列” を選択し、動的コンテンツで “BLOB コンテンツを取得する (V2) ” のファイルコンテンツを指定します。
 ![](./FileFormatConversion/image10.png)
 
-4. 選択アクションを設定し、開始に以下の式関数を設定します。
+4. "選択" アクションを設定し、開始に以下の式関数を設定します。
 ![](./FileFormatConversion/image11.png)
 
 ・skip(split(variables('csv'),base64ToString('Cg==')),1)
+
+- [skip](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#skip)
+
+- [split](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#split)
+
+- [variables](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#variables)
+
+- [base64ToString](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#base64tostring)
+
 
 ※ base64ToString('Cg==') は改行文字 「/n」と同じ値であるため
 利用中の CSV の改行文字が「\r\n」の場合は base64ToString('DQo=') に置き換える。
@@ -135,13 +144,13 @@ CSV 形式から XML 形式への変換につきましては、上記で作成�
 ![](./FileFormatConversion/image13.png)
 
 ＜For each アクション＞
-・以前の手順から出力を選択： 動的コンテンツ -  選択 - 出力”
+・以前の手順から出力を選択： 動的コンテンツ -  選択 - 出力
 
 ＜配列変数に追加＞
 ・名前：array ( "4．CSV → JSON" の手順 2. “変数を初期化する” アクションで指定した名前)
 ・値：xml(setProperty(json('{}'),'sample',items('For_each')))
 
-2. 作成アクション等、XML を出力したいアクションを利用し、以下の関数を設定します。
+2. "作成" アクション等、XML を出力したいアクションを利用し、以下の関数を設定します。
 ```
 xml(concat('<test>',join(variables('array'),''),'</test>'))
 ```
