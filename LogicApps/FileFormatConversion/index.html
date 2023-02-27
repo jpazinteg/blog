@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps で各ファイルフォーマットを変換する Tips | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイルを操作する際、CSV から JSON、JSON から XML 等ファイルフォーマットを変換されたい場合があるかと思います。今回は、Azure Logic Apps でいくつかのファイルフォーマットを変換する Tips をお届けします！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps で各ファイルフォーマットを変換する Tips">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイルを操作する際、CSV から JSON、JSON から XML 等ファイルフォーマットを変換されたい場合があるかと思います。今回は、Azure Logic Apps でいくつかのファイルフォーマットを変換する Tips をお届けします！">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image08.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image09.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image10.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image11.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image12.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image13.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image14.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image15.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image16.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image17.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image18.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image19.png">
+<meta property="article:published_time" content="2023-02-12T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-27T06:09:15.295Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/FileFormatConversion" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps で各ファイルフォーマットを変換する Tips
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-02-12T15:00:00.000Z" itemprop="datePublished">2023-02-13</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+91cb1ba7-9e3f-52b1-bd4e-e3deab719d44%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%A7%E5%90%84%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%82%92%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B+Tips%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FFileFormatConversion%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FFileFormatConversion.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FFileFormatConversion.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/" data-id="clemf6o1x00080npzg2379c88" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>Azure Logic Apps でファイルを操作する際、CSV から JSON、JSON から XML 等ファイルフォーマットを変換されたい場合があるかと思います。<br>今回は、Azure Logic Apps でいくつかのファイルフォーマットを変換する Tips をお届けします！</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>1． JSON → XML</li>
+<li>2． XML → JSON</li>
+<li>3． JSON → CSV</li>
+<li>4． CSV → JSON</li>
+<li>5． CSV → XML</li>
+<li>6． XML → CSV</li>
+<li>7． HTML → TXT</li>
+<li>まとめ</li>
+</ul>
+<h2 id="1．JSON-→-XML"><a href="#1．JSON-→-XML" class="headerlink" title="1．JSON → XML"></a>1．JSON → XML</h2><p>JSON から XML へのフォーマット変換につきましては、以下の xml 関数をご利用いただくことで変換可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#xml">xml</a></li>
+</ul>
+<p>例<br><img src="/blog/LogicApps/FileFormatConversion/image01.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml(outputs(&#x27;Test_JSON&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image02.png"></p>
+<p>1 つ目の Tips については以上となります。</p>
+<h2 id="2．XML-→-JSON"><a href="#2．XML-→-JSON" class="headerlink" title="2．XML → JSON"></a>2．XML → JSON</h2><p>XML から JSON へのフォーマット変換につきましては、以下の JSON 関数をご利用いただくことで変換可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#json">json</a></li>
+</ul>
+<p>例<br><img src="/blog/LogicApps/FileFormatConversion/image03.png"></p>
+<p>xml についてはサンプルとして以下のように設定しております。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml(&#x27;&lt;?xml version=&quot;1.0&quot;?&gt; &lt;root&gt; &lt;person id=&quot;1&quot;&gt; &lt;name&gt;Sophia Owen&lt;/name&gt; &lt;occupation&gt;Engineer&lt;/occupation&gt; &lt;/person&gt; &lt;/root&gt;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>また、JSON 関数には以下の値を指定しております。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json(outputs(&#x27;Test_XML&#x27;))</span><br></pre></td></tr></table></figure>
+
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image04.png"></p>
+<p>2 つ目の Tips については以上となります。</p>
+<h2 id="3．JSON-→-CSV"><a href="#3．JSON-→-CSV" class="headerlink" title="3．JSON → CSV"></a>3．JSON → CSV</h2><p>JSON から CSV へのフォーマット変換につきましては、CSV テーブルの作成アクションにて設定可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations#create-csv-table-action">Azure Logic Apps でデータの操作を実行する # CSV テーブルの作成アクション</a><br><img src="/blog/LogicApps/FileFormatConversion/image05.png"></li>
+</ul>
+<p>ただし、こちらのアクションにつきましては配列形式のインプットが必要となりますので、JSON プロパティを含む配列形式に設定いただく必要がございます。<br>例えば、以下図の例ですと、作成 2 アクション内で JSON オブジェクトを作成しておりますが、CSV テーブルの作成 アクションへ引き渡す値については array 関数にて配列形式に変換しております。</p>
+<p>例<br><img src="/blog/LogicApps/FileFormatConversion/image06.png"><br>array(outputs(‘Test_JSON’))</p>
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image07.png"></p>
+<p>3 つ目の Tips については以上となります。</p>
+<h2 id="4．CSV-→-JSON"><a href="#4．CSV-→-JSON" class="headerlink" title="4．CSV → JSON"></a>4．CSV → JSON</h2><p>まず、CSV 形式を基にしたファイルフォーマットに関する関数やアクションはございません。その為、別途作り込みが必要になります。<br>参考までに、以下のように式関数とアクションを組み合わせて変換するサンプルフローをご案内いたします。<br>こちらはあくまでも参考情報ですので、商用環境でご利用になられる場合はお客様の責任のもと、お客様にて設計、試験等を実施頂き、お客様の判断にて採用要否の判断をお願い申し上げます。<br>※本テクニカルサポートとしましては本サンプルに関する構築支援は実施致しません。</p>
+<p>例</p>
+<ol>
+<li><p>CSV フォーマットのデータを取得する。本例では BLOB 上の CSV を取得します。<br><img src="/blog/LogicApps/FileFormatConversion/image08.png"></p>
+</li>
+<li><p>“変数を初期化する” アクションで “アレイ” を選択します。<br><img src="/blog/LogicApps/FileFormatConversion/image09.png"></p>
+</li>
+<li><p>“変数を初期化する” アクションで “文字列” を選択し、動的コンテンツで “BLOB コンテンツを取得する (V2) ” のファイルコンテンツを指定します。<br><img src="/blog/LogicApps/FileFormatConversion/image10.png"></p>
+</li>
+<li><p>“選択” アクションを設定し、開始に以下の式関数を設定します。<br><img src="/blog/LogicApps/FileFormatConversion/image11.png"></p>
+</li>
+</ol>
+<p>・skip(split(variables(‘csv’),base64ToString(‘Cg==’)),1)</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#skip">skip</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#split">split</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#variables">variables</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#base64tostring">base64ToString</a></p>
+</li>
+</ul>
+<p>※ base64ToString(‘Cg==’) は改行文字 「/n」と同じ値であるため<br>利用中の CSV の改行文字が「\r\n」の場合は base64ToString(‘DQo=’) に置き換える。</p>
+<ol start="5">
+<li>上記図のマップの左側に CSV のカラム名を手動設定し、右側に以下のように式関数を設定します。(配列は0始まり)<br>・split(item(),’,’)[0]<br>・split(item(),’,’)[1]<br>・split(item(),’,’)[2]<br>・split(item(),’,’)[3]<br>・split(item(),’,’)[4]</li>
+</ol>
+<p>※ [] 内の数字についてはカラム位置を指定します。</p>
+<p>以上の通り実施いただくことで、以下のような JSON 形式の結果を取得することが可能でございます。</p>
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image12.png"></p>
+<p>なお、カラムの順番につきましてはマップに指定している文字列に依存しますのでご留意ください。<br>必要に応じてカラム名に数字を付与する等の対応が必要になります。</p>
+<p>4 つ目の Tips については以上となります。</p>
+<h2 id="5．CSV-→-XML"><a href="#5．CSV-→-XML" class="headerlink" title="5．CSV → XML"></a>5．CSV → XML</h2><p>CSV 形式から XML 形式への変換につきましては、上記で作成した JSON 形式の値に対して、以下の通り For each ステートメントおよび “配列変数に追加” アクションを設定し、＜2. “変数を初期化する” アクションで “アレイ” を選択。＞で作成した配列に対して値を設定することで変換可能でございます。<br>こちらも以下に設定例を記載いたします。</p>
+<p>例</p>
+<ol>
+<li>For each ステートメントを手動で設定し、“配列変数に追加” アクションを追加後以下の値を設定します。<br><img src="/blog/LogicApps/FileFormatConversion/image13.png"></li>
+</ol>
+<p>＜For each アクション＞<br>・以前の手順から出力を選択： 動的コンテンツ -  選択 - 出力</p>
+<p>＜配列変数に追加＞<br>・名前：array ( “4．CSV → JSON” の手順 2. “変数を初期化する” アクションで指定した名前)<br>・値：xml(setProperty(json(‘{}’),’sample’,items(‘For_each’)))</p>
+<ol start="2">
+<li>“作成” アクション等、XML を出力したいアクションを利用し、以下の関数を設定します。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml(concat(&#x27;&lt;test&gt;&#x27;,join(variables(&#x27;array&#x27;),&#x27;&#x27;),&#x27;&lt;/test&gt;&#x27;))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image14.png"></p>
+<p>以上のように、作り込みをいただくことで、CSV からのファイルフォーマットの変換が可能でございます。</p>
+<p>5 つ目の Tips については以上となります。</p>
+<h2 id="6．XML-→-CSV"><a href="#6．XML-→-CSV" class="headerlink" title="6．XML → CSV"></a>6．XML → CSV</h2><p>XML から CSV につきましては、先にご案内申し上げました、XML から JSON にフォーマット変換いただいた後で、JSON からCSV へのフォーマット変換を実施いただくことで設定可能でございます。</p>
+<h2 id="7．HTML-→-TXT"><a href="#7．HTML-→-TXT" class="headerlink" title="7．HTML → TXT"></a>7．HTML → TXT</h2><p>最後に、HTML から TXT へのフォーマット変換につきましては、プレビュー機能ではございますが、以下の Content Conversion (プレビュー) コネクタをご利用いただくことで変換可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/conversionservice/">Content Conversion (プレビュー)</a></li>
+</ul>
+<p><img src="/blog/LogicApps/FileFormatConversion/image15.png"></p>
+<p>こちらにつきましては、直接 HTML の内容を入力するのではなく、以下のようにコネクタから取得できるような HTML コンテンツを指定いただく必要がございます。<br>例<br><img src="/blog/LogicApps/FileFormatConversion/image16.png"></p>
+<p>結果<br><img src="/blog/LogicApps/FileFormatConversion/image17.png"></p>
+<p>直接 HTML の内容をテキスト入力すると以下のような結果となります。</p>
+<p><img src="/blog/LogicApps/FileFormatConversion/image18.png"><br><img src="/blog/LogicApps/FileFormatConversion/image19.png"></p>
+<p>こちらのコネクタにつきましては、2023年 2 月現在プレビュー機能となっておりますため、今後予告なく仕様の変更が発生する可能性がございますのでご留意下さい。</p>
+<p>なお、よくあるお問い合わせとして YAML 形式の変換は出来ないのかとご質問をいただくのですが、誠に申し訳なくも YAML 形式については 2023 年 2 月現在で対応しておりませんのでご了承いただきたく存じます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下のファイルフォーマット変換についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>1． JSON → XML</li>
+<li>2． XML → JSON</li>
+<li>3． CSV → JSON</li>
+<li>4． CSV → XML</li>
+<li>5． JSON → CSV</li>
+<li>6． XML → CSV</li>
+<li>7． HTML → TXT</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/FileFormatConversion.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../triggerConcurrency/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          トリガーのコンカレンシー制御と最大実行待機数について
+        
+      </div>
+    </a>
+  
+  
+    <a href="../FailedToFetch/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
+          </li>
+        
+          <li>
+            <a href="">Azure Logic Apps で各ファイルフォーマットを変換する Tips</a>
+          </li>
+        
+          <li>
+            <a href="../FailedToFetch/">Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策</a>
+          </li>
+        
+          <li>
+            <a href="../FlowHistoryClearner/">Logic Apps Standard のワークフロー実行ログを削除する</a>
+          </li>
+        
+          <li>
+            <a href="../Utf82SJIS/">Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">21</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">21</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">19</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">20</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Tips/" style="font-size: 18px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
