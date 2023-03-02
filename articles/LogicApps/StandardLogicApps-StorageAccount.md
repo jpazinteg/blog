@@ -26,7 +26,7 @@ tags:
 
 ## Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントの役割
 
-端的に、Logic Apps Standard を作成した際に一緒に作成されるコンテナやファイルは、Logic Apps Standard をご利用の際のワークフロー情報や、実行履歴情報が格納されているものとなります。「flow*」などという名称のテーブルがご覧いただけます。
+端的に、Logic Apps Standard を作成した際に一緒に作成されるコンテナやファイルは、Logic Apps Standard をご利用の際のワークフロー情報や、実行履歴情報が格納されているものとなります。「flow*」などという名称のテーブルをご覧いただけます。
 
 ![](StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-1.png)
 
@@ -35,7 +35,7 @@ tags:
 ストレージ アカウントと Logic Apps Standard の結びつきは以下から参照いただけます。
 
 1. Azure Portal から該当の Logic Apps Standard に移動します。
-2. 左部 [設定] から [構成] の、[アプリケーション設定] タブをご覧いただきます。 
+2. 左部 [設定] から [構成] の、[アプリケーション設定] タブを選択します。 
 
 ![](StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-2.png)
 
