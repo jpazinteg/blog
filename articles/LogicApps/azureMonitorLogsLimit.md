@@ -1,5 +1,5 @@
 ---
-title: 「Azure Monitor Logs」コネクタの制約について
+title: 「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について
 date: 2023-03-20 00:00:00
 tags:
   - How-To
@@ -11,13 +11,13 @@ tags:
 
 こんにちは。Azure Integration サポート チームの髙橋です。
 
-「Azure Monitor Logs」コネクタの制約についてご説明いたします。
+「Azure Monitor Logs」コネクタのクエリ実行に関わる制約についてご説明いたします。
 
 <!-- more -->
 
 ## こんな方におすすめです
-- 「Azure Monitor Logs」コネクタの制約を確認されたい方
-- 「Azure Monitor Logs」コネクタの制約の回避方法を知りたい方
+- 「Azure Monitor Logs」コネクタのクエリ実行に関わる制約を確認されたい方
+- 「Azure Monitor Logs」コネクタのクエリ実行に関わる制約の回避方法を知りたい方
 
 ## 関連情報
 - 「Azure Monitor Logs」コネクタについては、以下の公開情報がございます。
