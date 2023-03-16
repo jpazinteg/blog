@@ -58,14 +58,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
-    
-    <lastmod>2023-03-16</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/</loc>
     
     <lastmod>2023-03-16</lastmod>
     
@@ -94,6 +87,20 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/</loc>
+    
+    <lastmod>2023-03-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    
+    <lastmod>2023-03-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
     
     <lastmod>2023-03-16</lastmod>
     
@@ -142,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
-    
-    <lastmod>2023-03-16</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/</loc>
     
     <lastmod>2023-03-16</lastmod>
@@ -157,6 +157,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
+    
+    <lastmod>2023-03-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
     
     <lastmod>2023-03-16</lastmod>
     
@@ -271,6 +278,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Issues/</loc>
+    <lastmod>2023-03-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/Azure-Monitor-Logs/</loc>
     <lastmod>2023-03-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

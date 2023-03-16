@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。 「Azure Monitor Logs」コネクタのクエリ実行に関わる制約についてご説明いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。 「Azure Monitor Logs」コネクタのクエリ実行に関わる制約についてご説明いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit01.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit02.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit01.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit03.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit04.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit05.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit06.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit07.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit08.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit09.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit10.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit11.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit12.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit13.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit14.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit15.jpg">
+<meta property="article:published_time" content="2023-03-19T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-16T02:58:30.901Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Azure Monitor Logs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit01.jpg">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/azureMonitorLogsLimit" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-03-19T15:00:00.000Z" itemprop="datePublished">2023-03-20</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+2be5a243-1537-53e0-bab9-11f5514d978b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%80%8CAzure+Monitor+Logs%E3%80%8D%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%81%AE%E3%82%AF%E3%82%A8%E3%83%AA%E5%AE%9F%E8%A1%8C%E3%81%AB%E9%96%A2%E3%82%8F%E3%82%8B%E5%88%B6%E7%B4%84%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FazureMonitorLogsLimit%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FazureMonitorLogsLimit.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FazureMonitorLogsLimit.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/" data-id="clfaiuuxl000y0np71hwugdic" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
+<p>「Azure Monitor Logs」コネクタのクエリ実行に関わる制約についてご説明いたします。</p>
+<span id="more"></span>
+
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>「Azure Monitor Logs」コネクタのクエリ実行に関わる制約を確認されたい方</li>
+<li>「Azure Monitor Logs」コネクタのクエリ実行に関わる制約の回避方法を知りたい方</li>
+</ul>
+<h2 id="関連情報"><a href="#関連情報" class="headerlink" title="関連情報"></a>関連情報</h2><ul>
+<li><p>「Azure Monitor Logs」コネクタについては、以下の公開情報がございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azuremonitorlogs/">Azure Monitor Logs</a></li>
+</ul>
+</li>
+<li><p>「Azure Monitor Logs」コネクタを使った実装例については、以下の公開情報がございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logs-export-logic-app">Logic Apps を使用した Log Analytics ワークスペースからストレージ アカウントへのデータのエクスポート</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="制約"><a href="#制約" class="headerlink" title="制約"></a>制約</h2><p>「Azure Monitor Logs」コネクタには、以下の制約事項がございます。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit01.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logicapp-flow-connector#connector-limits">Logic Apps および Power Automate の Azure Monitor Logs コネクタ # コネクタの制限</a></li>
+</ul>
+<p><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit02.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/azure-monitor/service-limits#log-analytics-workspaces">Azure Monitor サービスの制限 # Log Analytics ワークスペース # Azure Monitor Logs コネクタ</a></li>
+</ul>
+<p>※ Azure Monitor Logs コネクタはデータを圧縮した形式で通信いたします。<br>上記のデータ容量の制限は圧縮した状態でのデータ容量に関する制限となります。<br>そのため、ワークフローの実行履歴からダウンロードした場合や、ファイルとして出力した際の容量とは異なるものとなります。</p>
+<h2 id="制約に抵触した場合の動作"><a href="#制約に抵触した場合の動作" class="headerlink" title="制約に抵触した場合の動作"></a>制約に抵触した場合の動作</h2><p>件数やサイズの制約を超える結果を取得した場合には、<strong>エラーは発生せずに</strong>結果が省かれて返却される動作となります。<br>また、「クエリ タイムアウトの最大値」を超えた場合には、「RequestTimeout (408)」エラーが発生いたします。</p>
+<h2 id="回避策-1-クエリの工夫"><a href="#回避策-1-クエリの工夫" class="headerlink" title="回避策 1 - クエリの工夫"></a>回避策 1 - クエリの工夫</h2><p>以下の公開情報に記載がございますように、一度に取得されるログが制約に抵触しない範囲となるよう、クエリを工夫いただく方法になります。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit01.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logicapp-flow-connector#connector-limits">Logic Apps および Power Automate の Azure Monitor Logs コネクタ # コネクタの制限</a></li>
+</ul>
+<p>たとえば、時間範囲を狭めることや project 演算子を利用して、一度に取得されるデータを小さくする方法が考えられます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/data-explorer/kusto/query/projectoperator">project 演算子</a></li>
+</ul>
+<p>「クエリ」にて where 句を用いた時間範囲の指定を行いますと、「時間範囲」にて「クエリで設定」を選択することが可能でございます。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit03.jpg"></p>
+<p>※ 「Set in query」と表示される場合もございます。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit04.jpg"></p>
+<p>※ もし「クエリ」にて where 句を用いて時間範囲指定を行っているにも関わらず、「クエリで設定」や「Set in query」という選択肢が表示されない場合には、「カスタム値の入力」を選択して直接「Set in query」と入力してください。</p>
+<p>「まで」アクションや「For each」アクション等のループ処理を利用して、繰り返しクエリを実行する方法が考えられます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#foreach-loop">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # “Foreach” ループ</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#until-loop">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # “Until” ループ</a></li>
+</ul>
+<h2 id="回避策-2-REST-API-の利用"><a href="#回避策-2-REST-API-の利用" class="headerlink" title="回避策 2 - REST API の利用"></a>回避策 2 - REST API の利用</h2><p>「クエリを実行して結果を一覧表示する」アクションの代わりとして、「HTTP」アクションにて以下の REST API を利用する方法もございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/loganalytics/dataaccess/query/execute?tabs=HTTP">Query - Execute</a></li>
+</ul>
+<p><strong>注意点</strong><br>当該 REST API にも別途制約がございますので、この点につきましてご留意ください。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit05.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/azure-monitor/service-limits#log-analytics-workspaces">Azure Monitor サービスの制限 # Log Analytics ワークスペース # クエリ API</a></li>
+</ul>
+<p>また、Logic Apps 自体の制約もございますので、こちらもご確認ください。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal">Azure Logic Apps の制約と構成の参考文献</a></li>
+</ul>
+<p>「クエリを実行して結果を一覧表示する」アクションから得られるデータの形式は「カラム名：値」ですが、<br>当該 REST API から得られるデータは形式が異なりますので、この点につきましてもご留意ください。<br>※ こちらにつきましては、後半に整形方法の一例をご案内しております。</p>
+<p>「クエリを実行して結果を一覧表示する」アクションから得られるデータ<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit06.jpg"></p>
+<p>REST API で得られるデータ<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit07.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/loganalytics/dataaccess/query/execute?tabs=HTTP#cross-workspace">Query - Execute # Sample Response</a></li>
+</ul>
+<p><strong>REST API の実行方法</strong><br>以下に REST API の実行方法につきましてご案内いたします。<br>※ 従量課金タイプの Logic Apps を例としております。</p>
+<ol>
+<li><p>Logic Apps のマネージド ID を有効化する。<br>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - ID] と遷移し、「システム割り当て済み」タブにて「状態」を「オン」とし、「保存」を押下します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit08.jpg"></p>
+</li>
+<li><p>Log Analytics ワークスペースのロールを付与する。<br>1 で有効化されたマネージド ID に対して、ロールを付与します。<br>[Log Analytics ワークスペース] - [&lt;対象の Log Analytics ワークスペース&gt;] - [アクセス制御 (IAM)] と遷移し、「+ 追加」を押下して「ロールの割り当ての追加」を選択します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit09.jpg"><br>「ロール」タブにて「監視閲覧者」ロールを選択します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit10.jpg"></p>
+</li>
+</ol>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#monitoring-reader">Azure 組み込みロール # Monitoring Reader</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/roles-permissions-security#built-in-monitoring-roles">Azure Monitor でのロール、アクセス許可、セキュリティ # 組み込みの監視の役割</a><br>「メンバー」タブにて「アクセスの割り当て先」に「ユーザー、グループ、またはサービス プリンシパル」を選択し、「+ メンバーを選択する」を押下します。<br>1 でマネージド ID を有効化した Logic Apps を検索・選択します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit11.jpg"><br>割り当てを完了します。<br>※ 割り当てに少しお時間がかかる場合がございます。</li>
+</ul>
+<ol start="3">
+<li>「HTTP」アクションを設定する。<br>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [開発ツール - ロジック アプリ デザイナー] と遷移し、「HTTP」アクションを追加します。<br>以下の REST API を実行するために、各設定を行います。</li>
+</ol>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/loganalytics/dataaccess/query/execute?tabs=HTTP">Query - Execute</a><br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit12.jpg"><br>・方法：POST<br>・URI：<a target="_blank" rel="noopener" href="https://api.loganalytics.io/v1/workspaces/%7BworkspaceId%7D/query">https://api.loganalytics.io/v1/workspaces/{workspaceId}/query</a> … (※1)<br>・本文：クエリを設定します。 … (※2)<br>・認証 (「Add new parameter」を押下し、「認証」にチェックを入れます。)<br>　・認証の種類：マネージド ID<br>　・マネージド ID：システム割り当てマネージド ID<br>　・対象ユーザー：<a target="_blank" rel="noopener" href="https://api.loganalytics.io/">https://api.loganalytics.io/</a><br>※1 workspaceId は、[Log Analytics ワークスペース] - [&lt;対象の Log Analytics ワークスペース&gt;] - [設定 - エージェント管理] にて、ご確認いただけます。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit13.jpg"><br>※2 クエリをご設定いただく際、クエリ内にダブルクォーテーションを使用しますと、有効な JSON として認識されない場合がございますので、ダブルクォーテーションの前に「\」をご設定ください。</li>
+</ul>
+<p><strong>データの整形</strong><br>「選択」アクションを利用することで、「クエリを実行して結果を一覧表示する」アクションと同様のデータ形式に整形することが可能です。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations#select-action">Azure Logic Apps でデータの操作を実行する # 選択アクション</a></li>
+</ul>
+<p>※ 以下にてご案内いたしますのは、あくまでサンプルでございます。お客様のご要件に合わせまして適宜ご変更いただき、<br>実運用に向けましたテストやハンドリングにつきましては、お客様ご自身にてご実施いただきますようお願い申し上げます。</p>
+<p>「選択」アクションは以下のように入力します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit14.jpg"></p>
+<p>・開始 : 式「body(‘HTTP’)?[‘tables’][0]?[‘rows’]」<br>・マップ :<br>　・TimeGenerated：式「item()[0]」<br>　・Type：式「item()[1]」<br>　・test_s：式「item()[2]」</p>
+<p>使用しております body 関数および item 関数につきましては、以下の公開情報もございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#body">body</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#item">item</a></li>
+</ul>
+<p>※ 「動的なコンテンツの追加」を押下し、「式」タブにて各式をご設定いただき「OK」ボタン (以下のスクリーンショットの「更新」ボタンにあたります) を選択します。<br><img src="/blog/LogicApps/azureMonitorLogsLimit/azureMonitorLogsLimit15.jpg"></p>
+<p>結果として、以下のデータを得ることができます。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;TimeGenerated&quot;</span>: <span class="string">&quot;2022-12-22T01:18:36.023709Z&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Type&quot;</span>: <span class="string">&quot;testCustom_CL&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;test_s&quot;</span>: <span class="string">&quot;hello&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">&quot;TimeGenerated&quot;</span>: <span class="string">&quot;2022-12-22T01:19:51.6295168Z&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Type&quot;</span>: <span class="string">&quot;testCustom_CL&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;test_s&quot;</span>: <span class="string">&quot;hello&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>なお、大変申し訳ございませんが、columns の長さに応じて動的に「選択」アクションの「マップ」パラメーターの行を変更する機能はございません。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、「Azure Monitor Logs」コネクタの制約と、その制約の回避策についてご案内いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/azureMonitorLogsLimit.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../StandardLogicApps-StorageAccount/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Logic Apps Standard と関連するストレージ アカウント</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-StorageAccount/">Logic Apps Standard と関連するストレージ アカウント</a>
+          </li>
+        
+          <li>
+            <a href="../triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
+          </li>
+        
+          <li>
+            <a href="../FileFormatConversion/">Azure Logic Apps で各ファイルフォーマットを変換する Tips</a>
+          </li>
+        
+          <li>
+            <a href="../FailedToFetch/">Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">23</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">23</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">21</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">22</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 18px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
