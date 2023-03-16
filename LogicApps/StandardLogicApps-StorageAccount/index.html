@@ -4,31 +4,27 @@
   <meta charset="utf-8">
   
   
-  <title>Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策 | Japan Azure Integration Support Blog</title>
+  <title>Logic Apps Standard と関連するストレージ アカウント | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策について説明します。">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの山田です。今回は、Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントについて、基礎知識からご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/index.html">
+<meta property="og:title" content="Logic Apps Standard と関連するストレージ アカウント">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策について説明します。">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの山田です。今回は、Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントについて、基礎知識からご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/runHistory.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/triggerHistory01.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/triggerHistory02.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/triggerHistory03.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/networkSetting01.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/networkSetting02.jpg">
-<meta property="article:published_time" content="2023-01-22T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-16T02:57:15.931Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-2.png">
+<meta property="article:published_time" content="2023-03-01T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-16T02:57:15.983Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Trigger">
+<meta property="article:tag" content="Storage Account">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/runHistory.jpg">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -90,7 +86,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/FailedToFetch" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/StandardLogicApps-StorageAccount" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -99,7 +95,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策
+      Logic Apps Standard と関連するストレージ アカウント
     </h1>
   
 
@@ -107,69 +103,50 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2023-01-22T15:00:00.000Z" itemprop="datePublished">2023-01-23</time>
+  <time datetime="2023-03-01T02:00:00.000Z" itemprop="datePublished">2023-03-01</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7a18c707-8dab-5753-8d53-5ffc9c1e0826%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%AE%E5%AE%9F%E8%A1%8C%E5%B1%A5%E6%AD%B4%E3%81%AB%E3%81%A6%E3%80%8CFailed+to+fetch%E3%80%8D%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%8E%9F%E5%9B%A0%E3%81%A8%E5%9B%9E%E9%81%BF%E7%AD%96%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FFailedToFetch%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FFailedToFetch.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FFailedToFetch.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+484c7a0b-033b-5c61-8390-e2bc6b0f785a%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+Standard+%E3%81%A8%E9%96%A2%E9%80%A3%E3%81%99%E3%82%8B%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8+%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicApps-StorageAccount%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicApps-StorageAccount.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicApps-StorageAccount.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/" data-id="clfait90r00070np86y9e4g5a" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/" data-id="clfait913000o0np84kpdeyf1" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
-<p>Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策について説明します。</p>
+        <p>こんにちは。  Azure Integration サポート チームの山田です。<br>今回は、Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントについて、基礎知識からご紹介いたします。</p>
 <span id="more"></span>
 
 <h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
-<li>Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示され、実行履歴が確認できずにお困りの方</li>
+<li>初めて Logic Apps Standard での開発をされる方</li>
+<li>Azure リソースの管理者</li>
 </ul>
-<h2 id="関連情報"><a href="#関連情報" class="headerlink" title="関連情報"></a>関連情報</h2><ul>
-<li><p>Standard Logic Apps についての公開情報は以下になります。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/single-tenant-overview-compare">Azure Logic Apps でのシングルテナント、マルチテナント、統合サービス環境の比較</a></li>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/designer-overview">シングルテナント Azure Logic Apps の Standard ロジック アプリ ワークフロー デザイナーについて</a></li>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントの役割</li>
+<li>Logic Apps Standard と関連するストレージ アカウント名</li>
+<li>関連ドキュメント</li>
+<li>まとめ</li>
 </ul>
-</li>
-<li><p>プライベート エンドポイントの設定についての公開情報は以下になります。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint">プライベート エンドポイントを使って Standard ロジック アプリと Azure 仮想ネットワーク間のトラフィックをセキュリティで保護する</a></li>
-</ul>
-</li>
-<li><p>英語表記となりますが、当該事象につきましては以下のブログにも記載がございます。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/common-errors-in-azure-logic-apps-standard-unexpected-error/ba-p/3293197">Common errors in Azure Logic Apps (Standard) - Unexpected error. Failed to fetch</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h2><p>Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示されることがございます。</p>
-<p>以下のようにエラーが表示され、実行履歴の詳細が確認できません。<br><img src="/blog/LogicApps/FailedToFetch/runHistory.jpg"></p>
-<p>また、「トリガーの履歴」タブにて識別子を選択し、「入力のリンク」または「出力のリンク」を選択します。<br><img src="/blog/LogicApps/FailedToFetch/triggerHistory01.jpg"></p>
-<p><img src="/blog/LogicApps/FailedToFetch/triggerHistory02.jpg"></p>
-<p>以下のように「MsPortalFx.Errors.AjaxError」とエラー表示され、トリガーの履歴につきましても詳細が確認できません。<br><img src="/blog/LogicApps/FailedToFetch/triggerHistory03.jpg"></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>通常原因としては、以下 2 点が挙げられます。</p>
+<h2 id="Logic-Apps-Standard-を作成した際に一緒に作成されるストレージ-アカウントの役割"><a href="#Logic-Apps-Standard-を作成した際に一緒に作成されるストレージ-アカウントの役割" class="headerlink" title="Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントの役割"></a>Logic Apps Standard を作成した際に一緒に作成されるストレージ アカウントの役割</h2><p>端的に、Logic Apps Standard を作成した際に一緒に作成されるコンテナやファイルは、Logic Apps Standard をご利用の際のワークフロー情報や、実行履歴情報が格納されているものとなります。「flow*」などという名称のテーブルをご覧いただけます。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-1.png"></p>
+<h2 id="Logic-Apps-Standard-と関連するストレージ-アカウント名"><a href="#Logic-Apps-Standard-と関連するストレージ-アカウント名" class="headerlink" title="Logic Apps Standard と関連するストレージ アカウント名"></a>Logic Apps Standard と関連するストレージ アカウント名</h2><p>ストレージ アカウントと Logic Apps Standard の結びつきは以下から参照いただけます。</p>
 <ol>
-<li>プライベート エンドポイントが有効化されている場合</li>
+<li>Azure Portal から該当の Logic Apps Standard に移動します。</li>
+<li>左部 [設定] から [構成] の、[アプリケーション設定] タブを選択します。 </li>
 </ol>
-<p>Standard Logic Apps の「受信トラフィック」にて「プライベート エンドポイント」が有効化されている場合、<br>実行履歴に「予期しないエラー. Failed to fetch」と表示されますのは、想定動作となります。</p>
-<p>※ [ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - ネットワーク] と遷移し、「受信トラフィック」にて設定状況をご確認いただけます。<br><img src="/blog/LogicApps/FailedToFetch/networkSetting01.jpg"></p>
-<p>プライベート エンドポイントを有効化したことにより、当該 Logic Apps に対しては、同一仮想ネットワークからのみのアクセスを許可している状態となります。<br>そのため、同一仮想ネットワーク外からのアクセスでは、「Failed to fetch」というエラーが表示され、実行履歴をご確認いただけません。<br>(実際のワークフローの「成功」、「失敗」に関わらず、こちらのエラーが表示されます。)</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-StorageAccount/StandardLogicApps-StorageAccount-2.png"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-access-restrictions">Azure App Service のアクセス制限</a></li>
+<li>AzureWebJobsStorage</li>
+<li>WEBSITE_CONTENTAZUREFILECONNECTIONSTRING</li>
 </ul>
-<ol start="2">
-<li>アクセス制限の設定を行っている場合</li>
-</ol>
-<p>Standard Logic Apps の「受信トラフィック」にて「アクセス制限」を設定されている場合、「許可」に設定されているパブリック IP アドレス以外からのアクセスを拒否いたしますので、想定動作となります。<br>※ [ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - ネットワーク] と遷移し、「受信トラフィック」にて設定状況をご確認いただけます。<br><img src="/blog/LogicApps/FailedToFetch/networkSetting02.jpg"></p>
-<h2 id="回避策"><a href="#回避策" class="headerlink" title="回避策"></a>回避策</h2><ol>
-<li>プライベート エンドポイントが有効化されている場合</li>
-</ol>
-<p>Standard Logic Apps のプライベート エンドポイントが配置されている仮想ネットワークと、同一の仮想ネットワークに仮想マシンを作成します。<br>作成した仮想マシンにリモート デスクトップ接続を行い、Azure ポータルへアクセスしますと、実行履歴をご確認いただけます。</p>
-<ol start="2">
-<li>アクセス制限の設定を行っている場合</li>
-</ol>
-<p>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - ネットワーク] と遷移し、「アクセス制限」にて当該 Logic Apps へアクセスしている端末のパブリック IP アドレスを許可します。</p>
+<p>上 2 つがストレージ アカウント名に関わるパラメーターとなります。</p>
+<h2 id="関連ドキュメント"><a href="#関連ドキュメント" class="headerlink" title="関連ドキュメント"></a>関連ドキュメント</h2><p>Logic Apps Standard とストレージ アカウントに言及したドキュメントには、以下のようなものがございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account">シングルテナントの Standard ロジック アプリをプライベート エンドポイントを使用してプライベート ストレージ アカウントにデプロイする</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/estimate-storage-costs">シングルテナント Azure Logic Apps の Standard ロジック アプリ ワークフローのストレージ コストを見積もる</a></li>
+</ul>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps Standard タイプを作成するにあたって理解しておくと安心な、ストレージ アカウントとの関係にまつわる基礎知識についてご紹介しました。ほか関連記事は以下を参照くださいませ。引き続き皆様のお役に立てる情報を発信してまいります。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/">Logic Apps Standard のワークフロー実行ログを削除する</a></p>
 
       
       
@@ -183,10 +160,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/FailedToFetch.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicApps-StorageAccount.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -194,19 +171,10 @@
     
 <nav id="article-nav">
   
-    <a href="../FileFormatConversion/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Azure Logic Apps で各ファイルフォーマットを変換する Tips
-        
-      </div>
-    </a>
   
-  
-    <a href="../FlowHistoryClearner/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../triggerConcurrency/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Logic Apps Standard のワークフロー実行ログを削除する</div>
+      <div class="article-nav-title">トリガーのコンカレンシー制御と最大実行待機数について</div>
     </a>
   
 </nav>
@@ -225,7 +193,7 @@
       <ul>
         
           <li>
-            <a href="../StandardLogicApps-StorageAccount/">Logic Apps Standard と関連するストレージ アカウント</a>
+            <a href="">Logic Apps Standard と関連するストレージ アカウント</a>
           </li>
         
           <li>
@@ -237,7 +205,7 @@
           </li>
         
           <li>
-            <a href="">Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策</a>
+            <a href="../FailedToFetch/">Standard Logic Apps の実行履歴にて「Failed to fetch」というエラーが表示される原因と回避策</a>
           </li>
         
           <li>
