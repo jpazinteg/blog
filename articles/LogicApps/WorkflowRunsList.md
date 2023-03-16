@@ -15,7 +15,8 @@ tags:
 <!-- more -->
 
 ## こんな方におすすめです
-- トリガーのコンカレンシー制御のほかに、他の実行中の Logic Apps の状況を任意にフィルターして制御されたい方。
+
+トリガーのコンカレンシー制御のほかに、他の実行中の Logic Apps の状況を任意にフィルターして制御されたい方。
 
 ## 目次
 - API
@@ -32,7 +33,8 @@ tags:
 
 `https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2016-06-01&$filter={$filter}`
 
-実行中のものを絞り込むフィルタは「status eq 'running'」などですので、エンコードを掛けますと以下のような URL になるかと存じます。
+実行中のものを絞り込むフィルタは「status eq 'running'」などとなります。エンコードを掛けますと以下のような URL になります。
+
 `https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2016-06-01&$filter=status%20eq%20%27running%27`
 
 実行結果:
@@ -49,7 +51,7 @@ tags:
 
 ![](WorkflowRunsList/WorkflowRunsList-3.png)
 
-当該の API を使用する際は Logic Apps のマネージド ID に対して、「Logic App Operator」ロールを割り当てする必要がある点が、留意点となります。
+＊当該の API を使用する際は Logic Apps のマネージド ID に対して、「Logic App Operator」ロールを割り当てする必要がございます。
 
 [Azure 組み込みロール # Logic App Operator](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#logic-app-operator)
 
@@ -70,12 +72,22 @@ https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-
 
 ![](WorkflowRunsList/WorkflowRunsList-5.png) 
 
-配列の要素数をカウントする length 関数を用いて、実行中のジョブ一覧「body('HTTP')?['value']」の要素数をカウントできます。このカウントを条件ステートメントで判定し、上のように実行中のジョブが 1 以上である場合は終了アクションでジョブを終了、実行中のジョブがない場合はご想定の処理に移行する、というような構築が可能となります。
+配列の要素数をカウントする length 関数を用いて、実行中のジョブ一覧「body('HTTP')?['value']」の要素数をカウントできます。
 
+- このカウントを条件ステートメントで判定する。
+- 実行中のジョブが 1 以上である場合は終了アクションでジョブを終了する。
+- 実行中のジョブがない場合はご想定の処理に移行する。
+
+上のような制御が可能となります。
+
+![](WorkflowRunsList/WorkflowRunsList-6.png)
 
 ## 関連ドキュメント
-- トリガーのコンカレンシー制御については、以下の記事がございます。
-  - 参考ドキュメント : [トリガーのコンカレンシー制御と最大実行待機数について](https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/)  
+
+ほか、トリガーのコンカレンシー制御については、以下の記事がございます。
+
+参考ドキュメント : [トリガーのコンカレンシー制御と最大実行待機数について](https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/)  
+
 
 ## まとめ
 
