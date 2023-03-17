@@ -88,7 +88,7 @@ https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-
 
 ## 関連ドキュメント
 
-基本的なトリガーに設定可能なコンカレンシー制御と最大実行待機数については、以下の記事がございます。
+ほか、トリガーに設定可能なコンカレンシー制御と最大実行待機数に関する情報については、以下の記事がございます。
 
 - [トリガーのコンカレンシー制御と最大実行待機数について](https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/)  
 
