@@ -63,6 +63,16 @@ Steps と記載された配列要素が 12 個作成されます。
 
 こちらは For each 内で配列のインデックスとして利用いたします。
 
+なお、元記事の構成では上記の通り Azure Monitor ログコネクタを利用しておりますが、以下の通り range 式関数でも配列を作成することが可能でございます。
+
+- [range](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#range)
+![](./GetIterationIndexInForeachAction/image25.png)
+
+<結果>
+![](./GetIterationIndexInForeachAction/image25.png)
+
+こちらも参考までにご確認いただけますと幸いです。
+
 次に、以下のような構成の For each アクションを後続に指定します。
 ![](./GetIterationIndexInForeachAction/image07.png)
 
