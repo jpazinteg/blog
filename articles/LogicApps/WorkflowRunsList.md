@@ -66,7 +66,7 @@ tags:
 
 Length
 
-https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#length
+[式関数のリファレンス ガイド - Azure Logic Apps # Length](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#length)
 
 配列の項目の数を返します。
 
