@@ -69,7 +69,7 @@ Steps と記載された配列要素が 12 個作成されます。
 ![](./GetIterationIndexInForeachAction/image25.png)
 
 <結果>
-![](./GetIterationIndexInForeachAction/image25.png)
+![](./GetIterationIndexInForeachAction/image26.png)
 
 こちらも参考までにご確認いただけますと幸いです。
 
