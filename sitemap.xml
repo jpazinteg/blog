@@ -23,13 +23,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/</loc>
     
     <lastmod>2023-03-22</lastmod>
@@ -37,14 +30,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -52,20 +38,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -86,7 +58,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -114,6 +93,27 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/</loc>
     
     <lastmod>2023-03-22</lastmod>
@@ -128,14 +128,21 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -149,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -250,6 +257,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Standard/</loc>
+    <lastmod>2023-03-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/For-each/</loc>
     <lastmod>2023-03-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

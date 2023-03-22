@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Foreachアクションでインデックスを取得した処理の比較 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   本記事は弊社海外ブログを日本語向けに解説した記事となります。  Get iteration index in Foreach action  Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合が">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Foreachアクションでインデックスを取得した処理の比較">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   本記事は弊社海外ブログを日本語向けに解説した記事となります。  Get iteration index in Foreach action  Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合が">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image01.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image25.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image26.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image07.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image08.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image09.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image10.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image11.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image12.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image13.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image14.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image15.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image16.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image17.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image18.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image19.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image20.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image21.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image22.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image23.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image24.png">
+<meta property="article:published_time" content="2023-03-16T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-22T07:39:04.031Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="For each">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image01.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/GetIterationIndexInForeachAction" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Foreachアクションでインデックスを取得した処理の比較
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-03-16T15:00:00.000Z" itemprop="datePublished">2023-03-17</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+148866a3-84c5-542d-affa-71a77906eba0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BForeach%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%9F%E5%87%A6%E7%90%86%E3%81%AE%E6%AF%94%E8%BC%83%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FGetIterationIndexInForeachAction%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FGetIterationIndexInForeachAction.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FGetIterationIndexInForeachAction.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/" data-id="clfjdir5g000b0np50mpc4ubd" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/get-iteration-index-in-foreach-action/ba-p/3730379">Get iteration index in Foreach action</a></li>
+</ul>
+<p>Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合があるかと思います。<br>その際は、コンカレンシ―制御を以下のように 1 に設定し、各繰り返し回数ごとに常に 1 ずつ加算されるインデックスとして変数を使用する手法がございます。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image01.png"></p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image02.png"></p>
+<p>しかし、この方法では For each 処理がシーケンシャルな処理であるため、並列実行が出来ずパフォーマンスに影響を及ぼすことがあります。</p>
+<p>今回は、For each アクションを並列実行して、効率的にインデックスを利用する構成と、従来の処理との比較結果についてご案内いたします。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>1． 従来の手法</li>
+<li>2． 本手法での処理の設定方法</li>
+<li>3． 本手法での構成および処理時間の比較</li>
+<li>まとめ</li>
+</ul>
+<h2 id="1．-従来の手法"><a href="#1．-従来の手法" class="headerlink" title="1． 従来の手法"></a>1． 従来の手法</h2><p>まず、今回の前提となる従来の構成がどのような場合を記載しているかについて説明いたします。<br>例えば、以下のようなフローがあるとします。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image03.png"></p>
+<p>一つ目のアクションでは、テストで使用する配列のデータを用意いたします。<br>本記事では Azure Monitor ログ コネクタを基に以下の range 演算子で配列データを動的に作成しておりますが、配列形式のアクションであれば変数アクションで設定いただいても構いません。任意の構成で配列データを準備いただければと思います。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image04.png"></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azuremonitorlogs/">Azure Monitor Logs</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/data-explorer/kusto/query/rangeoperator">range 演算子</a></p>
+</li>
+</ul>
+<p>参考までに、本アクションでは以下のような結果となります。</p>
+<p>＜クエリ＞<br>range Steps from 1 to 12 step 1</p>
+<p>&lt;結果&gt;<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image05.png"></p>
+<p>Steps と記載された配列要素が 12 個作成されます。</p>
+<p>次に、以下の “変数を初期化する” アクションを後続に指定します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image06.png"></p>
+<p>こちらは For each 内で配列のインデックスとして利用いたします。</p>
+<p>なお、元記事の構成では上記の通り Azure Monitor ログコネクタを利用しておりますが、以下の通り range 式関数でも配列を作成することが可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#range">range</a><br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image25.png"></li>
+</ul>
+<p>&lt;結果&gt;<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image26.png"></p>
+<p>こちらも参考までにご確認いただけますと幸いです。</p>
+<p>次に、以下のような構成の For each アクションを後続に指定します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image07.png"></p>
+<p>詳細について以降で説明いたします。</p>
+<p>まず、For each の “以前の手順から出力を選択” については、動的コンテンツの変数より “value” を指定いたします。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image08.png"></p>
+<p>一つ目の作成アクションでは “変数を初期化する” で作成した変数を指定しましす。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image09.png"></p>
+<p>二つ目の作成アクションでは以下のような式関数を指定しましす。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image10.png"></p>
+<p>以下、コードビューの例となります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iteration index: @&#123;outputs(&#x27;作成_3&#x27;)&#125;, data:@&#123;body(&#x27;StepArray&#x27;)?[&#x27;value&#x27;][outputs(&#x27;作成_3&#x27;)]&#125;</span><br></pre></td></tr></table></figure>
+<p>こちらの処理で、インデックスを基に最初に設定した配列の要素を取得致します。</p>
+<p>三つ目のアクションでは変数をインクリメント致します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image11.png"></p>
+<p>ここまでの設定が出来ましたら、以下の通り For each のコンカレンシー制御を 1 に設定いたします。<br>（1 にせず並列実行にした場合、変数の値が正常に加算されない）</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image12.png"><br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image13.png"></p>
+<p>出力結果については、以下の通り順次実行で配列の値を取得することが可能ではございますが、1 つずつ取得することとなるのでパフォーマンスに影響が発生します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image14.png"></p>
+<p>以上が前提となる処理になります。こちらの内容について、以下の手順で処理速度を改善する方法を記載いたします。</p>
+<h2 id="2．-処理の設定方法"><a href="#2．-処理の設定方法" class="headerlink" title="2． 処理の設定方法"></a>2． 処理の設定方法</h2><p>本記事の処理構成として、以下のような構成となります。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image15.png">　 </p>
+<p>一つ目のアクションについては “1． 従来の手法での処理時間” で記載した内容と同様に配列の作成となるため説明を割愛いたします。</p>
+<p>二つ目のアクションについて、処理する必要のあるすべてのインデックスを保存した新しい配列を生成する<br>処理となります。例えば、10 項目の配列があった場合、インデックス配列は [ 0, 1, 2 … 9 ] のように生成する必要があります（0 から始まり、[配列長 - 1]で終わります）。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image16.png">　 </p>
+<p>以下、コードビューの例となります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">range ID from 0 to @&#123;add(length(body(&#x27;StepArray&#x27;)?[&#x27;value&#x27;]), -1)&#125; step 1</span><br></pre></td></tr></table></figure>
+
+<p>&lt;結果&gt;<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image17.png">　 </p>
+<p>次に、以下のような構成の For each アクションを後続に指定します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image18.png">　 </p>
+<p>詳細について以降で説明いたします。</p>
+<p>まず、For each の “以前の手順から出力を選択”　については、先ほど作成したインデックスの配列を指定いたします。本例では “クエリを実行して結果を一覧表示する” の “value” を指定します。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image19.png"></p>
+<p>一つ目の作成アクションでは以下の式関数を指定いたします。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image20.png"></p>
+<p>以下、コードビューの例となります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@&#123;items(&#x27;For_each&#x27;)[&#x27;ID&#x27;]&#125;</span><br></pre></td></tr></table></figure>
+<p>こちらのアクションについては現在 For each で参照しているアイテムのインデックスを取得している処理となります。</p>
+<p>二つ目の作成アクションでは以下の式関数を指定いたします。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image21.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iteration index:@&#123;outputs(&#x27;作成&#x27;)&#125; , data:@&#123;body(&#x27;StepArray&#x27;)?[&#x27;value&#x27;][outputs(&#x27;作成&#x27;)]&#125;</span><br></pre></td></tr></table></figure>
+<p>こちらの処理で、インデックスを基に最初に設定した配列の要素を取得致します。</p>
+<p>出力結果については、For each の外であらかじめ作成したインデックスと紐づけて配列のデータを取得することで、並列実行処理で配列の値を取得することが可能でございます。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image22.png"></p>
+<h2 id="3．本手法での構成および処理時間"><a href="#3．本手法での構成および処理時間" class="headerlink" title="3．本手法での構成および処理時間"></a>3．本手法での構成および処理時間</h2><p>上記構成について配列要素数を 1000 にした状態でそれぞれ実行時間の比較検証を実施致しました。<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image23.png"></p>
+<p>本記事の元となっているブログにも 90 % 近く処理時間の削減が出来たと記載がございますが、<br>本ブログの執筆時の検証結果としましても同様の結果となりました。</p>
+<p>予め作成したインデックスと紐づけた場合：22 秒<br>For each 内でインデックスと紐づけた場合：6 分<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image24.png"></p>
+<p>以上、For each 処理におけるインデックスの取得方法についてご案内いたしました。<br>こちらの記事について、ご参考までにご一読いただければと思います。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下の 3 点について、海外ブログを基にご案内いたしました。</p>
+<ul>
+<li>1． 従来の手法</li>
+<li>2． 処理の設定方法</li>
+<li>3． 本手法での構成および処理時間の比較</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/GetIterationIndexInForeachAction.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../azureMonitorLogsLimit/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">次の記事</strong>
+      <div class="article-nav-title">
+        
+          「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について
+        
+      </div>
+    </a>
+  
+  
+    <a href="../WorkflowRunsList/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">実行中の Logic Apps の状況を確認して制御する</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="../azureMonitorLogsLimit/">「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について</a>
+          </li>
+        
+          <li>
+            <a href="">Foreachアクションでインデックスを取得した処理の比較</a>
+          </li>
+        
+          <li>
+            <a href="../WorkflowRunsList/">実行中の Logic Apps の状況を確認して制御する</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-StorageAccount/">Logic Apps Standard と関連するストレージ アカウント</a>
+          </li>
+        
+          <li>
+            <a href="../triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">25</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">25</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">23</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">23</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 16px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
