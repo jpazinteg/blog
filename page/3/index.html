@@ -80,6 +80,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LogicApps/HttpAction-AsyncPattern-Polling" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../LogicApps/HttpAction-AsyncPattern-Polling/" class="article-date">
+  <time datetime="2022-09-01T01:00:00.000Z" itemprop="datePublished">2022-09-01</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../LogicApps/HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。 Azure Integration サポート チームの大田です。<br>Logic Apps の HTTP アクションから長時間の処理を伴うサービスをリクエストする場合、下図のようにタイムアウト エラーを生じます。</p>
+<p><img src="/blog/LogicApps/HttpAction-AsyncPattern-Polling/timeout-error.png"></p>
+<p>本エラーは下記の公開情報にございます HTTP 要求のタイムアウト期間に関する制限が原因となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=azure-portal#http-request-limits">HTTP 要求のタイムアウト期間に関する制限</a></li>
+</ul>
+<p>本記事では非同期ポーリング パターンを用いて HTTP アクションのタイムアウト エラーを回避する方法をサンプルを用いてご紹介します。</p>
+        
+          <p class="article-more-link">
+            <a href="../../LogicApps/HttpAction-AsyncPattern-Polling/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/" data-id="clg1xp1he004w0nkm0w6042ax" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LogicApps/StandardLogicApps-Authorization" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -118,62 +174,10 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/" data-id="clfjdir5o000n0np50fbuetsh" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/" data-id="clg1xp1fw000n0nkm16go9rrh" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LogicApps/AadAuthentication" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="../../LogicApps/AadAuthentication/" class="article-date">
-  <time datetime="2022-08-16T15:00:00.000Z" itemprop="datePublished">2022-08-17</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../LogicApps/AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。<br>Standard Logic Apps （シングルテナント） をご利用のお客様も多いかと思いますが、App Service や Azure Functions と異なり、Standard Logic Apps では Azure Portal から AAD 認証の設定が出来ません。</p>
-<p><img src="/blog/LogicApps/AadAuthentication/image000.png"></p>
-<p>今回は、REST API を用いて Standard Logic Apps でも AAD 認証を行う方法をご紹介いたします。</p>
-        
-          <p class="article-more-link">
-            <a href="../../LogicApps/AadAuthentication/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/AadAuthentication/" data-id="clfjdir5100000np500aghqe7" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
     </footer>
   </div>
@@ -233,7 +237,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/" data-id="clfjdir5h000d0np5gjz72l8b" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/" data-id="clg1xp1fo000d0nkm4lvmh62n" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -290,7 +294,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/" data-id="clfjdir6u004x0np5hz4bebx8" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/" data-id="clg1xp1hf004x0nkma4pe5sqd" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -343,7 +347,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/" data-id="clfjdir5600010np5hb4mepo6" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/" data-id="clg1xp1f900010nkm5uathxbl" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -393,7 +397,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/" data-id="clfjdir6200190np54fhrdyr7" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/" data-id="clg1xp1gd00190nkm36vvgxpa" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -449,7 +453,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/" data-id="clfjdir5900030np54fcy1ew6" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/" data-id="clg1xp1fd00030nkm13g27425" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -499,7 +503,7 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/general/IntroduceOurBlog/" data-id="clfjdir64001e0np51g8625js" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/general/IntroduceOurBlog/" data-id="clg1xp1gf001e0nkm02dz84yt" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/General/" rel="tag">General</a></li></ul>
@@ -528,6 +532,10 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
       <ul>
         
           <li>
+            <a href="../../LogicApps/AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
+          </li>
+        
+          <li>
             <a href="../../LogicApps/azureMonitorLogsLimit/">「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について</a>
           </li>
         
@@ -541,10 +549,6 @@ Graph API は「アプリケーション」のアクセス許可を使用して�
         
           <li>
             <a href="../../LogicApps/StandardLogicApps-StorageAccount/">Logic Apps Standard と関連するストレージ アカウント</a>
-          </li>
-        
-          <li>
-            <a href="../../LogicApps/triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
           </li>
         
       </ul>
