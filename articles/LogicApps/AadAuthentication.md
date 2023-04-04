@@ -14,7 +14,7 @@ Standard Logic Apps （シングルテナント） をご利用のお客様も�
 
 ![](./AadAuthentication/image000.png)
 
-今回は、REST API を用いて Standard Logic Apps でも AAD 認証を行う方法をご紹介いたします。
+今回は、REST API を用いて Standard Logic Apps でも AAD 認証 (EasyAuth) を行う方法をご紹介いたします。
 
 <!-- more -->
 
@@ -30,8 +30,7 @@ Standard Logic Apps （シングルテナント） をご利用のお客様も�
 今回の記事については以下の情報を参考にしております。
 - [Trigger workflows in Standard logic apps with Easy Auth](https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/trigger-workflows-in-standard-logic-apps-with-easy-auth/ba-p/3207378)
 
-また、REST API の実行方法については [postman](https://www.postman.com/downloads/) を利用してリクエストを送信します。そのため、Postman のインストール設定を事前に実施いただくことが前提の記事となります。
-
+なお、本記事における REST API の実行方法については [postman](https://www.postman.com/downloads/) を利用してリクエストを送信します。そのため、Postman のインストール設定を事前に実施いただくことが前提の記事となります。
 authsettingsV2 の更新については、[Resource Explorer](https://resources.azure.com/) を利用して更新いたします。
 
 ＜参考情報＞
@@ -76,16 +75,14 @@ authsettingsV2 の更新については、[Resource Explorer](https://resources.
 ＜控える項目＞
 ・値
 
-次に、[管理] - [API の公開] のメニューより、[Scope の追加] を実施いたします。
+次に、[管理] - [API の公開] のメニューより、[アプリケーション ID の URI] の 設定ボタンを選択します。
 
 ![](./AadAuthentication/image017.png)
 
-"api://" から始まるアプリケーション ID の URI が払い出されたらキャンセルを選択します。
-![](./AadAuthentication/image0180.png)
+"api://" から始まるアプリケーション ID の URI が払い出されますので、保存ボタンを選択します。
 ![](./AadAuthentication/image018.png)
 
 このタイミングで、"アプリケーション ID の URI" の値を控えておきます。
-
 ![](./AadAuthentication/image01802.png)
 
 ＜控える項目＞
@@ -124,7 +121,7 @@ grant_type = client_credentials
 ![](./AadAuthentication/image023.png)
 
 
-続いて、取得した "access_token" をデコードし、aud および oid を取得します。
+続いて、取得した "access_token" をデコードし、oid を取得することと、aud の値と作成したアプリの client_id を比較いたします。
 
 [jwt.io](https://jwt.io/)
 
@@ -137,10 +134,12 @@ grant_type = client_credentials
 ![](./AadAuthentication/image025.png)
 
 ＜控える項目＞
-・aud
 ・oid
 
+ここで、aud の値と作成したアプリの client_id (アプリケーション (クライアント) ID) が同じものであることを確認します。
+
 トークン取得の作業としては以上となりますが、"access_token" , "aud" および "oid" については後続の手順で利用しますので、そのまま残していただきますようお願いいたします。
+なお、こちらのトークンにつきましては、通常 1 ~ 1.5 h の有効期限がございます。そのため、トークン発行後、有効期限が切れるたびに再取得する必要があることをご留意願います。
 
 ## Resource Explorer にて authsettingsV2 の更新
 続いて、authsettingsV2 API を呼び出します。こちらは Standard Logic Apps に対して AAD 認証を行うための事前処理を行うものでございます。
