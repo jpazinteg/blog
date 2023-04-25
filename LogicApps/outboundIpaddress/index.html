@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Logic Apps の送信 IP アドレスについて | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の送信 IP アドレスについて説明いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logic Apps の送信 IP アドレスについて">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の送信 IP アドレスについて説明いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress02.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress03.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress04.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress05.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress06.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress07.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress08.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress09.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress10.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress11.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress12.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress13.jpg">
+<meta property="article:published_time" content="2023-04-24T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-25T08:01:37.156Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Ip address">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/outboundIpaddress" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Logic Apps の送信 IP アドレスについて
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-04-24T15:00:00.000Z" itemprop="datePublished">2023-04-25</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a8a732cd-e354-537e-b7f6-a94a7ac45fe1%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E9%80%81%E4%BF%A1+IP+%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FoutboundIpaddress%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FoutboundIpaddress.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FoutboundIpaddress.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/" data-id="clgvzarie00170npgh2k66ta9" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
+<p>Logic Apps の送信 IP アドレスについて説明いたします。</p>
+<span id="more"></span>
+
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>Logic Apps の送信 IP アドレスの情報を用いて、アクセス制限を行いたい方</li>
+</ul>
+<h2 id="Logic-Apps-のコネクタの種類"><a href="#Logic-Apps-のコネクタの種類" class="headerlink" title="Logic Apps のコネクタの種類"></a>Logic Apps のコネクタの種類</h2><p>Logic Apps では、組み込みのトリガーおよびアクションと、マネージド コネクタの大きく 2 種類があります。<br>それによって送信 IP アドレスが異なりますので、まずはコネクタの種類について説明いたします。</p>
+<h3 id="組み込みのトリガーおよびアクション"><a href="#組み込みのトリガーおよびアクション" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p>トリガーおよびアクション追加時に、「ビルトイン」タブに表示されるものになります。<br><strong>&lt;従量課金タイプ&gt;</strong><br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg"></p>
+<p><strong>&lt;Standard タイプ&gt;</strong><br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress02.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard">Azure Logic Apps の組み込みコネクタ # 従量課金と Standard の組み込みコネクタの比較</a></li>
+</ul>
+<h3 id="マネージド-コネクタ"><a href="#マネージド-コネクタ" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p><strong>&lt;従量課金タイプ&gt;</strong><br>従量課金タイプでは、トリガーおよびアクション追加時に「標準」タブおよび「エンタープライズ」タブに表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress03.jpg"><br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress04.jpg"></p>
+<p><strong>&lt;Standard タイプ&gt;</strong><br>Standard タイプでは、「Azure」タブに表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress05.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">Azure Logic Apps のマネージド コネクタ</a></li>
+</ul>
+<h2 id="送信-IP-アドレス"><a href="#送信-IP-アドレス" class="headerlink" title="送信 IP アドレス"></a>送信 IP アドレス</h2><h3 id="組み込みのトリガーおよびアクション-1"><a href="#組み込みのトリガーおよびアクション-1" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p><strong>&lt;従量課金タイプ&gt;</strong><br>従量課金タイプの Logic Apps において「HTTP」アクションのような組み込みアクションで利用されます送信 IP アドレスは、<br>以下の公開情報の該当リージョンのものとなります。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#multi-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス</a></li>
+</ul>
+<p>たとえば、東日本リージョンに Logic Apps を配置されている場合、以下が対象となります。<br>ファイアウォール等で受信ルールをご設定いただいている場合には、該当リージョンのすべての IP アドレスを許可いただく必要がございます。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress06.jpg"></p>
+<p>また、こちらの IP アドレスは、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] の「ランタイム発信 IP アドレス」が該当いたします。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress07.jpg"></p>
+<p><strong>&lt;Standard タイプ&gt;</strong><br>Standard タイプの Logic Apps におきましては、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] にて、「追加の送信 IP アドレス」が該当いたします。<br>※ 「送信 IP アドレス」は、「追加の送信 IP アドレス」に含まれております。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress08.jpg"></p>
+<h3 id="マネージド-コネクタ-1"><a href="#マネージド-コネクタ-1" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p>マネージド コネクタは、従量課金タイプの Logic Apps でも Standard タイプの Logic Apps でも送信 IP アドレスは共通しております。<br>以下の公開情報の該当リージョンのものとなります。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps</a></li>
+</ul>
+<p>たとえば、東日本リージョンに Logic Apps を配置されている場合、以下が対象となります。<br>ファイアウォール等で受信ルールをご設定いただいている場合には、該当リージョンのすべての IP アドレスを許可いただく必要がございます。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress09.jpg"></p>
+<p>従量課金タイプの場合、こちらの IP アドレスは、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] の「コネクタ発信 IP アドレス」が該当いたします。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress10.jpg"></p>
+<h2 id="サービス-タグ"><a href="#サービス-タグ" class="headerlink" title="サービス タグ"></a>サービス タグ</h2><p>Azure 上の VNet 等の一部の製品では、サービス タグをご利用いただくことが可能でございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/virtual-network/service-tags-overview">仮想ネットワーク サービス タグ</a></li>
+</ul>
+<p>Logic Apps に関連するサービス タグは以下になります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress11.jpg"></p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#firewall-ip-configuration-considerations">Azure Logic Apps の制約と構成の参考文献 # ファイアウォールの IP 構成に関する考慮事項</a></li>
+</ul>
+<h3 id="組み込みのトリガーおよびアクション-2"><a href="#組み込みのトリガーおよびアクション-2" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p>従量課金タイプの場合は、サービス タグは「<strong>LogicApps</strong>」になります。<br>※ Standard タイプでは、サービス タグのご用意がございません。</p>
+<h3 id="マネージド-コネクタ-2"><a href="#マネージド-コネクタ-2" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p>マネージド コネクタの場合は、従量課金タイプ、Standard タイプ問わず、サービス タグは「<strong>AzureConnectors</strong>」になります。<br>「<strong>AzureConnectors.リージョン</strong>」とすることで、特定のリージョンのものを指定することが可能です。</p>
+<h2 id="IP-アドレスの変更"><a href="#IP-アドレスの変更" class="headerlink" title="IP アドレスの変更"></a>IP アドレスの変更</h2><p>以下に記載の送信 IP アドレスは、過去に変更された事例がございます。</p>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#multi-tenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス</a></li>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps</a></li>
+</ul>
+<p>Azure のサブスクリプション管理者宛てにメールでの通知、およびサービス正常性での通知が行われましたので、<br>変更時には IP アドレスの設定の見直しをお願いいたします。<br>※ サービス タグをご利用の場合には、ご変更いただく必要はございません。</p>
+<p>ご参考までに過去のアナウンスのスケジュールにつきましてご案内いたします。</p>
+<p>・メールでのアナウンス：2020/7/16<br>・変更実施：2020/8/31<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress12.jpg"></p>
+<p>・メールでのアナウンス：2022/3/26<br>・変更実施：2022/5/15<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress13.jpg"></p>
+<h2 id="サービス正常性アラートの設定"><a href="#サービス正常性アラートの設定" class="headerlink" title="サービス正常性アラートの設定"></a>サービス正常性アラートの設定</h2><p>正常性アラートからメールで通知する方法がございます。</p>
+<ol>
+<li>[Azure ポータル] - [サービス正常性] - [アラート - 正常性アラート] - [+ サービス正常性アラートの追加] を選択します。</li>
+<li>以下の項目を設定します。<br>[条件 - アラートの対象] - [サブスクリプション] : 対象のサブスクリプションを選択します。<br>[条件 - アラートの対象] - [サービス] : Logic Apps<br>[条件 - アラートの対象] - [リージョン] : Logic Apps をご利用頂いておりますリージョンを選択します。 [全体] を選択することも可能です。<br>[条件 - アラートの対象] - [Service Health の基準] : 全てにチェック入れます。<br>[アクション - アクショングループ名] : [アクショングループの追加] を選択し、メール通知を含むアクショングループを追加します。<br>[アラートルールに詳細 - アラートルール名] : 任意のアラートルール名を入力します。<br>[アラートルールの作成] を選択します。<br>アクショングループのご利用手順につきましては、以下の公開情報でご確認頂けます。</li>
+</ol>
+<ul>
+<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups">Azure Portal でのアクション グループの作成および管理</a></li>
+</ul>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps の送信 IP アドレスについて説明いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/outboundIpaddress.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../AadAuthentication/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Standard Logic Apps で AAD 認証する方法について</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Logic Apps の送信 IP アドレスについて</a>
+          </li>
+        
+          <li>
+            <a href="../AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
+          </li>
+        
+          <li>
+            <a href="../azureMonitorLogsLimit/">「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について</a>
+          </li>
+        
+          <li>
+            <a href="../GetIterationIndexInForeachAction/">Foreachアクションでインデックスを取得した処理の比較</a>
+          </li>
+        
+          <li>
+            <a href="../WorkflowRunsList/">実行中の Logic Apps の状況を確認して制御する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">26</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">26</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">24</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">24</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 16px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
