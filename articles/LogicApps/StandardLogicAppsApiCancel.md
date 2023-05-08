@@ -16,20 +16,20 @@ API 操作による Standard Logic Apps の処理のキャンセル方法につ�
 
 - [Workflow Runs - Cancel](https://learn.microsoft.com/ja-jp/rest/api/logic/workflow-runs/cancel?tabs=HTTP)
 
-しかしながら、Standard Logic Apps のワークフローについては特に API を用意しておりません。
-そこで今回は、Standard Logic Apps の実行中のワークフローを API を用いてキャンセルする方法についてご案内致します。
+しかしながら、Standard Logic Apps のワークフローについてはキャンセル処理に関する API の情報を公開しておりません。
+そこで今回は、Standard Logic Apps の実行中のワークフローを API を用いてキャンセルする方法についてブログにてご案内致します。
 
 <!-- more -->
 ## こんな方におすすめです
-- Standard Logic Apps の実行中のワークフローを REST API で停止したい方
+- Standard Logic Apps の実行中のワークフローを REST API でキャンセルしたい方
 
 ## 目次
 - キャンセル処理の API の確認方法
 - 設定例と実行結果
 
 ## キャンセル処理の API の確認方法
-まず、Standard Logic Apps のワークフローを停止するような API については公開情報はございません。
-その為、今回の記事では以下のリソースプロバイダに対してキャンセル処理の API を直接実行することで、ワークフローのキャンセル処理を実装致します。
+まず、先にもご案内しました通り、Standard Logic Apps のワークフローの処理をキャンセルする API については公開情報はございません。
+その為、今回の記事では以下のリソース プロバイダーに対してキャンセル処理の API を直接実行することで、ワークフローのキャンセル処理を実装致します。
 
 - [Microsoft.Web sites/hostruntime/webhooks/api/workflows/runs](https://learn.microsoft.com/en-US/azure/templates/microsoft.web/sites/hostruntime/webhooks/api/workflows/runs?pivots=deployment-language-arm-template)
 
@@ -39,7 +39,7 @@ API 操作による Standard Logic Apps の処理のキャンセル方法につ�
 ＜確認方法＞
 1. ブラウザを起動し、開発者ツール (F12) を実行します。本例では chromium 版 Edge を利用しております。
 
-2.  実際に実行中のワークフローを [実行の取り消し] ボタンで停止いたします。
+2.  実際に実行中のワークフローを [実行の取り消し] ボタンでキャンセルいたします。
 ![](./StandardLogicAppsApiCancel/image001.png) 
 
 3. 実際のリクエストとして "cancel?api-version=2018-11-01" の実行結果が出力されますので、こちらのヘッダに記載されている要求 URL を確認します。
@@ -83,7 +83,7 @@ https://management.azure.com/subscriptions/{SubscriptionId}/resourceGroups/{Reso
 ![](./StandardLogicAppsApiCancel/image006.png) 
 ![](./StandardLogicAppsApiCancel/image007.png) 
 
-以上の設定より、マネージド ID を基にリクエストを行うことで API を実行し、ワークフローを停止することが可能でございます。
+以上の設定より、マネージド ID を基にリクエストを行うことで API を実行し、実行中のワークフローの処理をキャンセルすることが可能でございます。
 
 ＜実行例＞
 ・Standard Logic Apps にてワークフロー実行中。
