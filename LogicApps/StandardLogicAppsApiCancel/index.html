@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Standard Logic Apps のワークフローを API 操作でキャンセルする | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。  API 操作による Standard Logic Apps の処理のキャンセル方法についてご説明いたします。 まず、従量課金タイプの Logic Apps では以下の API を利用することでワークフローを API 操作でキャンセルすることが可能です。  Workflow Runs - Cancel  しかしながら">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Standard Logic Apps のワークフローを API 操作でキャンセルする">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。  API 操作による Standard Logic Apps の処理のキャンセル方法についてご説明いたします。 まず、従量課金タイプの Logic Apps では以下の API を利用することでワークフローを API 操作でキャンセルすることが可能です。  Workflow Runs - Cancel  しかしながら">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image002.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image003.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image004.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image005.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image006.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image007.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image008.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image009.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image010.png">
+<meta property="article:published_time" content="2023-05-02T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-11T07:23:23.618Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/StandardLogicAppsApiCancel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Standard Logic Apps のワークフローを API 操作でキャンセルする
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-05-02T07:00:00.000Z" itemprop="datePublished">2023-05-02</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+b19243a9-d9d4-5c8c-8465-ae424301c3f5%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%AE%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92+API+%E6%93%8D%E4%BD%9C%E3%81%A7%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicAppsApiCancel%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicAppsApiCancel.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicAppsApiCancel.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/" data-id="clhisz8t3000s0nmufmhdealy" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。 </p>
+<p>API 操作による Standard Logic Apps の処理のキャンセル方法についてご説明いたします。</p>
+<p>まず、従量課金タイプの Logic Apps では以下の API を利用することでワークフローを API 操作でキャンセルすることが可能です。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/logic/workflow-runs/cancel?tabs=HTTP">Workflow Runs - Cancel</a></li>
+</ul>
+<p>しかしながら、Standard Logic Apps のワークフローについてはキャンセル処理に関する API の情報を公開しておりません。<br>そこで今回は、Standard Logic Apps の実行中のワークフローを API を用いてキャンセルする方法についてブログにてご案内致します。</p>
+<span id="more"></span>
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>Standard Logic Apps の実行中のワークフローを REST API でキャンセルしたい方</li>
+</ul>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>キャンセル処理の API の確認方法</li>
+<li>設定例と実行結果</li>
+</ul>
+<h2 id="キャンセル処理の-API-の確認方法"><a href="#キャンセル処理の-API-の確認方法" class="headerlink" title="キャンセル処理の API の確認方法"></a>キャンセル処理の API の確認方法</h2><p>まず、先にもご案内しました通り、Standard Logic Apps のワークフローの処理をキャンセルする API については公開情報はございません。<br>その為、今回の記事では以下のリソース プロバイダーに対してキャンセル処理の API を直接実行することで、ワークフローのキャンセル処理を実装致します。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-US/azure/templates/microsoft.web/sites/hostruntime/webhooks/api/workflows/runs?pivots=deployment-language-arm-template">Microsoft.Web sites/hostruntime/webhooks/api/workflows/runs</a></li>
+</ul>
+<p>実際にどのような方法で設定するかにつきましてですが、こちらブラウザの開発者ツールにて GUI 操作時のリクエストを解析することで確認可能でございます。<br>確認方法につきまして、以下に参考例を記載いたします。</p>
+<p>＜確認方法＞</p>
+<ol>
+<li><p>ブラウザを起動し、開発者ツール (F12) を実行します。本例では chromium 版 Edge を利用しております。</p>
+</li>
+<li><p> 実際に実行中のワークフローを [実行の取り消し] ボタンでキャンセルいたします。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image001.png"> </p>
+</li>
+<li><p>実際のリクエストとして “cancel?api-version=2018-11-01” の実行結果が出力されますので、こちらのヘッダに記載されている要求 URL を確認します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image002.png"> </p>
+</li>
+</ol>
+<p>以上より、以下のような API が実行されていることを確認出来ます。</p>
+<p>＜実際に実行されている API＞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://management.azure.com/subscriptions/&#123;SubscriptionId&#125;/resourceGroups/&#123;ResourceGroupName&#125;/providers/Microsoft.Web/sites/&#123;LogicAppsName&#125;/hostruntime/runtime/webhooks/workflow/api/management/workflows/&#123;WorkFlowName&#125;/runs/&#123;RunId&#125;/cancel?api-version=2018-11-01</span><br></pre></td></tr></table></figure>
+
+<p>・SubscriptionId：Standard Logic Apps の存在するサブスクリプション ID<br>・ResourceGroupName：Standard Logic Apps の存在するリソース グループ名<br>・LogicAppsName：Standard Logic Apps 名<br>・WorkFlowName：Standard Logic Apps 内に作成した ワークフロー名<br>・RunId：実行 ID</p>
+<p>なお、こちらの API の内容については 2023/05/01 現在の内容となります。<br>今後将来的に予告なく内容が変更される場合がございますので予めご了承下さい。</p>
+<p>これらを基に、以下の通りキャンセル処理の設定例を記載いたします。</p>
+<h2 id="設定例と実行結果"><a href="#設定例と実行結果" class="headerlink" title="設定例と実行結果"></a>設定例と実行結果</h2><p>本例では、マネージド ID を有効にした従量課金タイプの Logic Apps より、上記 API を実行して処理のキャンセルを実装いたします。<br>まず、Standard Logic Apps とは別で従量課金タイプの Logic Apps を用意し、事前にマネージド ID を有効に致します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image003.png"> </p>
+<p>次に、そのまま同一画面上の [Azure ロールの割り当て] ボタンを選択し、マネージド ID に “Web サイト共同作成者” ロールを付与します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image004.png"> </p>
+<p><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image005.png"> </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/role-based-access-control/built-in-roles#website-contributor">Azure 組み込みロール # Website Contributor</a></li>
+</ul>
+<p>次に、従量課金タイプのワークフローにて、HTTP アクションを設定いたします。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http">Azure Logic Apps から HTTP または HTTPS でサービス エンドポイントを呼び出す</a></li>
+</ul>
+<p>以下の通りパラメーターを指定し、認証方法にマネージド ID を指定いたします。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image006.png"><br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image007.png"> </p>
+<p>以上の設定より、マネージド ID を基にリクエストを行うことで API を実行し、実行中のワークフローの処理をキャンセルすることが可能でございます。</p>
+<p>＜実行例＞<br>・Standard Logic Apps にてワークフロー実行中。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image008.png"> </p>
+<p>・従量課金タイプよりワークフローを実行。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image009.png"> </p>
+<p>・結果<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image010.png"> </p>
+<p>以上より、API 操作を基に Standard Logic Apps のワークフローの実行をキャンセルすることが可能でございます。<br>なお、先にも申しました通り、こちら公開情報がございませんことと、2023/05/01 現在の情報となりますので、今後内容が変更される可能性が十分にございます。<br>お手数をおかけして申し訳ございませんが、上記を踏まえまして、お客様にて十分に検証を実施いただいたうえで採用要否についてご検討をいただきますようお願い申し上げます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>キャンセル処理の API の確認方法</li>
+<li>設定例と実行結果</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicAppsApiCancel.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../outboundIpaddress/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Logic Apps の送信 IP アドレスについて</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Standard Logic Apps のワークフローを API 操作でキャンセルする</a>
+          </li>
+        
+          <li>
+            <a href="../outboundIpaddress/">Logic Apps の送信 IP アドレスについて</a>
+          </li>
+        
+          <li>
+            <a href="../AadAuthentication/">Standard Logic Apps で AAD 認証する方法について</a>
+          </li>
+        
+          <li>
+            <a href="../azureMonitorLogsLimit/">「Azure Monitor Logs」コネクタのクエリ実行に関わる制約について</a>
+          </li>
+        
+          <li>
+            <a href="../GetIterationIndexInForeachAction/">Foreachアクションでインデックスを取得した処理の比較</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">27</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">27</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">25</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">25</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 10px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 16px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
