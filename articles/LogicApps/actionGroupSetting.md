@@ -1,5 +1,5 @@
 ---
-title: アラート発報時に Logic Apps を呼び出す方法
+title: Azure Monitor のアラート発報時に Logic Apps を呼び出す方法
 date: 2023-05-31 00:00:00
 tags:
   - How-To
@@ -11,13 +11,13 @@ tags:
 
 こんにちは。Azure Integration サポート チームの髙橋です。
 
-アラート発報時に Logic Apps を呼び出す方法について説明いたします。
+Azure Monitor でアラートが発報された時に Logic Apps を呼び出す方法について説明いたします。
 
 <!-- more -->
 
 ## こんな方におすすめです
 - ログ アラートやメトリック アラート発報時に、Logic Apps を起動したい方
-- アクション グループの設定方法を知りたい方
+- アクション グループで Logic Apps を選択されたい方
 
 ## Azure Monitor のアクション グループ
 Azure Monitor ではアラート ルールを設定し、特定のリソースを監視することができます。
