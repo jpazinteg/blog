@@ -172,3 +172,6 @@ Standard Logic Apps では、サービス タグを利用してアクセス制�
 ## まとめ
 本記事では、Logic Apps の送信 IP アドレスについて説明いたしました。
 本記事が少しでもお役に立ちましたら幸いです。
+
+## 関連記事
+- [ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する](https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/)
