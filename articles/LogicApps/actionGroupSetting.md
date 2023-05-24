@@ -1,6 +1,6 @@
 ---
 title: Azure Monitor のアラート発報時に Logic Apps を呼び出す方法
-date: 2023-05-31 00:00:00
+date: 2023-05-24 00:00:00
 tags:
   - How-To
   - Tips
