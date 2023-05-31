@@ -64,7 +64,7 @@ Cosmos DB で大量データをクエリすると、結果が複数のページ�
 #### しきい値を設定した場合
 ![](./LogicApps-CosmosDB/LogicApps-CosmosDB_3.png)
 
-このように、値を調整してデータを取り扱うことが可能となります。ほかにも [ストアド プロシージャを実行 (V2)](https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%82%B9%E3%83%88%E3%82%A2%E3%83%89-%E3%83%97%E3%83%AD%E3%82%B7%E3%83%BC%E3%82%B8%E3%83%A3%E3%82%92%E5%AE%9F%E8%A1%8C-(v2)) や [ドキュメントを作成または更新 (V3)](https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90%E3%81%BE%E3%81%9F%E3%81%AF%E6%9B%B4%E6%96%B0-(v3)) などのアクションが用意されております。
+このように、値を調整してデータを取り扱うことが可能となります。Logic Apps では、Cosmos DB に対してこのほかにも [ストアド プロシージャを実行 (V2)](https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%82%B9%E3%83%88%E3%82%A2%E3%83%89-%E3%83%97%E3%83%AD%E3%82%B7%E3%83%BC%E3%82%B8%E3%83%A3%E3%82%92%E5%AE%9F%E8%A1%8C-(v2)) や [ドキュメントを作成または更新 (V3)](https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90%E3%81%BE%E3%81%9F%E3%81%AF%E6%9B%B4%E6%96%B0-(v3)) などのアクションが用意されております。
 
 
 ## まとめ
