@@ -1,6 +1,6 @@
 ---
 title: Logic Apps で Cosmos DB からドキュメントをクエリする
-date: 2023-05-02 16:00:00
+date: 2023-06-01 16:00:00
 tags:
   - How-To
   - Azure Integration
