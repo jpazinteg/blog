@@ -45,7 +45,7 @@ JDBC コネクタについては本日 2023 年 6 月現在で全てのアクシ
 詳細については以下に記載していきます。
 
 1. Azure Database for PostgreSQL の設定
-初めに、Azure Database for PostgreSQL の設定を実施致します。
+初めに、Azure Database for PostgreSQL の設定を実施いたします。
 なお、こちらについてはデータベースやテーブルは既に作成されている前提で進めて参ります。
 
 Standard Logic Apps から Azure Database for PostgreSQL にアクセス可能にするために、[設定] - [接続のセキュリティ] より、以下の通り設定いたします。
@@ -60,10 +60,10 @@ Standard Logic Apps から Azure Database for PostgreSQL にアクセス可能�
 
 2. PostgreSQL の JDBC ドライバのダウンロード
 
-参考基のブログ記事にもございます通り、以下のサイトより PostgreSQL の JDBC ドライバをダウンロード致します。
+参考基のブログ記事にもございます通り、以下のサイトより PostgreSQL の JDBC ドライバをダウンロードいたします。。
 - [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/)
 
-本ブログ記事では Java 7 の資材をダウンロード致します。
+本ブログ記事では Java 7 の資材をダウンロードいたします。。
 
 ![](./PostgresqlJdbc/image0001.png)
 
@@ -97,7 +97,7 @@ JAR ディレクトリを作成出来たらダウンロードした JDBC ドラ�
 ![](./PostgresqlJdbc/image005.png)
 ![](./PostgresqlJdbc/image006.png)
 
-API 接続の設定について、以下の内容を設定いたします。
+サービス プロバイダー接続の設定について、以下の内容を設定いたします。
 ![](./PostgresqlJdbc/image008.png)
 
 ・接続名：任意の値
