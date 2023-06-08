@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。  本記事は弊社海外ブログを日本語向けに解説した記事となります。  Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query  Azure Logic Apps では、以下の">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。  本記事は弊社海外ブログを日本語向けに解説した記事となります。  Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query  Azure Logic Apps では、以下の">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image000.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image0001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image002.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image003.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image004.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image005.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image006.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image008.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image007.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image009.png">
+<meta property="article:published_time" content="2023-06-07T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-08T12:05:49.483Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="JDBC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image000.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/PostgresqlJdbc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-06-07T07:00:00.000Z" itemprop="datePublished">2023-06-07</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+18a4aec8-07ca-5a13-87f9-1914c0c8f7cf%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%A7+JDBC+%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%9F+PostgreSQL+%E6%8E%A5%E7%B6%9A%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FPostgresqlJdbc%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FPostgresqlJdbc.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FPostgresqlJdbc.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/" data-id="clin3ead2000k0np8cj2ycj6b" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。 </p>
+<p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/configure-postgresql-connection-in-logic-apps-standard-with-jdbc/ba-p/3784988">Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query</a></li>
+</ul>
+<p>Azure Logic Apps では、以下の PostgreSQL コネクタを利用してオンプレミス環境の PostgreSQL に接続することが可能です。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/postgresql/">PostgreSQL</a></li>
+</ul>
+<p>しかしながら、上記コネクタでは Azure Database for PostgreSQL への接続は本日 2023 年 6 月現在で不可でございます。<br>今回は、 Standard Logic Apps と JDBC コネクタを利用して、Azure Database for PostgreSQL へ接続する方法についてご案内します。</p>
+<span id="more"></span>
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>Logic Apps から Azure Database for PostgreSQL へ接続されたい方</li>
+</ul>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>JDBC コネクタについて</li>
+<li>事前準備</li>
+<li>設定例と実行結果</li>
+</ul>
+<h2 id="JDBC-コネクタについて"><a href="#JDBC-コネクタについて" class="headerlink" title="JDBC コネクタについて"></a>JDBC コネクタについて</h2><p>本ブログでは以下の JDBC コネクタを利用して、 Azure Database for PostgreSQL へ接続いたします。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/logic-apps/connectors/built-in/reference/jdbc/">JDBC</a></li>
+</ul>
+<p>JDBC コネクタについては本日 2023 年 6 月現在で全てのアクションがプレビュー機能として提供されております。その為、今後予告なく仕様変更が発生する場合がございますので予めご了承下さい。</p>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>上記コネクタを利用するにあたり、以下の事前準備が必要となります。</p>
+<ul>
+<li><ol>
+<li>Azure Database for PostgreSQL の設定</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>PostgreSQL の JDBC ドライバのダウンロード</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>Standard Logic Apps へ JDBC ドライバの配置</li>
+</ol>
+</li>
+</ul>
+<p>詳細については以下に記載していきます。</p>
+<ol>
+<li>Azure Database for PostgreSQL の設定<br>初めに、Azure Database for PostgreSQL の設定を実施いたします。<br>なお、こちらについてはデータベースやテーブルは既に作成されている前提で進めて参ります。</li>
+</ol>
+<p>Standard Logic Apps から Azure Database for PostgreSQL にアクセス可能にするために、[設定] - [接続のセキュリティ] より、以下の通り設定いたします。</p>
+<p><img src="/blog/LogicApps/PostgresqlJdbc/image000.png"></p>
+<p>・パブリック ネットワーク アクセスの拒否：いいえ<br>・ファイアウォール規則：はい<br>・SSL 接続を強制する：無効</p>
+<p>以上で Azure Database for PostgreSQL の設定は完了です。</p>
+<ol start="2">
+<li>PostgreSQL の JDBC ドライバのダウンロード</li>
+</ol>
+<p>参考基のブログ記事にもございます通り、以下のサイトより PostgreSQL の JDBC ドライバをダウンロードいたします。。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://jdbc.postgresql.org/">PostgreSQL JDBC Driver</a></li>
+</ul>
+<p>本ブログ記事では Java 7 の資材をダウンロードいたします。。</p>
+<p><img src="/blog/LogicApps/PostgresqlJdbc/image0001.png"></p>
+<p>以上で JDBC ドライバのダウンロードは完了です。</p>
+<ol start="3">
+<li>Standard Logic Apps へ JDBC ドライバの配置<br>これより、取得したドライバを Standard Logic Apps へ配置いたします。<br>ドライバを配置することにより JDBC コネクタで対象のドライバを呼び出し、Azure Database for PostgreSQL へ接続することが可能となります。</li>
+</ol>
+<p>まず、作成いただいている Standard Logic Apps のリソースを表示し、[開発ツール] - [高度なツール] より [移動→] のリンクを押下します。<br><img src="/blog/LogicApps/PostgresqlJdbc/image001.png"></p>
+<p>次に、画面上部の [Debug console] より、”CMD” を選択します。<br><img src="/blog/LogicApps/PostgresqlJdbc/image002.png"></p>
+<p>site\wwwroot ディレクトリへ遷移し、＋ マークを押下して以下のディレクトリを作成いたします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image003.png"></p>
+<p>・作成するパス<br>lib\builtinOperationSdks\JAR（C:\home\site\wwwroot\lib\builtinOperationSdks\JAR がフルパス）</p>
+<p>JAR ディレクトリを作成出来たらダウンロードした JDBC ドライバをドラッグアンドドロップします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image004.png"></p>
+<p>以上で、事前準備の完了となります。</p>
+<h2 id="設定例と実行結果"><a href="#設定例と実行結果" class="headerlink" title="設定例と実行結果"></a>設定例と実行結果</h2><p>それでは、Standard Logic Apps の設定に移ります。<br>まず、ワークフローを作成し、以下の通り JDBC コネクタを検索いたします。</p>
+<p><img src="/blog/LogicApps/PostgresqlJdbc/image005.png"><br><img src="/blog/LogicApps/PostgresqlJdbc/image006.png"></p>
+<p>サービス プロバイダー接続の設定について、以下の内容を設定いたします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image008.png"></p>
+<p>・接続名：任意の値<br>・URL：Azure Database for PostgreSQL の [設定] - [接続文字列] より、JDBC の値を設定<br><img src="/blog/LogicApps/PostgresqlJdbc/image007.png"><br>{your_database}：設定いただいたデータベース<br>{your_password}：設定いただいたパスワード<br>User Identifier：ユーザー名<br>Password：設定いただいたパスワード</p>
+<p>＜実行結果＞<br><img src="/blog/LogicApps/PostgresqlJdbc/image009.png"></p>
+<p>以上より、JDBC コネクタを利用し、Azure Database for PostgreSQL へ接続することが可能でございます。</p>
+<p>なお、先にも申し上げました通り、本コネクタについてはプレビュー機能で提供されております。今後将来的に予告なく内容が変更される場合がございますので予めご了承下さい。</p>
+<p>こちらの仕組みをご利用になられる場合、お客様にて十分に検証を実施いただいたうえで採用要否についてご検討をいただきますようお願い申し上げます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>JDBC コネクタについて</li>
+<li>事前準備</li>
+<li>設定例と実行結果</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/PostgresqlJdbc.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../LogicApps-CosmosDB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Logic Apps で Cosmos DB からドキュメントをクエリする</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-CosmosDB/">Logic Apps で Cosmos DB からドキュメントをクエリする</a>
+          </li>
+        
+          <li>
+            <a href="../actionGroupSetting/">Azure Monitor のアラート発報時に Logic Apps を呼び出す方法</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicAppsApiCancel/">Standard Logic Apps のワークフローを API 操作でキャンセルする</a>
+          </li>
+        
+          <li>
+            <a href="../outboundIpaddress/">Logic Apps の送信 IP アドレスについて</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">30</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">30</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">28</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">27</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Unix-Time">Unix Time</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.33px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.67px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.67px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16.67px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/MSMQ/" style="font-size: 10px;">MSMQ</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 11.67px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 15px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 13.33px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
