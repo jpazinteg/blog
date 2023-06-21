@@ -11,7 +11,7 @@ tags:
 
 こんにちは。Azure Integration サポート チームの髙橋です。
 
-Logic Apps における再試行ついて説明いたします。
+Logic Apps における再試行について説明いたします。
 
 <!-- more -->
 
