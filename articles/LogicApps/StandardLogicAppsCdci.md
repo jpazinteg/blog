@@ -35,7 +35,7 @@ tags:
 
 - [シングルテナントの Azure Logic Apps に Standard ロジック アプリ ワークフローの DevOps デプロイを設定する](https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-devops)
 
-上記の公開情報にもございます通り、Azure Logic Apps  製品としましては デプロイ スロットをサポートしておりません。
+上記の公開情報にもございます通り、Azure Logic Apps 製品としましては デプロイ スロットをサポートしておりません。
 Azure Logic Apps にて環境を構築するにあたり、以下の通り Azure Functions のデプロイ タスクを利用し、Standard Logic Apps へデプロイする必要がございます。
 
 - [AzureFunctionApp@1 - v1 タスクのAzure Functions](https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/azure-function-app-v1?view=azure-pipelines&viewFallbackFrom=azure-devops&preserve-view=true)
@@ -44,7 +44,7 @@ Azure Logic Apps にて環境を構築するにあたり、以下の通り Azure
 
 大まかな構成の概要としましては以下の構成となります。
 1. Azure DevOps 上の Repos にワークフローの構成ファイルを格納
-2. 1 で格納したファイルを基に Piplines にて App Service Plan (Standard Logic Apps) にワークフローをデプロイ
+2. 1 で格納したファイルを基に Pipelines にて App Service Plan (Standard Logic Apps) にワークフローをデプロイ
 
 また、上記の操作を実施するにあたり、Git を利用しますので、予め Git を利用可能な状態に環境設定をお願いいたします。
 本例では Visual Studio Code より Git 操作を実施いたします。
@@ -80,17 +80,17 @@ Standard Logic Apps 側の設定については一旦以上となります。
 始めに、Azure DevOps へログインし、[Organization setting] を表示します。
 ![](./StandardLogicAppsCdci/image003.png) 
 
-次に、[Billing] を確認し、対象の Standard Logic Apps のリソースが存在するサブスクリプションが指定されているかを確認いたします。
+次に、[Billing] を確認し、対象の Standard Logic Apps のリソースが存在するサブスクリプションが指定されているかを確認します。
 ![](./StandardLogicAppsCdci/image004.png) 
 
-指定されていない場合、"Change billing" より設定を変更いたします。
-また、[Azure Active Directory] より、接続しているテナントについても同様に確認いたします。
+指定されていない場合、"Change billing" より設定を変更します。
+また、[Azure Active Directory] より、接続しているテナントについても同様に確認します。
 ![](./StandardLogicAppsCdci/image006.png) 
 
 設定の確認が完了しましたら、トップ画面にもどり、[+ New Project] より、任意のプロジェクトを作成します。
 ![](./StandardLogicAppsCdci/image005.png) 
 
-本例では "Visibility" を "Private"、"Version control" を "Git" に設定いたします。
+本例では "Visibility" を "Private"、"Version control" を "Git" に設定します。
 ![](./StandardLogicAppsCdci/image007.png) 
 
 次に、Repos の画面より、作成したプロジェクトのリポジトリをローカルにクローンします。今回は "Clone in VS Code" を選択します。
@@ -121,11 +121,11 @@ Standard Logic Apps 側の設定については一旦以上となります。
 上記の操作で、Repos 上にワークフローの構成ファイルが格納されていることが確認出来ればリポジトリの設定としては完了です。
 ![](./StandardLogicAppsCdci/image023.png) 
 
-次に、Piplines の設定を実施します。
+次に、Pipelines の設定を実施します。
 [+ New Project] より今回作成したプロジェクトの画面に遷移いただき、画面下部の [Project settings] を選択します。
 ![](./StandardLogicAppsCdci/image024.png) 
 
-[Piplines] - [Service connections] より、[Create service connections] を選択します。
+[Pipelines] - [Service connections] より、[Create service connections] を選択します。
 ![](./StandardLogicAppsCdci/image025.png) 
 
 [New service connection] の画面より、[Azure Resource Manager] を選択します。
@@ -136,7 +136,7 @@ Standard Logic Apps 側の設定については一旦以上となります。
 
 [Scope level] にて [Subscription] を選択し、対象の Logic Apps が存在するサブスクリプション、およびリソースグループを選択します。
 また、任意の [Service connection name] を指定いたします。こちらの Service connection name については後程利用しますので notepad 等へ退避して下さい。
-[Security] - [Grant access permissin to all piplines] にチェックを設定し、[Save] ボタンを押下します。
+[Security] - [Grant access permissin to all Pipelines] にチェックを設定し、[Save] ボタンを押下します。
 ![](./StandardLogicAppsCdci/image028.png) 
 
 設定が完了すると、以下のように Service connections が作成されます。
@@ -145,9 +145,9 @@ Standard Logic Apps 側の設定については一旦以上となります。
 また、Standard Logic Apps を作成したテナントの Azure Portal に遷移いただき、[Azure Active Directory] - [管理] - [アプリの登録] を確認いただくと、以下のようにアプリが登録されます。
 ![](./StandardLogicAppsCdci/image030.png) 
 
-Azure Piplines では、こちらのアプリに付与されている権限を基にリソースを操作することとなりますので削除しないようお願いします。
+Azure Pipelines では、こちらのアプリに付与されている権限を基にリソースを操作することとなりますので削除しないようお願いいたします。
 
-ここまで設定が出来ましたら、[Piplines] より [Create Pipline] を実施します。
+ここまで設定が出来ましたら、[Pipelines] より [Create Pipline] を実施します。
 ![](./StandardLogicAppsCdci/image031.png) 
 
 [Select a repository] では先ほど作成したリポジトリを選択します。
@@ -205,7 +205,7 @@ steps:
     deploymentMethod: 'zipDeploy'
 ```
 
-Azure Piplines の yml 定義に関する詳細については Azure Piplines 製品の公開情報をご確認下さい。
+Azure Pipelines の yml 定義に関する詳細については Azure Pipelines 製品の公開情報をご確認下さい。
 [パイプラインをカスタマイズする](https://learn.microsoft.com/ja-jp/azure/devops/pipelines/customize-pipeline?view=azure-devops#understand-the-azure-pipelinesyml-file)
 
 上記テンプレートの概要について、以下の通り説明いたします。
@@ -214,7 +214,7 @@ Azure Piplines の yml 定義に関する詳細については Azure Piplines �
 →パイプラインの起動について、自動ではなく手動での設定としております。この値を "none" から "main" に変更すると、Repos の main ブランチに変更が発生したことを契機とし、自動的にパイプラインを起動することが可能です。今回は、手動での実行としますので "none" で設定しております。
 
 ・pool
-→パイプラインの裏側で処理する VM（ビルドする為のプラットフォーム） を Ubuntu に指定しております。
+→パイプラインの裏側で処理する VM (ビルドする為のプラットフォーム) を Ubuntu に指定しております。
 
 ・ArchiveFiles@2
 →System.DefaultWorkingDirectory (Repos のワーキングディレクトリ) 上に先ほど作成した sample フォルダの中身を zip ファイルとして作成いたします。
@@ -224,7 +224,7 @@ Azure Piplines の yml 定義に関する詳細については Azure Piplines �
 
 ・AzureFunctionApp@1
 →azureSubscription には Service connections の値を指定します。
- appType は 'functionApp' を指定します。（Logic Apps ではありませんが問題ありません。）
+ appType は 'functionApp' を指定します。 (Logic Apps ではありませんが問題ありません。)
  appName は デプロイ先の Standard Logic Apps 名を指定します。
  package は ArchiveFiles@2 で作成した zip ファイルを指定します。
  deploymentMethod は 'zipDeploy' を指定します。
@@ -241,10 +241,10 @@ Azure Piplines の yml 定義に関する詳細については Azure Piplines �
 リポジトリ上の sample フォルダに削除前の構成でワークフローの資材が格納されていることを確認します。
 ![](./StandardLogicAppsCdci/image041.png) 
 
-[Piplines] - [All] より対象のパイプラインを選択し、[Run Pipline] ボタンを押下しパイプラインを実行します。
+[Pipelines] - [All] より対象のパイプラインを選択し、[Run Pipline] ボタンを押下しパイプラインを実行します。
 ![](./StandardLogicAppsCdci/image042.png) 
 
-[Run Piplines] の画面が表示されますが、デフォルトのまま [Run] ボタンを押下いただければ問題ありません。
+[Run Pipelines] の画面が表示されますが、デフォルトのまま [Run] ボタンを押下いただければ問題ありません。
 ![](./StandardLogicAppsCdci/image043.png) 
 
 パイプライン初回実行時には、以下のように承認処理が必要となりますので承認処理をお願いします。
