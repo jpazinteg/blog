@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Standard Logic Apps と Azure DevOps で CD/CI 環境を構成する | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。  近年の技術動向として、DevOps のように環境構築の自動化が進んでおりますが、Standard Logic Apps についても以下の公開情報のとおり DevOps の仕組みを利用して CD&#x2F;CI の環境を構築することが可能でございます。  シングルテナントの Azure Logic Apps への DevOps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Standard Logic Apps と Azure DevOps で CD&#x2F;CI 環境を構成する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。  近年の技術動向として、DevOps のように環境構築の自動化が進んでおりますが、Standard Logic Apps についても以下の公開情報のとおり DevOps の仕組みを利用して CD&#x2F;CI の環境を構築することが可能でございます。  シングルテナントの Azure Logic Apps への DevOps">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image008.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image009.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image010.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image011.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image012.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image013.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image014.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image003.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image004.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image006.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image005.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image007.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image015.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image016.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image017.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image018.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image019.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image020.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image021.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image022.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image023.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image024.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image025.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image026.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image027.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image028.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image029.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image030.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image031.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image032.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image034.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image035.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image036.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image037.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image039.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image038.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image0351.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image040.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image041.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image042.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image043.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image044.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image045.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image046.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image047.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image049.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image048.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image050.png">
+<meta property="article:published_time" content="2023-08-29T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-16T08:15:25.594Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Azure DevOps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/image008.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/StandardLogicAppsCdci" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Standard Logic Apps と Azure DevOps で CD/CI 環境を構成する
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-08-29T07:00:00.000Z" itemprop="datePublished">2023-08-29</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+38903095-19c6-561c-81be-a1bb866bd920%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%A8+Azure+DevOps+%E3%81%A7+CD%2FCI+%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicAppsCdci%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicAppsCdci.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicAppsCdci.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/" data-id="clldgjr7a00680nk6gwftawrb" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。 </p>
+<p>近年の技術動向として、DevOps のように環境構築の自動化が進んでおりますが、Standard Logic Apps についても以下の公開情報のとおり DevOps の仕組みを利用して CD/CI の環境を構築することが可能でございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/devops-deployment-single-tenant-azure-logic-apps">シングルテナントの Azure Logic Apps への DevOps のデプロイ</a></li>
+</ul>
+<p>今回は、Azure DevOps を利用して、Standard Logic Apps にて CD/CI 環境を構築する方法についてご案内いたします。</p>
+<span id="more"></span>
+<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
+<li>Azure DevOps を利用して Standard Logic Apps のワークフローをデプロイしたい方</li>
+</ul>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要</li>
+<li>Standard Logic Apps 側の設定</li>
+<li>Azure DevOps 側の設定</li>
+<li>実際の動作</li>
+</ul>
+<h2 id="Azure-DevOps-を利用した-Standard-Logic-Apps-の-CD-CI-環境の概要"><a href="#Azure-DevOps-を利用した-Standard-Logic-Apps-の-CD-CI-環境の概要" class="headerlink" title="Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要"></a>Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要</h2><p>始めに、本ブログ記事につきましては Logic Apps 製品としての内容となります。そのため、Azure DevOps、Azure Functions、Azure App Service の製品に関する詳細については説明を割愛いたします。詳細な操作方法についてはそれぞれの製品観点で別途弊社サポートへお問合せ下さい。<br>また、本ブログ記事でご案内する内容としては手動でのデプロイ、かつ最低限の操作方法となります。そのため、各設定についてはお客様のビジネス要件に合わせて別途カスタマイズいただく必要があることと、本ブログ記事の内容については弊社サポートとしてお客様のビジネス要件に合わせたカスタマイズの対応は実施致しませんので予めご了承下さい。</p>
+<p>まず、Standard Logic Apps での DevOps の設定方法については以下の公開情報を基に設定を進めて参ります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-devops">シングルテナントの Azure Logic Apps に Standard ロジック アプリ ワークフローの DevOps デプロイを設定する</a></li>
+</ul>
+<p>上記の公開情報にもございます通り、Azure Logic Apps 製品としましては デプロイ スロットをサポートしておりません。<br>Azure Logic Apps にて環境を構築するにあたり、以下の通り Azure Functions のデプロイ タスクを利用し、Standard Logic Apps へデプロイする必要がございます。</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/azure-function-app-v1?view=azure-pipelines&viewFallbackFrom=azure-devops&preserve-view=true">AzureFunctionApp@1 - v1 タスクのAzure Functions</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-how-to-azure-devops?tabs=csharp,yaml&pivots=v1">Azure Pipelines を使用した継続的デリバリー</a></p>
+</li>
+</ul>
+<p>大まかな構成の概要としましては以下の構成となります。</p>
+<ol>
+<li>Azure DevOps 上の Repos にワークフローの構成ファイルを格納</li>
+<li>1 で格納したファイルを基に Pipelines にて App Service Plan (Standard Logic Apps) にワークフローをデプロイ</li>
+</ol>
+<p>また、上記の操作を実施するにあたり、Git を利用しますので、予め Git を利用可能な状態に環境設定をお願いいたします。<br>本例では Visual Studio Code より Git 操作を実施いたします。<br><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+<h2 id="Standard-Logic-Apps-側の設定"><a href="#Standard-Logic-Apps-側の設定" class="headerlink" title="Standard Logic Apps 側の設定"></a>Standard Logic Apps 側の設定</h2><p>始めに、Azure Portal より [ロジック アプリ] - [追加] より [ロジック アプリの作成] 画面を表示し、Standard Logic Apps を新規作成します。こちらは任意の設定で作成いただければと思います。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image008.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image009.png"> </p>
+<p>次に、[ワークフロー] - [ワークフロー] より、任意のワークフローを作成します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image010.png"> </p>
+<p>・サンプル<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image011.png"> </p>
+<p>ワークフローを作成しましたら、Standard Logic Apps の概要画面より、[アプリ コンテンツのダウンロード] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image012.png"> </p>
+<p>今回の設定方法では “サイトのコンテンツ” を指定いただき、”ダウンロードにアプリ設定を含める” のチェックを外した状態で “ダウンロード” ボタンを押下してください。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image013.png"> </p>
+<p>ダウンロードされた Zip コンテンツについては後程利用しますので、別途退避してください。</p>
+<p>また、[デプロイメント] - [デプロイ センター] より、”Setting”　に何も設定されていないことを確認いたします。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image014.png"> </p>
+<p>こちらの設定がされていると、Standard Logic Apps のソースがプッシュされる度に差分で自動デプロイが実行される場合がございますため、今回の設定ではこちらの設定を無効とします。</p>
+<p>Standard Logic Apps 側の設定については一旦以上となります。</p>
+<h2 id="Azure-DevOps-側の設定"><a href="#Azure-DevOps-側の設定" class="headerlink" title="Azure DevOps 側の設定"></a>Azure DevOps 側の設定</h2><p>始めに、Azure DevOps へログインし、[Organization setting] を表示します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image003.png"> </p>
+<p>次に、[Billing] を確認し、対象の Standard Logic Apps のリソースが存在するサブスクリプションが指定されているかを確認します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image004.png"> </p>
+<p>指定されていない場合、”Change billing” より設定を変更します。<br>また、[Azure Active Directory] より、接続しているテナントについても同様に確認します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image006.png"> </p>
+<p>設定の確認が完了しましたら、トップ画面にもどり、[+ New Project] より、任意のプロジェクトを作成します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image005.png"> </p>
+<p>本例では “Visibility” を “Private”、”Version control” を “Git” に設定します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image007.png"> </p>
+<p>次に、Repos の画面より、作成したプロジェクトのリポジトリをローカルにクローンします。今回は “Clone in VS Code” を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image015.png"> </p>
+<p>リポジトリのクローン先フォルダを確認されるため、任意のフォルダを選択し、[リポジトリの宛先として選択] ボタンを押下します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image016.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image017.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image018.png"> </p>
+<p>クローン先のフォルダの中で Standard Logic Apps の資材を格納するフォルダを作成します。<br>今回は “sample” という名前のフォルダを作成しますが、任意の名前のフォルダを作成してください。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image019.png"> </p>
+<p>次に、[アプリ コンテンツのダウンロード] で取得した Zip ファイルの中身を展開し、上記で作成したフォルダにコピーします。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image020.png"> </p>
+<p>各フォルダ、ファイルについての詳細は以下の公開情報をご確認下さい。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/edit-app-settings-host-settings?tabs=azure-portal">シングルテナントの Azure Logic Apps で Standard ロジック アプリのホストとアプリの設定を編集する</a></p>
+<p>フォルダの構成が整いましたら、Azure DevOps の画面にてメッセージの入力後、”コミットしてプッシュ” を選択します。<br>ブランチの指定や直接プッシュしたくないというお客様については別途個別に操作いただければ問題ありません。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image021.png"> </p>
+<p>以下の警告メッセージについて、今回は直接コミット、プッシュ操作をするため “はい” を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image022.png"> </p>
+<p>上記の操作で、Repos 上にワークフローの構成ファイルが格納されていることが確認出来ればリポジトリの設定としては完了です。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image023.png"> </p>
+<p>次に、Pipelines の設定を実施します。<br>[+ New Project] より今回作成したプロジェクトの画面に遷移いただき、画面下部の [Project settings] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image024.png"> </p>
+<p>[Pipelines] - [Service connections] より、[Create service connections] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image025.png"> </p>
+<p>[New service connection] の画面より、[Azure Resource Manager] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image026.png"> </p>
+<p>[Service principal (automatic)] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image027.png"> </p>
+<p>[Scope level] にて [Subscription] を選択し、対象の Logic Apps が存在するサブスクリプション、およびリソースグループを選択します。<br>また、任意の [Service connection name] を指定いたします。こちらの Service connection name については後程利用しますので notepad 等へ退避して下さい。<br>[Security] - [Grant access permissin to all Pipelines] にチェックを設定し、[Save] ボタンを押下します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image028.png"> </p>
+<p>設定が完了すると、以下のように Service connections が作成されます。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image029.png"> </p>
+<p>また、Standard Logic Apps を作成したテナントの Azure Portal に遷移いただき、[Azure Active Directory] - [管理] - [アプリの登録] を確認いただくと、以下のようにアプリが登録されます。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image030.png"> </p>
+<p>Azure Pipelines では、こちらのアプリに付与されている権限を基にリソースを操作することとなりますので削除しないようお願いいたします。</p>
+<p>ここまで設定が出来ましたら、[Pipelines] より [Create Pipline] を実施します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image031.png"> </p>
+<p>[Select a repository] では先ほど作成したリポジトリを選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image032.png"> </p>
+<p>[Inventory] が表示される場合はお客様組織の要件に合わせて設定いただきます。</p>
+<p>[Configure your pipline] では [Starter Pipline] を選択し、[Review pipline] を選択します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image034.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image035.png"> </p>
+<p>最後に、任意のパイプラインの定義ファイル名、パイプライン名を入力し、一旦 [Save] を選択し、yml ファイルを保存します。<br>コミットメッセージについても任意の内容を入力いただければ問題ありません。</p>
+<p><img src="/blog/LogicApps/StandardLogicAppsCdci/image036.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image037.png"> </p>
+<p>上記操作が完了しましたら、Repos の Contents 内にパイプラインの定義ファイルが作成されていることを確認します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image039.png"> </p>
+<p>パイプラインの定義が作成出来ましたら、以下の通り編集を行います。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image038.png"> </p>
+<p>参考までに、以下の yml 定義を設定します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Start with a minimal pipeline that you can customize to build and deploy your code.</span><br><span class="line"># Add steps that build, run tests, deploy, and more:</span><br><span class="line"># https://aka.ms/yaml</span><br><span class="line"></span><br><span class="line">trigger:</span><br><span class="line">- none</span><br><span class="line"></span><br><span class="line">pool:</span><br><span class="line">  vmImage: ubuntu-latest</span><br><span class="line">steps:</span><br><span class="line">- task: ArchiveFiles@2</span><br><span class="line">  inputs:</span><br><span class="line">    rootFolderOrFile: &#x27;$(System.DefaultWorkingDirectory)/sample&#x27;</span><br><span class="line">    includeRootFolder: false</span><br><span class="line">    archiveType: &#x27;zip&#x27;</span><br><span class="line">    archiveFile: &#x27;$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip&#x27;</span><br><span class="line">    replaceExistingArchive: true</span><br><span class="line">- task: PublishPipelineArtifact@0</span><br><span class="line">  inputs:</span><br><span class="line">    artifactName: &#x27;drop&#x27;</span><br><span class="line">    targetPath: &#x27;$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip&#x27;</span><br><span class="line">- task: AzureFunctionApp@1</span><br><span class="line">  inputs:</span><br><span class="line">    azureSubscription: &#x27;testdeploy&#x27;</span><br><span class="line">    appType: &#x27;functionApp&#x27;</span><br><span class="line">    appName: &#x27;20230712teststandard&#x27;</span><br><span class="line">    package: &#x27;$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip&#x27;</span><br><span class="line">    deploymentMethod: &#x27;zipDeploy&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>Azure Pipelines の yml 定義に関する詳細については Azure Pipelines 製品の公開情報をご確認下さい。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/devops/pipelines/customize-pipeline?view=azure-devops#understand-the-azure-pipelinesyml-file">パイプラインをカスタマイズする</a></p>
+<p>上記テンプレートの概要について、以下の通り説明いたします。</p>
+<p>・trigger<br>→パイプラインの起動について、自動ではなく手動での設定としております。この値を “none” から “main” に変更すると、Repos の main ブランチに変更が発生したことを契機とし、自動的にパイプラインを起動することが可能です。今回は、手動での実行としますので “none” で設定しております。</p>
+<p>・pool<br>→パイプラインの裏側で処理する VM (ビルドする為のプラットフォーム) を Ubuntu に指定しております。</p>
+<p>・ArchiveFiles@2<br>→System.DefaultWorkingDirectory (Repos のワーキングディレクトリ) 上に先ほど作成した sample フォルダの中身を zip ファイルとして作成いたします。</p>
+<p>・PublishPipelineArtifact@0<br>→実際に Zip Deploy した際の zip ファイルを後程確認するための設定です。必須ではございません。</p>
+<p>・AzureFunctionApp@1<br>→azureSubscription には Service connections の値を指定します。<br> appType は ‘functionApp’ を指定します。 (Logic Apps ではありませんが問題ありません。)<br> appName は デプロイ先の Standard Logic Apps 名を指定します。<br> package は ArchiveFiles@2 で作成した zip ファイルを指定します。<br> deploymentMethod は ‘zipDeploy’ を指定します。</p>
+<p>以上より、パイプラインを実行いただくことで、対象の Standard Logic Apps に対してワークフローをデプロイすることが可能となります。<br>なお、以下のように Tasks より GUI で操作いただくことも可能でございます。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image0351.png"> </p>
+<h2 id="実際の動作"><a href="#実際の動作" class="headerlink" title="実際の動作"></a>実際の動作</h2><p>参考までに、既存のワークフローを一つ削除します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image040.png"> </p>
+<p>リポジトリ上の sample フォルダに削除前の構成でワークフローの資材が格納されていることを確認します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image041.png"> </p>
+<p>[Pipelines] - [All] より対象のパイプラインを選択し、[Run Pipline] ボタンを押下しパイプラインを実行します。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image042.png"> </p>
+<p>[Run Pipelines] の画面が表示されますが、デフォルトのまま [Run] ボタンを押下いただければ問題ありません。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image043.png"> </p>
+<p>パイプライン初回実行時には、以下のように承認処理が必要となりますので承認処理をお願いします。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image044.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image045.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image046.png"> </p>
+<p>パイプラインが完了するまで待機します。 Azure FunctionApp のタスクで warning が表示されますが問題ありません。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image047.png"> </p>
+<p>パイプラインが完了しましたら、Azure Logic Apps を確認し、削除したワークフローが復元していることを確認します。</p>
+<p><img src="/blog/LogicApps/StandardLogicAppsCdci/image049.png"><br><img src="/blog/LogicApps/StandardLogicAppsCdci/image048.png"> </p>
+<p>なお、実際にどの Zip ファイルをデプロイしたかについては、以下の実行ログの [Related] の部分に 1 published とリンクがございますのでそちらを押下いただければ確認可能です。<br><img src="/blog/LogicApps/StandardLogicAppsCdci/image050.png"> </p>
+<p>以上より、Azure DevOps を利用して Standard Logic Apps のデプロイが可能となります。<br>なお、こちらの設定につきましてはあくまでも参考までに最低限の動作方法をご案内する内容となります。<br>その他の設定については別途お客様環境に併せて CD/CI 環境の要件定義を実施いただき、別途設計、設定をお願いいたします。<br>また、先にも記載しておりますが、本ブログ記事につきましては Logic Apps 製品としての内容となりますため、本ブログ記事で記載しました各製品の詳細な操作方法についてはそれぞれの製品観点で別途弊社サポートへお問合せ下さい。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<ul>
+<li>Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要</li>
+<li>Standard Logic Apps 側の設定</li>
+<li>Azure DevOps 側の設定</li>
+<li>実際の動作</li>
+</ul>
+<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicAppsCdci.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../MSMQ/MsmqCheckInstall/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">MSMQ を有効化する手順・メッセージを送受信する手順</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Standard Logic Apps と Azure DevOps で CD/CI 環境を構成する</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqCheckInstall/">MSMQ を有効化する手順・メッセージを送受信する手順</a>
+          </li>
+        
+          <li>
+            <a href="../retryPolicy/">Logic Apps における再試行について</a>
+          </li>
+        
+          <li>
+            <a href="../PostgresqlJdbc/">Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-CosmosDB/">Logic Apps で Cosmos DB からドキュメントをクエリする</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">32</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">32</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">30</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Tips">Tips</a><span class="tag-list-count">29</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Trigger">Trigger</a><span class="tag-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 12px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 18px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/MSMQ/" style="font-size: 12px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 10px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 16px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
