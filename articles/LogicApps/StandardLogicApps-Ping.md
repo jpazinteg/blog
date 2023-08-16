@@ -48,15 +48,21 @@ Kudu 上で、Debug console から CMD へ進みます。
 
 ここで、下部に現出します CLI より、tcpping コマンド、nameresolver コマンドの実施が可能となります。
 
-例: 
-
-`tcpping <先に取得したストレージ Blob、File、Queue、Table の各エンドポイント>:443 `
+`tcpping <先に取得したストレージ Blob、File、Queue、Table の各エンドポイント>:443`
 
 `nameresolver <先に取得したストレージ Blob、File、Queue、Table の各エンドポイント>`
 
+「samplestorage」に対する例: 
+
+```
+tcpping samplestorage.blob.core.windows.net:443 
+
+nameresolver samplestorage.blob.core.windows.net
+```
+
 ![](./StandardLogicApps-Ping/StandardLogicApps-Ping-3.png)
 
-無事 Success および IP が確認できました。以上の形で、宛先ストレージ アカウントに疎通が取れているか確認いただくことができます。
+無事 Success および IP が確認できました。以上の形で、宛先ストレージ アカウントに疎通が取れているか確認いただけます。
 
 なお留意点としまして、作業端末よりツールへのアクセス許可が必要となります。以下 Error 403 となります場合は、まずは Azure ポータル より、作業端末から Standard Logic Apps へのアクセスが十分かご確認ください。
  
