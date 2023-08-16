@@ -77,6 +77,7 @@ built-in (組み込み) タイプのコネクタは、Azure Functions 拡張性�
 また、built-in (組み込み) タイプのコネクタは、マネージド コネクタに比べて種類が少ないため、ご希望のリソースに対応しているコネクタのご用意がない場合もございます。
 この点につきましても、ご理解賜れますと幸いです。
 - 参考ドキュメント : [Azure Logic Apps の組み込みコネクタ # 従量課金と Standard の組み込みコネクタの比較](https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard)
+- 参考ドキュメント : [Azure Logic Apps Standard built-in service provider connectors documentation](https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/)
 
 なお、マネージド コネクタをご利用いただいた場合には、**VNet 統合を有効化していても**コネクタを経由した後に対象リソースへアクセスする動作となりますので、
 パブリック IP アドレスからの通信となります。
