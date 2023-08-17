@@ -23,7 +23,7 @@ Logic Apps から別リソースにアクセスする際に、VNet を経由す�
 - Standard Logic Apps を利用する
 - VNet 統合を有効化する
 - built-in (組み込み) タイプのコネクタを利用する
-- アクセス先のリソースに、サービス エンドポイントまたはプライベート エンドポイントを用意する
+- アクセス先のリソースに、プライベート エンドポイントを用意する
 
 ## 手順
 以下の例では、VNet を経由して Azure Blob Storage にアクセスする方法をご紹介します。
@@ -63,7 +63,7 @@ built-in (組み込み) タイプのコネクタは、トリガーおよびア�
 ![](./vnetIntergration/vnetIntergration05.jpg)
 
 「Azure Blob Storage」コネクタには、built-in (組み込み) タイプのコネクタと、マネージド コネクタの 2 種類のご用意がございます。
-「アプリ内」マークがござますのが、built-in (組み込み) タイプとなります。
+「アプリ内」マークがございますのが、built-in (組み込み) タイプとなります。
 ![](./vnetIntergration/vnetIntergration06.jpg)
 
 built-in (組み込み) タイプのコネクタは、Azure Functions 拡張性モデルに基づいており、Azure Logic Apps ランタイムと同じプロセスで実行されます。
@@ -93,7 +93,7 @@ NSG や Azure Firewall 等で許可する必要があります。
 - 参考ドキュメント : [Azure Logic Apps の制約と構成の参考文献 # ファイアウォールの IP 構成に関する考慮事項](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal#firewall-ip-configuration-considerations)
 - 参考ドキュメント : [マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps](https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps)
 
-### アクセス先のリソースに、サービス エンドポイントまたはプライベート エンドポイントを用意する
+### アクセス先のリソースに、プライベート エンドポイントを用意する
 今回の例では、ストレージ アカウント側で blob のプライベート エンドポイントを作成します。
 Standard Logic Apps の VNet 統合に利用したサブネットと、同一 VNet 内の異なるサブネットに配置しています。
 ![](./vnetIntergration/vnetIntergration07.jpg)
