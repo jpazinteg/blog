@@ -16,13 +16,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/</loc>
-    
-    <lastmod>2023-08-22</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/</loc>
     
     <lastmod>2023-08-22</lastmod>
@@ -30,7 +23,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/</loc>
+    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/vnetIntergration/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -38,6 +38,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/retryPolicy/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -59,13 +66,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/azureMonitorLogsLimit/</loc>
-    
-    <lastmod>2023-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -100,28 +100,14 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/</loc>
-    
-    <lastmod>2023-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/</loc>
-    
-    <lastmod>2023-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/</loc>
-    
-    <lastmod>2023-08-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -149,7 +135,21 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -171,6 +171,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
+    
+    <lastmod>2023-08-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/</loc>
     
     <lastmod>2023-08-22</lastmod>
     
@@ -404,6 +411,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Retry-Policy/</loc>
+    <lastmod>2023-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/VNet-Integration/</loc>
     <lastmod>2023-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
