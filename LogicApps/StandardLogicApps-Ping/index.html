@@ -4,36 +4,29 @@
   <meta charset="utf-8">
   
   
-  <title>Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について | Japan Azure Integration Support Blog</title>
+  <title>Standard Logic Apps からストレージ アカウントへの疎通を確認する | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。  今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。">
+  <meta name="description" content="こんにちは！  Azure Integration サポート チームの 山田 です。今回は、Standard Logic Apps から、関わるストレージ アカウントに対して、ツールにて接続の疎通を確認する方法をご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/index.html">
+<meta property="og:title" content="Standard Logic Apps からストレージ アカウントへの疎通を確認する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。  今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。">
+<meta property="og:description" content="こんにちは！  Azure Integration サポート チームの 山田 です。今回は、Standard Logic Apps から、関わるストレージ アカウントに対して、ツールにて接続の疎通を確認する方法をご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image01.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image02.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image03.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image04.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image05.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image06.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image07.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image08.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image09.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image10.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image11.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image12.png">
-<meta property="article:published_time" content="2022-06-29T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-22T01:04:39.586Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-0.png">
+<meta property="article:published_time" content="2023-08-20T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-22T01:04:39.662Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Storage Account">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/image01.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-4.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -95,7 +88,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/ApiConnectionsDelete" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/StandardLogicApps-Ping" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -104,7 +97,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について
+      Standard Logic Apps からストレージ アカウントへの疎通を確認する
     </h1>
   
 
@@ -112,55 +105,63 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2022-06-29T15:00:00.000Z" itemprop="datePublished">2022-06-30</time>
+  <time datetime="2023-08-20T02:00:00.000Z" itemprop="datePublished">2023-08-20</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d7e04806-25ad-5424-8b4b-7ca8fca5ad3f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%AE+%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E4%B8%8D%E8%A6%81%E3%81%AA%E6%8E%A5%E7%B6%9A%E6%83%85%E5%A0%B1%E3%81%AE%E5%89%8A%E9%99%A4%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FApiConnectionsDelete%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FApiConnectionsDelete.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FApiConnectionsDelete.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+1b3d4d32-90fb-5b6c-ad75-382d549972c9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%8B%E3%82%89%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8+%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E7%96%8E%E9%80%9A%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicApps-Ping%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicApps-Ping.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicApps-Ping.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/" data-id="cllllswmy00010nmvexz6htea" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/" data-id="cllllswnj000u0nmv5ffm5xta" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
-<p>Azure Logic Apps でワークフローを作成する際に、コネクタの接続情報を設定する画面で以下のように複数項目が表示されることがあるかと思います。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image01.png"></p>
-<p>今回はこの接続情報について、誤って作成してしまった場合や不要になった場合にどうやって削除すればよいかをご案内いたします。</p>
+        <p>こんにちは！  Azure Integration サポート チームの 山田 です。今回は、Standard Logic Apps から、関わるストレージ アカウントに対して、ツールにて接続の疎通を確認する方法をご紹介いたします。</p>
 <span id="more"></span>
 
+<h2 id="こんな時に"><a href="#こんな時に" class="headerlink" title="こんな時に"></a>こんな時に</h2><ul>
+<li>閉域ネットワーク構成にて Standard Logic Apps を管理したい。</li>
+<li>Azure ポータルから Standard Logic Apps を開いた際に予期しないエラーが出るのでトラブルシューティングしたい。</li>
+</ul>
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>接続情報 (API 接続) のリソースの確認方法について</li>
-<li>接続情報 (API 接続) のリソースの削除方法について</li>
+<li>Standard Logic Apps とストレージ アカウント</li>
+<li>「高度なツール」</li>
+<li>関連ドキュメント</li>
 <li>まとめ</li>
 </ul>
-<h2 id="接続情報-API-接続-のリソースの確認方法について"><a href="#接続情報-API-接続-のリソースの確認方法について" class="headerlink" title="接続情報 (API 接続) のリソースの確認方法について"></a>接続情報 (API 接続) のリソースの確認方法について</h2><p>まず、この接続情報がどのように作成されるかご説明させていただきます。<br>Azure Logic Apps でコネクタをご利用になられる場合、以下のように当該サービスの認証に必要な接続情報を入力する画面が表示されます。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image02.png"></p>
-<p>ここで認証に必要な情報を入力し接続情報を作成すると、自動的にワークフローと同一のリソース グループに [API 接続]というリソースが作成されます。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image03.png"></p>
-<p>こちらのリソースがコネクタの接続情報を設定する画面で表示されている接続情報の内容になります。<br>なお、従量課金タイプの Azure Logic Apps ですと、ワークフローの画面左部より [開発者ツール] - [API 接続] を選択いただくことで内容を確認することが可能でございます。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image04.png"></p>
-<p>Standard タイプの Azure Logic Apps の場合は、[ワークフロー] - [接続] を選択頂くことで API 接続 を確認いただくことが可能でございます。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image05.png"></p>
-<p>以上が接続情報のリソースである [API 接続] の確認方法でした。</p>
-<h2 id="接続情報-API-接続-のリソースの削除方法について"><a href="#接続情報-API-接続-のリソースの削除方法について" class="headerlink" title="接続情報 (API 接続) のリソースの削除方法について"></a>接続情報 (API 接続) のリソースの削除方法について</h2><p>次に、接続情報の削除方法についてご案内申し上げます。<br>本記事では従量課金タイプの Azure Logic Apps で利用している API 接続の削除方法をご説明いたします。</p>
-<p>こちらにつきましては、当該リソースを削除することで既存の接続先を削除することが可能でございます。<br>以下にキャプチャと併せて削除例を記載いたしますので、参考までにご確認いただけますと幸いです。</p>
-<p>＜削除例＞<br>1．対象の接続情報を確認する。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image06.png"> </p>
-<p>2．リソース グループを開く。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image07.png"> </p>
-<p>3．対象の API 接続が存在することを確認し、削除を選択。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image08.png"> </p>
-<p>4．再度、対象のリソースが表示されていることを確認し、削除の確認欄に “はい” と入力し、削除ボタンを選択。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image09.png"> </p>
-<p>5．削除されたことを確認したのち、Logic Apps のワークフローの接続情報作成時に削除した接続情報が表示されないことを確認する。<br><img src="/blog/LogicApps/ApiConnectionsDelete/image10.png"><br><img src="/blog/LogicApps/ApiConnectionsDelete/image11.png"> </p>
-<p>以上より、誤った接続情報や不要になった接続情報を削除することが可能でございます。<br>ただし、こちらのリソースについては削除すると復元が出来ませんので、影響範囲を十分調査いただいたうえで削除頂ければと存じます。</p>
-<p>参考までに、API 接続がどのリソースに紐づいているかを確認されたい場合、同一のリソース グループに閉じた情報ではありますが、リソース グループの画面より、以下のリソース ビジュアライザー という機能を利用することで視覚的に確認いただくことが可能です。</p>
-<p><img src="/blog/LogicApps/ApiConnectionsDelete/image12.png"> </p>
-<p>こちらも併せてご確認いただけますと幸いでございます。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<h2 id="Standard-Logic-Apps-とストレージ-アカウント"><a href="#Standard-Logic-Apps-とストレージ-アカウント" class="headerlink" title="Standard Logic Apps とストレージ アカウント"></a>Standard Logic Apps とストレージ アカウント</h2><p>前提として、Standard Logic Apps を作成した際に合わせてストレージ アカウントに作成されるコンテナやファイルは、ワークフロー情報や、実行履歴情報が格納されているものとなります。以下記事にて概要をご覧いただけます。</p>
 <ul>
-<li>接続情報 (API 接続) のリソースの確認方法について</li>
-<li>接続情報 (API 接続) のリソースの削除方法について</li>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/">Standard Logic Apps と関連するストレージ アカウント | Japan Azure Integration Support Blog</a></li>
 </ul>
-<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://docs.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>ここでは後述のツールのために、対象のストレージ アカウントに対して [Azure ポータル] - [ストレージ アカウント] - [&lt;対象の ストレージ アカウント&gt;] - [設定 - エンドポイント] と遷移し、以下のように Blob、File、Queue、Table の 4 つのエンドポイントを取得しておきます。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-4.png"></p>
+<h2 id="「高度なツール」"><a href="#「高度なツール」" class="headerlink" title="「高度なツール」"></a>「高度なツール」</h2><p>本題となるツールです。下記「高度なツール」から、Kudu というものに移動することができます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/resources-kudu">Kudu サービスの概要 - Azure App Service | Microsoft Learn</a></li>
+</ul>
+<p><img src="/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-1.png"></p>
+<p>Kudu 上で、Debug console から CMD へ進みます。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-2.png"></p>
+<p>ここで、下部に現出します CLI より、tcpping コマンド、nameresolver コマンドの実施が可能となります。</p>
+<p><code>tcpping &lt;先に取得したストレージ Blob、File、Queue、Table の各エンドポイント&gt;:443</code></p>
+<p><code>nameresolver &lt;先に取得したストレージ Blob、File、Queue、Table の各エンドポイント&gt;</code></p>
+<p>「samplestorage」に対する例: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tcpping samplestorage.blob.core.windows.net:443 </span><br><span class="line"></span><br><span class="line">nameresolver samplestorage.blob.core.windows.net</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-3.png"></p>
+<p>無事 Success および IP が確認できました。以上の形で、宛先ストレージ アカウントに疎通が取れているか確認いただけます。</p>
+<p>なお留意点としまして、作業端末よりツールへのアクセス許可が必要となります。以下 Error 403 となります場合は、まずは Azure ポータル より、作業端末から Standard Logic Apps へのアクセスが十分かご確認ください。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-Ping/StandardLogicApps-Ping-0.png"></p>
+<ul>
+<li>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/app-service-ip-restrictions?tabs=azurecli">Azure App Service のアクセス制限 - Azure App Service | Microsoft Learn</a></li>
+</ul>
+<h2 id="関連ドキュメント"><a href="#関連ドキュメント" class="headerlink" title="関連ドキュメント"></a>関連ドキュメント</h2><p>Standard Logic Apps とストレージ アカウントに言及したドキュメントや記事には、以下のようなものがございます。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/deploy-single-tenant-logic-apps-private-storage-account">Standard ロジック アプリをプライベート ストレージ アカウントにデプロイする - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-networking-options?tabs=azure-cli#troubleshooting">Azure Functions のネットワーク オプション # トラブルシューティング | Microsoft Learn</a></li>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/">ファイアウォール設定配下の既存ストレージ アカウントに Standard Logic Apps を作成 | Japan Azure Integration Support Blog</a></li>
+</ul>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Standard Logic Apps を閉域ネットワーク構成にて管理する際、知っておくと便利なツール「高度なツール Kudu」についてご紹介しました。引き続き皆様のお役に立てる情報を発信してまいります。</p>
 
       
       
@@ -174,10 +175,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/ApiConnectionsDelete.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicApps-Ping.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -185,19 +186,19 @@
     
 <nav id="article-nav">
   
-    <a href="../Integration-logAlertRule/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../StandardLogicAppsCdci/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          ログ アラート ルールの発報時に出力されたデータからクエリの検索結果を取得する
+          Standard Logic Apps と Azure DevOps で CD/CI 環境を構成する
         
       </div>
     </a>
   
   
-    <a href="../../MSMQ/MsmqCleanInstall/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../MSMQ/MsmqCheckInstall/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">MSMQ をドメインモードでインストールする手順について</div>
+      <div class="article-nav-title">MSMQ を有効化する手順・メッセージを送受信する手順</div>
     </a>
   
 </nav>
@@ -220,7 +221,7 @@
           </li>
         
           <li>
-            <a href="../StandardLogicApps-Ping/">Standard Logic Apps からストレージ アカウントへの疎通を確認する</a>
+            <a href="">Standard Logic Apps からストレージ アカウントへの疎通を確認する</a>
           </li>
         
           <li>
