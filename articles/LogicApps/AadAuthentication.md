@@ -39,7 +39,7 @@ authsettingsV2 の更新については、[Resource Explorer](https://resources.
 
 途中でトークンのデコードを行う手順がございますが、 [jwt.io](https://jwt.io/) （もしくは [jwt.ms](https://jwt.ms/) ） というサイトで行います。
 
-なお、本記事についてはあくまでも Logic Apps を呼び出す方法となります。Logic Apps から App Service や Functions を呼び出す方法ではなく、こちらの記事ではご案内しませんのでご留意ください。
+なお、本記事についてはあくまでも Logic Apps を呼び出す方法となります。Logic Apps から App Service や Functions を呼び出す方法ではございませんことと、そちらの方法については本記事ではご案内しませんのでご留意ください。
 
 以上を基に、本記事では認証手順を記載いたします。
 
