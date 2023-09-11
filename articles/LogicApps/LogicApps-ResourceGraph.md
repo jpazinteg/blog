@@ -31,9 +31,9 @@ tags:
 
 ## シナリオ 1: 従量課金版 Logic Apps を検索する
 
-まずは基本として、従量課金版 Logic Apps を Azure Resource Graph エクスプローラーから検索いただく方法です。左側 カテゴリ から、「ロジック アプリ」がございます。
+踏まえ、まずは基本として、従量課金版 Logic Apps を Azure Resource Graph エクスプローラーから検索いただく方法です。左側 カテゴリ から、「ロジック アプリ」がございます。
 
-例として以下クエリにて、リソースが表示されます。
+例として以下クエリにて、リソースが表示されます。name 列にて Logic Apps 名が見つかるかと思います。
 
 ```
 resources
@@ -46,9 +46,9 @@ resources
 
 ## シナリオ 2: Standard 版 Logic Apps を検索する
 
-Standard 版 Logic Apps は上と異なり、「AppServiceResources」からご覧いただけます。
+さて Standard 版 Logic Apps は上と異なり、「AppServiceResources」からご覧いただけます。
 
-例として以下クエリにて、リソースが表示されます。
+例として以下クエリにて、リソースが表示されます。同じく name 列にて Standard Logic Apps 名が見つかるかと思います。
 
 ```
 AppServiceResources
@@ -90,7 +90,7 @@ AppServiceResources
 
 ## シナリオ 4: API 接続を検索する
 
-ここまでの内容に加え、API 接続を検索するには以下クエリがご利用いただけます。
+さらにここまでの内容に加え、API 接続を検索するには以下クエリがご利用いただけます。
 
 ```
 resources
@@ -103,7 +103,7 @@ resources
 ![](./LogicApps-ResourceGraph/LogicApps-ResourceGraph-5.png)
 
 
-上記の API 接続をもとに、対象の Logic Apps を見つけることができます。
+また上記の API 接続をもとに、対象の Logic Apps を見つけることができます。
 
 ```
 resources
@@ -123,5 +123,5 @@ resources
 
 ## まとめ
 
-本記事では、Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ についてご紹介しました。引き続き皆様のお役に立てる情報を発信してまいります。
+本記事では、Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ についてサンプルをご紹介しました。Logic Apps と関連リソースの整理整頓に役立てば幸いです。引き続き、皆様のお役に立てる情報を発信してまいります。
 
