@@ -1,5 +1,5 @@
 ---
-title: Standard Logic Apps と Azure DevOps で CD/CI 環境を構成する
+title: Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する
 date: 2023-08-29 16:00:00
 tags:
   - How-To
@@ -11,23 +11,23 @@ tags:
 
 こんにちは！Azure Integration サポート チームの 川合 です。 
 
-近年の技術動向として、DevOps のように環境構築の自動化が進んでおりますが、Standard Logic Apps についても以下の公開情報のとおり DevOps の仕組みを利用して CD/CI の環境を構築することが可能でございます。
+近年の技術動向として、DevOps のように環境構築の自動化が進んでおりますが、Standard Logic Apps についても以下の公開情報のとおり DevOps の仕組みを利用して CI/CD の環境を構築することが可能でございます。
 
 - [シングルテナントの Azure Logic Apps への DevOps のデプロイ](https://learn.microsoft.com/ja-jp/azure/logic-apps/devops-deployment-single-tenant-azure-logic-apps)
 
-今回は、Azure DevOps を利用して、Standard Logic Apps にて CD/CI 環境を構築する方法についてご案内いたします。
+今回は、Azure DevOps を利用して、Standard Logic Apps にて CI/CD 環境を構築する方法についてご案内いたします。
 
 <!-- more -->
 ## こんな方におすすめです
 - Azure DevOps を利用して Standard Logic Apps のワークフローをデプロイしたい方
 
 ## 目次
-- Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要
+- Azure DevOps を利用した Standard Logic Apps の CI/CD 環境の概要
 - Standard Logic Apps 側の設定
 - Azure DevOps 側の設定
 - 実際の動作
 
-## Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要
+## Azure DevOps を利用した Standard Logic Apps の CI/CD 環境の概要
 始めに、本ブログ記事につきましては Logic Apps 製品としての内容となります。そのため、Azure DevOps、Azure Functions、Azure App Service の製品に関する詳細については説明を割愛いたします。詳細な操作方法についてはそれぞれの製品観点で別途弊社サポートへお問合せ下さい。
 また、本ブログ記事でご案内する内容としては手動でのデプロイ、かつ最低限の操作方法となります。そのため、各設定についてはお客様のビジネス要件に合わせて別途カスタマイズいただく必要があることと、本ブログ記事の内容については弊社サポートとしてお客様のビジネス要件に合わせたカスタマイズの対応は実施致しませんので予めご了承下さい。
 
@@ -266,12 +266,12 @@ Azure Pipelines の yml 定義に関する詳細については Azure Pipelines 
 
 以上より、Azure DevOps を利用して Standard Logic Apps のデプロイが可能となります。
 なお、こちらの設定につきましてはあくまでも参考までに最低限の動作方法をご案内する内容となります。
-その他の設定については別途お客様環境に併せて CD/CI 環境の要件定義を実施いただき、別途設計、設定をお願いいたします。
+その他の設定については別途お客様環境に併せて CI/CD 環境の要件定義を実施いただき、別途設計、設定をお願いいたします。
 また、先にも記載しておりますが、本ブログ記事につきましては Logic Apps 製品としての内容となりますため、本ブログ記事で記載しました各製品の詳細な操作方法についてはそれぞれの製品観点で別途弊社サポートへお問合せ下さい。
 
 ## まとめ
 本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。
-- Azure DevOps を利用した Standard Logic Apps の CD/CI 環境の概要
+- Azure DevOps を利用した Standard Logic Apps の CI/CD 環境の概要
 - Standard Logic Apps 側の設定
 - Azure DevOps 側の設定
 - 実際の動作
