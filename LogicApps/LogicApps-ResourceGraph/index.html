@@ -4,29 +4,28 @@
   <meta charset="utf-8">
   
   
-  <title>Logic Apps で Cosmos DB からドキュメントをクエリする | Japan Azure Integration Support Blog</title>
+  <title>特定の条件の Logic Apps ワークフローや API 接続を検索する | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！ Azure Integration サポート チームの山田です。今回は、Azure Logic Apps で Azure Cosmos DB から 「ドキュメントをクエリする」 方法をご紹介いたします。">
+  <meta name="description" content="こんにちは！  Azure Integration サポート チームの 山田 です。 今回は、ある特定の条件の Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ に関する Tips をご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logic Apps で Cosmos DB からドキュメントをクエリする">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/index.html">
+<meta property="og:title" content="特定の条件の Logic Apps ワークフローや API 接続を検索する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！ Azure Integration サポート チームの山田です。今回は、Azure Logic Apps で Azure Cosmos DB から 「ドキュメントをクエリする」 方法をご紹介いたします。">
+<meta property="og:description" content="こんにちは！  Azure Integration サポート チームの 山田 です。 今回は、ある特定の条件の Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ に関する Tips をご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_0.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_1.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_4.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_2.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_3.png">
-<meta property="article:published_time" content="2023-06-01T07:00:00.000Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-5.png">
+<meta property="article:published_time" content="2023-09-20T02:00:00.000Z">
 <meta property="article:modified_time" content="2023-09-15T01:19:14.672Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Azure Cosmos DB">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_0.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -88,7 +87,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/LogicApps-CosmosDB" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/LogicApps-ResourceGraph" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -97,7 +96,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Logic Apps で Cosmos DB からドキュメントをクエリする
+      特定の条件の Logic Apps ワークフローや API 接続を検索する
     </h1>
   
 
@@ -105,52 +104,61 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2023-06-01T07:00:00.000Z" itemprop="datePublished">2023-06-01</time>
+  <time datetime="2023-09-20T02:00:00.000Z" itemprop="datePublished">2023-09-20</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+3a2c9c74-34c5-5774-8a9d-d25228b6e669%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%A7+Cosmos+DB+%E3%81%8B%E3%82%89%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-CosmosDB%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-CosmosDB.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-CosmosDB.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+80b048a9-cbd1-5e5f-a166-de3ba67e3210%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E7%89%B9%E5%AE%9A%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%81%AE+Logic+Apps+%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%84+API+%E6%8E%A5%E7%B6%9A%E3%82%92%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-ResourceGraph%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-ResourceGraph.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-ResourceGraph.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CosmosDB/" data-id="clmjww5x5000g0np76y013052" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/" data-id="clmjww5x8000k0np74dpqc0nt" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Azure Logic Apps で Azure Cosmos DB から 「ドキュメントをクエリする」 方法をご紹介いたします。</p>
+        <p>こんにちは！  Azure Integration サポート チームの 山田 です。</p>
+<p>今回は、ある特定の条件の Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ に関する Tips をご紹介いたします。</p>
 <span id="more"></span>
 
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li><p>Logic Apps で Cosmos DB からドキュメントをクエリする</p>
-<ul>
-<li>基本</li>
-<li>「ドキュメントをクエリする」アクション</li>
-<li>「改ページ」に関して調整する</li>
+<li>前提</li>
+<li>シナリオ 1: 従量課金版 Logic Apps を検索する</li>
+<li>シナリオ 2: Standard 版 Logic Apps を検索する</li>
+<li>シナリオ 3: 特定のコネクタを利用している Logic Apps を検索する</li>
+<li>シナリオ 4: API 接続を検索する</li>
+<li>関連ドキュメント</li>
+<li>まとめ</li>
 </ul>
-</li>
-<li><p>まとめ</p>
-</li>
-</ul>
-<h2 id="Logic-Apps-で-Cosmos-DB-からドキュメントをクエリする"><a href="#Logic-Apps-で-Cosmos-DB-からドキュメントをクエリする" class="headerlink" title="Logic Apps で Cosmos DB からドキュメントをクエリする"></a>Logic Apps で Cosmos DB からドキュメントをクエリする</h2><h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><p>Logic Apps から Cosmos DB へ接続しての処理を行う方法については、以下ドキュメントがございます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-cosmos-db?tabs=consumption">Azure Cosmos DB への接続 - Azure Logic Apps | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/documentdb/">Azure Cosmos DB - Connectors | Microsoft Learn</a></p>
-<h3 id="「ドキュメントをクエリする」アクション"><a href="#「ドキュメントをクエリする」アクション" class="headerlink" title="「ドキュメントをクエリする」アクション"></a>「ドキュメントをクエリする」アクション</h3><p>ここでは例として、「ドキュメントをクエリする」アクション をご紹介いたします。以下がご利用いただけます。</p>
-<p><img src="/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_0.png"></p>
-<p>Cosmos DB のデータ エクスプローラー画面と、以下のように対応しています。</p>
-<p><img src="/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_1.png"></p>
-<h3 id="「改ページ」に関して調整する"><a href="#「改ページ」に関して調整する" class="headerlink" title="「改ページ」に関して調整する"></a>「改ページ」に関して調整する</h3><p>Cosmos DB で大量データをクエリすると、結果が複数のページにわたる場合があります。 Logic Apps ではこれに対し、以下設定で改ページ位置のしきい値を変更することが可能です。以下、参考ドキュメントがございます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/cosmos-db/nosql/query/pagination">Azure Cosmos DB での改ページ | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exceed-default-page-size-with-pagination#turn-on-pagination">改ページ位置の自動修正で項目やレコードを増やす - Azure Logic Apps | Microsoft Learn</a></p>
-<p><img src="/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_4.png"></p>
-<p>上のように [改ページ位置の自動修正] 設定を [オフ] から [オン] に変更します。 [しきい値] プロパティに、そのアクションで返す結果の目標数として整数値を指定します。</p>
-<h4 id="しきい値を設定しない場合"><a href="#しきい値を設定しない場合" class="headerlink" title="しきい値を設定しない場合"></a>しきい値を設定しない場合</h4><p><img src="/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_2.png"></p>
-<h4 id="しきい値を設定した場合"><a href="#しきい値を設定した場合" class="headerlink" title="しきい値を設定した場合"></a>しきい値を設定した場合</h4><p><img src="/blog/LogicApps/LogicApps-CosmosDB/LogicApps-CosmosDB_3.png"></p>
-<p>このように、値を調整してデータを取り扱うことが可能となります。Logic Apps では、Cosmos DB に対してこのほかにも <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%82%B9%E3%83%88%E3%82%A2%E3%83%89-%E3%83%97%E3%83%AD%E3%82%B7%E3%83%BC%E3%82%B8%E3%83%A3%E3%82%92%E5%AE%9F%E8%A1%8C-(v2)">ストアド プロシージャを実行 (V2)</a> や <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/documentdb/#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90%E3%81%BE%E3%81%9F%E3%81%AF%E6%9B%B4%E6%96%B0-(v3)">ドキュメントを作成または更新 (V3)</a> などのアクションが用意されております。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps で Cosmos DB からドキュメントをクエリする方法についてご紹介しました。より柔軟なデータ連携フロー構築において、参考になれば幸いです。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-cosmos-db?tabs=consumption">Azure Cosmos DB への接続 - Azure Logic Apps | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/documentdb/">Azure Cosmos DB - Connectors | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/cosmos-db/introduction">Azure Cosmos DB | Microsoft Learn</a></li>
-</ul>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>前提として、Logic Apps を含む各種リソースを検索する際は、Azure Resource Graph エクスプローラー をご利用いただけます。以下ドキュメントに概要がございます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/first-query-portal#run-your-first-resource-graph-query">クイック スタート:初めてのポータル クエリ - Azure Resource Graph | Microsoft Learn</a></p>
+<h2 id="シナリオ-1-従量課金版-Logic-Apps-を検索する"><a href="#シナリオ-1-従量課金版-Logic-Apps-を検索する" class="headerlink" title="シナリオ 1: 従量課金版 Logic Apps を検索する"></a>シナリオ 1: 従量課金版 Logic Apps を検索する</h2><p>踏まえ、まずは基本として、従量課金版 Logic Apps を Azure Resource Graph エクスプローラーから検索いただく方法です。左側 カテゴリ から、「ロジック アプリ」がございます。</p>
+<p>例として以下クエリにて、リソースが表示されます。name 列にて Logic Apps 名が見つかるかと思います。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources</span><br><span class="line">| where type == &quot;microsoft.logic/workflows&quot;</span><br><span class="line">| project id, name, location, resourceGroup, subscriptionId, properties</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-1.png"></p>
+<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/reference/supported-tables-resources#resources">https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/reference/supported-tables-resources#resources</a></p>
+<h2 id="シナリオ-2-Standard-版-Logic-Apps-を検索する"><a href="#シナリオ-2-Standard-版-Logic-Apps-を検索する" class="headerlink" title="シナリオ 2: Standard 版 Logic Apps を検索する"></a>シナリオ 2: Standard 版 Logic Apps を検索する</h2><p>さて Standard 版 Logic Apps は上と異なり、「AppServiceResources」からご覧いただけます。</p>
+<p>例として以下クエリにて、リソースが表示されます。同じく name 列にて Standard Logic Apps 名が見つかるかと思います。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AppServiceResources</span><br><span class="line">| where type == &quot;microsoft.web/sites/workflows&quot;</span><br><span class="line">| project id, name, location, resourceGroup, subscriptionId, properties</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-2.png"></p>
+<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/reference/supported-tables-resources#appserviceresources">https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/reference/supported-tables-resources#appserviceresources</a></p>
+<h2 id="シナリオ-3-特定のコネクタを利用している-Logic-Apps-を検索する"><a href="#シナリオ-3-特定のコネクタを利用している-Logic-Apps-を検索する" class="headerlink" title="シナリオ 3: 特定のコネクタを利用している Logic Apps を検索する"></a>シナリオ 3: 特定のコネクタを利用している Logic Apps を検索する</h2><p>踏まえまして、特定のコネクタを利用しているなど、プロパティに応じた Logic Apps を検索したいケースがあるかと思います。</p>
+<p>例として以下のようなクエリにて、対象を絞り込むことができます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">resources</span><br><span class="line">| where type == &quot;microsoft.logic/workflows&quot;</span><br><span class="line">| where properties contains &quot;teams&quot; // 例として teams のコネクタを利用しているもの</span><br><span class="line">| project id, name, location, resourceGroup, subscriptionId, properties</span><br><span class="line">| top 3 by name // name 列で並べた、先頭の 3 個のレコードを返す</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-4.png"></p>
+<p>Standard Logic Apps の場合は以下のようになります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AppServiceResources</span><br><span class="line">| where type == &quot;microsoft.web/sites/workflows&quot;</span><br><span class="line">| where properties contains &quot;Send_an_email_(V2)&quot; // 例として Send_an_email_(V2) というアクション名を使用しているもの</span><br><span class="line">| project id, name, location, resourceGroup, subscriptionId, properties</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-3.png"></p>
+<h2 id="シナリオ-4-API-接続を検索する"><a href="#シナリオ-4-API-接続を検索する" class="headerlink" title="シナリオ 4: API 接続を検索する"></a>シナリオ 4: API 接続を検索する</h2><p>さらにここまでの内容に加え、API 接続を検索するには以下クエリがご利用いただけます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resources</span><br><span class="line">| extend status = tostring(properties.statuses[0].status)</span><br><span class="line">| where type == &#x27;microsoft.web/connections&#x27;</span><br><span class="line">| where status == &#x27;Error&#x27; // 例として Error 状態のもの</span><br><span class="line">| project subscriptionId, resourceGroup, apiConnection=name, id</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/LogicApps-ResourceGraph/LogicApps-ResourceGraph-5.png"></p>
+<p>また上記の API 接続をもとに、対象の Logic Apps を見つけることができます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">resources</span><br><span class="line">| where type == &quot;microsoft.logic/workflows&quot;</span><br><span class="line">| where properties contains &quot;azureblob-24&quot; // API 接続名で検索する</span><br><span class="line">| project id, name, location, resourceGroup, subscriptionId, properties</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="関連ドキュメント"><a href="#関連ドキュメント" class="headerlink" title="関連ドキュメント"></a>関連ドキュメント</h2><p><a href="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/">Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について | Japan Azure Integration Support Blog</a></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/governance/resource-graph/first-query-portal#run-your-first-resource-graph-query">クイック スタート:初めてのポータル クエリ - Azure Resource Graph | Microsoft Learn</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps ワークフローや API 接続を検索したいときに便利な Azure Resource Graph エクスプローラー と クエリ についてサンプルをご紹介しました。Logic Apps と関連リソースの整理整頓に役立てば幸いです。引き続き、皆様のお役に立てる情報を発信してまいります。</p>
 
       
       
@@ -164,10 +172,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-CosmosDB.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-ResourceGraph.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -175,19 +183,10 @@
     
 <nav id="article-nav">
   
-    <a href="../PostgresqlJdbc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続
-        
-      </div>
-    </a>
   
-  
-    <a href="../actionGroupSetting/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../StandardLogicAppsCdci/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Azure Monitor のアラート発報時に Logic Apps を呼び出す方法</div>
+      <div class="article-nav-title">Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する</div>
     </a>
   
 </nav>
@@ -206,7 +205,7 @@
       <ul>
         
           <li>
-            <a href="../LogicApps-ResourceGraph/">特定の条件の Logic Apps ワークフローや API 接続を検索する</a>
+            <a href="">特定の条件の Logic Apps ワークフローや API 接続を検索する</a>
           </li>
         
           <li>
