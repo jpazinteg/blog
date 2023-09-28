@@ -13,6 +13,7 @@
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
 <meta property="og:description" content="こんにちは。  Azure Integration サポート チームの北山です。ログ アラート発報時に出力されるデータに含まれた URL から、アラート発報時に評価されたクエリの結果を取得する方法について説明します。  ログ アラート発報時に、ロジック アプリを使ってメール通知されたい方、通知されるメールにクエリの結果を含めたい方 アラート発報時に評価されたクエリの結果を別のシステムへ連携されたい">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-01.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp01.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp02.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp03.png">
@@ -37,8 +38,14 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-07.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-08.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/mail-setting-09.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-06.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-02.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-05.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-03.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-04.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-07.png">
 <meta property="article:published_time" content="2022-07-01T01:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-15T01:19:14.660Z">
+<meta property="article:modified_time" content="2023-09-28T13:14:04.816Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
@@ -46,7 +53,7 @@
 <meta property="article:tag" content="Azure Logic Apps">
 <meta property="article:tag" content="Azure Monitor">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/create-logicapp01.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/logalert-01.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -131,7 +138,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+57aab1ce-0d2a-5cb0-86c3-10fdce157034%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%AD%E3%82%B0+%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88+%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E7%99%BA%E5%A0%B1%E6%99%82%E3%81%AB%E5%87%BA%E5%8A%9B%E3%81%95%E3%82%8C%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8B%E3%82%89%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%AE%E6%A4%9C%E7%B4%A2%E7%B5%90%E6%9E%9C%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FIntegration-logAlertRule%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FIntegration-logAlertRule.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FIntegration-logAlertRule.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/" data-id="clmjww608006n0np7fewgfph9" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/" data-id="cln375hxs006n0ojs63jm8485" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -143,11 +150,12 @@
 </ul>
 <h1 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h1><ul>
 <li>今回の記事では従量課金版ロジック アプリを利用します。ただし、スタンダード版のロジック アプリでも問題ありません。</li>
-<li>ログ アラート ルールの API バージョンは、2022 年 6 月 30 日時点で最新版の 2021-08-01 を想定しています。<ul>
+<li>ログ アラート ルールの API バージョンは、2021-08-01 以降を想定しています。(2021-08-01 も含みます)<ul>
 <li>これはアラート スキーマが <strong>monitoringService = Log Alerts V2</strong> を想定しております。</li>
 <li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema-definitions#monitoringservice--log-alerts-v2">共通アラート スキーマ定義</a></li>
 </ul>
 </li>
+<li>ログ アラート ルールのメジャーが「テーブルの行」である前提です。もし「テーブルの行」ではなく任意の数値列をご指定いただいている場合は、後述する<strong>ログ アラート ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合</strong>の注意事項をご参照ください。<img src="/blog/LogicApps/Integration-logAlertRule/logalert-01.png"></li>
 </ul>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="1-アラート発報時に実行されるロジック-アプリの作成"><a href="#1-アラート発報時に実行されるロジック-アプリの作成" class="headerlink" title="1. アラート発報時に実行されるロジック アプリの作成"></a>1. アラート発報時に実行されるロジック アプリの作成</h2><p>アラート発報時に実行されるロジック アプリを、Azure portal から作成します。  </p>
 <blockquote>
@@ -184,6 +192,9 @@
 <p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-01.png"></p>
 <p>方法の箇所には <strong>[GET]</strong> をご指定いただき、URI の箇所には <strong>[動的なコンテンツ - linkToSearchResultsAPI]</strong> を指定します。</p>
 <p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-02.png"></p>
+<blockquote>
+<p>注意 : もし当該ログ アラート ルールでディメンション分割をご指定いただいている場合は、<strong>linkToSearchResultsAPI</strong> ではなく <strong>linkToFilteredSearchResultsAPI</strong> をご指定ください。</p>
+</blockquote>
 <p>その後、自動的に <strong>[For each]</strong> が追加されますが、そのままで問題ありません。<br>これは、linkToSearchResultsAPI オブジェクトを保持している親オブジェクト (allOf オブジェクト) のデータ型が配列であるため、自動的に For each が作成され配列内のオブジェクト一つ一つにアクセスする必要があるためです。<br>ログ アラート ルールが出力する JSON データの allOf オブジェクトは要素数が必ず 1 つであるため、そのままで問題ありません。</p>
 <p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-03.png"></p>
 <p><img src="/blog/LogicApps/Integration-logAlertRule/create-workflow-04.png"></p>
@@ -235,6 +246,25 @@
 <p>その後ワークフローを保存し、意図的にログ アラートを発報させます。<br>すると下図のような、クエリ実行結果が HTML テーブル形式で記載されたメールが通知される事を確認しました。</p>
 <p><img src="/blog/LogicApps/Integration-logAlertRule/mail-setting-09.png"></p>
 <p>こちらは、単純にクエリ実行結果を記載したのみのメールですが、お客様の要件を満たすようなメール内容にカスタマイズいただけますと幸いです。</p>
+<h1 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h1><h2 id="ログ-アラート-ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合"><a href="#ログ-アラート-ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合" class="headerlink" title="ログ アラート ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合"></a>ログ アラート ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合</h2><p>仮に、ログ アラート ルールに対して下記のクエリをご設定いただいた場合、返却されたログの期待する列の数は 4 つとなります。<br>(project 句 に 4 つのプロパティを指定しているため)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Perf</span><br><span class="line">| where Computer == &#x27;mylab-mc-01&#x27;</span><br><span class="line">| where ObjectName == &quot;LogicalDisk&quot;</span><br><span class="line">| where CounterName == &quot;% Free Space&quot;</span><br><span class="line">| where InstanceName in (&quot;C:&quot;, &quot;E:&quot;, &quot;F:&quot;, &quot;G:&quot;, &quot;H:&quot;)</span><br><span class="line">| extend VM_NAME = tostring(Computer)</span><br><span class="line">| project TimeGenerated, VM_NAME, InstanceName, CounterValue</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-06.png"></p>
+<p>しかし、もし当該ログ アラート ルールのメジャーが「テーブルの行」でない場合かつ、ディメンション分割を実施していない場合、linkToSearchResultsAPI で取得したログの結果は下図のように summarize された結果となります。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-02.png"></p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-05.png"></p>
+<p>結果として期待する列の数とは異なる結果となり、ワークフロー内のデータ操作アクションにて指定したデータが無いことを表すエラーが発生する可能性があります。<br>(例えば 3 つ目の列の値を参照しようとしても、3 つ目の列が無いためエラーが発生する)</p>
+<p>このような問題を回避するために、下記のように当該ログ アラート ルールに対してディメンション分割をご指定ください。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-03.png"></p>
+<p>ディメンション分割をご指定いただく事で、アラート ルールは下記のようなクエリを実行します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Perf</span><br><span class="line">| where Computer == &#x27;mylab-mc-01&#x27;</span><br><span class="line">| where ObjectName == &quot;LogicalDisk&quot;</span><br><span class="line">| where CounterName == &quot;% Free Space&quot;</span><br><span class="line">| where InstanceName in (&quot;C:&quot;, &quot;E:&quot;, &quot;F:&quot;, &quot;G:&quot;, &quot;H:&quot;)</span><br><span class="line">| extend VM_NAME = tostring(Computer)</span><br><span class="line">| project TimeGenerated, VM_NAME, InstanceName, CounterValue</span><br><span class="line">| extend TimeGenerated = column_ifexists(&#x27;TimeGenerated&#x27;, datetime(2023-09-28T01:57:06.0000000Z))</span><br><span class="line">| summarize AggregatedValue = min(CounterValue)</span><br><span class="line">    by</span><br><span class="line">    bin_at(TimeGenerated, 5m, datetime(2023-09-28T02:02:06.0000000Z)),</span><br><span class="line">    VM_NAME,</span><br><span class="line">    InstanceName</span><br><span class="line">| where todouble(AggregatedValue) &lt; 50</span><br><span class="line">| where tostring(InstanceName) == @&#x27;C:&#x27; and tostring(VM_NAME) == @&#x27;mylab-mc-01&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-04.png"></p>
+<p>これにより、ユーザーが期待する列の数と、アラート ルールが評価のために取得したログの列の数が一致し、ワークフロー内のデータ操作アクションにて指定したデータが無いことを表すエラーは発生しません。</p>
+<p>またディメンション分割をご指定いただいた場合は、<strong>linkToSearchResultsAPI</strong> ではなく <strong>linkToFilteredSearchResultsAPI</strong> にセットされた URL を用いて、ログを取得してください。<br><strong>linkToSearchResultsAPI</strong> でログを取得した場合、ディメンション分割が考慮されていないログが取得されるためです。</p>
+<p><img src="/blog/LogicApps/Integration-logAlertRule/logalert-07.png"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema">共通アラート スキーマ</a></li>
+</ul>
 
       
       
