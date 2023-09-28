@@ -20,9 +20,11 @@ tags:
 
 # 前提条件
 - 今回の記事では従量課金版ロジック アプリを利用します。ただし、スタンダード版のロジック アプリでも問題ありません。
-- ログ アラート ルールの API バージョンは、2022 年 6 月 30 日時点で最新版の 2021-08-01 を想定しています。
+- ログ アラート ルールの API バージョンは、2021-08-01 以降を想定しています。(2021-08-01 も含みます)
   - これはアラート スキーマが **monitoringService = Log Alerts V2** を想定しております。
   - 参考ドキュメント : [共通アラート スキーマ定義](https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema-definitions#monitoringservice--log-alerts-v2)
+- ログ アラート ルールのメジャーが「テーブルの行」である前提です。もし「テーブルの行」ではなく任意の数値列をご指定いただいている場合は、後述する**ログ アラート ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合**の注意事項をご参照ください。![](./Integration-logAlertRule/logalert-01.png)
+
 
 
 # 方法
@@ -150,6 +152,8 @@ HTTP 組み込みコネクタの **[HTTP]** アクションを追加します。
 方法の箇所には **[GET]** をご指定いただき、URI の箇所には **[動的なコンテンツ - linkToSearchResultsAPI]** を指定します。
 
 ![](./Integration-logAlertRule/create-workflow-02.png)
+
+> 注意 : もし当該ログ アラート ルールでディメンション分割をご指定いただいている場合は、**linkToSearchResultsAPI** ではなく **linkToFilteredSearchResultsAPI** をご指定ください。
 
 その後、自動的に **[For each]** が追加されますが、そのままで問題ありません。  
 これは、linkToSearchResultsAPI オブジェクトを保持している親オブジェクト (allOf オブジェクト) のデータ型が配列であるため、自動的に For each が作成され配列内のオブジェクト一つ一つにアクセスする必要があるためです。  
@@ -374,3 +378,62 @@ Heartbeat
 
 こちらは、単純にクエリ実行結果を記載したのみのメールですが、お客様の要件を満たすようなメール内容にカスタマイズいただけますと幸いです。
 
+# 注意事項
+## ログ アラート ルールのメジャーが「テーブルの行」ではなく任意の数値列の場合
+仮に、ログ アラート ルールに対して下記のクエリをご設定いただいた場合、返却されたログの期待する列の数は 4 つとなります。  
+(project 句 に 4 つのプロパティを指定しているため)
+
+```
+Perf
+| where Computer == 'mylab-mc-01'
+| where ObjectName == "LogicalDisk"
+| where CounterName == "% Free Space"
+| where InstanceName in ("C:", "E:", "F:", "G:", "H:")
+| extend VM_NAME = tostring(Computer)
+| project TimeGenerated, VM_NAME, InstanceName, CounterValue
+```
+![](./Integration-logAlertRule/logalert-06.png)
+
+しかし、もし当該ログ アラート ルールのメジャーが「テーブルの行」でない場合かつ、ディメンション分割を実施していない場合、linkToSearchResultsAPI で取得したログの結果は下図のように summarize された結果となります。
+
+![](./Integration-logAlertRule/logalert-02.png)
+
+![](./Integration-logAlertRule/logalert-05.png)
+
+結果として期待する列の数とは異なる結果となり、ワークフロー内のデータ操作アクションにて指定したデータが無いことを表すエラーが発生する可能性があります。  
+(例えば 3 つ目の列の値を参照しようとしても、3 つ目の列が無いためエラーが発生する)
+
+
+このような問題を回避するために、下記のように当該ログ アラート ルールに対してディメンション分割をご指定ください。
+
+![](./Integration-logAlertRule/logalert-03.png)
+
+ディメンション分割をご指定いただく事で、アラート ルールは下記のようなクエリを実行します。
+```
+Perf
+| where Computer == 'mylab-mc-01'
+| where ObjectName == "LogicalDisk"
+| where CounterName == "% Free Space"
+| where InstanceName in ("C:", "E:", "F:", "G:", "H:")
+| extend VM_NAME = tostring(Computer)
+| project TimeGenerated, VM_NAME, InstanceName, CounterValue
+| extend TimeGenerated = column_ifexists('TimeGenerated', datetime(2023-09-28T01:57:06.0000000Z))
+| summarize AggregatedValue = min(CounterValue)
+    by
+    bin_at(TimeGenerated, 5m, datetime(2023-09-28T02:02:06.0000000Z)),
+    VM_NAME,
+    InstanceName
+| where todouble(AggregatedValue) < 50
+| where tostring(InstanceName) == @'C:' and tostring(VM_NAME) == @'mylab-mc-01'
+```
+
+![](./Integration-logAlertRule/logalert-04.png)
+
+
+これにより、ユーザーが期待する列の数と、アラート ルールが評価のために取得したログの列の数が一致し、ワークフロー内のデータ操作アクションにて指定したデータが無いことを表すエラーは発生しません。
+
+またディメンション分割をご指定いただいた場合は、**linkToSearchResultsAPI** ではなく **linkToFilteredSearchResultsAPI** にセットされた URL を用いて、ログを取得してください。  
+**linkToSearchResultsAPI** でログを取得した場合、ディメンション分割が考慮されていないログが取得されるためです。
+
+![](./Integration-logAlertRule/logalert-07.png)
+- [共通アラート スキーマ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-common-schema)
