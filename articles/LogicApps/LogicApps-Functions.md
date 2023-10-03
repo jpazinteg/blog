@@ -1,5 +1,5 @@
 ---
-title: Logic Apps で日付を判定してワークフローを制御する
+title: Logic Apps で日付や時刻を判定してワークフローを制御する
 date: 2023-10-20 11:00:00
 tags:
   - Tips
@@ -22,7 +22,7 @@ tags:
 
 ## 目次
 - シナリオ 1: 平日 8 時に VM を起動したい。ただし 特定の日 (祝日など) を除外したい
-- シナリオ 2: 平日 8 時に VM1 を起動し、9 時に VM2 を起動したい
+- シナリオ 2: 平日 6 時に VM1 を起動し、8 時に VM2 を起動したい
 - 関連ドキュメント
 - まとめ
 
@@ -76,7 +76,7 @@ Trigger conditions can be set using logic app designer or manually using code vi
 
 ### 条件式
 
-上記を踏まえ、「今日が 2023 年の日本の祝日ではない」という条件式を設定します。まず日本時間の「月日」 (MMdd) は以下となります。
+上記を踏まえ、「今日が 2023 年の日本の祝日ではない」という条件式を設定してみることにします。まず日本時間の「月日」 (MMdd) は以下となります。
 
 ```
 convertFromUtc(UtcNow(), 'Tokyo Standard Time', 'MMdd')
@@ -138,13 +138,13 @@ not(contains(
 - [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # convertFromUtc](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc)
 - [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # createArray](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#createArray)
 - [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # contains](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains)
-
+- [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # not](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#not)
 
 またここでは「日本の祝日」となる日付を静的にアレイに記述しましたが、カレンダーなどから取得して構築することも考えられます。詳細割愛いたしますが以下などがご活用いただけます。
 
 参考: [Office 365 Outlook - Connectors | Microsoft Learn # イベントのカレンダー ビューの取得 (V3)](https://learn.microsoft.com/ja-jp/connectors/office365/#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC-%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E5%8F%96%E5%BE%97-(v3)))
-
 ほか 2024 年の日本の祝日 (MMdd) を示すアレイは以下となります。
+
 ```
 createArray('0101',
             '0108',
