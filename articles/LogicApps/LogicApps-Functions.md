@@ -227,10 +227,14 @@ convertFromUtc(UtcNow(), 'Tokyo Standard Time', 'HH')
 - [Logic Apps の式関数で Unix Time を取得する方法 | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/UnixTime/)
 
 
+今回の記事では日付に対して 6 時 や 8 時という時刻を例に紹介いたしましたが、0 時を起動時刻に設定し日付を条件判定する際には、[「繰り返し (Recurrence)」トリガーの起動時刻の差異について](https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/) にありますように起動時刻仕様についてもご確認いただけますと幸いです。
+
+
 また今回の「Start/Stop VMs v2」に関する参考ドキュメントや記事は、以下のようなものがございます。
 
 - [Start/Stop VMs v2 を Azure サブスクリプションにデプロイする | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy)
 - [Start/Stop VMs v2 のご紹介 - Japan PaaS Support Team Blog](https://jpazpaas.github.io/blog/2021/11/29/introduce-Start-Stop-VMs-v2.html)
+
 
 
 ## まとめ
