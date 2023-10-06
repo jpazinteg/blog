@@ -1,6 +1,6 @@
 ---
 title: Logic Apps で日付や時刻を判定してワークフローを制御する
-date: 2023-10-20 11:00:00
+date: 2023-10-06 11:00:00
 tags:
   - Tips
   - Azure Integration
