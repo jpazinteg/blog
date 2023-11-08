@@ -8,7 +8,7 @@ tags:
 ---
 
 こんにちは！  Azure Integration サポート チームの 山田 です。
-今回は Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを厳選し、まとめてご紹介いたします。
+今回は Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを厳選し、リンク集としてご紹介いたします。
 
 <!-- more -->
 
@@ -85,6 +85,7 @@ tags:
 参考: [ワークフローから Azure Blob Storage に接続する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-azureblobstorage?tabs=consumption#add-a-blob-action)
 
 
+以下からコネクタの一覧をご覧いただけます。
 
 [Azure Logic Apps コネクタのドキュメント - Connectors | Microsoft Learn](https://learn.microsoft.com/ja-jp/connectors/)
 
@@ -93,7 +94,7 @@ tags:
 
 ## ワークフローとは
 
-ワークフローにてアクションを条件に基づいて制御したり、繰り返し処理したりできます。
+ワークフロー内にて、アクションを条件に基づいて制御したり、繰り返し処理したりできます。また、式関数を用いて出力結果から値を加工して利用できます。
 
 ### 制御
 
@@ -104,15 +105,16 @@ tags:
 [アクションを繰り返すループを追加する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops?tabs=consumption)
 
 
+![](./LogicApps-HeadFirst/LogicApps-HeadFirst-3.png)
 
 
 ### 式関数
 
 [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference)
 
-#### JSON
-
 [Azure Logic Apps で JSON オブジェクトから特定のプロパティの値を取得する方法 | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/)
+
+[データの操作の実行 - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption)
 
 
 ## Standard 版 (シングルテナント) Logic Apps とは
@@ -127,6 +129,7 @@ tags:
 
 [Standard ワークフローと仮想ネットワーク間のトラフィックをセキュリティで保護する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint)
 
+> Standard ロジック アプリのワークフローと Azure 仮想ネットワーク間で安全かつプライベートに通信するために、受信トラフィック用に "プライベート エンドポイント" を設定し、送信トラフィック用に仮想ネットワーク統合を使用できます。
 
 
 ## 制約と構成
@@ -158,5 +161,5 @@ Logic Apps を利用するうえで知っておきたい制約事項です。
 
 ## まとめ
 
-本記事では、Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを一挙にご紹介いたしました。引き続き皆様のお役に立てる情報を発信してまいります。
+本記事では、Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを一挙にご紹介いたしました。引き続き、皆様のお役に立てる情報を発信してまいります。
 
