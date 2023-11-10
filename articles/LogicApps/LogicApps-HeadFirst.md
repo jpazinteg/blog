@@ -119,13 +119,18 @@ tags:
 
 ## Standard 版 (シングルテナント) Logic Apps とは
 
-ここまでの内容をふまえ、Standard 版 Logic Apps には以下のような特長がございます。
+ここまでの内容に加えて、Standard 版 Logic Apps には以下のような特長がございます。
 
 [Azure Logic Apps でのシングルテナントとマルチテナントの比較 - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/single-tenant-overview-compare#standard-logic-app-and-workflow)
 
 
 > Standard ロジック アプリとワークフローには、再設計されたシングルテナント Azure Logic Apps ランタイムが使用されています。 このランタイムには Azure Functions 機能拡張モデルが使用されており、Azure Functions ランタイムの拡張機能としてホストされます。 この設計により、ロジック アプリ ワークフローの移植性、柔軟性、パフォーマンス向上に加え、Azure Functions プラットフォームと Azure App Service エコシステムから継承されたその他の機能と利点が提供されます。 
 
+[ステートフルおよびステートレス ワークフロー](https://learn.microsoft.com/ja-jp/azure/logic-apps/single-tenant-overview-compare#stateful-stateless)
+
+> ステートフル ワークフローでは、サービス停止が発生した場合に高い回復性を実現できます。 サービスとシステムが復元された後に、中断された実行を保存済みの状態から再構築し、ワークフローを再実行して完了することができます。 ステートフル ワークフローは、ステートレス ワークフローよりもはるかに長い間実行を継続できます。
+
+> 各実行が完了した後に外部ストレージに前のイベントのデータを保持、確認、参照する必要がない場合は、ステートレス ワークフローを作成します。 これらのワークフローでは、各アクションとその状態の入出力を外部ストレージにではなく、"メモリ内にのみ" 保存します。 その結果、ステートレス ワークフローでは、実行時間が短縮され (通常は 5 分未満)、パフォーマンスが高速化されて応答時間が短くなり、スループットが向上し、実行コストが削減されます。
 
 [Standard ワークフローと仮想ネットワーク間のトラフィックをセキュリティで保護する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint)
 
