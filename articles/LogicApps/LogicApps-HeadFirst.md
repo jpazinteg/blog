@@ -22,8 +22,7 @@ tags:
 - コネクタとは
 - ワークフローとは
 - Standard 版 (シングルテナント) Logic Apps とは
-- 制約と構成
-- 価格
+- その他
 - 関連ドキュメント
 - まとめ
 
@@ -136,25 +135,29 @@ tags:
 
 > Standard ロジック アプリのワークフローと Azure 仮想ネットワーク間で安全かつプライベートに通信するために、受信トラフィック用に "プライベート エンドポイント" を設定し、送信トラフィック用に仮想ネットワーク統合を使用できます。
 
+## その他
 
-## 制約と構成
+ほか、多くお問い合わせをいただくトピックです。
+
+### 制約と構成
 
 Logic Apps を利用するうえで知っておきたい制約事項です。
 
 [制約と構成の参考ガイド - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal)
 
+### 価格
 
-## 価格
-
-最後に、Logic Apps の利用価格です。
+Logic Apps の利用価格です。
 
 [価格 - Logic Apps | Microsoft Azure](https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/)
 
 
 ## 関連ドキュメント
 
-ほか Logic Apps を学べるリソースには、以下のようなものがございます。
+Logic Apps を学べるリソースには、以下のようなものがございます。
 
+- チュートリアル
+    - [スケジュールに基づいた自動化ワークフローを作成する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/tutorial-build-schedule-recurring-logic-app-workflow)
 - Training
     - [Azure Logic Apps でデータとアプリを統合するための自動化されたワークフローを構築する - Training | Microsoft Learn](https://learn.microsoft.com/ja-jp/training/paths/build-workflows-with-logic-apps/)
     - [Azure Logic Apps の概要 - Training | Microsoft Learn](https://learn.microsoft.com/ja-jp/training/modules/intro-to-logic-apps/)
