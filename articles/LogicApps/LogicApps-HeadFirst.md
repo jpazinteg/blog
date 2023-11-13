@@ -151,6 +151,9 @@ Logic Apps の利用価格です。
 
 [価格 - Logic Apps | Microsoft Azure](https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/)
 
+[使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing)
+
+
 
 ## 関連ドキュメント
 
