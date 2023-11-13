@@ -77,11 +77,17 @@ tags:
 
 > いくつかのコネクタは、特定のイベントが発生したときにアプリに通知できるトリガーを提供しています。 
 
+[トリガーまたはアクションを使用してワークフローを作成する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/create-workflow-with-trigger-or-action?tabs=consumption)
+
+>トリガーは、どのワークフローでも常に最初のステップであり、ワークフローが実行を開始できるようになる前に満たす条件を指定します。 トリガーの後に、ワークフローが必要なタスクを実行するには、後続のアクションを 1 つ以上追加する必要があります。 トリガーとアクションは連携して、ワークフローのロジックと構造を定義します。
+
+
 以下は 「繰り返し」 トリガー と 「パスを使用して BLOB コンテンツを取得する (V2)」 アクション の例です。
 
 ![](./LogicApps-HeadFirst/LogicApps-HeadFirst-2.png)
 
 参考: [ワークフローから Azure Blob Storage に接続する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-azureblobstorage?tabs=consumption#add-a-blob-action)
+
 
 
 以下からコネクタの一覧をご覧いただけます。
