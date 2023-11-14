@@ -8,7 +8,7 @@ tags:
 ---
 
 こんにちは！  Azure Integration サポート チームの 山田 です。
-今回は Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを厳選し、リンク集としてご紹介いたします。
+今回は Azure Logic Apps をこれから使い始めようという方へ、「Azure Logic Apps とは何なのか」「何ができるのか」を効率よく理解できるリソースを厳選し、引用しながら、リンク集としてご紹介いたします。
 
 <!-- more -->
 
@@ -40,7 +40,7 @@ tags:
 
 引用: [概要 # さまざまな環境を作成してデプロイする - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments)
 
-### 従量課金版 (Consumption、マルチテナント) Logic Apps
+### 従量課金版 (Consumption、消費、マルチテナント) Logic Apps
 
 > 1 つのロジック アプリではワークフローを 1 つだけ 使用できます。
 "複数の Azure Active Directory テナントにわたる" ロジック アプリで、同じ処理 (コンピューティング)、ストレージ、ネットワークなどが共有されます。
