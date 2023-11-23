@@ -14,12 +14,12 @@ Azure Integration サポート チームでは Azure 製品以外にもオンプ
 <!-- more -->
 
 ## 目次
-- MSMQ について (おさらい)
+- MSMQ について
 - MSMQ の End2End ログを有効化する
 - MSMQ の End2End ログを取得する
 - まとめ
 
-## MSMQ について (おさらい)
+## MSMQ について
 
 MSMQ とは、弊社が提供するオンプレミス製品のメッセージ キューイング サービスです。
 - [Message Queuing (MSMQ)](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85))
@@ -51,6 +51,8 @@ End2End ログは [コンピューターの管理]-[システム ツール]-[ア
 
 ## MSMQ の End2End ログを取得する
 
+続いて End2End ログ取得手順です。
+
 1. 対象の端末でイベント ビューアーを開きます。ショートカット キー「Windows + X」を押下後に「V」を押下しますと、「イベント ビューアー」が開きます。
 2. 左側のメニューから [アプリケーションとサービス ログ]-[Microsoft]-[Windows]-[MSMQ] から End2End に移動します。
 3. 画面右側の [操作] から [すべてのイベントを名前を付けて保存] を選択します。
@@ -67,7 +69,7 @@ End2End ログは [コンピューターの管理]-[システム ツール]-[ア
 
 本記事では、以下についてご案内いたしました。
 
-- MSMQ について (おさらい)
+- MSMQ について
 - MSMQ の End2End ログを有効化する
 - MSMQ の End2End ログを取得する
 
