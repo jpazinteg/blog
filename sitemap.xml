@@ -37,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/vnetIntergration/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/vnetIntergration/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -163,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/</loc>
-    
-    <lastmod>2023-12-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/</loc>
     
     <lastmod>2023-12-01</lastmod>
@@ -191,7 +184,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -219,7 +212,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -227,6 +220,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-logAlertRule/</loc>
+    
+    <lastmod>2023-12-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -247,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/</loc>
-    
-    <lastmod>2023-12-01</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/</loc>
     
     <lastmod>2023-12-01</lastmod>
@@ -261,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -275,7 +268,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
@@ -290,6 +283,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
+    
+    <lastmod>2023-12-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
     
     <lastmod>2023-12-01</lastmod>
     
