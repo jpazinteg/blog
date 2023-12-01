@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Logic Apps で障害調査時にサポート エンジニアへ連携するログの取得方法について | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   お客様環境の Logic Apps にて障害や何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。今回は、取得いただきたいログの内容と、その取得方法についてご案内申し上げます。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logic Apps で障害調査時にサポート エンジニアへ連携するログの取得方法について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   お客様環境の Logic Apps にて障害や何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。今回は、取得いただきたいログの内容と、その取得方法についてご案内申し上げます。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image002.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image003.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image004.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image005.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image006.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image006-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image007.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image008.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image009.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image013.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image014.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image015.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image016.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image018.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image019.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image026.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image027.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image028.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image029.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image010.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image011.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image012.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image020.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image021.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image022.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image023.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image024.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image025.png">
+<meta property="article:published_time" content="2023-11-30T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-01T05:10:05.911Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Trouble">
+<meta property="article:tag" content="Log">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image001.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/TroubleLogCollection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Logic Apps で障害調査時にサポート エンジニアへ連携するログの取得方法について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2023-11-30T15:00:00.000Z" itemprop="datePublished">2023-12-01</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7b22141b-15d4-5c1b-b059-21361864e0bc%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%A7%E9%9A%9C%E5%AE%B3%E8%AA%BF%E6%9F%BB%E6%99%82%E3%81%AB%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88+%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%B8%E9%80%A3%E6%90%BA%E3%81%99%E3%82%8B%E3%83%AD%E3%82%B0%E3%81%AE%E5%8F%96%E5%BE%97%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FTroubleLogCollection%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FTroubleLogCollection.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FTroubleLogCollection.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/" data-id="clpm61kve001b0nry2ki54rx5" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>お客様環境の Logic Apps にて障害や何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。<br>今回は、取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>前提条件</li>
+<li>従量課金タイプの場合</li>
+<li>Standard タイプの場合</li>
+<li>その他関連ログ</li>
+<li>まとめ</li>
+</ul>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>まず、本 Logic Apps 製品のお問合せをいただく場合、Azure Portal にログインいただいたうえで、事象の発生しているサブスクリプションからお問合せいただきますようお願いいたします。<br>Unified 契約や Azure 製品のサポート受けられる適切なサポート契約をお持ちの場合でも、M365 管理ポータルや直接電話でのお問合せなど Azure Portal 以外からお問合せいただくと詳細な調査が出来ませんので、その際は別途 Azure Portal からお問合せいただくようお願いさせていただく場合がございます。<br>また、弊社にて詳細ログを調査するためには事象発生から 28 日以内にログを提供いただきますようお願いいたします。28 日を経過すると詳細な調査が出来ない場合がございますのでで予めご留意ください。</p>
+<h2 id="従量課金タイプの場合"><a href="#従量課金タイプの場合" class="headerlink" title="従量課金タイプの場合"></a>従量課金タイプの場合</h2><p>従量課金タイプの場合、以下の情報についてご提供をお願いいたします。</p>
+<ol>
+<li>当該 Azure のサブスクリプション ID</li>
+<li>当該ロジック アプリのリソース情報</li>
+<li>当該ロジック アプリの識別子</li>
+<li>当該ロジック アプリの実行時間</li>
+<li>当該ロジック アプリの入出力のスクリーンショット</li>
+<li>当該ロジック アプリの未加工入出力</li>
+<li>当該ロジック アプリのコードビュー</li>
+</ol>
+<p>それでは取得方法についてご案内申し上げます。</p>
+<h3 id="1．当該-Azure-のサブスクリプション-ID"><a href="#1．当該-Azure-のサブスクリプション-ID" class="headerlink" title="1．当該 Azure のサブスクリプション ID"></a>1．当該 Azure のサブスクリプション ID</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該 Azure のサブスクリプション ID については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] より、概要欄のサブスクリプション ID をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image001.png"></p>
+<h3 id="2．当該ロジック-アプリのリソース情報"><a href="#2．当該ロジック-アプリのリソース情報" class="headerlink" title="2．当該ロジック アプリのリソース情報"></a>2．当該ロジック アプリのリソース情報</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該のリソース ID については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [設定 - プロパティ] に遷移いただき「リソース ID」に設定されているリソース ID をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image002.png"></p>
+<h3 id="3-当該ロジック-アプリの識別子"><a href="#3-当該ロジック-アプリの識別子" class="headerlink" title="3. 当該ロジック アプリの識別子"></a>3. 当該ロジック アプリの識別子</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの識別子については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [概要] よりエラーの発生した実行履歴の [識別子] をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image003.png"></p>
+<h3 id="4-当該ロジック-アプリの実行時間"><a href="#4-当該ロジック-アプリの実行時間" class="headerlink" title="4. 当該ロジック アプリの実行時間"></a>4. 当該ロジック アプリの実行時間</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの実行時間については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [概要] よりエラーの発生した実行履歴の [開始時間] をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image004.png"></p>
+<h3 id="5-当該ロジック-アプリの入出力のスクリーンショット"><a href="#5-当該ロジック-アプリの入出力のスクリーンショット" class="headerlink" title="5. 当該ロジック アプリの入出力のスクリーンショット"></a>5. 当該ロジック アプリの入出力のスクリーンショット</h3><p><u><strong>提供方法：イメージ形式</strong></u><br>当該ロジック アプリの入出力のスクリーンショットについては、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [概要] よりエラーの発生した実行履歴を選択し、[ロジック アプリの実行] にて対象のアクションを展開いただき、対象アクションの入力と出力が表示されているスクリーンショットを取得します。アクションの全体が分かるように取得いただきますようお願いします。</p>
+<p>例 1<br><img src="/blog/LogicApps/TroubleLogCollection/image005.png"></p>
+<p>例 2<br><img src="/blog/LogicApps/TroubleLogCollection/image006.png"></p>
+<p>例 3<br><img src="/blog/LogicApps/TroubleLogCollection/image006-1.png"></p>
+<h3 id="6-当該ロジック-アプリの未加工入出力"><a href="#6-当該ロジック-アプリの未加工入出力" class="headerlink" title="6. 当該ロジック アプリの未加工入出力"></a>6. 当該ロジック アプリの未加工入出力</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの未加工入出力については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [概要] よりエラーの発生した実行履歴を選択し、[ロジック アプリの実行] にて対象のアクションを展開いただき、対象アクションの入力及び出力にて [未加工入力の表示]、[未加工出力の表示] を押下いただき出力されるテキストの内容をご確認下さい。未加工出力が存在していない場合、その旨をご連絡ください。</p>
+<p>・未加工入力の表示（未加工出力の表示がある場合はそちらも）のリンクを選択します。<br><img src="/blog/LogicApps/TroubleLogCollection/image007.png"></p>
+<p>・表示されているテキストの情報を全てコピーしてテキストファイルなどに貼り付けます。<br><img src="/blog/LogicApps/TroubleLogCollection/image008.png"></p>
+<h3 id="7-当該ロジック-アプリのコードビュー"><a href="#7-当該ロジック-アプリのコードビュー" class="headerlink" title="7. 当該ロジック アプリのコードビュー"></a>7. 当該ロジック アプリのコードビュー</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリのコードビューについて、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [開発ツール - ロジック アプリ コード ビュー] にて表示されますコード全文をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image009.png"></p>
+<p>以上を取得できましたら、弊社サポート エンジニアより連携させていただきます ファイル アップロード サイトにログをアップロード頂きますようお願いいたします。<br>従量課金タイプのログ取得については以上となります。</p>
+<p>続いて、Standard タイプの Logic Apps に関するログの提供依頼についてご案内申し上げます。</p>
+<h2 id="Standard-タイプの場合"><a href="#Standard-タイプの場合" class="headerlink" title="Standard タイプの場合"></a>Standard タイプの場合</h2><p>Standard タイプの場合、以下の情報についてご提供をお願いいたします。<br>ただし、Standard タイプの場合はステートフルのワークフローを利用しているとログが出力されませんので予めご留意ください。</p>
+<ol>
+<li>当該 Azure のサブスクリプション ID</li>
+<li>当該ロジック アプリのリソース情報</li>
+<li>当該ロジック アプリの識別子</li>
+<li>当該ロジック アプリの実行時間</li>
+<li>当該ロジック アプリの入出力のスクリーンショット</li>
+<li>当該ロジック アプリの未加工入出力</li>
+<li>当該ロジック アプリのコードビュー</li>
+</ol>
+<p>それでは取得方法についてご案内申し上げます。</p>
+<h3 id="1．当該-Azure-のサブスクリプション-ID-1"><a href="#1．当該-Azure-のサブスクリプション-ID-1" class="headerlink" title="1．当該 Azure のサブスクリプション ID"></a>1．当該 Azure のサブスクリプション ID</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該 Azure のサブスクリプション ID については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] より、概要欄のサブスクリプション ID をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image013.png"></p>
+<h3 id="2．当該ロジック-アプリのリソース情報-1"><a href="#2．当該ロジック-アプリのリソース情報-1" class="headerlink" title="2．当該ロジック アプリのリソース情報"></a>2．当該ロジック アプリのリソース情報</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該のリソース ID については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [設定 - プロパティ] に遷移いただき「リソース ID」に設定されているリソース ID をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image014.png"></p>
+<h3 id="3-当該ロジック-アプリの識別子-1"><a href="#3-当該ロジック-アプリの識別子-1" class="headerlink" title="3. 当該ロジック アプリの識別子"></a>3. 当該ロジック アプリの識別子</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの識別子については、 [Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [ワークフロー - ワークフロー] - [&lt;対象の ワークフロー&gt;] よりエラーの発生した実行履歴の [識別子] をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image015.png"></p>
+<h3 id="4-当該ロジック-アプリの実行時間-1"><a href="#4-当該ロジック-アプリの実行時間-1" class="headerlink" title="4. 当該ロジック アプリの実行時間"></a>4. 当該ロジック アプリの実行時間</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの実行時間については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [ワークフロー - ワークフロー] - [&lt;対象の ワークフロー&gt;] よりエラーの発生した実行履歴の [開始時間] をご確認下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image016.png"></p>
+<h3 id="5-当該ロジック-アプリの入出力のスクリーンショット-1"><a href="#5-当該ロジック-アプリの入出力のスクリーンショット-1" class="headerlink" title="5. 当該ロジック アプリの入出力のスクリーンショット"></a>5. 当該ロジック アプリの入出力のスクリーンショット</h3><p><u><strong>提供方法：イメージ形式</strong></u><br>当該ロジック アプリの入出力のスクリーンショットについては、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [ワークフロー - ワークフロー] - [&lt;対象の ワークフロー&gt;] よりエラーの発生した実行履歴を選択し、対象のアクションを展開いただき、対象アクションの入力と出力が表示されているスクリーンショットを取得します。画面の下部に見切れている部分も含めて、アクションの全体が分かるように取得いただきますようお願いします。</p>
+<p>例 1<br><img src="/blog/LogicApps/TroubleLogCollection/image018.png"></p>
+<p>例 2<br><img src="/blog/LogicApps/TroubleLogCollection/image019.png"></p>
+<h3 id="6-当該ロジック-アプリの未加工入出力-1"><a href="#6-当該ロジック-アプリの未加工入出力-1" class="headerlink" title="6. 当該ロジック アプリの未加工入出力"></a>6. 当該ロジック アプリの未加工入出力</h3><p><u><strong>提供方法：テキスト形式</strong></u><br>当該ロジック アプリの未加工入出力については、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [ワークフロー - ワークフロー] - [&lt;対象の ワークフロー&gt;] よりエラーの発生した実行履歴を選択し、対象のアクションを展開いただき、対象アクションの入力及び出力にて [未加工入力の表示]、[未加工出力の表示] を押下いただき出力されるテキストの内容をご確認下さい。未加工出力が存在していない場合、その旨をご連絡ください。</p>
+<p>・未加工入力の表示（未加工出力の表示がある場合はそちらも）のリンクを選択します。<br><img src="/blog/LogicApps/TroubleLogCollection/image026.png"></p>
+<p>・表示されているテキストの情報を全てコピーしてテキスト ファイルなどに貼り付けます。<br><img src="/blog/LogicApps/TroubleLogCollection/image027.png"></p>
+<h3 id="7-当該ロジック-アプリのコンテンツ"><a href="#7-当該ロジック-アプリのコンテンツ" class="headerlink" title="7. 当該ロジック アプリのコンテンツ"></a>7. 当該ロジック アプリのコンテンツ</h3><p><u><strong>提供方法：圧縮ファイル形式</strong></u><br>当該ロジック アプリのコンテンツについては、[Azure ポータル] - [Logic Apps] - [&lt;対象の Logic App&gt;] - [概要] - [アプリ コンテンツのダウンロード]より、アプリ設定を含めたコンテンツ一式の圧縮ファイルを提供下さい。<br><img src="/blog/LogicApps/TroubleLogCollection/image028.png"></p>
+<p><img src="/blog/LogicApps/TroubleLogCollection/image029.png"></p>
+<h2 id="その他関連ログ"><a href="#その他関連ログ" class="headerlink" title="その他関連ログ"></a>その他関連ログ</h2><p>必要に応じて、お客様のブラウザの操作における HAR ファイルや Standard Logic Apps のネットワーク キャプチャを取得いただく場合がございます。<br>その際の取得方法について、以下に記載いたしますので参考までにご確認下さい。</p>
+<h3 id="HAR-ファイルの取得依頼"><a href="#HAR-ファイルの取得依頼" class="headerlink" title="HAR ファイルの取得依頼"></a>HAR ファイルの取得依頼</h3><p><u><strong>提供方法：har 拡張子の形式</strong></u></p>
+<ol>
+<li><p>Microsoft Edge を起動します。</p>
+</li>
+<li><p>[F12] キーを押下し、表示されるペイン内にて、[Network] タブに移動して、データをキャプチャーしていることを確認します。<br>※ 以下のように、赤い丸が表示されておりましたら、キャプチャーが開始されております。<br><img src="/blog/LogicApps/TroubleLogCollection/image010.png"></p>
+</li>
+<li><p>[ログの保持 (もしくは Preserve log) ] にチェックを入れます。その後、以下のボタンをクリックして、現在のログを削除します。<br><img src="/blog/LogicApps/TroubleLogCollection/image011.png"></p>
+</li>
+<li><p>今回事象の発生している動作や、弊社サポートより連携させていただいた操作を実施し、結果を確認します。</p>
+</li>
+<li><p>[Network] タブに戻り、[Export HAR] をクリックします。<br><img src="/blog/LogicApps/TroubleLogCollection/image012.png"></p>
+</li>
+</ol>
+<p>エクスポートした HAR ファイルを弊社までお寄せください。</p>
+<h3 id="Standard-Logic-Apps-のパケットキャプチャ"><a href="#Standard-Logic-Apps-のパケットキャプチャ" class="headerlink" title="Standard Logic Apps のパケットキャプチャ"></a>Standard Logic Apps のパケットキャプチャ</h3><p><u><strong>提供方法：圧縮ファイル形式</strong></u></p>
+<ol>
+<li><p>以下のサイトより、「使ってみる」ボタンを押下し、事象の発生している Standard Logic Apps を参照可能なユーザーでサインインします。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/appservice/web-apps/start-network-trace?tabs=HTTP">Web Apps - Start Network Trace</a><br><img src="/blog/LogicApps/TroubleLogCollection/image020.png"></p>
+</li>
+<li><p>ネットワーク キャプチャの採取を開始します。設定項目については公開情報にも記載がございますが以下の通りとなります。<br>設定できましたら、画面下部の「実行」ボタンを押下します。</p>
+</li>
+</ol>
+<p>・name : Standard Logic Apps の名前<br>・resourceGroupName : Standard Logic Apps が存在するリソース グループ名<br>・subscriptionId : Standard Logic Apps が存在するサブスクリプション ID<br>・api-version : 変更なし<br><img src="/blog/LogicApps/TroubleLogCollection/image021.png"></p>
+<ol start="3">
+<li><p>対象の Standard Logic Apps を開き、ワークフローを実行して事象を再現します。</p>
+</li>
+<li><p>ワークフローの実行が完了しましたら、以下のサイトより、「使ってみる」ボタンを押下し、ネットワーク キャプチャの採取を終了します。こちらも設定項目は同様でございます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/rest/api/appservice/web-apps/stop-network-trace?tabs=HTTP">Web Apps - Stop Network Trace</a></p>
+</li>
+<li><p>ネットワーク キャプチャを取得します。<br>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [開発ツール - 高度なツール] と遷移し、「移動」ボタンを押下して Kudu を開きます。<br><img src="/blog/LogicApps/TroubleLogCollection/image022.png"></p>
+</li>
+<li><p>Kudu にログインできましたら、画面上部より「Debug console &gt; CMD」を選択します。<br><img src="/blog/LogicApps/TroubleLogCollection/image023.png"></p>
+</li>
+<li><p>停止いただくと、以下の通り / LogFiles / networktrace 内に Zip ファイルが生成されますので、出力されたファイル全てダウンロードします。<br><img src="/blog/LogicApps/TroubleLogCollection/image024.png"></p>
+</li>
+<li><p>ファイルのダウンロードは以下の通り画面左のダウンロード アイコンからお願いいたします。<br><img src="/blog/LogicApps/TroubleLogCollection/image025.png"></p>
+</li>
+</ol>
+<p>ダウンロードした圧縮ファイルを弊社までお寄せください。</p>
+<p>なお、上記でご案内いたしましたログについては、テキスト ファイルに個別に分割いただいても構いませんし、Excel ファイルにまとめていただいても結構でございますが、Word ファイルにまとめられると容量の都合上内容を確認出来ない場合がございますので、可能な限り Word での提供は避けていただけると幸いでございます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしました。Logic Apps の調査をご依頼の際はこちらの内容を基に本テクニカルサポートへお問合せいただければと思います。</p>
+<ul>
+<li>前提条件</li>
+<li>従量課金タイプの場合</li>
+<li>Standard タイプの場合</li>
+<li>その他関連ログ</li>
+<li>まとめ</li>
+</ul>
+<p>最後までお読みいただき、ありがとうございました！</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/TroubleLogCollection.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../MSMQ/MsmqEnd2Endlog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">MSMQ で End2End ログを取得する手順</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Logic Apps で障害調査時にサポート エンジニアへ連携するログの取得方法について</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqEnd2Endlog/">MSMQ で End2End ログを取得する手順</a>
+          </li>
+        
+          <li>
+            <a href="../HowToGetRowIdGS/">Google Sheets コネクタで行 ID を取得する方法</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-HeadFirst/">Logic Apps をこれから使い始めようという方へ</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-Functions/">Logic Apps で日付や時刻を判定してワークフローを制御する</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">39</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">39</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">33</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Storage-Account">Storage Account</a><span class="tag-list-count">2</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 12px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 12px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 10px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 14px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 12px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 18px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
