@@ -97,8 +97,8 @@ tags:
 
 最後に、VNet 統合にかかる環境変数の設定を行い、画面下部の [適用] ボタンを選択して保存します。
 Standard Logic Apps の [設定] - [環境変数] より、[アプリ設定] を選択し、以下の値を設定します。
-** ・設定値：WEBSITE_CONTENTOVERVNET **
-** ・値：1 **
+**・設定値：WEBSITE_CONTENTOVERVNET**
+**・値：1**
 
 ![](./SecBlobStandardLAPortal/image017.png)
 
