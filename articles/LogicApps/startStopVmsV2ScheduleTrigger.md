@@ -42,12 +42,12 @@ Logic Apps は無効化された状態でデプロイされておりますが、
 Logic Apps がデプロイされた時点では、「繰り返し (Recurrence)」トリガーの [開始時刻] パラメーターが設定されていないため、
 有効化されたタイミングで即座に実行するよう、予約済みの初回実行のジョブが既に作成されていることに起因いたします。
 
-※ デプロイ後かつ有効化前に [開始時刻] をご設定いただいた場合でも、既にジョブが作成されてしまっていますので、有効化後に起動してしまいます。
+※ デプロイ後かつ有効化前に [開始時刻] をご設定いただいた場合でも、既にジョブが作成されておりますので、有効化後に即時起動いたします。
 当該ツールのデプロイ方法およびトリガーの仕様に起因した事象でございます。
 ![](./startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger03.jpg)
 - 参考ドキュメント : [Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する # 繰り返しトリガーを追加する](https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption#add-the-recurrence-trigger)
 
-なお、Start/Stop VMs v2 機能ではなく、Logic Apps を Azure ポータル上で手動で作成し初めて「繰り返し (Recurrence)」トリガーを設定した場合におきましても、
+なお、Start/Stop VMs v2 機能ではなく、Logic Apps を Azure ポータル上で手動で作成し、初めて「繰り返し (Recurrence)」トリガーを設定した場合におきましても、
 [開始時刻] が設定されていない場合には Logic Apps 保存後に即時に起動いたします。
 即時起動後には、設定された値に基づいてトリガーが起動いたします。
 ![](./startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger04.jpg)
