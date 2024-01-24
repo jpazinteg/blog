@@ -24,12 +24,13 @@ Logic Apps では、組み込みのトリガーおよびアクションと、マ
 
 ### 組み込みのトリガーおよびアクション
 
-トリガーおよびアクション追加時に、「ビルトイン」タブに表示されるものになります。
 **<従量課金タイプ>**
+従量課金タイプでは、トリガーおよびアクション追加時に、「ビルトイン」タブに表示されるものになります。
 ![](./outboundIpaddress/outboundIpaddress01.jpg)
 
 **<Standard タイプ>**
-![](./outboundIpaddress/outboundIpaddress02.jpg)
+Standard タイプでは、「ランタイム」にて「アプリ内」を選択した際に表示されるものになります。
+![](./outboundIpaddress/outboundIpaddress14.jpg)
 - 参考ドキュメント : [Azure Logic Apps の組み込みコネクタ # 従量課金と Standard の組み込みコネクタの比較](https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard)
 
 ### マネージド コネクタ
@@ -40,8 +41,8 @@ Logic Apps では、組み込みのトリガーおよびアクションと、マ
 ![](./outboundIpaddress/outboundIpaddress04.jpg)
 
 **<Standard タイプ>**
-Standard タイプでは、「Azure」タブに表示されるものになります。
-![](./outboundIpaddress/outboundIpaddress05.jpg)
+Standard タイプでは、「ランタイム」にて「Shared」を選択した際に表示されるものになります。
+![](./outboundIpaddress/outboundIpaddress15.jpg)
 
 - 参考ドキュメント : [Azure Logic Apps のマネージド コネクタ](https://learn.microsoft.com/ja-jp/azure/connectors/managed)
 
