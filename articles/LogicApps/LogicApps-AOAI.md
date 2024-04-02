@@ -40,7 +40,7 @@ tags:
 
 ### ワークフロー
 
-> Azure OpenAI Service は、GPT-4、GPT-4 Turbo with Vision、GPT-3.5-Turbo、Embeddingsモデルシリーズを含むOpenAIの強力な言語モデルへのアクセスを提供します。
+> Azure OpenAI Service は、GPT-4、GPT-4 Turbo with Vision、GPT-3.5-Turbo、Embeddings モデルシリーズを含む OpenAI の強力な言語モデルへのアクセスを提供します。
 
 以下のようなアクションが用意されています。
 
@@ -48,7 +48,7 @@ tags:
 - Gets a single embedding
 - Gets the chat completions
 
-ここでは「Gets the chat completions」でチャット メッセージをやり取りしてみます。
+ここでは 「Gets the chat completions」 でチャット メッセージをやり取りしてみます。
 
 ![](./LogicApps-AOAI/LogicApps-AOAI-1.png)
 
