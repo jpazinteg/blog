@@ -52,7 +52,7 @@ Standard タイプでは、「ランタイム」にて「Shared」を選択し�
 **<従量課金タイプ>**
 従量課金タイプの Logic Apps において「HTTP」アクションのような組み込みアクションで利用されます送信 IP アドレスは、
 以下の公開情報の該当リージョンのものとなります。
-- 参考ドキュメント : [Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal#multi-tenant---outbound-ip-addresses)
+- 参考ドキュメント : [Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal#multitenant---outbound-ip-addresses)
 
 たとえば、東日本リージョンに Logic Apps を配置されている場合、以下が対象となります。
 ファイアウォール等で受信ルールをご設定いただいている場合には、該当リージョンのすべての IP アドレスを許可いただく必要がございます。
@@ -99,7 +99,7 @@ Logic Apps に関連するサービス タグは以下になります。
 
 ## IP アドレスの変更
 以下に記載の送信 IP アドレスは、過去に変更された事例がございます。
-- 参考ドキュメント : [Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal#multi-tenant---outbound-ip-addresses)
+- 参考ドキュメント : [Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption%2Cazure-portal#multitenant---outbound-ip-addresses)
 - 参考ドキュメント : [マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps](https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps)
 
 Azure のサブスクリプション管理者宛てにメールでの通知、およびサービス正常性での通知が行われましたので、
