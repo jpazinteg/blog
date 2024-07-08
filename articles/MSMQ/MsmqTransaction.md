@@ -85,7 +85,7 @@ $tran.Commit()
 
 ## MSMQ のトランザクション メッセージ再試行
 
-コマンドの違いとしては上の通り、begin ～ commit にてメッセージを囲むことで「順序通りに送る」ことを保証できる点にありますが、内部的にも、トランザクション メッセージは以下のような振る舞いをいたします。
+コマンドの違いとしては上の通り、メッセージの送信処理の前後でトランザクションの開始、コミットを記述することで「順序通りに送る」ことを保証できる点にありますが、内部的にも、トランザクション メッセージは以下のような振る舞いをいたします。
 
 MSMQのトランザクション メッセージは、トランザクションの完了を確認するために内部の order_queue$ というキューを使用します。通常、トランザクションの order_queue$ への ack は、MSMQ クライアントが確立したのと同じ TCP セッションで送り返されます。
 
@@ -108,6 +108,10 @@ The value of this entry specifies the interval between resends for the first thr
 - SeqResend46Time:試行4-6 回:300秒(5分):[SeqResend46Time | Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957505(v=technet.10)?redirectedfrom=MSDN)
 - SeqResend79Time:試行7-9 回:1800秒(30分):[SeqResend79Time | Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957506(v=technet.10)?redirectedfrom=MSDN)
 - SeqResend10Time:試行10+ 回:21600秒(6時間):[SeqResend10Time | Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957503(v=technet.10)?redirectedfrom=MSDN)
+
+
+関連: [Message Queuing Transactions | Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msmq/ms699870(v=vs.85))
+
 
 以上、トランザクション メッセージの特徴として、参考になりましたら幸いです。
 
