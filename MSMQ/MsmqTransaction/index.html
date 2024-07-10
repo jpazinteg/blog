@@ -4,32 +4,27 @@
   <meta charset="utf-8">
   
   
-  <title>Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技 | Japan Azure Integration Support Blog</title>
+  <title>MSMQ のトランザクション メッセージ | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。 例えば、以下のように Azure Portal のデザイナーから">
+  <meta name="description" content="こんにちは！Azure Integration サポート チームの 山田 です。Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。今回は Windows に含まれる MSMQ というサービスのメッセージの種類についてご紹介します。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/index.html">
+<meta property="og:title" content="MSMQ のトランザクション メッセージ">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。   Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。 例えば、以下のように Azure Portal のデザイナーから">
+<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 山田 です。Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。今回は Windows に含まれる MSMQ というサービスのメッセージの種類についてご紹介します。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image01.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image02.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image03.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image04.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image05.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image06.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image07.png">
-<meta property="article:published_time" content="2023-01-17T15:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-10T09:37:52.420Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-3.png">
+<meta property="article:published_time" content="2024-07-09T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-10T09:37:52.464Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Azure Automation">
+<meta property="article:tag" content="MSMQ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/image01.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -91,7 +86,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/Utf82SJIS" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-MSMQ/MsmqTransaction" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -100,7 +95,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Azure Logic Apps と Azure Automation でファイルの文字コードを変更する小技
+      MSMQ のトランザクション メッセージ
     </h1>
   
 
@@ -108,58 +103,89 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2023-01-17T15:00:00.000Z" itemprop="datePublished">2023-01-18</time>
+  <time datetime="2024-07-09T15:00:00.000Z" itemprop="datePublished">2024-07-10</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+48218c0a-ed12-5898-aa78-3881cc22bcbe%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%A8+Azure+Automation+%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%96%87%E5%AD%97%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B%E5%B0%8F%E6%8A%80%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FUtf82SJIS%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FUtf82SJIS.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FUtf82SJIS.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d7cb2729-70be-52a3-a575-8b2317fe8b9b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMSMQ+%E3%81%AE%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3+%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FMSMQ%2FMsmqTransaction%2F%29%0A*+Content+Source%3A+%5Barticles%2FMSMQ%2FMsmqTransaction.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FMSMQ%2FMsmqTransaction.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="clyfnd1n5001n0npn1us76ys9" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/" data-id="clyfnd1me00040npnekhsd4kl" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
-<p>Azure Logic Apps でファイル コンテンツを取り扱う場合に文字コードを任意の文字コードに設定されたい場合があるかと思います。<br>しかしながら、Azure Logic Apps では文字コードを変更することが出来かねる仕様となっております。</p>
-<p>例えば、以下のように Azure Portal のデザイナーからファイルを新規作成した場合はデザイナーの仕様上、ファイルは UTF-8 として作成されます。<br><img src="/blog/LogicApps/Utf82SJIS/image01.png"></p>
-<p>作成されたファイル<br><img src="/blog/LogicApps/Utf82SJIS/image02.png"></p>
-<p>一方、以下の “BLOB コンテンツを取得する (V2)” ように既に作成されているファイルをコンテンツとして取得した場合、元の文字コードが維持されます。例えば、”test.csv” の文字コードが SJIS だった場合、SJIS のコンテンツとして扱われ、Azure Logic Apps では文字コードを変更することが出来ません。<br><img src="/blog/LogicApps/Utf82SJIS/image03.png"></p>
-<p>今回は Azure Logic Apps と Azure Automation を用いて、ファイルの文字コードを変更する小技をご案内しようと思います。<br>なお、本ブログでご案内する仕組みについてはあくまで参考情報となります。こちらをお客様の商用環境でご利用になる場合は十分にお客様環境で検証いただき、設計および製造、試験をお客様の責任で実施いただきますようお願い申し上げます。</p>
+        <p>こんにちは！Azure Integration サポート チームの 山田 です。<br>Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。今回は Windows に含まれる MSMQ というサービスのメッセージの種類についてご紹介します。</p>
 <span id="more"></span>
 
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>前提条件</li>
-<li>Azure Automation の設定方法とサンプルコード</li>
-<li>Azure Logic Apps の設定方法</li>
+<li>MSMQ について</li>
+<li>MSMQ のトランザクション メッセージ</li>
+<li>MSMQ のトランザクション メッセージ送信</li>
+<li>MSMQ のトランザクション メッセージ再試行</li>
 <li>まとめ</li>
 </ul>
-<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>今回ご案内させていただく小技では、ファイルの格納先をストレージ アカウント (Blob コンテナー)とします。<br>また、Azure Automation ではストレージ アカウントのモジュールを有効にし、Runbook の種類として PowerShell (ランタイム バージョン 5.1) を利用します。<br>Azure Logic Apps については従量課金タイプを利用致します。</p>
-<h2 id="Azure-Automation-の設定方法とサンプルコード"><a href="#Azure-Automation-の設定方法とサンプルコード" class="headerlink" title="Azure Automation の設定方法とサンプルコード"></a>Azure Automation の設定方法とサンプルコード</h2><p>まず、Azure Automation で Automation アカウントを構築いただき、[アカウント設定] - [ID] より “システム割り当て済み” のマネージド ID の状態を オンにします。<br><img src="/blog/LogicApps/Utf82SJIS/image04.png"></p>
-<p>その後、”ストレージ アカウント共同作成者” 等のストレージ アカウントを操作可能な権限を付与いたします。本構成では “共同作成者” の権限を付与しております。<br><img src="/blog/LogicApps/Utf82SJIS/image05.png"></p>
-<p>次に、任意の名前で Runbook を作成いただきます。<br><img src="/blog/LogicApps/Utf82SJIS/image06.png"></p>
-<p>＜設定値＞<br>・名前 : 任意<br>・Runbook の種類 : PowerShell<br>・ランタイム バージョン : 5.1 (2023/01/17 現在で 7.1 がプレビューであるため)<br>・説明 : 任意</p>
-<p>作成できましたら、以下のサンプルコードを基にスクリプトを構築いたします。</p>
-<p>・RunBook のサンプル（※こちらはあくまでもサンプルでございます。お客様の責任にて採用判断をお願いいたします。）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">Param</span><br><span class="line">(</span><br><span class="line">  [Parameter (Mandatory= $true)]</span><br><span class="line">  [String] $Blob,</span><br><span class="line">  [Parameter (Mandatory= $true)]</span><br><span class="line">  [String] $Container</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Disable-AzContextAutosave -Scope Process</span><br><span class="line">$AzureContext = (Connect-AzAccount -Identity).context</span><br><span class="line">Set-AzContext -SubscriptionName $AzureContext.Subscription -DefaultProfile $AzureContext</span><br><span class="line"></span><br><span class="line"># Storage Acount information (任意のものに変更)</span><br><span class="line">$resourceGroup = &quot;●●●●&quot; #ストレージアカウントのリソースグループ名 </span><br><span class="line">$storageaccountName = &quot;●●●●&quot; #ストレージアカウント名</span><br><span class="line"></span><br><span class="line"># ファイル変換設定</span><br><span class="line">$CurrentPath = (pwd).path</span><br><span class="line">$EncodeTo = &quot;Shift-JIS&quot;</span><br><span class="line">$EncodingFrom = &quot;UTF-8&quot;</span><br><span class="line">$inputFileName = &quot;$&#123;CurrentPath&#125;\$&#123;Blob&#125;&quot;</span><br><span class="line">$outputFileName = &quot;$&#123;CurrentPath&#125;\SJIS_$&#123;Blob&#125;&quot;</span><br><span class="line"># Get csv from Storage Account</span><br><span class="line">$storageAccount = Get-AzStorageAccount -ResourceGroupName $resourceGroup -Name $storageaccountName</span><br><span class="line">$ctx = $storageAccount.Context</span><br><span class="line">Get-AzStorageBlobContent -Context $ctx -Blob $Blob -Container $Container -Path $CurrentPath</span><br><span class="line"></span><br><span class="line"># Transform</span><br><span class="line">$enc_t = [Text.Encoding]::GetEncoding($EncodeTo)</span><br><span class="line">$enc_f = [Text.Encoding]::GetEncoding($EncodingFrom)</span><br><span class="line"></span><br><span class="line"># 変換元ファイルをStreamReaderオブジェクトで読み込み</span><br><span class="line">$reader = New-Object IO.StreamReader($inputFileName, $enc_f)</span><br><span class="line"></span><br><span class="line"># 保存先ファイルをStreamWriterオブジェクトでオープン</span><br><span class="line">$writer = New-Object IO.StreamWriter($outputFileName, $false, $enc_t)</span><br><span class="line"></span><br><span class="line"># 変換元ファイルを順に読み込み、保存先ファイルに書き込み</span><br><span class="line">while(!$reader.EndOfStream)&#123;$writer.WriteLine($reader.ReadLine())&#125;</span><br><span class="line"></span><br><span class="line"># ファイルをすべてクローズ</span><br><span class="line">$reader.Close()</span><br><span class="line">$writer.Close()</span><br><span class="line"></span><br><span class="line"># Upload file</span><br><span class="line">Set-AzStorageBlobContent -File &quot;.\SJIS_$&#123;Blob&#125;&quot; -Container $Container -Blob &quot;SJIS_$&#123;Blob&#125;&quot; -Context $ctx</span><br></pre></td></tr></table></figure>
+<h2 id="MSMQ-について"><a href="#MSMQ-について" class="headerlink" title="MSMQ について"></a>MSMQ について</h2><p>MSMQ とは、弊社が提供するオンプレミス製品のメッセージ キューイング サービスです。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
+</ul>
+<blockquote>
+<p>Message Queuing (MSMQ) technology enables applications running at different times to communicate across heterogeneous networks and systems that may be temporarily offline. Applications send messages to queues and read messages from queues. </p>
+</blockquote>
+<blockquote>
+<p>(翻訳) メッセージ キューイング（MSMQ）技術は、異なる時間に実行されるアプリケーションが、異種ネットワークや一時的にオフラインになる可能性のあるシステム間で通信することを可能にします。アプリケーションはキューにメッセージを送信し、キューからメッセージを読み取ります。</p>
+</blockquote>
+<ul>
+<li><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/">MSMQ を有効化する手順・メッセージを送受信する手順 | Japan Azure Integration Support Blog</a></li>
+<li><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/">MSMQ をドメイン モードでインストールする手順について | Japan Azure Integration Support Blog</a> </li>
+<li><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqEnd2Endlog/">MSMQ で End2End ログを取得する手順 | Japan Azure Integration Support Blog</a></li>
+</ul>
+<p>上記にも関連記事がございます。</p>
+<h2 id="MSMQ-のトランザクション-メッセージ"><a href="#MSMQ-のトランザクション-メッセージ" class="headerlink" title="MSMQ のトランザクション メッセージ"></a>MSMQ のトランザクション メッセージ</h2><p>トランザクション キューで扱われるメッセージと、非トランザクション キューで扱われるメッセージの違いについてご説明します。端的にトランザクション キューでは、「順序を保証する」点が特徴になります。</p>
+<p>以下のようなドキュメントをご覧いただけます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/feature-details/queuing-in-wcf#msmq">WCF でのキュー - WCF | Microsoft Learn</a></p>
+<blockquote>
+<p>MSMQ では、キューをトランザクションまたは非トランザクションとして設定できます。<br>トランザクション キューの場合、トランザクションによるメッセージの取り込みと配信が可能です。<br>メッセージは、キューに永続的に格納されます。トランザクション キューに送信されたメッセージは、正確に 1 回だけ、順序どおりに転送されます。 </p>
+</blockquote>
+<blockquote>
+<p>非トランザクション キューを使用すると、揮発性メッセージと非揮発性メッセージの両方を送信できます。非トランザクション キューに送信されたメッセージには、信頼できる転送保証がありません。したがって、メッセージが失われる可能性があります。</p>
+</blockquote>
+<p>それぞれ以下から確認いただけます。</p>
+<h3 id="トランザクション-キュー"><a href="#トランザクション-キュー" class="headerlink" title="トランザクション キュー"></a>トランザクション キュー</h3><p><img src="/blog/MSMQ/MsmqTransaction/MsmqTransaction-1.png"></p>
+<h3 id="非トランザクション-キュー"><a href="#非トランザクション-キュー" class="headerlink" title="非トランザクション キュー"></a>非トランザクション キュー</h3><p><img src="/blog/MSMQ/MsmqTransaction/MsmqTransaction-2.png"></p>
+<h2 id="MSMQ-のトランザクション-メッセージ送信"><a href="#MSMQ-のトランザクション-メッセージ送信" class="headerlink" title="MSMQ のトランザクション メッセージ送信"></a>MSMQ のトランザクション メッセージ送信</h2><p>以下は、トランザクション キューに PowerShell にてメッセージを送信するサンプルです。</p>
+<h3 id="トランザクション-メッセージ送信コマンド例"><a href="#トランザクション-メッセージ送信コマンド例" class="headerlink" title="トランザクション メッセージ送信コマンド例"></a>トランザクション メッセージ送信コマンド例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[System.Reflection.Assembly]::LoadWithPartialName(&quot;System.Messaging&quot;)</span><br><span class="line">$queuePath = &quot;FormatName:Direct=OS:&lt;送信先 コンピューター名&gt;\private$\&lt;キュー名&gt;&quot;</span><br><span class="line">$mq = new-object System.Messaging.MessageQueue($queuePath)</span><br><span class="line">$tran = new-object System.Messaging.MessageQueueTransaction;</span><br><span class="line">$tran.Begin()</span><br><span class="line">$mq.Send(&quot;Hello transaction 1&quot;, $tran)</span><br><span class="line">$mq.Send(&quot;Hello transaction 2&quot;, $tran)</span><br><span class="line">$tran.Commit()</span><br></pre></td></tr></table></figure>
 
-<p>以上のスクリプトをご利用いただくことで、ストレージ アカウントからファイルを取得し、文字コードを変更後にリネームして再度ストレージ アカウントへアップロードすることが可能でございます。</p>
-<p>Azure Automation の設定としましては以上となります。</p>
-<h2 id="Azure-Logic-Apps-の設定方法"><a href="#Azure-Logic-Apps-の設定方法" class="headerlink" title="Azure Logic Apps の設定方法"></a>Azure Logic Apps の設定方法</h2><p>次に、Azure Logic Apps 側の設定となります。<br>本記事では従量課金タイプの Azure Logic Apps にて、以下のアクションを利用いたします。</p>
+<h3 id="非トランザクション-メッセージ送信コマンド例"><a href="#非トランザクション-メッセージ送信コマンド例" class="headerlink" title="非トランザクション メッセージ送信コマンド例"></a>非トランザクション メッセージ送信コマンド例</h3><p>以下記事で非トランザクション キューに PowerShell にてメッセージを送信するサンプルを紹介しています。合わせてご覧ください。</p>
+<p><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/">MSMQ を有効化する手順・メッセージを送受信する手順 | Japan Azure Integration Support Blog</a></p>
+<h2 id="MSMQ-のトランザクション-メッセージ再試行"><a href="#MSMQ-のトランザクション-メッセージ再試行" class="headerlink" title="MSMQ のトランザクション メッセージ再試行"></a>MSMQ のトランザクション メッセージ再試行</h2><p>コマンドの違いとしては上の通り、メッセージの送信処理の前後でトランザクションの開始、コミットを記述することで「順序通りに送る」ことを保証できる点にありますが、内部的にも、トランザクション メッセージは以下のような振る舞いをいたします。</p>
+<p>MSMQのトランザクション メッセージは、トランザクションの完了を確認するために内部の order_queue$ というキューを使用します。通常、トランザクションの order_queue$ への ack は、MSMQ クライアントが確立したのと同じ TCP セッションで送り返されます。</p>
+<p>トランザクション メッセージを送信すると、受信したサーバーから送信元の order_queue$ へ返答を送り返していることが分かります。</p>
+<p><img src="/blog/MSMQ/MsmqTransaction/MsmqTransaction-3.png"></p>
+<p>一方、一般的なネットワーク・通信エラーやその他の問題が発生した場合、TCP セッションが切断される状況もあります。その場合、送信された返答は送信キューに入れられますが、MSMQ 送信メッセージの送信再試行ポリシーで再試行されます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></p>
+<blockquote>
+<p>Determines how often outgoing, transacted messages are resent because they are unacknowledged.<br>The value of this entry specifies the interval between resends for the first three times the message is resent. If, after the third resend, the sender still does not receive an acknowledgement from the intended recipient, the message is resent at intervals determined by the values of the following entries: SeqResend46Time , SeqResend79Time , SeqResend10Time</p>
+</blockquote>
+<blockquote>
+<p>(翻訳) 送信されたトランザクション・メッセージが再送される頻度を指定します。このエントリの値は、メッセージが再送される最初の3回の再送間隔を指定します。3回目の再送の後、送信者がまだ意図した受信者から確認応答を受け取らない場合、メッセージは以下のエントリの値で決まる間隔で再送されます： SeqResend46Time , SeqResend79Time , SeqResend10Time</p>
+</blockquote>
+<p>既定では、MSMQ は以下の間隔でメッセージの再送信を試みます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azureautomation/#%E3%82%B8%E3%83%A7%E3%83%96%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B">Azure Automation # ジョブを作成する</a></li>
+<li>SeqResend13Time:試行1-3 回:30秒:<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></li>
+<li>SeqResend46Time:試行4-6 回:300秒(5分):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957505(v=technet.10)?redirectedfrom=MSDN">SeqResend46Time | Microsoft Learn</a></li>
+<li>SeqResend79Time:試行7-9 回:1800秒(30分):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957506(v=technet.10)?redirectedfrom=MSDN">SeqResend79Time | Microsoft Learn</a></li>
+<li>SeqResend10Time:試行10+ 回:21600秒(6時間):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957503(v=technet.10)?redirectedfrom=MSDN">SeqResend10Time | Microsoft Learn</a></li>
 </ul>
-<p>こちらの設定につきましては以下の通りの設定を実施いただきます。<br><img src="/blog/LogicApps/Utf82SJIS/image07.png"></p>
-<p>＜設定値＞<br>・サブスクリプション : Azure Automation の Automation アカウントが存在するサブスクリプション。<br>・リソース グループ :  Azure Automation の Automation アカウントが存在するリソース グループ。<br>・Automation アカウント : 先ほど Runbook を作成した Automation アカウント<br>・ジョブの待機 : 任意<br>・Runbook 名 : 先ほど作成した Runbook<br>– Runbook Parameter<br>・BLOB : 文字コードを変更したいファイル名。必要に応じて動的コンテンツでファイル名を指定願います。<br>・CONTAINER : Blob コンテナ名</p>
-<p>以上より、先ほど作成した Runbook を Azure Logic Apps から呼び出すことが可能でございます。<br>こちらの ワークフローを実行することで、PowerShell で作り込める範囲には限りますが、既存のファイルに対して文字コードを変更することが可能でございます。</p>
-<p>設定内容としては以上となります。<br>こちらを参考に、お客様の環境におきましても検証および設計試験等実施いただいたうえで採用要否についてご検討いただければと思います。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
+<p>関連: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msmq/ms699870(v=vs.85)">Message Queuing Transactions | Microsoft Learn</a></p>
+<p>以上、トランザクション メッセージの特徴として、参考になりましたら幸いです。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしました。</p>
 <ul>
-<li>前提条件</li>
-<li>Azure Automation の設定方法とサンプルコード</li>
-<li>Azure Logic Apps の設定方法</li>
+<li>MSMQ について</li>
+<li>MSMQ のトランザクション メッセージ</li>
+<li>MSMQ のトランザクション メッセージ送信</li>
+<li>MSMQ のトランザクション メッセージ再試行</li>
 </ul>
-<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>トランザクション メッセージの活用と、オンプレミス製品 MSMQ についてご理解の一助として、本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
 
       
       
@@ -173,10 +199,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/Utf82SJIS.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/MSMQ/MsmqTransaction.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -184,19 +210,10 @@
     
 <nav id="article-nav">
   
-    <a href="../FlowHistoryClearner/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Logic Apps Standard のワークフロー実行ログを削除する
-        
-      </div>
-    </a>
   
-  
-    <a href="../ConditionsTips/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../../LogicApps/LogicApps-AOAI/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Azure Logic Apps の 条件アクションに関するTips</div>
+      <div class="article-nav-title">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</div>
     </a>
   
 </nav>
@@ -215,23 +232,23 @@
       <ul>
         
           <li>
-            <a href="../../MSMQ/MsmqTransaction/">MSMQ のトランザクション メッセージ</a>
+            <a href="">MSMQ のトランザクション メッセージ</a>
           </li>
         
           <li>
-            <a href="../LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
+            <a href="../../LogicApps/LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
           </li>
         
           <li>
-            <a href="../startStopVmsV2ScheduleTrigger/">Start/Stop VMs v2 で Logic Apps が即時起動してしまう事象について</a>
+            <a href="../../LogicApps/startStopVmsV2ScheduleTrigger/">Start/Stop VMs v2 で Logic Apps が即時起動してしまう事象について</a>
           </li>
         
           <li>
-            <a href="../SecBlobStandardLAPortal/">Azure Portal からファイアウォール設定配下のストレージ アカウントに Standard Logic Apps を作成する方法</a>
+            <a href="../../LogicApps/SecBlobStandardLAPortal/">Azure Portal からファイアウォール設定配下のストレージ アカウントに Standard Logic Apps を作成する方法</a>
           </li>
         
           <li>
-            <a href="../TroubleLogCollection/">Logic Apps の調査時にサポート エンジニアへ連携するログの取得方法について</a>
+            <a href="../../LogicApps/TroubleLogCollection/">Logic Apps の調査時にサポート エンジニアへ連携するログの取得方法について</a>
           </li>
         
       </ul>
