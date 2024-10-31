@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>従量課金版 Azure Logic Apps の料金体系を理解するポイント | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="従量課金版 Azure Logic Apps の料金体系を理解するポイント">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png">
+<meta property="article:published_time" content="2024-11-01T07:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-31T07:20:24.392Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/LogicApps-ConsumptionPricing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      従量課金版 Azure Logic Apps の料金体系を理解するポイント
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-11-01T07:00:00.000Z" itemprop="datePublished">2024-11-01</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+6dbcd116-7bcb-5fd5-b11e-1bfdca6961f6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E7%89%88+Azure+Logic+Apps+%E3%81%AE%E6%96%99%E9%87%91%E4%BD%93%E7%B3%BB%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-ConsumptionPricing%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/" data-id="cm2wz7iuh000i0nkwepug3gdi" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！ Azure Integration サポート チームの山田です。<br>Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>従量課金版 Azure Logic Apps の料金体系を理解するポイント<ul>
+<li>Logic Apps の価格表 (2024 年 10 月の例) </li>
+<li>アクション と コネクタ について</li>
+<li>データ保持 について</li>
+<li>メトリック について</li>
+<li>Azure Logic Apps の使用量の計測、課金、価格のしくみ</li>
+<li>料金計算ツール について</li>
+</ul>
+</li>
+<li>まとめ</li>
+</ul>
+<h2 id="従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント"><a href="#従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント" class="headerlink" title="従量課金版 Azure Logic Apps の料金体系を理解するポイント"></a>従量課金版 Azure Logic Apps の料金体系を理解するポイント</h2><h3 id="Logic-Apps-の価格表-2024-年-10-月の例"><a href="#Logic-Apps-の価格表-2024-年-10-月の例" class="headerlink" title="Logic Apps の価格表 (2024 年 10 月の例)"></a>Logic Apps の価格表 (2024 年 10 月の例)</h3><p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a></p>
+<p>以下例では 2024 年 10 月の料金に基づいて記載しております。主要なところを (1)～(4) に分けてお考えいただけます。</p>
+<ol>
+<li>アクション = ¥0.004055 × 実行回数 (ただし、組み込みアクションの最初の 4000 回は毎月無料です。)</li>
+<li>Standard コネクタ = ¥0.018825 × 通話 (呼び出し) 回数</li>
+<li>エンタープライズ コネクタ = ¥0.144805 × 通話 (呼び出し) 回数</li>
+<li>データ保持 = ¥17.38 GB/月</li>
+</ol>
+<p>通話 とはチャンクなどにより 1 つのアクションで複数回呼び出し (Call、通信) される場合があるための単位とお考えください。</p>
+<p>価格表:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png"></p>
+<h3 id="アクション-と-コネクタ-について"><a href="#アクション-と-コネクタ-について" class="headerlink" title="アクション と コネクタ について"></a>アクション と コネクタ について</h3><p>前提といたしまして、Logic Apps のコネクタには、組み込みコネクタとマネージド コネクタがあります。<br>従量課金版における価格記載の「アクション」(価格表の (1)) とは、組み込みコネクタの実行数を意味した記述となります。一方の「Standard コネクタ」、「エンタープライズ コネクタ」はマネージド コネクタとなります。<br>組み込みコネクタとマネージド コネクタの機能的な比較は以下にございます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/introduction#built-in-connectors-versus-managed-connectors">コネクタとは - Azure Logic Apps | Microsoft Learn</a></p>
+<blockquote>
+<p>組み込みコネクタは、直接 Azure Logic Apps 内でネイティブで動作するよう作られています。<br>マネージド コネクタは、Microsoft によって Azure でデプロイ、ホスト、管理されます。<br>マネージド コネクタはほとんどが、基になるサービスまたはシステムが Azure Logic Apps と通信するために使用する API のプロキシまたはラッパーを提供します。</p>
+</blockquote>
+<p>マネージド コネクタのうち、コネクタの種類が Standard コネクタ (価格表の (2)) であるか、エンタープライズ コネクタ (価格表の (3)) であるかにつきましては、コネクタの公開情報から確認いただけます。</p>
+<p>Standard コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azureblob/">Azure Blob Storage - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png"></p>
+<p>エンタープライズ コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/mq/">MQ - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png"></p>
+<p>これを トリガー と アクション に分けておまとめしますと以下となります。</p>
+<p><strong>&lt;トリガー&gt;</strong></p>
+<ul>
+<li>組み込みコネクタのトリガー：無課金</li>
+<li>Standard コネクタのトリガー：<strong>価格表の (2)</strong> に該当</li>
+<li>エンタープライズ コネクタのトリガー： <strong>価格表の (3)</strong> に該当</li>
+</ul>
+<p><strong>&lt;アクション&gt;</strong></p>
+<ul>
+<li>組み込みコネクタのアクション： <strong>価格表の (1)</strong> に該当</li>
+<li>Standard コネクタのアクション： <strong>価格表の (2)</strong> に該当</li>
+<li>エンタープライズ コネクタのアクション： <strong>価格表の (3)</strong> に該当</li>
+</ul>
+<h3 id="データ保持-について"><a href="#データ保持-について" class="headerlink" title="データ保持 について"></a>データ保持 について</h3><p><strong>価格表の(4)</strong> 、データ保持 については以下となります。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/plan-manage-costs#storage-operations-and-costs">Azure Logic Apps のコストの管理を計画する - Azure Logic Apps | Microsoft Learn</a></p>
+<blockquote>
+<p>Azure Logic Apps では、すべてのストレージ操作に Azure Storage を使用します。 マルチテナントの Azure Logic Apps では、すべてのストレージの使用およびコストがロジック アプリに関連付けられます。 データ保持とストレージ消費によって固定価格モデルを使用するコストが発生します。 たとえば、実行履歴からの入力と出力はバックグラウンド ストレージに保持されます。これは、ロジック アプリから独立して作成、管理、アクセスするストレージ リソースとは異なります。</p>
+</blockquote>
+<p>メトリックの Billing Usage for Storage Consumption Executions が、課金対象のデータを保持した際のデータ サイズとなります。<br>またこのデータ サイズは、Logic Apps 実行履歴のアクションの入力と出力のテキスト サイズからも計算いただけます。</p>
+<p>以上 (1)～(4) が、従量課金版 Azure Logic Apps の料金体系の主要なところとなります。</p>
+<h3 id="メトリック-について"><a href="#メトリック-について" class="headerlink" title="メトリック について"></a>メトリック について</h3><p>ここまでの内容を踏まえメトリックにて、以下を確認いただけます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-logic-workflows-metrics">サポートされているメトリック - Microsoft.Logic/Workflows - Azure Monitor | Microsoft Learn</a></p>
+<ul>
+<li>課金対象のアクションの実行 … Billable Action Executions</li>
+<li>課金対象のトリガーの実行 … Billable Trigger Executions</li>
+<li>ネイティブ操作実行の利用状況に応じた課金 … Billing Usage for Native Operation</li>
+<li>標準コネクタ実行の利用状況に応じた課金 … Billing Usage for Standard Connector</li>
+<li>ストレージ消費の利用状況に応じた課金 … Billing Usage for Storage Consumption</li>
+<li>課金対象の実行の合計数 … Total Billable Executions</li>
+</ul>
+<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png"></p>
+<h3 id="Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ"><a href="#Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ" class="headerlink" title="Azure Logic Apps の使用量の計測、課金、価格のしくみ"></a>Azure Logic Apps の使用量の計測、課金、価格のしくみ</h3><p>また Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて、以下ドキュメントにて網羅的にご覧いただけます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing">使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn</a></p>
+<blockquote>
+<p>Azure Logic Apps を使用して、スケーリング可能な自動化された統合ワークフローをクラウドに作成して実行できます。この記事では、Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて説明します。具体的な価格、コスト計画、さまざまなホスティング環境などの情報については、次のコンテンツを確認してください。</p>
+</blockquote>
+<h3 id="料金計算ツール-について"><a href="#料金計算ツール-について" class="headerlink" title="料金計算ツール について"></a>料金計算ツール について</h3><p>ほか 料金計算ツール にて概算を確認いただけます。</p>
+<p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/calculator/?service=logic-apps">料金計算ツール | Microsoft Azure</a></p>
+<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png"></p>
+<p>最後にはなりますが、ツールに基づくお見積りは概算となり、具体的なリソースのご利用状況によって増減する可能性もございます。Logic Apps の調査をご依頼の際は以下記事もご参考に、本テクニカル サポートへお問合せいただければ大変うれしく思います。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/">Logic Apps の調査時にサポート エンジニアへ連携するログの取得方法について | Japan Azure Integration Support Blog</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a> のドキュメントを基に、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介しました。Logic Apps のご利用検討時、皆様のご参考になれば幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-ConsumptionPricing.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../../MSMQ/MsmqTransaction/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">MSMQ のトランザクション メッセージ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqTransaction/">MSMQ のトランザクション メッセージ</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
+          </li>
+        
+          <li>
+            <a href="../startStopVmsV2ScheduleTrigger/">Start/Stop VMs v2 で Logic Apps が即時起動してしまう事象について</a>
+          </li>
+        
+          <li>
+            <a href="../SecBlobStandardLAPortal/">Azure Portal からファイアウォール設定配下のストレージ アカウントに Standard Logic Apps を作成する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">43</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">43</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">37</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard-Logic-Apps">Standard Logic Apps</a><span class="tag-list-count">3</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.57px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.43px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 15.71px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 10px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 14.29px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.86px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.43px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 17.14px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14.29px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
