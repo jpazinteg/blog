@@ -28,19 +28,19 @@ Logic Apps の [API 接続] について説明いたします。
 まず、Logic Apps における [接続] は、各トリガーやアクションの実行時に利用する認証情報を保持しておくものであり、従量課金タイプの Logic Apps と Standard タイプの Logic Apps とで以下のように異なります。
 参考ドキュメント : [Azure portal でロジック アプリ ワークフローを管理する # 接続の表示](https://learn.microsoft.com/ja-jp/azure/logic-apps/manage-logic-apps-with-azure-portal?tabs=standard#view-connections)
 
+具体的な確認方法につきましては、後述の [2. 確認方法] にて説明いたします。
+
 ### 1. 従量課金タイプ
+[開発ツール - API 接続] にてご確認いただけます。
+
 - API 接続
 
-[開発ツール - API 接続] にてご確認いただけます。
-![](./apiConnection/apiConnection01.jpg)
-
 ### 2. Standard タイプ
+[ワークフロー - 接続] にてご確認いただけます。
+
 - API 接続
 - サービス プロバイダー接続
 - 関数の接続
-
-[ワークフロー - 接続] にてご確認いただけます。
-![](./apiConnection/apiConnection02.jpg)
 
 ## Logic Apps のコネクタの種類
 Logic Apps では、大きく 2 種類のコネクタのご用意があり、コネクタの種類によって利用される [接続] が異なります。
