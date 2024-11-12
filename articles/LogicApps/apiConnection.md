@@ -135,7 +135,7 @@ ARM テンプレート内に以下のような記述の API 接続のリソー�
 システム割り当てマネージド ID を有効化されている Logic App の ARM テンプレートの場合、
 ARM テンプレート内の [resources. Identity. principalId] および [resources. Identity. tenantId] を null にする必要もあります。
 
-3. [API 接続の] をデプロイする
+3. [API 接続] をデプロイする
 [Azure ポータル] - [カスタム テンプレートのデプロイ] へ移動します。
 [エディターで独自のテンプレートを作成します] を選択します。
 デプロイする ARM テンプレートに差し替えます。(全選択頂きペーストで問題ございません。)
@@ -165,7 +165,7 @@ API 接続はデプロイしただけでは認証に用いる認証情報が格�
 
 2. Standard Logic Apps をデプロイする
 ARM テンプレート等を用いて Standard Logic Apps (基盤側) をデプロイします。
-※ Standard Logic Apps の場合ですと、この他ストレージ アカウントや App Service Plan 、必要に応じて Appcation Insights や VNet 等のデプロイも必要ですが、本記事では説明を割愛させていただきます。
+※ Standard Logic Apps の場合ですと、この他ストレージ アカウントや App Service Plan 、必要に応じて Application Insights や VNet 等のデプロイも必要ですが、本記事では説明を割愛させていただきます。
 
 3. zip デプロイを行う
 zip デプロイによってワークフロー (アプリケーション側) をデプロイすることが可能です。
