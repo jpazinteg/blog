@@ -11,7 +11,7 @@ tags:
 
 [Start/Stop VMs v2](https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy) をご利用いただく際などに、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。
 
-当ブログでは以前に [Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/) 方法をいくつかご紹介いたしました。
+当ブログでは以前に [Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/) にて、Logic Apps で日付や時刻を判定してワークフローを制御する方法をいくつかご紹介いたしました。
 
 今回はさらに Logic Apps における日付や時刻の判定に使えるシナリオとして「毎月第 1 月曜日に起動したい」場合の設定例をご紹介いたします。
 
@@ -23,13 +23,13 @@ tags:
 今回の記事では従量課金版 Logic Apps を利用しますが、Standard 版 Logic Apps でもご利用いただけます。
 
 ## 目次
-- シナリオ: 毎月第 1 月曜日の午前 8 時に VM を起動したい
+- シナリオ: 毎月第 1 月曜日の午前 8 時にワークフローを起動したい
 - 関連ドキュメント
 - まとめ
 
-## シナリオ: 毎月第 1 月曜日の午前 8 時に VM を起動したい
+## シナリオ: 毎月第 1 月曜日の午前 8 時にワークフローを起動したい
 
-「毎月第 1 月曜日の午前 8 時に VM を起動したい」。例としてこの場合、まずは以下のように毎週月曜日の 8:00 にワークフローを動作させるよう、繰り返しトリガーを設定しておきます。
+「毎月第 1 月曜日の午前 8 時にワークフローを起動したい」。例としてこの場合、まずは以下のように毎週月曜日の 8:00 にワークフローを起動させるよう、繰り返しトリガーを設定しておきます。
 
 ![](./LogicApps-Functions2/LogicApps-Functions2.png)
 
@@ -72,7 +72,7 @@ tags:
 - [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # greaterOrEquals](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#greaterOrEquals)
 - [Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # and](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#and)
 
-これにより、「毎月第 1 月曜日に起動したい」ワークフローを制御できるようになりました。上に基づいて、お客様業務上の任意の条件設定に応用いただけます。
+これにより、「毎月第 1 月曜日に起動したい」とするワークフローを制御できるようになりました。上に基づいて、お客様業務上の任意の後続処理を行うための、条件設定に応用いただけます。
 
 
 ## 関連ドキュメント
