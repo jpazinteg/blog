@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>API 接続について | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の [API 接続] について説明いたします。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="API 接続について">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の [API 接続] について説明いたします。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection03.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection04.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection05.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection06.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection07.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection08.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection09.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection10.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection11.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection12.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection13.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection14.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection15.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection16.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection17.jpg">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection18.jpg">
+<meta property="article:published_time" content="2024-11-12T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-13T01:08:35.679Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="API 接続">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/apiConnection/apiConnection03.jpg">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/apiConnection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      API 接続について
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2024-11-12T15:00:00.000Z" itemprop="datePublished">2024-11-13</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e2c06b88-2836-5259-88d0-72568b64ce77%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAPI+%E6%8E%A5%E7%B6%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FapiConnection%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FapiConnection.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FapiConnection.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/apiConnection/" data-id="cm3f6ng3n008e0nlh7y57e24l" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
+<p>Logic Apps の [API 接続] について説明いたします。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>Logic Apps における [接続]</li>
+<li>Logic Apps のコネクタの種類</li>
+<li><ol>
+<li>API 接続とは</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>確認方法</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>削除方法</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>デプロイ</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>[API 接続] が無効となる場合</li>
+</ol>
+</li>
+</ul>
+<h2 id="Logic-Apps-における-接続"><a href="#Logic-Apps-における-接続" class="headerlink" title="Logic Apps における [接続]"></a>Logic Apps における [接続]</h2><p>まず、Logic Apps における [接続] は、各トリガーやアクションの実行時に利用する認証情報を保持しておくものであり、従量課金タイプの Logic Apps と Standard タイプの Logic Apps とで以下のように異なります。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/manage-logic-apps-with-azure-portal?tabs=standard#view-connections">Azure portal でロジック アプリ ワークフローを管理する # 接続の表示</a></p>
+<p>具体的な確認方法につきましては、後述の [2. 確認方法] にて説明いたします。</p>
+<h3 id="1-従量課金タイプ"><a href="#1-従量課金タイプ" class="headerlink" title="1. 従量課金タイプ"></a>1. 従量課金タイプ</h3><p>[開発ツール - API 接続] にてご確認いただけます。</p>
+<ul>
+<li>API 接続</li>
+</ul>
+<h3 id="2-Standard-タイプ"><a href="#2-Standard-タイプ" class="headerlink" title="2. Standard タイプ"></a>2. Standard タイプ</h3><p>[ワークフロー - 接続] にてご確認いただけます。</p>
+<ul>
+<li>API 接続</li>
+<li>サービス プロバイダー接続</li>
+<li>関数の接続</li>
+</ul>
+<h2 id="Logic-Apps-のコネクタの種類"><a href="#Logic-Apps-のコネクタの種類" class="headerlink" title="Logic Apps のコネクタの種類"></a>Logic Apps のコネクタの種類</h2><p>Logic Apps では、大きく 2 種類のコネクタのご用意があり、コネクタの種類によって利用される [接続] が異なります。</p>
+<ul>
+<li>組み込み (built-in) コネクタ<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in">Azure Logic Apps の組み込みコネクタ</a></li>
+</ul>
+<p>トリガーやアクション追加時に、[In-app] にチェックを入れますとご確認いただけます。<br><img src="/blog/LogicApps/apiConnection/apiConnection03.jpg"></p>
+<ul>
+<li>マネージド コネクタ<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">Azure Logic Apps のマネージド コネクタ</a></li>
+</ul>
+<p>トリガーやアクション追加時に、[共有済み] にチェックを入れますとご確認いただけます。<br><img src="/blog/LogicApps/apiConnection/apiConnection04.jpg"></p>
+<h3 id="ご参考情報"><a href="#ご参考情報" class="headerlink" title="ご参考情報"></a>ご参考情報</h3><p>コネクタの種類によって送信 IP アドレスも異なります。<br>詳細につきましては以下のブログもご参照ください。<br>参考ドキュメント : <a href="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/">Logic Apps の送信 IP アドレスについて</a></p>
+<h2 id="1-API-接続とは"><a href="#1-API-接続とは" class="headerlink" title="1. API 接続とは"></a>1. API 接続とは</h2><p>本記事では [API 接続] について説明いたします。</p>
+<p>従量課金 Logic Apps または Standard Logic Apps でマネージド コネクタをご利用の場合に、[API 接続] という別リソースが作成されます。</p>
+<p>たとえば、[Office 365 Outlook] コネクタの [メールの送信 (V2)] アクションを追加した際に、以下のような画面が表示されます。<br>当該コネクタでは、ユーザーのサインイン情報を必要としますので、[サインイン] ボタンを押下し認証を行います。<br>※ ご利用いただける認証方法は、コネクタによって異なります。<br><img src="/blog/LogicApps/apiConnection/apiConnection05.jpg"></p>
+<p>これにより、[API 接続] という別リソースが自動的に作成され、認証情報を保持します。<br>各トリガーやアクションの実行時に、[API 接続] にて保持している認証情報が利用されます。</p>
+<h2 id="2-確認方法"><a href="#2-確認方法" class="headerlink" title="2. 確認方法"></a>2. 確認方法</h2><h4 id="2-1-従量課金タイプ"><a href="#2-1-従量課金タイプ" class="headerlink" title="2-1. 従量課金タイプ"></a>2-1. 従量課金タイプ</h4><p>対象の従量課金 Logic Apps 内で利用している [API 接続] は、[開発ツール - API 接続] にてご確認いただけます。<br><img src="/blog/LogicApps/apiConnection/apiConnection06.jpg"></p>
+<h4 id="2-2-Standard-タイプ"><a href="#2-2-Standard-タイプ" class="headerlink" title="2-2. Standard タイプ"></a>2-2. Standard タイプ</h4><p>対象の Standard Logic Apps 内で利用している [API 接続] は、[ワークフロー - 接続] の [API 接続] タブにてご確認いただけます。<br><img src="/blog/LogicApps/apiConnection/apiConnection07.jpg"></p>
+<h4 id="2-3-一覧での確認"><a href="#2-3-一覧での確認" class="headerlink" title="2-3. 一覧での確認"></a>2-3. 一覧での確認</h4><p>Azure ポータル上で [API 接続] と検索いただきますと、過去に作成されたすべての [API 接続] をご確認いただけます。<br><img src="/blog/LogicApps/apiConnection/apiConnection08.jpg"></p>
+<p>[種類] にて <strong>V1</strong> と表示されますのが従量課金 Logic Apps の [API 接続]、<strong>V2</strong> が Standard Logic Apps の [API 接続] になります。</p>
+<h2 id="3-削除方法"><a href="#3-削除方法" class="headerlink" title="3. 削除方法"></a>3. 削除方法</h2><h4 id="3-1-従量課金タイプ"><a href="#3-1-従量課金タイプ" class="headerlink" title="3-1. 従量課金タイプ"></a>3-1. 従量課金タイプ</h4><p>ご不要になりました [API 接続] の削除方法につきましては、過去のブログをご参照ください。<br>参考ドキュメント : <a href="https://jpazinteg.github.io/blog/LogicApps/ApiConnectionsDelete/">Azure Logic Apps の コネクタにおける不要な接続情報の削除方法について</a></p>
+<h4 id="3-2-Standard-タイプ"><a href="#3-2-Standard-タイプ" class="headerlink" title="3-2. Standard タイプ"></a>3-2. Standard タイプ</h4><p>[API 接続] リソース自体の削除方法は従量課金タイプと同様となりますが、[API 接続] リソース自体の削除後も [ワークフロー - 接続] の [API 接続] タブにて表示され続けます。<br>[ワークフロー – 接続] の [JSON ビュー] タブを開き、”managedApiConnections” 配下にある対象の [API 接続] のプロパティを削除いただき、[保存] ボタンを押下いただくことで [API 接続] タブ表示からも削除されます。<br><img src="/blog/LogicApps/apiConnection/apiConnection09.jpg"></p>
+<p>[JSON ビュー] にてご確認いただける内容は、connections.json (*) に記載されております内容と同様になります。</p>
+<p>(*) connections.json のご確認方法につきましては、以下をご参照ください。<br><img src="/blog/LogicApps/apiConnection/apiConnection10.jpg"><br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#deploy-infrastructure-resources">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # インフラストラクチャ リソースのデプロイ</a><br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#download-standard-logic-app-artifacts-from-portal">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ポータルから Standard ロジック アプリの成果物をダウンロードする</a></p>
+<h3 id="4-デプロイ"><a href="#4-デプロイ" class="headerlink" title="4. デプロイ"></a>4. デプロイ</h3><p>上述の通り、[API 接続] は Logic Apps のリソースとは別に存在するリソースですので、Logic Apps を別サブスクリプションや別テナントへデプロイ (コピー) する場合には、[API 接続] も別途デプロイが必要となります。<br>複数の [API 接続] をご利用の場合には、それぞれをデプロイする必要があります。<br>組み込みコネクタのみで構成されており、[API 接続] が紐づいていない Logic Apps におきましては [API 接続] のデプロイは不要です。<br>※ Logic Apps 自体のデプロイ方法の詳細につきましては、一部割愛させていただいております。</p>
+<h4 id="4-1-従量課金タイプ"><a href="#4-1-従量課金タイプ" class="headerlink" title="4-1. 従量課金タイプ"></a>4-1. 従量課金タイプ</h4><p>Logic Apps 自体をデプロイするよりも先に、[API 接続] をデプロイします。<br>以下は ARM テンプレートを利用する場合についてとなります。</p>
+<ol>
+<li><p>[API 接続] の ARM テンプレートをエクスポートする<br>[Azure ポータル] - [API 接続] - [&lt;対象の　API 接続&gt;] - [オートメーション - テンプレートのエクスポート] ページへ移動します。<br>[パラメーターを含める] にチェックを入れ、[ダウンロード] を選択します。<br>ダウンロードした zip ファイル内の [template.json] が ARM テンプレートになります。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-resource-manager/templates/export-template-portal#export-template-from-a-resource">Azure portal を使用してテンプレートをエクスポートする # リソースからテンプレートをエクスポートする</a></p>
+</li>
+<li><p>ARM テンプレートを編集する<br>ARM テンプレート内に以下のような記述の API 接続のリソース ID が記述されています。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/subscriptions/&#123;サブスクリプション ID&#125;/resourceGroups/&#123;リソースグループ名&#125;/providers/Microsoft.Web/connections/&#123;API 接続名&#125;</span><br></pre></td></tr></table></figure>
+<p>サブスクリプション、リソースグループ名 に変更がある場合は、文字列置換にて移行先の情報に変更する必要があります。<br>例)<br>置換前 : 現行サブスクリプション ID<br>置換後 : 移行先サブスクリプション ID<br>システム割り当てマネージド ID を有効化されている Logic App の ARM テンプレートの場合、<br>ARM テンプレート内の [resources. Identity. principalId] および [resources. Identity. tenantId] を null にする必要もあります。</p>
+</li>
+<li><p>[API 接続] をデプロイする<br>[Azure ポータル] - [カスタム テンプレートのデプロイ] へ移動します。<br>[エディターで独自のテンプレートを作成します] を選択します。<br>デプロイする ARM テンプレートに差し替えます。(全選択頂きペーストで問題ございません。)<br>リソースグループを選択し、[確認と作成] を選択します。<br>[作成] を選択します。</p>
+</li>
+<li><p>Logic Apps をデプロイする<br>[API 接続] のデプロイ完了後に、Logic Apps のデプロイを行いますが、このとき Logic Apps 側の ARM テンプレートに記載されている [API 接続] の情報を、1.~3. で新しく作成したものに置き換えます。<br>“parameters” &gt; “$connections” に [API 接続] の記載がございます。<br><img src="/blog/LogicApps/apiConnection/apiConnection11.jpg"></p>
+</li>
+<li><p>[API 接続] の再認証を行う<br>API 接続はデプロイしただけでは認証に用いる認証情報が格納されていない状況となります。<br>この状況で Logic App でマネージド コネクタの処理を実行すると認証エラーになりますので、以下の手順にて再認証を実施頂く必要があります。<br>[Azure ポータル] - [API 接続] - [&lt;対象の API 接続&gt;] - [全般 - API 接続の編集] ページへ移動します。<br>[承認する] を選択します。(*)<br>画面の指示に従い再認証手順をご実施頂きます。<br>[保存] を選択します。</p>
+</li>
+</ol>
+<p>(*) たとえば、[Azure Blob Storage] コネクタでアクセス キー認証をご利用の場合には、[Azure Storage アカウント名または BLOB エンドポイント] および [Azure ストレージ アカウントのアクセス キー] の入力が必要となります。<br>各コネクタでの認証方法によって、再認証に必要な作業が異なりますのでご注意ください。</p>
+<h4 id="4-2-Standard-タイプ"><a href="#4-2-Standard-タイプ" class="headerlink" title="4-2. Standard タイプ"></a>4-2. Standard タイプ</h4><ol>
+<li><p>[API 接続] をデプロイする<br>従量課金タイプと同様の方法にて、まず [API 接続] を先にデプロイします。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#before-you-release-to-azure">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # Azure にリリースする前に</a></p>
+</li>
+<li><p>Standard Logic Apps をデプロイする<br>ARM テンプレート等を用いて Standard Logic Apps (基盤側) をデプロイします。<br>※ Standard Logic Apps の場合ですと、この他ストレージ アカウントや App Service Plan 、必要に応じて Application Insights や VNet 等のデプロイも必要ですが、本記事では説明を割愛させていただきます。</p>
+</li>
+<li><p>zip デプロイを行う<br>zip デプロイによってワークフロー (アプリケーション側) をデプロイすることが可能です。<br>zip デプロイに利用する zip ファイルは、移行元の Standard Logic Apps の [概要] より取得いただけます。<br>[アプリ コンテンツのダウンロード] ボタンを押下します。<br>[ダウンロード] ボタンを選択し、zip ファイルをダウンロードします。<br><img src="/blog/LogicApps/apiConnection/apiConnection12.jpg"><br>このとき、zip ファイルには [API 接続] 等の接続情報を保持している connections.json ファイルが含まれております。<br>connections.json ファイルの内容を、1. で新しく作成した [API 接続] の情報をもとに編集します。<br>新しく作成した [API 接続] の [全般 - プロパティ] を開き、[接続ランタイム URL] および [リソース ID] をコピーして控えておきます。<br><img src="/blog/LogicApps/apiConnection/apiConnection13.jpg"><br>connections.json ファイルを開き、”managedApiConnections” 配下に [API 接続] の情報がありますので、”connectionRuntimeUrl” の値に控えておいた [接続ランタイム URL] をペーストします。<br>また、”connection” &gt; “id” に、[リソース ID] の値を置き換えます。<br>その他の箇所において connections.json 内のサブスクリプション ID やリソース グループ名も移行先のものに置き換えてください。<br>以下の手順に従い、zip デプロイを行います。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#release-to-azure">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # Azure へのリリース</a></p>
+</li>
+<li><p>[API 接続] の再認証を行う<br>従量課金タイプと同様の方法にて、[API 接続] の再認証を行います。</p>
+</li>
+<li><p>アクセス ポリシーを追加する<br>各 [API 接続] には、アクセス ポリシーがあります。<br>新しくデプロイした Standard Logic Apps に対して、アクセス ポリシーを付与する必要があります。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#api-connection-resources-and-access-policies">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # API 接続リソースとアクセス ポリシー</a><br><img src="/blog/LogicApps/apiConnection/apiConnection14.jpg"><br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#release-to-azure">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # Azure へのデプロイ後</a><br><img src="/blog/LogicApps/apiConnection/apiConnection15.jpg"><br>新しく作成した [API 接続] を開き、[設定 - アクセス ポリシー] にて [+ 追加] ボタンを押下します。<br><img src="/blog/LogicApps/apiConnection/apiConnection16.jpg"><br>新しく作成した Standard Logic Apps 名を検索し、アクセス ポリシーを追加します。<br>※ アクセス ポリシーを割り当てるためには、Standard Logic Apps のマネージド ID が有効化されている必要があります。<br><img src="/blog/LogicApps/apiConnection/apiConnection17.jpg"></p>
+</li>
+</ol>
+<h2 id="5-API-接続-が無効となる場合"><a href="#5-API-接続-が無効となる場合" class="headerlink" title="5. [API 接続] が無効となる場合"></a>5. [API 接続] が無効となる場合</h2><p>[API 接続] が無効となり、トリガーやアクションの実行が失敗する場合があります。<br>以下、よくお問い合わせいただく事例についてご紹介いたします。</p>
+<h3 id="5-1-ユーザー情報によるサインインで認証を行う場合"><a href="#5-1-ユーザー情報によるサインインで認証を行う場合" class="headerlink" title="5-1. ユーザー情報によるサインインで認証を行う場合"></a>5-1. ユーザー情報によるサインインで認証を行う場合</h3><p>[API 接続] が無効となるケースについては以下が考えられます。<br>参考ドキュメント : <a target="_blank" rel="noopener" href="https://jpdynamicscrm.github.io/blog/powerautomate/Invalid-Connection/#Power-Automate-%E3%81%A7%E3%80%8C%E7%84%A1%E5%8A%B9%E3%81%AA%E6%8E%A5%E7%B6%9A%E3%80%8D%E3%81%A8%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%82%8B%E5%8E%9F%E5%9B%A0">Power Automate で接続が「無効な接続」になる原因 # Power Automate で「無効な接続」と表示される原因</a><br><img src="/blog/LogicApps/apiConnection/apiConnection18.jpg"><br>※ 上記は Logic Apps の類似製品である Power Automate 側のブログを参照しております。<br>ユーザー情報によるサインインで認証を行っているマネージド コネクタの実行にて、[Unauthorized] エラーが発生した場合には上記のような要因が考えられますので一度ご確認いただけますと幸いです。<br>もしエラー内容等からご判断が難しい場合には、Azure ポータルより <strong>Logic Apps 観点</strong> でお問い合わせください。</p>
+<h3 id="5-2-マネージド-ID-認証の場合"><a href="#5-2-マネージド-ID-認証の場合" class="headerlink" title="5-2. マネージド ID 認証の場合"></a>5-2. マネージド ID 認証の場合</h3><p>一例となりますが、たとえば対象の Logic Apps のマネージド ID を一度無効化し、再度有効化しますとマネージド ID のオブジェクト ID が刷新されますので、<br>改めて新しいマネージド ID に対して必要なロールを付与する必要があります。</p>
+<h3 id="5-3-サービス-プリンシパル認証の場合"><a href="#5-3-サービス-プリンシパル認証の場合" class="headerlink" title="5-3. サービス プリンシパル認証の場合"></a>5-3. サービス プリンシパル認証の場合</h3><p>一例となりますが、シークレットの有効期限切れによって接続が無効となります。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps で利用される [API 接続] についてご案内いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/apiConnection.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../LogicApps-ConsumptionPricing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">従量課金版 Azure Logic Apps の料金体系を理解するポイント</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">API 接続について</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-ConsumptionPricing/">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
+          </li>
+        
+          <li>
+            <a href="../../MSMQ/MsmqTransaction/">MSMQ のトランザクション メッセージ</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
+          </li>
+        
+          <li>
+            <a href="../startStopVmsV2ScheduleTrigger/">Start/Stop VMs v2 で Logic Apps が即時起動してしまう事象について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">44</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">44</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">38</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.57px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.43px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 15.71px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 10px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 14.29px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.86px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.43px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 17.14px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14.29px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
