@@ -4,28 +4,26 @@
   <meta charset="utf-8">
   
   
-  <title>従量課金版 Azure Logic Apps の料金体系を理解するポイント | Japan Azure Integration Support Blog</title>
+  <title>Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
+  <meta name="description" content="こんにちは！  Azure Integration サポート チームの 山田 です。 Start&#x2F;Stop VMs v2 をご利用いただく際などに、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。 当ブログでは以前に Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="従量課金版 Azure Logic Apps の料金体系を理解するポイント">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/index.html">
+<meta property="og:title" content="Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
+<meta property="og:description" content="こんにちは！  Azure Integration サポート チームの 山田 です。 Start&#x2F;Stop VMs v2 をご利用いただく際などに、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。 当ブログでは以前に Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png">
-<meta property="article:published_time" content="2024-11-01T07:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-15T08:22:27.638Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2-3.png">
+<meta property="article:published_time" content="2024-11-15T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T08:22:27.646Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -87,7 +85,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/LogicApps-ConsumptionPricing" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/LogicApps-Functions2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -96,7 +94,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      従量課金版 Azure Logic Apps の料金体系を理解するポイント
+      Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい
     </h1>
   
 
@@ -104,92 +102,74 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2024-11-01T07:00:00.000Z" itemprop="datePublished">2024-11-01</time>
+  <time datetime="2024-11-15T02:00:00.000Z" itemprop="datePublished">2024-11-15</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+6dbcd116-7bcb-5fd5-b11e-1bfdca6961f6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E7%89%88+Azure+Logic+Apps+%E3%81%AE%E6%96%99%E9%87%91%E4%BD%93%E7%B3%BB%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-ConsumptionPricing%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+de20f54c-91b7-5fd4-bacd-cf46e8ab5f66%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%A7%E6%97%A5%E4%BB%98%E3%82%84%E6%99%82%E5%88%BB%E3%82%92%E5%88%A4%E5%AE%9A%E3%81%97%E3%81%A6%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E5%88%B6%E5%BE%A1%E3%81%99%E3%82%8B+%282%29+-+%E6%AF%8E%E6%9C%88%E7%AC%AC+1+%E6%9C%88%E6%9B%9C%E6%97%A5%E3%81%AB%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%9F%E3%81%84%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-Functions2%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-Functions2.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-Functions2.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/" data-id="cm3ih14mg000i0npg3drxbus9" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/" data-id="cm3ih14ml000s0npghfsc3q28" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！ Azure Integration サポート チームの山田です。<br>Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>
+        <p>こんにちは！  Azure Integration サポート チームの 山田 です。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start/Stop VMs v2</a> をご利用いただく際などに、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。</p>
+<p>当ブログでは以前に <a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/">Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog</a> にて、Logic Apps で日付や時刻を判定してワークフローを制御する方法をいくつかご紹介いたしました。</p>
+<p>今回はさらに Logic Apps における日付や時刻の判定に使えるシナリオとして「毎月第 1 月曜日に起動したい」場合の設定例をご紹介いたします。</p>
 <span id="more"></span>
 
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>今回の記事では従量課金版 Logic Apps を利用しますが、Standard 版 Logic Apps でもご利用いただけます。</p>
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>従量課金版 Azure Logic Apps の料金体系を理解するポイント<ul>
-<li>Logic Apps の価格表 (2024 年 10 月の例) </li>
-<li>アクション と コネクタ について</li>
-<li>データ保持 について</li>
-<li>メトリック について</li>
-<li>Azure Logic Apps の使用量の計測、課金、価格のしくみ</li>
-<li>料金計算ツール について</li>
-</ul>
-</li>
+<li>シナリオ: 毎月第 1 月曜日の午前 8 時にワークフローを起動したい</li>
+<li>関連ドキュメント</li>
 <li>まとめ</li>
 </ul>
-<h2 id="従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント"><a href="#従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント" class="headerlink" title="従量課金版 Azure Logic Apps の料金体系を理解するポイント"></a>従量課金版 Azure Logic Apps の料金体系を理解するポイント</h2><h3 id="Logic-Apps-の価格表-2024-年-10-月の例"><a href="#Logic-Apps-の価格表-2024-年-10-月の例" class="headerlink" title="Logic Apps の価格表 (2024 年 10 月の例)"></a>Logic Apps の価格表 (2024 年 10 月の例)</h3><p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a></p>
-<p>以下例では 2024 年 10 月の料金に基づいて記載しております。主要なところを (1)～(4) に分けてお考えいただけます。</p>
-<ol>
-<li>アクション = ¥0.004055 × 実行回数 (ただし、組み込みアクションの最初の 4000 回は毎月無料です。)</li>
-<li>Standard コネクタ = ¥0.018825 × 通話 (呼び出し) 回数</li>
-<li>エンタープライズ コネクタ = ¥0.144805 × 通話 (呼び出し) 回数</li>
-<li>データ保持 = ¥17.38 GB/月</li>
-</ol>
-<p>通話 とはチャンクなどにより 1 つのアクションで複数回呼び出し (Call、通信) される場合があるための単位とお考えください。</p>
-<p>価格表:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png"></p>
-<h3 id="アクション-と-コネクタ-について"><a href="#アクション-と-コネクタ-について" class="headerlink" title="アクション と コネクタ について"></a>アクション と コネクタ について</h3><p>前提といたしまして、Logic Apps のコネクタには、組み込みコネクタとマネージド コネクタがあります。<br>従量課金版における価格記載の「アクション」(価格表の (1)) とは、組み込みコネクタの実行数を意味した記述となります。一方の「Standard コネクタ」、「エンタープライズ コネクタ」はマネージド コネクタとなります。<br>組み込みコネクタとマネージド コネクタの機能的な比較は以下にございます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/introduction#built-in-connectors-versus-managed-connectors">コネクタとは - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>組み込みコネクタは、直接 Azure Logic Apps 内でネイティブで動作するよう作られています。<br>マネージド コネクタは、Microsoft によって Azure でデプロイ、ホスト、管理されます。<br>マネージド コネクタはほとんどが、基になるサービスまたはシステムが Azure Logic Apps と通信するために使用する API のプロキシまたはラッパーを提供します。</p>
-</blockquote>
-<p>マネージド コネクタのうち、コネクタの種類が Standard コネクタ (価格表の (2)) であるか、エンタープライズ コネクタ (価格表の (3)) であるかにつきましては、コネクタの公開情報から確認いただけます。</p>
-<p>Standard コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azureblob/">Azure Blob Storage - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png"></p>
-<p>エンタープライズ コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/mq/">MQ - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png"></p>
-<p>これを トリガー と アクション に分けておまとめしますと以下となります。</p>
-<p><strong>&lt;トリガー&gt;</strong></p>
+<h2 id="シナリオ-毎月第-1-月曜日の午前-8-時にワークフローを起動したい"><a href="#シナリオ-毎月第-1-月曜日の午前-8-時にワークフローを起動したい" class="headerlink" title="シナリオ: 毎月第 1 月曜日の午前 8 時にワークフローを起動したい"></a>シナリオ: 毎月第 1 月曜日の午前 8 時にワークフローを起動したい</h2><p>「毎月第 1 月曜日の午前 8 時にワークフローを起動したい」。例としてこの場合、まずは以下のように毎週月曜日の 8:00 にワークフローを起動させるよう、繰り返しトリガーを設定しておきます。</p>
+<p><img src="/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2.png"></p>
+<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn</a></p>
+<h3 id="トリガーの条件"><a href="#トリガーの条件" class="headerlink" title="トリガーの条件"></a>トリガーの条件</h3><p>トリガーには条件式というものを設定できることを、以前の記事でもご紹介いたしました。</p>
+<p>参考: <a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/">Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog</a> </p>
+<p>今回はこちらに「第 1 月曜日」を満たす式を記述しますが、カレンダーからは以下のように 第 1 月曜日 (または月曜日以外の任意の曜日) は必ず 1 以上 7 以下の日付となることが分かります。</p>
+<p><img src="/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2-2.png"></p>
+<p>1 週間は 7 日間であることから、月の初日から数えて最初の月曜日は必ず 1 日から 7 日の間にあります。以下となります。</p>
 <ul>
-<li>組み込みコネクタのトリガー：無課金</li>
-<li>Standard コネクタのトリガー：<strong>価格表の (2)</strong> に該当</li>
-<li>エンタープライズ コネクタのトリガー： <strong>価格表の (3)</strong> に該当</li>
+<li>第 1 週: 1 日から 7 日</li>
+<li>第 2 週: 8 日から 14 日</li>
+<li>第 3 週: 15 日から 21 日</li>
+<li>第 4 週: 22 日から 28 日</li>
+<li>第 5 週: 29 日以降</li>
 </ul>
-<p><strong>&lt;アクション&gt;</strong></p>
+<p>したがって、下のように各週の条件を考えることができます。</p>
 <ul>
-<li>組み込みコネクタのアクション： <strong>価格表の (1)</strong> に該当</li>
-<li>Standard コネクタのアクション： <strong>価格表の (2)</strong> に該当</li>
-<li>エンタープライズ コネクタのアクション： <strong>価格表の (3)</strong> に該当</li>
+<li>第 1 月曜日 (または月曜日以外の任意の曜日) は 1 以上 7 以下の日付。</li>
+<li>第 2 月曜日 (または月曜日以外の任意の曜日) は 8 以上 14 以下の日付。</li>
+<li>第 3 月曜日 (または月曜日以外の任意の曜日) は 15 以上 21 以下の日付。</li>
+<li>第 4 月曜日 (または月曜日以外の任意の曜日) は 22 以上 28 以下の日付。</li>
+<li>第 5 月曜日 (または月曜日以外の任意の曜日) は 29 以上の日付。</li>
 </ul>
-<h3 id="データ保持-について"><a href="#データ保持-について" class="headerlink" title="データ保持 について"></a>データ保持 について</h3><p><strong>価格表の(4)</strong> 、データ保持 については以下となります。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/plan-manage-costs#storage-operations-and-costs">Azure Logic Apps のコストの管理を計画する - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>Azure Logic Apps では、すべてのストレージ操作に Azure Storage を使用します。 マルチテナントの Azure Logic Apps では、すべてのストレージの使用およびコストがロジック アプリに関連付けられます。 データ保持とストレージ消費によって固定価格モデルを使用するコストが発生します。 たとえば、実行履歴からの入力と出力はバックグラウンド ストレージに保持されます。これは、ロジック アプリから独立して作成、管理、アクセスするストレージ リソースとは異なります。</p>
-</blockquote>
-<p>メトリックの Billing Usage for Storage Consumption Executions が、課金対象のデータを保持した際のデータ サイズとなります。<br>またこのデータ サイズは、Logic Apps 実行履歴のアクションの入力と出力のテキスト サイズからも計算いただけます。</p>
-<p>以上 (1)～(4) が、従量課金版 Azure Logic Apps の料金体系の主要なところとなります。</p>
-<h3 id="メトリック-について"><a href="#メトリック-について" class="headerlink" title="メトリック について"></a>メトリック について</h3><p>ここまでの内容を踏まえメトリックにて、以下を確認いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-logic-workflows-metrics">サポートされているメトリック - Microsoft.Logic/Workflows - Azure Monitor | Microsoft Learn</a></p>
+<h3 id="条件式"><a href="#条件式" class="headerlink" title="条件式"></a>条件式</h3><p>上記を踏まえ、日本時間にて「今日が第 1 月曜日である (= 1 以上 7 以下の日付である)」という条件式を設定すると、以下のようになります。</p>
+<p><img src="/blog/LogicApps/LogicApps-Functions2/LogicApps-Functions2-3.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@and(greaterOrEquals(dayOfMonth(convertFromUtc(utcNow(), &#x27;Tokyo Standard Time&#x27;)), 1), lessOrEquals(dayOfMonth(convertFromUtc(utcNow(), &#x27;Tokyo Standard Time&#x27;)), 7))</span><br></pre></td></tr></table></figure>
+
+<p><code>greaterOrEquals</code> (以上)  と <code>lessOrEquals</code> (以下) の利用方法についてご参考になれば幸いです。また関連する関数について、以下ご覧いただけます。</p>
+<p>参考: </p>
 <ul>
-<li>課金対象のアクションの実行 … Billable Action Executions</li>
-<li>課金対象のトリガーの実行 … Billable Trigger Executions</li>
-<li>ネイティブ操作実行の利用状況に応じた課金 … Billing Usage for Native Operation</li>
-<li>標準コネクタ実行の利用状況に応じた課金 … Billing Usage for Standard Connector</li>
-<li>ストレージ消費の利用状況に応じた課金 … Billing Usage for Storage Consumption</li>
-<li>課金対象の実行の合計数 … Total Billable Executions</li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # convertFromUtc</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#dayOfMonth">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # dayOfMonth</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#lessOrEquals">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # lessOrEquals</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#greaterOrEquals">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # greaterOrEquals</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#and">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # and</a></li>
 </ul>
-<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png"></p>
-<h3 id="Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ"><a href="#Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ" class="headerlink" title="Azure Logic Apps の使用量の計測、課金、価格のしくみ"></a>Azure Logic Apps の使用量の計測、課金、価格のしくみ</h3><p>また Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて、以下ドキュメントにて網羅的にご覧いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing">使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>Azure Logic Apps を使用して、スケーリング可能な自動化された統合ワークフローをクラウドに作成して実行できます。この記事では、Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて説明します。具体的な価格、コスト計画、さまざまなホスティング環境などの情報については、次のコンテンツを確認してください。</p>
-</blockquote>
-<h3 id="料金計算ツール-について"><a href="#料金計算ツール-について" class="headerlink" title="料金計算ツール について"></a>料金計算ツール について</h3><p>ほか 料金計算ツール にて概算を確認いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/calculator/?service=logic-apps">料金計算ツール | Microsoft Azure</a></p>
-<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png"></p>
-<p>最後にはなりますが、ツールに基づくお見積りは概算となり、具体的なリソースのご利用状況によって増減する可能性もございます。Logic Apps の調査をご依頼の際は以下記事もご参考に、本テクニカル サポートへお問合せいただければ大変うれしく思います。</p>
-<p><a href="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/">Logic Apps の調査時にサポート エンジニアへ連携するログの取得方法について | Japan Azure Integration Support Blog</a></p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a> のドキュメントを基に、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介しました。Logic Apps のご利用検討時、皆様のご参考になれば幸いです。</p>
+<p>これにより、「毎月第 1 月曜日に起動したい」とするワークフローを制御できるようになりました。上に基づいて、お客様業務上の任意の後続処理を行うための、条件設定に応用いただけます。</p>
+<h2 id="関連ドキュメント"><a href="#関連ドキュメント" class="headerlink" title="関連ドキュメント"></a>関連ドキュメント</h2><p>本文中でもご紹介いたしましたが、ほか Logic Apps と日付関数に言及した記事には、以下のようなものがございます。</p>
+<ul>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/">Logic Apps で簡単に日付や時刻を用いる | Japan Azure Integration Support Blog</a></li>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/">「繰り返し (Recurrence)」トリガーの起動時刻の差異について | Japan Azure Integration Support Blog</a></li>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/UnixTime/">Logic Apps の式関数で Unix Time を取得する方法 | Japan Azure Integration Support Blog</a></li>
+<li><a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/">Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog</a></li>
+</ul>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、繰り返しトリガー利用時に便利な、日付や時刻の判定方法についてご紹介しました。引き続き皆様のお役に立てる情報を発信してまいります。</p>
 
       
       
@@ -203,10 +183,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-ConsumptionPricing.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-Functions2.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -214,19 +194,10 @@
     
 <nav id="article-nav">
   
-    <a href="../apiConnection/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          API 接続について
-        
-      </div>
-    </a>
   
-  
-    <a href="../../MSMQ/MsmqTransaction/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../apiConnection/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">MSMQ のトランザクション メッセージ</div>
+      <div class="article-nav-title">API 接続について</div>
     </a>
   
 </nav>
@@ -245,7 +216,7 @@
       <ul>
         
           <li>
-            <a href="../LogicApps-Functions2/">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
+            <a href="">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
           </li>
         
           <li>
@@ -253,7 +224,7 @@
           </li>
         
           <li>
-            <a href="">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
+            <a href="../LogicApps-ConsumptionPricing/">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
           </li>
         
           <li>

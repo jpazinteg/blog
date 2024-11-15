@@ -4,28 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>従量課金版 Azure Logic Apps の料金体系を理解するポイント | Japan Azure Integration Support Blog</title>
+  <title>Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="従量課金版 Azure Logic Apps の料金体系を理解するポイント">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/index.html">
+  <meta name="description" content="日本マイクロソフトの Azure Integration に関するサポート情報のブログです。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Japan Azure Integration Support Blog">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/page/6/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！ Azure Integration サポート チームの山田です。Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。">
+<meta property="og:description" content="日本マイクロソフトの Azure Integration に関するサポート情報のブログです。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png">
-<meta property="article:published_time" content="2024-11-01T07:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-15T08:22:27.638Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
-<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -87,153 +78,64 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/LogicApps-ConsumptionPricing" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-general/IntroduceOurBlog" class="article article-type-post" itemscope itemprop="blogPost">
+
   <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../general/IntroduceOurBlog/" class="article-date">
+  <time datetime="2022-03-18T07:50:00.000Z" itemprop="datePublished">2022-03-18</time>
+</a>
+      
+    </div>
+
     
+    <!-- post title -->
     
-    
-      <header class="article-header-single">
+      <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      従量課金版 Azure Logic Apps の料金体系を理解するポイント
+    <h1 itemprop="name">
+      <a class="article-title" href="../../general/IntroduceOurBlog/">Integration サポート チームの Blog リニューアルのお知らせ</a>
     </h1>
   
 
       </header>
-      <div class="article-share">
-        Last Update: 
-        <a href="" class="article-date-single">
-  <time datetime="2024-11-01T07:00:00.000Z" itemprop="datePublished">2024-11-01</time>
-</a>
-        
-        
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+6dbcd116-7bcb-5fd5-b11e-1bfdca6961f6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E7%89%88+Azure+Logic+Apps+%E3%81%AE%E6%96%99%E9%87%91%E4%BD%93%E7%B3%BB%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-ConsumptionPricing%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-ConsumptionPricing.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
-        
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/" data-id="cm3ih14mg000i0npg3drxbus9" class="article-share-link">共有</a>
-      </div>
     
+
+    <!-- post caption -->
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！ Azure Integration サポート チームの山田です。<br>Azure Logic Apps には 従量課金版 と Standard 版がございますが、本記事は 従量課金版 について記載しております。今回は、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>
-<span id="more"></span>
-
-<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>従量課金版 Azure Logic Apps の料金体系を理解するポイント<ul>
-<li>Logic Apps の価格表 (2024 年 10 月の例) </li>
-<li>アクション と コネクタ について</li>
-<li>データ保持 について</li>
-<li>メトリック について</li>
-<li>Azure Logic Apps の使用量の計測、課金、価格のしくみ</li>
-<li>料金計算ツール について</li>
-</ul>
-</li>
-<li>まとめ</li>
-</ul>
-<h2 id="従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント"><a href="#従量課金版-Azure-Logic-Apps-の料金体系を理解するポイント" class="headerlink" title="従量課金版 Azure Logic Apps の料金体系を理解するポイント"></a>従量課金版 Azure Logic Apps の料金体系を理解するポイント</h2><h3 id="Logic-Apps-の価格表-2024-年-10-月の例"><a href="#Logic-Apps-の価格表-2024-年-10-月の例" class="headerlink" title="Logic Apps の価格表 (2024 年 10 月の例)"></a>Logic Apps の価格表 (2024 年 10 月の例)</h3><p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a></p>
-<p>以下例では 2024 年 10 月の料金に基づいて記載しております。主要なところを (1)～(4) に分けてお考えいただけます。</p>
-<ol>
-<li>アクション = ¥0.004055 × 実行回数 (ただし、組み込みアクションの最初の 4000 回は毎月無料です。)</li>
-<li>Standard コネクタ = ¥0.018825 × 通話 (呼び出し) 回数</li>
-<li>エンタープライズ コネクタ = ¥0.144805 × 通話 (呼び出し) 回数</li>
-<li>データ保持 = ¥17.38 GB/月</li>
-</ol>
-<p>通話 とはチャンクなどにより 1 つのアクションで複数回呼び出し (Call、通信) される場合があるための単位とお考えください。</p>
-<p>価格表:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-1.png"></p>
-<h3 id="アクション-と-コネクタ-について"><a href="#アクション-と-コネクタ-について" class="headerlink" title="アクション と コネクタ について"></a>アクション と コネクタ について</h3><p>前提といたしまして、Logic Apps のコネクタには、組み込みコネクタとマネージド コネクタがあります。<br>従量課金版における価格記載の「アクション」(価格表の (1)) とは、組み込みコネクタの実行数を意味した記述となります。一方の「Standard コネクタ」、「エンタープライズ コネクタ」はマネージド コネクタとなります。<br>組み込みコネクタとマネージド コネクタの機能的な比較は以下にございます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/introduction#built-in-connectors-versus-managed-connectors">コネクタとは - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>組み込みコネクタは、直接 Azure Logic Apps 内でネイティブで動作するよう作られています。<br>マネージド コネクタは、Microsoft によって Azure でデプロイ、ホスト、管理されます。<br>マネージド コネクタはほとんどが、基になるサービスまたはシステムが Azure Logic Apps と通信するために使用する API のプロキシまたはラッパーを提供します。</p>
-</blockquote>
-<p>マネージド コネクタのうち、コネクタの種類が Standard コネクタ (価格表の (2)) であるか、エンタープライズ コネクタ (価格表の (3)) であるかにつきましては、コネクタの公開情報から確認いただけます。</p>
-<p>Standard コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azureblob/">Azure Blob Storage - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-2.png"></p>
-<p>エンタープライズ コネクタ 例: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/mq/">MQ - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-3.png"></p>
-<p>これを トリガー と アクション に分けておまとめしますと以下となります。</p>
-<p><strong>&lt;トリガー&gt;</strong></p>
-<ul>
-<li>組み込みコネクタのトリガー：無課金</li>
-<li>Standard コネクタのトリガー：<strong>価格表の (2)</strong> に該当</li>
-<li>エンタープライズ コネクタのトリガー： <strong>価格表の (3)</strong> に該当</li>
-</ul>
-<p><strong>&lt;アクション&gt;</strong></p>
-<ul>
-<li>組み込みコネクタのアクション： <strong>価格表の (1)</strong> に該当</li>
-<li>Standard コネクタのアクション： <strong>価格表の (2)</strong> に該当</li>
-<li>エンタープライズ コネクタのアクション： <strong>価格表の (3)</strong> に該当</li>
-</ul>
-<h3 id="データ保持-について"><a href="#データ保持-について" class="headerlink" title="データ保持 について"></a>データ保持 について</h3><p><strong>価格表の(4)</strong> 、データ保持 については以下となります。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/plan-manage-costs#storage-operations-and-costs">Azure Logic Apps のコストの管理を計画する - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>Azure Logic Apps では、すべてのストレージ操作に Azure Storage を使用します。 マルチテナントの Azure Logic Apps では、すべてのストレージの使用およびコストがロジック アプリに関連付けられます。 データ保持とストレージ消費によって固定価格モデルを使用するコストが発生します。 たとえば、実行履歴からの入力と出力はバックグラウンド ストレージに保持されます。これは、ロジック アプリから独立して作成、管理、アクセスするストレージ リソースとは異なります。</p>
-</blockquote>
-<p>メトリックの Billing Usage for Storage Consumption Executions が、課金対象のデータを保持した際のデータ サイズとなります。<br>またこのデータ サイズは、Logic Apps 実行履歴のアクションの入力と出力のテキスト サイズからも計算いただけます。</p>
-<p>以上 (1)～(4) が、従量課金版 Azure Logic Apps の料金体系の主要なところとなります。</p>
-<h3 id="メトリック-について"><a href="#メトリック-について" class="headerlink" title="メトリック について"></a>メトリック について</h3><p>ここまでの内容を踏まえメトリックにて、以下を確認いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-logic-workflows-metrics">サポートされているメトリック - Microsoft.Logic/Workflows - Azure Monitor | Microsoft Learn</a></p>
-<ul>
-<li>課金対象のアクションの実行 … Billable Action Executions</li>
-<li>課金対象のトリガーの実行 … Billable Trigger Executions</li>
-<li>ネイティブ操作実行の利用状況に応じた課金 … Billing Usage for Native Operation</li>
-<li>標準コネクタ実行の利用状況に応じた課金 … Billing Usage for Standard Connector</li>
-<li>ストレージ消費の利用状況に応じた課金 … Billing Usage for Storage Consumption</li>
-<li>課金対象の実行の合計数 … Total Billable Executions</li>
-</ul>
-<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-4.png"></p>
-<h3 id="Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ"><a href="#Azure-Logic-Apps-の使用量の計測、課金、価格のしくみ" class="headerlink" title="Azure Logic Apps の使用量の計測、課金、価格のしくみ"></a>Azure Logic Apps の使用量の計測、課金、価格のしくみ</h3><p>また Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて、以下ドキュメントにて網羅的にご覧いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing">使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn</a></p>
-<blockquote>
-<p>Azure Logic Apps を使用して、スケーリング可能な自動化された統合ワークフローをクラウドに作成して実行できます。この記事では、Azure Logic Apps および関連リソースにおける、測定、課金、および各価格モデルのしくみについて説明します。具体的な価格、コスト計画、さまざまなホスティング環境などの情報については、次のコンテンツを確認してください。</p>
-</blockquote>
-<h3 id="料金計算ツール-について"><a href="#料金計算ツール-について" class="headerlink" title="料金計算ツール について"></a>料金計算ツール について</h3><p>ほか 料金計算ツール にて概算を確認いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/calculator/?service=logic-apps">料金計算ツール | Microsoft Azure</a></p>
-<p>例:<br><img src="/blog/LogicApps/LogicApps-ConsumptionPricing/LogicApps-ConsumptionPricing-5.png"></p>
-<p>最後にはなりますが、ツールに基づくお見積りは概算となり、具体的なリソースのご利用状況によって増減する可能性もございます。Logic Apps の調査をご依頼の際は以下記事もご参考に、本テクニカル サポートへお問合せいただければ大変うれしく思います。</p>
-<p><a href="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/">Logic Apps の調査時にサポート エンジニアへ連携するログの取得方法について | Japan Azure Integration Support Blog</a></p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a target="_blank" rel="noopener" href="https://azure.microsoft.com/ja-jp/pricing/details/logic-apps/">価格 - Logic Apps | Microsoft Azure</a> のドキュメントを基に、従量課金版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介しました。Logic Apps のご利用検討時、皆様のご参考になれば幸いです。</p>
-
-      
-      
-        <div class="article-disclaimer">
+        <h2 id="Blog-リニューアルのお知らせ"><a href="#Blog-リニューアルのお知らせ" class="headerlink" title="Blog リニューアルのお知らせ"></a>Blog リニューアルのお知らせ</h2><p>こんにちは、Integration サポート チームです。<br>この度、Integration サポート チームのブログをリニューアルいたしましたのでお知らせします！</p>
         
-          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+          <p class="article-more-link">
+            <a href="../../general/IntroduceOurBlog/#more">Read More</a>
+          </p>
         
-        </div>
       
     </div>
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
 
-        
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-ConsumptionPricing.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
-        
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/general/IntroduceOurBlog/" data-id="cm3ih14nc002t0npgct695oph" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/General/" rel="tag">General</a></li></ul>
+
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="../apiConnection/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          API 接続について
-        
-      </div>
-    </a>
-  
-  
-    <a href="../../MSMQ/MsmqTransaction/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">MSMQ のトランザクション メッセージ</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="../5/">&laquo; 戻る</a><a class="page-number" href="../../">1</a><span class="space">&hellip;</span><a class="page-number" href="../4/">4</a><a class="page-number" href="../5/">5</a><span class="page-number current">6</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -245,15 +147,15 @@
       <ul>
         
           <li>
-            <a href="../LogicApps-Functions2/">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
+            <a href="../../LogicApps/LogicApps-Functions2/">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
           </li>
         
           <li>
-            <a href="../apiConnection/">API 接続について</a>
+            <a href="../../LogicApps/apiConnection/">API 接続について</a>
           </li>
         
           <li>
-            <a href="">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
+            <a href="../../LogicApps/LogicApps-ConsumptionPricing/">従量課金版 Azure Logic Apps の料金体系を理解するポイント</a>
           </li>
         
           <li>
@@ -261,7 +163,7 @@
           </li>
         
           <li>
-            <a href="../LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
+            <a href="../../LogicApps/LogicApps-AOAI/">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</a>
           </li>
         
       </ul>
