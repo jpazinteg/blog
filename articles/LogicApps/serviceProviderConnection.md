@@ -65,8 +65,8 @@ Standard Logic Apps にてトリガーやアクション追加時に、[In-app] 
 参考ドキュメント : [シングルテナントの Azure Logic Apps の Standard ロジック アプリ向けの DevOps デプロイ # サービス プロバイダーの接続](https://learn.microsoft.com/ja-jp/azure/logic-apps/devops-deployment-single-tenant-azure-logic-apps#service-provider-connections)
 参考ドキュメント : [シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ポータルから Standard ロジック アプリの成果物をダウンロードする](https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#download-standard-logic-app-artifacts-from-portal)
 
-たとえば、サービス プロバイダー ベース組み込みコネクタの [Azure Blob Storage] コネクタで接続文字列を認証に利用している場合、以下のように "@appsetting('{環境変数名}')" という記載形式になっております。
-"@appsetting~" という記述は、[設定 - 環境変数] の [アプリ設定] タブにて登録されております環境変数の値を参照していることを意味しております。
+たとえば、サービス プロバイダー ベース組み込みコネクタの [Azure Blob Storage] コネクタで接続文字列を認証に利用している場合、以下のように `@appsetting('{環境変数名}')` という記載形式になっております。
+`@appsetting~` という記述は、[設定 - 環境変数] の [アプリ設定] タブにて登録されております環境変数の値を参照していることを意味しております。
 ![](./seviceProviderConnection/seviceProviderConnection07.jpg)
 
 こちらの環境変数が残存していることによってワークフローの動作に影響はございませんが、管理の面での混乱を避けるために削除いただくことも可能です。
