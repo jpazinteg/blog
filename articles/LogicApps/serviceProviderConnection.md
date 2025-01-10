@@ -1,6 +1,6 @@
 ---
 title: サービス プロバイダー接続について
-date: 2025-01-17 00:00:00
+date: 2025-01-14 00:00:00
 tags:
   - How-To
   - Tips
@@ -38,11 +38,12 @@ Standard Logic Apps にてトリガーやアクション追加時に、[In-app] 
 ![](./serviceProviderConnection/serviceProviderConnection02.jpg)
 
 ### 注意点
-[Azure Blob Storage] コネクタや [SQL Server] コネクタといった一部のサービス プロバイダー ベース組み込みコネクタは、マネージド コネクタのご用意もあります。
-サービス プロバイダー ベース組み込みコネクタの場合には、VNet 統合やプライベート エンドポイントと組み合わせることで、Azure Blob Storage や Azure SQL Server 等にプライベートにアクセスすることが可能です。
+[Azure Blob Storage] コネクタや [SQL Server] コネクタといったサービス プロバイダー ベース組み込みコネクタは、マネージド コネクタのご用意もあります。
+サービス プロバイダー ベース組み込みコネクタをお使いいただくメリットとしましては、たとえば Standard Logic Apps 側の VNet 統合およびアクセス先のサービス側でのプライベート エンドポイントと組み合わせることで、Azure Blob Storage や Azure SQL Server 等にプライベートにアクセスすることが可能である点です。
+詳細な手順は以下をご参照ください。
 参考ドキュメント : [Standard Logic Apps から VNet 経由で別リソースにアクセスする方法](https://jpazinteg.github.io/blog/LogicApps/vnetIntergration/)
 
-サービス プロバイダー ベース組み込みコネクタとマネージド コネクタとで、一部項目の設定方法の違いや、認証方法の違い、動作の違いがある場合がありますので、こちらもご注意ください。
+なお、サービス プロバイダー ベース組み込みコネクタとマネージド コネクタとで、一部項目の設定方法の違いや、認証方法の違い、動作の違いがある場合がありますので、ご注意ください。
 
 例 [Azure Blob Storage] コネクタのトリガー
 ![](./serviceProviderConnection/serviceProviderConnection03.jpg)
@@ -99,7 +100,7 @@ zip デプロイによってワークフロー (アプリケーション側) を
 zip デプロイに利用する zip ファイルは、移行元の Standard Logic Apps の [概要] より取得いただけます。
 参考ドキュメント : [シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ポータルから Standard ロジック アプリの成果物をダウンロードする](https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=github#download-standard-logic-app-artifacts-from-portal)
 このとき、zip ファイルには [サービス プロバイダー接続] 等の接続情報を保持している connections.json ファイルが含まれております。
-zip デプロイの際に、この connections.json に必要な [サービス プロバイダー接続] の情報を含めること可能です。
+zip デプロイの際に、この connections.json に必要な [サービス プロバイダー接続] の情報を含めることが可能です。
 以下の手順に従い、zip デプロイを行います。
 参考ドキュメント : [シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # Azure へのリリース](https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#release-to-azure)
 マネージド ID 認証をご利用の場合には、デプロイ先の Standard Logic Apps のマネージド ID に必要なロールが付与されているかもご確認ください。
