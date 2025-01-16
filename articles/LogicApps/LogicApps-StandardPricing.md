@@ -113,7 +113,7 @@ Azure Logic Apps および関連リソースにおける、測定、課金、お
 
 ### 料金計算ツール について
 
-ほか Standard Logic Apps に関しても 料金計算ツール にて概算を確認いただけます。ワークフローから計画を「標準」と選択ください。
+ほか Standard Logic Apps に関しても 料金計算ツール にて概算を確認いただけます。ワークフローから計画を「標準」と選択ください。またストレージ コストは [シングルテナント Azure Logic Apps のストレージ コストを見積もる - Azure Logic Apps | Microsoft Learn # ストレージ コストを見積もる](https://learn.microsoft.com/ja-jp/azure/logic-apps/estimate-storage-costs#estimate-storage-costs) を参考ください。
 
 [料金計算ツール | Microsoft Azure](https://azure.microsoft.com/ja-jp/pricing/calculator/?service=logic-apps)
 
