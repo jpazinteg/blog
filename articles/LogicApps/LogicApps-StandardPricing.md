@@ -19,9 +19,9 @@ Azure Logic Apps には 従量課金版 と Standard 版がございますが、
 ## 目次
 - Standard 版 Azure Logic Apps の料金体系を理解するポイント
     - Logic Apps の価格表 (2025 年 1 月の例) 
-    - vCPU および メモリ について
-    - アクション と コネクタ について
-    - データ保持 について
+    - vCPU および メモリ について ... (1) 
+    - アクション と コネクタ について ... (2)、(3) 
+    - データ保持 について ... (4) 
     - Azure Logic Apps の使用量の計測、課金、価格のしくみ
     - 料金計算ツール について
 - まとめ
@@ -44,7 +44,7 @@ Azure Logic Apps には 従量課金版 と Standard 版がございますが、
 価格表: 
 ![](./LogicApps-StandardPricing/LogicApps-StandardPricing-1.png)
 
-### vCPU および メモリ について
+### vCPU および メモリ について ... (1) 
 
 価格表の (1) の通り、Standard Logic Apps の利用料金では、割り当てられた VM インスタンスのリソース (vCPU、および メモリ) の利用時間によっても課金が発生いたします。こちらはアプリケーションを停止しても待機インスタンスとして最低 1 インスタンスの課金が発生しますことをご留意ください。
 
@@ -63,7 +63,9 @@ Azure Logic Apps には 従量課金版 と Standard 版がございますが、
 ![](./LogicApps-StandardPricing/LogicApps-StandardPricing-3.png)
 
 
-### アクション と コネクタ について
+### アクション と コネクタ について ... (2)、(3) 
+
+価格表の (2)、(3) について以下となります。
 
 [標準モデルでのトリガーとアクションの操作](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing#standard-operations)
 
@@ -75,14 +77,14 @@ Azure Logic Apps には 従量課金版 と Standard 版がございますが、
 [従量課金版 Azure Logic Apps の料金体系を理解するポイント | Japan Azure Integration Support Blog # アクション と コネクタ について](https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/#%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3-%E3%81%A8-%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 
 
-### データ保持 について
+### データ保持 について ... (4) 
 
-Standard Logic Apps ではストレージ アカウントを使用します。
+価格表の (4) について、Standard Logic Apps ではストレージ アカウントを使用します。
 
 [ストレージ操作](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing#storage-operations)
 
 
-冒頭の価格表の(4) 、データ保持 について以下とお考えいただけます。
+データ保持 について以下とお考えいただけます。
 
 [Azure Logic Apps のコストの管理を計画する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/plan-manage-costs#storage-operations-and-costs)
 
@@ -106,7 +108,7 @@ Azure Logic Apps および関連リソースにおける、測定、課金、お
 
 [使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing)
 
-この点も詳細は以下 従量課金版 におけるしくみと同様になります。以下記事にてご参考になりましたら幸いです。
+詳細は以下 従量課金版 におけるしくみと同様になります。以下記事にてご参考になりましたら幸いです。
 
 [従量課金版 Azure Logic Apps の料金体系を理解するポイント | Japan Azure Integration Support Blog # Azure Logic Apps の使用量の計測、課金、価格のしくみ](https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/#Azure-Logic-Apps-%E3%81%AE%E4%BD%BF%E7%94%A8%E9%87%8F%E3%81%AE%E8%A8%88%E6%B8%AC%E3%80%81%E8%AA%B2%E9%87%91%E3%80%81%E4%BE%A1%E6%A0%BC%E3%81%AE%E3%81%97%E3%81%8F%E3%81%BF)
 
