@@ -54,7 +54,7 @@ Azure Logic Apps には 従量課金版 と Standard 版がございますが、
 
 ![](./LogicApps-StandardPricing/LogicApps-StandardPricing-2.png)
 
-また 1 か月のコストのシミュレーションが以下のページに公開されております。
+また 1 か月のコストのシミュレーションが以下のページに公開されております。2025 年 1 月時点の記載より引用しておりますこと念のためご留意ください。
 
 [標準モデルの価格レベル](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing#pricing-tiers-in-the-standard-model)
 
