@@ -52,7 +52,7 @@ $Env:WEBSITE_SITE_NAME
 App Service の OS ではその他に様々な環境変数が存在しており、状況に応じて必要な値が設定された環境変数を取得してワークフロー内のアクションで活用することができます。<br>
 [環境変数とアプリ設定のリファレンス - Azure App Service | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/app-service/reference-app-settings?tabs=kudu%2Cdotnet)
 
-このように、OS 情報を取得できることが可能です。
+このように、OS 情報を取得することが可能です。
 
 ## 3. アクションで OS 情報を取得する一例
 
