@@ -15,19 +15,19 @@ Azure Logic Apps Standard は内部で Azure App Services をホスティング�
 
 ## 目次
 
-1. Azure Logic Apps Standard のホスト環境
-2. Kudu
-3. アクションで OS 情報を取得する一例
-4. まとめ
+1. [Azure Logic Apps Standard のホスト環境](#header1)
+2. [Kudu](#header2)
+3. [アクションで OS 情報を取得する一例](#header3)
+4. [まとめ](#header4)
 
-## 1. Azure Logic Apps Standard のホスト環境
+<h2 id="header1">1. Azure Logic Apps Standard のホスト環境</h2>
 
 Azure Logic Apps Standard (シングルテナント) は、ホスト環境を独自に指定する場合を除いて基本的には App Service プラン上で動作します。<br>
 [ロジック アプリ ワークフローの種類と環境](https://learn.microsoft.com/ja-jp/azure/logic-apps/single-tenant-overview-compare) で各ホスティングプランとリソース構成を確認することができます。
 
 Logic Apps のホストである App Service に対して後述する Kudu や CLI を使用することで OS 情報を取得することができます。
 
-## 2. Kudu
+<h2 id="header2">2. Kudu</h2>
 
 Azure App Service では GUI から CMD や PowerShell のコマンド実行画面を表示することができる `Kudu` というサービスが提供されております。<br>
 App Service でホストされた Logic Apps Standard でも、Kudu を使用して自身が動作する OS 上でコマンドを実行することができます。<br>
@@ -54,7 +54,7 @@ App Service の OS ではその他に様々な環境変数が存在しており�
 
 このように、OS 情報を取得することが可能です。
 
-## 3. アクションで OS 情報を取得する一例
+<h2 id="header3">3. アクションで OS 情報を取得する一例</h2>
 
 PowerShell で環境変数を取得できるということは、同様にワークフロー内の `Execute Powershell Code` アクションでも取得が可能ということです。<br>
 `Execute Powershell Code` アクションの使い方や制限事項等の説明は以下のドキュメントに記載されております。<br>
@@ -80,7 +80,7 @@ Push-WorkflowOutput -Output $envVariables
 ワークフローに返した出力は `Parse JSON` アクション等を使用することで、動的コンテンツで取り扱える形式の値とすることが可能になり、より柔軟性が向上します。<br>
 [JSON の解析アクション](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action)
 
-## 4. まとめ
+<h2 id="header4">4. まとめ</h2>
 
 本記事では、Azure Logic Apps Standard がホストされた App Service の OS 環境変数を取得してワークフロー内で使用する方法をご紹介しました。
 
