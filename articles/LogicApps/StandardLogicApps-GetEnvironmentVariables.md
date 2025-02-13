@@ -39,7 +39,7 @@ App Service でホストされた Logic Apps Standard でも、Kudu を使用し
   Advanced Tools > `Go→` のリンク
   ![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-1.png)
 
-画面上部の`Debug console`から CMD と PowerShell を選択できます。
+画面上部の `Debug console` から CMD と PowerShell を選択できます。
 一例として PowerShell で環境変数の値を取得する様子を以下に記載します。
 
 ```powershell
@@ -52,12 +52,12 @@ $Env:WEBSITE_SITE_NAME
 App Service の OS ではその他に様々な環境変数が存在しており、状況に応じて必要な値が設定された環境変数を取得してワークフロー内のアクションで活用することができます。<br>
 [環境変数とアプリ設定のリファレンス - Azure App Service | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/app-service/reference-app-settings?tabs=kudu%2Cdotnet)
 
-このように、OS 情報を取得できることが
+このように、OS 情報を取得できることが可能です。
 
 ## 3. アクションで OS 情報を取得する一例
 
-PowerShell で環境変数を取得できるということは、同様にワークフロー内の「Execute Powershell Code」アクションでも取得が可能ということです。<br>
-「Execute Powershell Code」アクションの使い方や制限事項等の説明は以下のドキュメントに記載されております。<br>
+PowerShell で環境変数を取得できるということは、同様にワークフロー内の `Execute Powershell Code` アクションでも取得が可能ということです。<br>
+`Execute Powershell Code` アクションの使い方や制限事項等の説明は以下のドキュメントに記載されております。<br>
 [Standard ワークフローで PowerShell を追加して実行する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/add-run-powershell-scripts)
 
 ワークフローに出力を返し、後続のアクションで取得した環境変数の値を使用するには上記にも記載の通り、`Push-WorkflowOutput` を使います。
@@ -77,7 +77,7 @@ Push-WorkflowOutput -Output $envVariables
 アクションが成功すると、このように JSON で出力が返されます。
 ![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-4.png)
 
-ワークフローに返した出力は`Parse JSON`アクション等を使用することで、動的コンテンツで取り扱える形式の値とすることが可能になり、より柔軟性が向上します。<br>
+ワークフローに返した出力は `Parse JSON` アクション等を使用することで、動的コンテンツで取り扱える形式の値とすることが可能になり、より柔軟性が向上します。<br>
 [JSON の解析アクション](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action)
 
 ## 4. まとめ
