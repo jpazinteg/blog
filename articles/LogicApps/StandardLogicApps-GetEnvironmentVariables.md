@@ -37,7 +37,7 @@ App Service でホストされた Logic Apps Standard でも、Kudu を使用し
 
 - Azure Portal > Logic Apps リソース > Development tools -
   Advanced Tools > `Go→` のリンク
-  ![](./LogicApps-Standard-GetEnvironmentVariables/LogicApps-Standard-GetEnvironmentVariables-1.png)
+  ![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-1.png)
 
 画面上部の`Debug console`から CMD と PowerShell を選択できます。
 一例として PowerShell で環境変数の値を取得する様子を以下に記載します。
@@ -47,7 +47,7 @@ $Env:WEBSITE_SITE_NAME
 ```
 
 上記を実行すると、Logic Apps のリソース名が表示されます。
-![](./LogicApps-Standard-GetEnvironmentVariables/LogicApps-Standard-GetEnvironmentVariables-2.png)
+![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-2.png)
 
 App Service の OS ではその他に様々な環境変数が存在しており、状況に応じて必要な値が設定された環境変数を取得してワークフロー内のアクションで活用することができます。<br>
 [環境変数とアプリ設定のリファレンス - Azure App Service | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/app-service/reference-app-settings?tabs=kudu%2Cdotnet)
@@ -72,10 +72,10 @@ $envVariables =  [PSCustomObject]@{
 Push-WorkflowOutput -Output $envVariables
 ```
 
-![](./LogicApps-Standard-GetEnvironmentVariables/LogicApps-Standard-GetEnvironmentVariables-3.png)
+![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-3.png)
 
 アクションが成功すると、このように JSON で出力が返されます。
-![](./LogicApps-Standard-GetEnvironmentVariables/LogicApps-Standard-GetEnvironmentVariables-4.png)
+![](./StandardLogicApps-GetEnvironmentVariables/StandardLogicApps-GetEnvironmentVariables-4.png)
 
 ワークフローに返した出力は`Parse JSON`アクション等を使用することで、動的コンテンツで取り扱える形式の値とすることが可能になり、より柔軟性が向上します。<br>
 [JSON の解析アクション](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action)
