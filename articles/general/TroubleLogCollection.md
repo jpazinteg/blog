@@ -91,6 +91,13 @@ MSMQ の調査に有用な End2End ログの採取手順は以下記事をご覧
 
 必要に応じて、各種コマンドの実行結果や、ネットワーク キャプチャを取得いただく場合がございます。その際のコマンドのご利用方法などについて、以下にリンクをおまとめいたしております。
 
+### Systeminfo / Get-ComputerInfo など
+
+[systeminfo | Microsoft Learn](https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/systeminfo)
+
+[Get-ComputerInfo (Microsoft.PowerShell.Management) - PowerShell | Microsoft Learn](https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-computerinfo)
+
+
 ### nslookup / Resolve-DnsName など
 
 [nslookup | Microsoft Learn](https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/nslookup)
