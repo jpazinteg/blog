@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>従量課金タイプの Logic Apps 用のカスタム ロールを作成する | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの継松です。今回は、 従量課金タイプの Logic Apps に対してのカスタム ロールの作成方法についてご紹介いたします！ 本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけます">
+<meta property="og:type" content="article">
+<meta property="og:title" content="従量課金タイプの Logic Apps 用のカスタム ロールを作成する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの継松です。今回は、 従量課金タイプの Logic Apps に対してのカスタム ロールの作成方法についてご紹介いたします！ 本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけます">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image000.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image001.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image002.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image003.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image004.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image005.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image006.png">
+<meta property="article:published_time" content="2025-02-26T03:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-26T02:47:15.231Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image000.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/LogicApps-CustomRole" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      従量課金タイプの Logic Apps 用のカスタム ロールを作成する
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-02-26T03:00:00.000Z" itemprop="datePublished">2025-02-26</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e9a8925e-bd75-53f0-b814-a3d88afae530%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE+Logic+Apps+%E7%94%A8%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0+%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-CustomRole%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-CustomRole.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-CustomRole.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/" data-id="cm7lberjn000n0nk92avbbx33" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。  Azure Integration サポート チームの継松です。<br>今回は、 従量課金タイプの Logic Apps に対してのカスタム ロールの作成方法についてご紹介いたします！</p>
+<p>本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。<br>ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけますと幸いでございます。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li>Azure カスタム ロールについて</li>
+<li>カスタム ロールを作成する</li>
+<li>関連ドキュメント</li>
+<li>まとめ</li>
+</ul>
+<h2 id="Azure-カスタム-ロールについて"><a href="#Azure-カスタム-ロールについて" class="headerlink" title="Azure カスタム ロールについて"></a>Azure カスタム ロールについて</h2><p>Azure のロール定義とは、アクセス許可のコレクションです。<br>このロールをユーザー、グループなどに割り当て、 Azure リソースへのアクセスを与えることが可能です。</p>
+<p>既定で各リソース操作の許可をまとめた「組み込みロール」がご用意されております。<br>「組み込みロール」ではお客様のご要件を満たさない場合には独自の Azure カスタム ロールを作成することが可能です。</p>
+<p>カスタム ロールを作成する場合には、これら既存の組み込みロールを複製して、要件に沿って特定の権限 (アクション) を追加・削除する形が簡単です。</p>
+<p>参考ドキュメント:<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/overview">Azure ロールベースのアクセス制御 (Azure RBAC) とは</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles">Azure 組み込みロール</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
+<div class="alert is-info"><p class="alert-title">Note</p><p>必要となる権限 (アクション) の組み合わせについてはお客様のご要件に併せてご検討いただきますようお願いいたします。</p><p>Azure サポート窓口にて、カスタム ロールの作成の代行は難しい事、あらかじめご了承ください。</p></div>
+<h2 id="カスタム-ロールを作成する"><a href="#カスタム-ロールを作成する" class="headerlink" title="カスタム ロールを作成する"></a>カスタム ロールを作成する</h2><p>まず、従量課金タイプの Logic Apps にて有用な組み込みロールとしましては以下がございます。<br>・ Logic App Contributor (ロジック アプリの共同作成者): ロジック アプリを管理できますが、アクセス権を変更することはできません。<br>・ Logic App Operator (ロジック アプリのオペレーター): ロジック アプリの読み取り、有効化、無効化ができますが、編集または更新はできません。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
+<p>本記事では前述の通り、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成しますので、今回の場合、 Logic App Contributor (ロジック アプリの共同作成者) を複製したうえで、調整する形が簡単かと考えます。</p>
+<p>以下にて手順をまとめましたのでご参考ください。</p>
+<ol>
+<li><p>Azure Portal にて権限を付与されたいロジック アプリを開き、 [アクセス制御 (IAM)] を開きます。</p>
+</li>
+<li><p>[役割] にて今回複製されたいロール (ロジック アプリの共同作成者) を検索し、行の末尾にある省略記号 ( … ) を押下し、 [複製] を押下します。</p>
+</li>
+</ol>
+<p><img src="/blog/LogicApps/LogicApps-CustomRole/image000.png"> </p>
+<ol start="3">
+<li>[基本] にて任意のカスタム ロール名の入力など、以下の通り構成します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image001.png"> </li>
+</ol>
+<p>4.[アクセス許可] にて、[+ 権限を除外する] を押下します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image002.png"> </p>
+<ol start="5">
+<li>除外されたい権限を入力、選択、追加します。<br>今回の場合は削除の権限を除外したいため “Microsoft.Logic/workflows/delete” を検索します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image003.png"> </li>
+</ol>
+<p>なお、従量課金タイプの Logic Apps に関しての権限 (アクション) については下記資料にまとめられております。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
+<ol start="6">
+<li>[確認と作成] まで進み、カスタム ロールを作成します。<br>NotAction: Microsoft.Logic/workflows/delete が記載されていることを確認します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image004.png"> </li>
+</ol>
+<p>※ 作成後、 [アクセス制御 (IAM)] にて反映されるまで数分かかる場合がございます。<br>少々時間をおいた後、 [+ 追加] &gt;&gt; [ロールの割り当ての追加] から作成したカスタム ロールの付与をお試しください。</p>
+<p>作成完了後は、下図のように表示されます。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image005.png"> </p>
+<p>結果:<br>上記手順にて作成したカスタム ロールを割り当てたユーザーが削除を試みると、下図のようなエラーが発生します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image006.png"> </p>
+<h2 id="関連ドキュメントまとめ"><a href="#関連ドキュメントまとめ" class="headerlink" title="関連ドキュメントまとめ"></a>関連ドキュメントまとめ</h2><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では従量課金タイプの Logic Apps にてお使いいただけるカスタム ロールの作成方法についてご紹介いたしました。</p>
+<p>最後までお読みいただき、ありがとうございました！</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-CustomRole.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../StandardLogicApps-GetEnvironmentVariables/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">従量課金タイプの Logic Apps 用のカスタム ロールを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-GetEnvironmentVariables/">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-StandardPricing/">Standard 版 Azure Logic Apps の料金体系を理解するポイント</a>
+          </li>
+        
+          <li>
+            <a href="../serviceProviderConnection/">サービス プロバイダー接続について</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-Functions2/">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">49</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">49</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">42</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.57px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.43px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 15.71px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 10px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 14.29px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.86px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.43px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 17.14px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14.29px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">サービス プロバイダー接続</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
