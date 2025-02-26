@@ -1,6 +1,6 @@
 ---
 title: 従量課金タイプの Logic Apps 用のカスタム ロールを作成する
-date: 2025-02-25 16:00:00
+date: 2025-02-26 12:00:00
 tags:
   - Tips
   - Azure Integration
