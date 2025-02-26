@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/general/TroubleLogCollection/</loc>
+    
+    <lastmod>2025-02-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/general/Integration-teamInfo/</loc>
     
     <lastmod>2025-02-26</lastmod>
@@ -359,14 +366,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
     
     <lastmod>2025-02-26</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
     
     <lastmod>2025-02-26</lastmod>
     
@@ -593,6 +600,20 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/</loc>
+    <lastmod>2025-02-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/HIS/</loc>
+    <lastmod>2025-02-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/BizTalk/</loc>
     <lastmod>2025-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

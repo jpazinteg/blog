@@ -80,6 +80,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LogicApps/GetIterationIndexInForeachAction" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../LogicApps/GetIterationIndexInForeachAction/" class="article-date">
+  <time datetime="2023-03-16T15:00:00.000Z" itemprop="datePublished">2023-03-17</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../LogicApps/GetIterationIndexInForeachAction/">Foreachアクションでインデックスを取得した処理の比較</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/get-iteration-index-in-foreach-action/ba-p/3730379">Get iteration index in Foreach action</a></li>
+</ul>
+<p>Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合があるかと思います。<br>その際は、コンカレンシ―制御を以下のように 1 に設定し、各繰り返し回数ごとに常に 1 ずつ加算されるインデックスとして変数を使用する手法がございます。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image01.png"></p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image02.png"></p>
+<p>しかし、この方法では For each 処理がシーケンシャルな処理であるため、並列実行が出来ずパフォーマンスに影響を及ぼすことがあります。</p>
+<p>今回は、For each アクションを並列実行して、効率的にインデックスを利用する構成と、従来の処理との比較結果についてご案内いたします。</p>
+        
+          <p class="article-more-link">
+            <a href="../../LogicApps/GetIterationIndexInForeachAction/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/" data-id="cm7lqxin1000b0nny4j0d53zk" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LogicApps/WorkflowRunsList" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -119,7 +178,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/" data-id="cm7lberk5001z0nk94ea470v1" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/" data-id="cm7lqxinx001z0nny8vii7jh5" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -169,7 +228,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/" data-id="cm7lberk1001m0nk9aubbh3b7" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/" data-id="cm7lqxins001m0nny2jcnh0qw" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -220,7 +279,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/" data-id="cm7lberke002l0nk96erh57c7" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/" data-id="cm7lqxio7002l0nny7xgsfgnb" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
@@ -271,7 +330,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/" data-id="cm7lberje00080nk9c70s2idb" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/" data-id="cm7lqximz00080nnyf4i10tb7" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -322,7 +381,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/" data-id="cm7lberjd00070nk9fkk90oz5" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/" data-id="cm7lqximy00070nny8ym9ffa3" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
@@ -372,7 +431,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/" data-id="cm7lberjf000a0nk9cvzc0ug4" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/" data-id="cm7lqxin0000a0nny793b7b9l" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -427,7 +486,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cm7lberk4001w0nk90jij1ons" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cm7lqxinw001w0nny1dchhnby" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -482,7 +541,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="cm7lberjc00040nk90fg8ck1k" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="cm7lqximw00040nny3ej65b4k" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -532,69 +591,10 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/" data-id="cm7lberjk000h0nk95tw45kov" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/" data-id="cm7lqxin9000h0nnycpc69d1m" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LogicApps/ScheduleTriggerStrattime" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="../../LogicApps/ScheduleTriggerStrattime/" class="article-date">
-  <time datetime="2022-11-06T15:00:00.000Z" itemprop="datePublished">2022-11-07</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../LogicApps/ScheduleTriggerStrattime/">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        こんにちは。Azure Integration サポート チームの髙橋です。「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる仕様の動作について説明します。
-こんな方におすすめです
-「繰り返し (Recurrence)」トリガーの想定される起動時刻と、実際の起動時刻に差異が生じる原因を知りたい方
-
-前提条件
-「繰り返し (Recurrence)」トリガーに関連する公開情報は以下になります。
-参考ドキュメント : Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール
-参考ドキュメント : Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する
-
-
-
-事象「繰り返し (Recurrence)」トリガーでは、想定される起動時刻よりも、稀に...
-        <p class="article-readmore">
-          <a href="../../LogicApps/ScheduleTriggerStrattime/">Read more</a>
-        </p>
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="cm7lberjw00170nk99l8qgdje" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
 
     </footer>
   </div>
@@ -624,6 +624,10 @@
           </li>
         
           <li>
+            <a href="../../general/TroubleLogCollection/">MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について</a>
+          </li>
+        
+          <li>
             <a href="../../LogicApps/StandardLogicApps-GetEnvironmentVariables/">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</a>
           </li>
         
@@ -635,10 +639,6 @@
             <a href="../../LogicApps/serviceProviderConnection/">サービス プロバイダー接続について</a>
           </li>
         
-          <li>
-            <a href="../../LogicApps/LogicApps-Functions2/">Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -648,7 +648,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
-      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/BizTalk/" rel="tag">BizTalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HIS/" rel="tag">HIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li></ul>  -->
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">49</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">49</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">42</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
@@ -669,7 +669,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">タグクラウド</h3>
     <div class="widget tagcloud">
-      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.57px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.43px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 15.71px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 10px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 14.29px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.86px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.43px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 17.14px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14.29px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 10px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">サービス プロバイダー接続</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
+      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.75px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.25px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/BizTalk/" style="font-size: 10px;">BizTalk</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.25px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HIS/" style="font-size: 10px;">HIS</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 16.25px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 11.25px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 15px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.5px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.25px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 17.5px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 13.75px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 11.25px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">サービス プロバイダー接続</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a>
     </div>
   </div>
 
