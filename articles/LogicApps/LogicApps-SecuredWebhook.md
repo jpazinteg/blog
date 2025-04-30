@@ -31,7 +31,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータに
 アクション グループから従量課金タイプのロジック アプリを呼び出す際、通常は認証方法を意識することなく、アクション グループの [アクション タイプ] に [ロジック アプリ] を選択いただいてから、呼び出し先のロジック アプリを指定されてアクション グループからロジック アプリを呼び出すことが多いかと思います。
 <br>
 
-![](.\LogicApps-SecuredWebhook\image-02.png)
+![](./LogicApps-SecuredWebhook/image-02.png)
 
 この場合、内部的にはロジック アプリの [When a HTTP request is received] トリガーに設定されているエンドポイント URL に対するリクエストが送信されています。<br>
 このエンドポイント URL 文字列にはアクセス キーを利用した SAS (共有アクセス署名) 認証情報が含まれているため、[ロジック アプリ] を選択した場合のロジック アプリの呼び出しは SAS 認証によって行われることとなります。<br><br>
@@ -41,7 +41,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータに
 
 (https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#considerations-before-you-enable-oauth-20-with-microsoft-entra-id)<br>
 
-![](.\LogicApps-SecuredWebhook\image-01.png)
+![](./LogicApps-SecuredWebhook/image-01.png)
 
 [When a HTTP request is received] トリガーを呼び出す際の認証方式として SAS 認証を使いたくない場合に利用できる認証方法が OAuth 認証の有効化による認証となります。<br>
 アクション グループのアクション タイプに [ロジック アプリ] を選択してしまうと内部的に SAS 認証呼び出しの形式をとるため、OAuth 認証によってロジック アプリを呼び出す場合、アクション タイプには [セキュリティで保護された Webhook] を選択する必要があります。<br>
@@ -70,17 +70,17 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 ### 1. 保護された Web API 用の Microsoft Entra アプリケーションを作成
 [Microsoft Entra ID] - [管理 - アプリの登録] と遷移し、「+ 新規登録」を押下します。
 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-![](.\LogicApps-SecuredWebhook\image001.png)
+![](./LogicApps-SecuredWebhook/image001.png)
 
  
 アプリケーションを作成しましたら、以下のように [概要] を開き、「アプリケーション ID の URI の追加」を押下します。
  
-![](.\LogicApps-SecuredWebhook\image002.png)
+![](./LogicApps-SecuredWebhook/image002.png)
 
  
 以下の画面の「追加」を押下し、表示されます「アプリケーション ID の URI」をコピーして控えておき、そのまま保存します。
 
-![](.\LogicApps-SecuredWebhook\image003.png)
+![](./LogicApps-SecuredWebhook/image003.png)
 
  
  
@@ -88,7 +88,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 - テナント ID<br>
 登録したアプリの [概要] ページにてコピーのうえ、テキスト エディタなどに貼り付けて控えておきます。
 
-![](.\LogicApps-SecuredWebhook\image004.png)
+![](./LogicApps-SecuredWebhook/image004.png)
 
  
 - アクセス トークンの形式<br>
@@ -96,7 +96,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 1 または null の場合：アクセス トークンの形式は v1<br>
 2 の場合：アクセス トークンの形式は v2 となります。
  
-![](.\LogicApps-SecuredWebhook\image005.png)
+![](./LogicApps-SecuredWebhook/image005.png)
 
  
 以下の技術情報もご参考いただけます。<br>
@@ -150,7 +150,7 @@ api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列<br>
  
 [ロジック アプリ] - [<対象の ロジック アプリ>] - [開発ツール - ロジック アプリ デザイナー] と遷移し、 [HTTP 要求の受信時] トリガーを開き、URL を取得します。<br>
  
-![](.\LogicApps-SecuredWebhook\image007.png)
+![](./LogicApps-SecuredWebhook/image007.png)
 
  
  
@@ -158,7 +158,7 @@ api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列<br>
 sp や sv 、sigといったパラメーター値は SAS 認証のために使用され、AAD 認証の場合には不要となるため、削除します。<br>
 具体的には以下のようにSAS認証情報を含む URL 文字列から水色箇所を削除し、黄色箇所のみとなるようにします。<br>
  
-![](.\LogicApps-SecuredWebhook\image008.png)
+![](./LogicApps-SecuredWebhook/image008.png)
  
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn
 ＃ Shared Access Signature (SAS) 認証を無効にする (従量課金のみ)]<br>
@@ -170,18 +170,18 @@ Azure Monitor 側のアクション グループを開き、以下のように [
 [セキュリティで保護された Webhook] 画面にて [オブジェクト ID] 手順 1. で登録したアプリケーションを指定します。(アプリの登録が反映されるまで時間がかかる場合がございます。)<br>
 [URI] 手順 3. で SAS 認証の情報を削除した URL を指定します。<br>
  
-![](.\LogicApps-SecuredWebhook\image009.png)
+![](./LogicApps-SecuredWebhook/image009.png)
 
  
 なお、アクション グループで [セキュリティで保護された Webhook] アクションを作成または変更できるようにするには、
 Microsoft Entra アプリケーションの所有者ロールをサービス プリンシパルに割り当てる必要があります。
  
-![](.\LogicApps-SecuredWebhook\image010.png)
+![](./LogicApps-SecuredWebhook/image010.png)
 
  
 以下は [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn]<br>
 (https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook) からの抜粋となります。
-![](.\LogicApps-SecuredWebhook\image011.png)
+![](./LogicApps-SecuredWebhook/image011.png)
 
 ### 5. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
 以下の技術情報のセクションの手順に従い、スクリプトを実行します。<br>
@@ -285,7 +285,7 @@ Write-Host "====================================================================
 ```
  
 このスクリプトの実行は Microsoft Entra アプリケーション管理者ロールが割り当てられているユーザーが行う必要があります。
-![](.\LogicApps-SecuredWebhook\image012.png)
+![](./LogicApps-SecuredWebhook/image012.png)
 
 
 
