@@ -8,10 +8,13 @@ tags:
   - 認証  
 ---
 
-こんにちは！Azure Integration サポート チームの 飯野 です。  
-
-アクション グループから [セキュリティで保護された Webhook] によってロジック アプリを呼び出すための手順をご紹介します。
-
+こんにちは！Azure Integration サポート チームの 飯野 です。<br>
+<br>
+Azure Monitor のアクション グループは、Azure Monitor のデータによってインフラストラクチャやアプリケーションに問題が発生したことを検知した際に、アラートをトリガーするための機能です。<br>
+アクション グループを使用することで、アラートがトリガーされた際に、通知（音声通話、SMS、プッシュ通知、メールなど）を送信し、あらかじめ指定したアクションを実行することが可能となります。<br>
+アアラートがトリガーされたときに実行されるアクションのうち [ロジック アプリ] と [セキュリティ保護された Webhook] がロジック アプリを呼び出すことができるアクションとなります。<br>
+<br>
+この記事では Azure Monitor のアクション グループから [セキュリティで保護された Webhook] によってロジック アプリを呼び出すための手順をご紹介します。<br>
 <!-- more -->
 
 ## 目次
@@ -19,7 +22,7 @@ tags:
 - セキュリティで保護された Webhook の設定方法
 
     1. 保護された Web API 用の Microsoft Entra アプリケーションを作成
-    1. ロジック アプリ側で [Azure Active Directory 承認ポリシー]を設定
+    1. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
     1. ロジック アプリのエンドポイント URL を取得
     1. アクション グループを設定
     1. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
@@ -46,10 +49,9 @@ tags:
 アクション グループでアクション タイプに [保護された Webhook] を指定する場合、OAuth 認証を用いるための設定が必要となりますので、その手順の詳細を以降からご説明いたします。<br>
 
 ## セキュリティで保護された Webhook の設定方法
-アクション グループで [セキュリティで保護された Webhook] を設定いただくためには、
-サービス プリンシパルを作成し
-Webhook 配信をセキュリティで保護するための Microsoft Entra Webhook アプリケーション()ロールのメンバーにサービス プリンシパルを作成
-また、ロジック アプリ側の認証方法を OAuth 認証に設定しておき、アクション グループで「セキュリティで保護された Webhook」を選択して呼び出します。
+アクション グループで [セキュリティで保護された Webhook] を設定いただくためには、サービス プリンシパルを作成し
+Webhook 配信をセキュリティで保護するための Microsoft Entra Webhook アプリケーション ロールのメンバーにサービス プリンシパルを作成
+また、ロジック アプリ側の認証方法を OAuth 認証に設定しておき、アクション グループで [セキュリティで保護された Webhook] を選択して呼び出します。
 
 設定手順につきましては以下の公開情報もございますので、併せてご確認ください。<br>
 Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する
@@ -58,7 +60,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 おおまかな手順は以下となります。
 
 1. 保護された Web API 用の Microsoft Entra アプリケーションを作成
-1. ロジック アプリ側で [Azure Active Directory 承認ポリシー]を設定
+1. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
 1. ロジック アプリのエンドポイント URL を取得
 1. アクション グループを設定
 1. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
@@ -90,7 +92,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 
  
 - アクセス トークンの形式<br>
-アプリ登録のマニフェストの AccessTokenAcceptedVersionの値の確認し、アクセス トークンの形式を判断します。<br>
+アプリ登録のマニフェストの AccessTokenAcceptedVersion の値の確認し、アクセス トークンの形式を判断します。<br>
 1 または null の場合：アクセス トークンの形式は v1<br>
 2 の場合：アクセス トークンの形式は v2 となります。
  
@@ -102,11 +104,11 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#confi
 (https://learn.microsoft.com/ja-jp/entra/identity-platform/access-tokens#token-formats)
 
 
-### 2. ロジック アプリ側で [Azure Active Directory 承認ポリシー]を設定
-[ロジック アプリ] - [<対象の ロジック アプリ>] - [設定 – 認可] と遷移し、[ポリシーの追加] を押下し、以下の値を設定します
+### 2. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
+[ロジック アプリ] - [<対象の ロジック アプリ>] - [設定 – 認可] と遷移し、 [ポリシーの追加] を押下し、以下の値を設定します
  
-[ポリシー名]：任意<br>
-[ポリシー タイプ]：AAD<br>
+[ポリシー名] : 任意<br>
+[ポリシー タイプ] : AAD<br>
 [クレーム]<br>
  - クレーム名 : issuer <br>
 アクセス トークンの形式が v1 の場合は https://sts.windows.net/{テナントID}/<br>
@@ -128,7 +130,7 @@ api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列<br>
  
 アプリ登録時にマニフェストにて確認したトークンの形式によって issuer (発行者) の設定値が異なることについて、以下の公開技術情報の記載がご参考いただけます。
  
-[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]
+[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]<br>
 (https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-sas)<br>
 
 
@@ -139,14 +141,14 @@ api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列<br>
  
 ロジック アプリにおける AAD ポリシーの有効化手順については、以下の公開技術情報がご参考いただけます。<br>
 [Azure AD OAuth を有効にする前の考慮事項 # ロジック アプリに対して OAuth Azure AD を有効にする]<br>
-https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-azure-ad-oauth-for-your-logic-app
+(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-azure-ad-oauth-for-your-logic-app)
  
  ### 3. ロジック アプリのエンドポイント URL を取得
 以下の技術情報のセクションで解説している手順となります。<br>
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ 従量課金ロジック アプリ リソースに Microsoft Entra ID を使用した OAuth を有効にする]<br>
 (https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-oauth-with-microsoft-entra-id-for-your-consumption-logic-app-resource)
  
-[ロジック アプリ] - [<対象の ロジック アプリ>] - [開発ツール - ロジック アプリ デザイナー] と遷移し、「HTTP 要求の受信時」トリガーを開き、URL を取得します。<br>
+[ロジック アプリ] - [<対象の ロジック アプリ>] - [開発ツール - ロジック アプリ デザイナー] と遷移し、 [HTTP 要求の受信時] トリガーを開き、URL を取得します。<br>
  
 ![](.\LogicApps-SecuredWebhook\image007.png)
 
@@ -164,8 +166,8 @@ sp や sv 、sigといったパラメーター値は SAS 認証のために使�
  
 
 ### 4. アクション グループを設定
-Azure Monitor 側のアクション グループを開き、以下のように「アクション」にて「セキュリティで保護された Webhook」を選択します。<br>
-[セキュリティで保護された Webhook] 画面にて[オブジェクト ID]  手順 1. で登録したアプリケーションを指定します。(アプリの登録が反映されるまで時間がかかる場合がございます。)<br>
+Azure Monitor 側のアクション グループを開き、以下のように [アクション] にて [セキュリティで保護された Webhook] を選択します。<br>
+[セキュリティで保護された Webhook] 画面にて [オブジェクト ID] 手順 1. で登録したアプリケーションを指定します。(アプリの登録が反映されるまで時間がかかる場合がございます。)<br>
 [URI] 手順 3. で SAS 認証の情報を削除した URL を指定します。<br>
  
 ![](.\LogicApps-SecuredWebhook\image009.png)
@@ -295,7 +297,7 @@ Write-Host "====================================================================
 おおまかな手順として以下をご案内いたしました。
 
 1. 保護された Web API 用の Microsoft Entra アプリケーションを作成
-1. ロジック アプリ側で [Azure Active Directory 承認ポリシー]を設定
+1. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
 1. ロジック アプリのエンドポイント URL を取得
 1. アクション グループを設定
 1. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
