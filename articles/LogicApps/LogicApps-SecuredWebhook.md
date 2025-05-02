@@ -46,7 +46,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 ## セキュリティで保護された Webhook の設定方法
 アクション グループで [セキュリティで保護された Webhook] をを選択して呼び出すためには、Webhook 配信をセキュリティで保護するための Microsoft Entra Webhook アプリケーション ロールのメンバーにサービス プリンシパルを作成し、ロジック アプリ側では OAuth 認証を認証方法として設定しておく必要がございます。<br>
 設定手順につきましては以下の公開情報もございますので、併せてご確認ください。
-Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
+[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する][(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
 
 おおまかな手順は以下となります。
 
@@ -87,7 +87,7 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
  
 ![](./LogicApps-SecuredWebhook/image005.png)
 
-以下の技術情報もご参考いただけます。
+以下の技術情報もご参考いただけます。<br>
 [Microsoft ID プラットフォームのアクセス トークン - Microsoft identity platform | Microsoft Learn ＃ トークンの形式](https://learn.microsoft.com/ja-jp/entra/identity-platform/access-tokens#token-formats)<br>
 
 このセクションで確認した [アプリケーション ID の URI]、[ディレクトリ(テナント) ID]、[アクセス トークンの形式] は、後述のロジック アプリ側における [Azure Active Directory 承認ポリシー] の設定時に使用します。
@@ -109,15 +109,15 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 
 ![](./LogicApps-SecuredWebhook/image006.png)
 
-アプリ登録時にマニフェストにて確認したトークンの形式によって issuer (発行者) の設定値が異なることについて、以下の公開技術情報の記載がご参考いただけます。
+アプリ登録時にマニフェストにて確認したトークンの形式によって issuer (発行者) の設定値が異なることについて、以下の公開技術情報の記載がご参考いただけます。<br>
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-sas)<br>
 
---- 抜粋 ---
-承認ポリシーには少なくとも発行者のクレームが含まれている必要があります。
-その Microsoft Entra ID の発行者の値は、https://sts.windows.net/ または https://login.microsoftonline.com/ (OAuth V2) のいずれかで始まります。
+--- 抜粋 ---<br>
+承認ポリシーには少なくとも発行者のクレームが含まれている必要があります。<br>
+その Microsoft Entra ID の発行者の値は、https://sts.windows.net/ または https://login.microsoftonline.com/ (OAuth V2) のいずれかで始まります。<br>
 --- 抜粋 ---<br>
 
-ロジック アプリにおける AAD ポリシーの有効化手順については、以下の公開技術情報がご参考いただけます。
+ロジック アプリにおける AAD ポリシーの有効化手順については、以下の公開技術情報がご参考いただけます。<br>
 [Azure AD OAuth を有効にする前の考慮事項 # ロジック アプリに対して OAuth Azure AD を有効にする](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-azure-ad-oauth-for-your-logic-app)<br>
  
  ### 3. ロジック アプリのエンドポイント URL を取得
@@ -134,14 +134,14 @@ sp や sv 、sigといったパラメーター値は SAS 認証のために使�
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn
 ＃ Shared Access Signature (SAS) 認証を無効にする (従量課金のみ)](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-shared-access-signature-sas-authentication-consumption-only)
  
-このセクションで解説したロジック アプリのエンドポイント URL の取得手順は、以下技術情報もご参考いただけます。
+このセクションで解説したロジック アプリのエンドポイント URL の取得手順は、以下技術情報もご参考いただけます。<br>
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ 従量課金ロジック アプリ リソースに Microsoft Entra ID を使用した OAuth を有効にする](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-oauth-with-microsoft-entra-id-for-your-consumption-logic-app-resource)
 
 ### 4. アクション グループを設定
 Azure Monitor 側のアクション グループを開き、以下のように [アクション] - [アクション タイプ] - [セキュリティで保護された Webhook] を選択します。[セキュリティで保護された Webhook] 画面にて前述の手順で確認した内容を以下のように指定します。<br>
-[オブジェクト ID] : 手順 1. で登録したアプリケーションを指定します。
-　(アプリの登録直後でまだドロップダウン リストの候補に表示されない場合、登録が反映されるまで時間を置いてから再度お試しください。)
-[URI] : 手順 3. で SAS 認証の情報を削除した URL を指定します。
+[オブジェクト ID] : 手順 1. で登録したアプリケーションを指定します。<br>
+　(アプリの登録直後でまだドロップダウン リストの候補に表示されない場合、登録が反映されるまで時間を置いてから再度お試しください。)<br>
+[URI] : 手順 3. で SAS 認証の情報を削除した URL を指定します。<br>
  
 ![](./LogicApps-SecuredWebhook/image009.png)
 
@@ -160,10 +160,10 @@ Microsoft Entra アプリケーションの所有者ロールをサービス プ
 以下の技術情報のセクションの手順に従い、スクリプトを実行します。<br>
 [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃ Secure Webhook PowerShell スクリプト](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#secure-webhook-powershell-script)
  
-前提条件として以下技術情報の Microsoft Graph PowerShell SDK を作業端末にインストールしておく必要がございます。
+前提条件として以下技術情報の Microsoft Graph PowerShell SDK を作業端末にインストールしておく必要がございます。<br>
 [Install the Microsoft Graph PowerShell SDK | Microsoft Learn](https://learn.microsoft.com/ja-jp/powershell/microsoftgraph/installation?view=graph-powershell-1.0&preserve-view=true)
  
-スクリプトの実行方法は以下となります。
+スクリプトの実行方法は以下となります。<br>
 [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃実行手順](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#how-to-run)
  
 1. 以下のスクリプトをコピーして作業端末上でテキスト エディタに貼り付け、tenantId と、アプリ登録の ObjectID を置き換えます。
