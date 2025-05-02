@@ -35,8 +35,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 エンドポイント URL 文字列にはアクセス キーを利用した SAS (共有アクセス署名) 認証情報が含まれており、 [ロジック アプリ] を選択した場合のロジック アプリの呼び出しは SAS 認証によって行われることとなります。
 従量課金ワークフローの [When a HTTP request is received] トリガーのエンドポイント URL の呼び出しに利用できる認可方式は、以下セクションの記載のとおり、Microsoft Entra ID を使用した OAuth 2.0 または Shared Access Signature (SAS) のいずれか 1 つのみとなります。<br>
 
-[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#considerations-before-you-enable-oauth-20-with-microsoft-entra-id)<br>
+[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#considerations-before-you-enable-oauth-20-with-microsoft-entra-id)<br>
 
 ![](./LogicApps-SecuredWebhook/image-01.png)
 
@@ -47,8 +46,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 ## セキュリティで保護された Webhook の設定方法
 アクション グループで [セキュリティで保護された Webhook] をを選択して呼び出すためには、Webhook 配信をセキュリティで保護するための Microsoft Entra Webhook アプリケーション ロールのメンバーにサービス プリンシパルを作成し、ロジック アプリ側では OAuth 認証を認証方法として設定しておく必要がございます。<br>
 設定手順につきましては以下の公開情報もございますので、併せてご確認ください。
-Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する
-(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
+Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
 
 おおまかな手順は以下となります。
 
@@ -90,21 +88,20 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 ![](./LogicApps-SecuredWebhook/image005.png)
 
 以下の技術情報もご参考いただけます。
-[Microsoft ID プラットフォームのアクセス トークン - Microsoft identity platform | Microsoft Learn ＃ トークンの形式]
-(https://learn.microsoft.com/ja-jp/entra/identity-platform/access-tokens#token-formats)<br>
+[Microsoft ID プラットフォームのアクセス トークン - Microsoft identity platform | Microsoft Learn ＃ トークンの形式](https://learn.microsoft.com/ja-jp/entra/identity-platform/access-tokens#token-formats)<br>
 
 このセクションで確認した [アプリケーション ID の URI]、[ディレクトリ(テナント) ID]、[アクセス トークンの形式] は、後述のロジック アプリ側における [Azure Active Directory 承認ポリシー] の設定時に使用します。
 
 ### 2. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
 [ロジック アプリ] - [<対象の ロジック アプリ>] - [設定 – 認可] と遷移し、 [ポリシーの追加] を選択し、以下の値を設定します。
 
-[ポリシー名] : 任意
-[ポリシー タイプ] : AAD
-[クレーム] : 以下のクレーム名と設定内容の組み合わせを指定します。[標準要求の追加] で、クレーム名とクレームの値の行を追加することができます。
-　[issuer] :
-　　アクセス トークンの形式が v1 の場合は https://sts.windows.net/{テナントID}/
-　　アクセス トークンの形式が v2 の場合は https://login.microsoftonline.com/{テナントID}/v2.0
-　[audience] : api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列
+[ポリシー名] : 任意<br>
+[ポリシー タイプ] : AAD<br>
+[クレーム] : 以下のクレーム名と設定内容の組み合わせを指定します。[標準要求の追加] で、クレーム名とクレームの値の行を追加することができます。<br>
+　[issuer] :<br>
+　　アクセス トークンの形式が v1 の場合は https://sts.windows.net/{テナントID}/<br>
+　　アクセス トークンの形式が v2 の場合は https://login.microsoftonline.com/{テナントID}/v2.0<br>
+　[audience] : api://XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX の形式の文字列<br>
 
 アクセス トークンの形式が v1 の場合の [issuer] に指定する文字列の末尾が / で終了することにご注意ください。
 [audience] には 手順 1. で控えたアプリケーション ID の URI を指定します。
@@ -113,8 +110,7 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 ![](./LogicApps-SecuredWebhook/image006.png)
 
 アプリ登録時にマニフェストにて確認したトークンの形式によって issuer (発行者) の設定値が異なることについて、以下の公開技術情報の記載がご参考いただけます。
-[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-sas)<br>
+[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-sas)<br>
 
 --- 抜粋 ---
 承認ポリシーには少なくとも発行者のクレームが含まれている必要があります。
@@ -122,8 +118,7 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 --- 抜粋 ---<br>
 
 ロジック アプリにおける AAD ポリシーの有効化手順については、以下の公開技術情報がご参考いただけます。
-[Azure AD OAuth を有効にする前の考慮事項 # ロジック アプリに対して OAuth Azure AD を有効にする]
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-azure-ad-oauth-for-your-logic-app)<br>
+[Azure AD OAuth を有効にする前の考慮事項 # ロジック アプリに対して OAuth Azure AD を有効にする](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-azure-ad-oauth-for-your-logic-app)<br>
  
  ### 3. ロジック アプリのエンドポイント URL を取得
 [ロジック アプリ] - [<対象の ロジック アプリ>] - [開発ツール] - [ロジック アプリ デザイナー] と遷移し、 [HTTP 要求の受信時] トリガーを開き、URL を取得します。
@@ -137,12 +132,10 @@ sp や sv 、sigといったパラメーター値は SAS 認証のために使�
 ![](./LogicApps-SecuredWebhook/image008.png)
  
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn
-＃ Shared Access Signature (SAS) 認証を無効にする (従量課金のみ)]
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-shared-access-signature-sas-authentication-consumption-only)
+＃ Shared Access Signature (SAS) 認証を無効にする (従量課金のみ)](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-shared-access-signature-sas-authentication-consumption-only)
  
 このセクションで解説したロジック アプリのエンドポイント URL の取得手順は、以下技術情報もご参考いただけます。
-[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ 従量課金ロジック アプリ リソースに Microsoft Entra ID を使用した OAuth を有効にする]
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-oauth-with-microsoft-entra-id-for-your-consumption-logic-app-resource)
+[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ 従量課金ロジック アプリ リソースに Microsoft Entra ID を使用した OAuth を有効にする](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#enable-oauth-with-microsoft-entra-id-for-your-consumption-logic-app-resource)
 
 ### 4. アクション グループを設定
 Azure Monitor 側のアクション グループを開き、以下のように [アクション] - [アクション タイプ] - [セキュリティで保護された Webhook] を選択します。[セキュリティで保護された Webhook] 画面にて前述の手順で確認した内容を以下のように指定します。<br>
@@ -158,24 +151,20 @@ Microsoft Entra アプリケーションの所有者ロールをサービス プ
  
 ![](./LogicApps-SecuredWebhook/image010.png)
 
- [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn]
-(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
+[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
 
 以下は上記技術情報からの抜粋となります。
 ![](./LogicApps-SecuredWebhook/image011.png)<br>
 
 ### 5. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
 以下の技術情報のセクションの手順に従い、スクリプトを実行します。<br>
-[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃ Secure Webhook PowerShell スクリプト]
-(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#secure-webhook-powershell-script)
+[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃ Secure Webhook PowerShell スクリプト](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#secure-webhook-powershell-script)
  
 前提条件として以下技術情報の Microsoft Graph PowerShell SDK を作業端末にインストールしておく必要がございます。
-[Install the Microsoft Graph PowerShell SDK | Microsoft Learn]
-(https://learn.microsoft.com/ja-jp/powershell/microsoftgraph/installation?view=graph-powershell-1.0&preserve-view=true)
+[Install the Microsoft Graph PowerShell SDK | Microsoft Learn](https://learn.microsoft.com/ja-jp/powershell/microsoftgraph/installation?view=graph-powershell-1.0&preserve-view=true)
  
 スクリプトの実行方法は以下となります。
-[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃実行手順]
-(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#how-to-run)
+[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃実行手順](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#how-to-run)
  
 1. 以下のスクリプトをコピーして作業端末上でテキスト エディタに貼り付け、tenantId と、アプリ登録の ObjectID を置き換えます。
 tenantIdt と アプリ登録の ObjectID の文字列は 登録したアプリの [概要] ページにて [ディレクトリ(テナント)ID] と [オブジェクト ID] にてご確認いただけます。
