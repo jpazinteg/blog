@@ -35,7 +35,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 エンドポイント URL 文字列にはアクセス キーを利用した SAS (共有アクセス署名) 認証情報が含まれており、 [ロジック アプリ] を選択した場合のロジック アプリの呼び出しは SAS 認証によって行われることとなります。
 従量課金ワークフローの [When a HTTP request is received] トリガーのエンドポイント URL の呼び出しに利用できる認可方式は、以下セクションの記載のとおり、Microsoft Entra ID を使用した OAuth 2.0 または Shared Access Signature (SAS) のいずれか 1 つのみとなります。<br>
 
-- [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]
+[ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn ＃ Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項]
 (https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#considerations-before-you-enable-oauth-20-with-microsoft-entra-id)<br>
 
 ![](./LogicApps-SecuredWebhook/image-01.png)
@@ -75,14 +75,14 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 
 ![](./LogicApps-SecuredWebhook/image003.png)
 
-テナント ID とアクセス トークンの形式についても確認しておきます。
-- テナント ID
+ディレクトリ(テナント) ID とアクセス トークンの形式についても確認しておきます。
+ディレクトリ(テナント) ID : 
 登録したアプリの [概要] ページにてコピーのうえ、テキスト エディタなどに貼り付けて控えておきます。
 
 ![](./LogicApps-SecuredWebhook/image004.png)
 
  
-- アクセス トークンの形式
+アクセス トークンの形式 : 
 アプリ登録のマニフェストの AccessTokenAcceptedVersion の値の確認し、アクセス トークンの形式を判断します。
 1 または null の場合：アクセス トークンの形式は v1
 2 の場合：アクセス トークンの形式は v2 となります。<br>
@@ -93,7 +93,7 @@ Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn 
 [Microsoft ID プラットフォームのアクセス トークン - Microsoft identity platform | Microsoft Learn ＃ トークンの形式]
 (https://learn.microsoft.com/ja-jp/entra/identity-platform/access-tokens#token-formats)<br>
 
-このセクションで確認した [アプリケーション ID の URI]、[テナント ID]、[アクセス トークンの形式] は、後述のロジック アプリ側における [Azure Active Directory 承認ポリシー] の設定時に使用します。
+このセクションで確認した [アプリケーション ID の URI]、[ディレクトリ(テナント) ID]、[アクセス トークンの形式] は、後述のロジック アプリ側における [Azure Active Directory 承認ポリシー] の設定時に使用します。
 
 ### 2. ロジック アプリ側で [Azure Active Directory 承認ポリシー] を設定
 [ロジック アプリ] - [<対象の ロジック アプリ>] - [設定 – 認可] と遷移し、 [ポリシーの追加] を選択し、以下の値を設定します。
