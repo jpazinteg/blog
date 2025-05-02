@@ -45,8 +45,8 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 
 ## セキュリティで保護された Webhook の設定方法
 アクション グループで [セキュリティで保護された Webhook] をを選択して呼び出すためには、Webhook 配信をセキュリティで保護するための Microsoft Entra Webhook アプリケーション ロールのメンバーにサービス プリンシパルを作成し、ロジック アプリ側では OAuth 認証を認証方法として設定しておく必要がございます。<br>
-設定手順につきましては以下の公開情報もございますので、併せてご確認ください。
-[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する][(https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
+設定手順につきましては以下の公開情報もございますので、併せてご確認ください。<br>
+[Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn # セキュリティで保護された Webhook の認証を構成する](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#configure-authentication-for-secure-webhook)
 
 おおまかな手順は以下となります。
 
