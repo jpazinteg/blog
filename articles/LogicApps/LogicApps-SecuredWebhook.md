@@ -39,7 +39,7 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 
 ![](./LogicApps-SecuredWebhook/image-01.png)
 
-このため、アクション グループからロジック アプリを呼び出す際の認証方法として SAS 認証を回避したい場合、OAuth 認証による呼び出しを行う [セキュリティで保護された Webhook] アクション タイプを選択することとなります。<br>
+このため、アクション グループからロジック アプリを呼び出す際の認証方法として SAS 認証を回避したい場合、アクション タイプに OAuth 認証による呼び出しを行う [セキュリティで保護された Webhook] を選択することとなります。<br>
 [セキュリティで保護された Webhook] アクションを利用する場合、OAuth 認証の利用のためには事前設定が必要となります。
 その設定手順の詳細をご説明いたします。
 
@@ -112,9 +112,9 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 アプリ登録時にマニフェストにて確認したトークンの形式によって issuer (発行者) の設定値が異なることについて、以下の公開技術情報の記載がご参考いただけます。<br>
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn # Microsoft Entra ID を使用した OAuth 2.0 を有効にする前の考慮事項](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#disable-sas)<br>
 
---- 抜粋 ---<br>
-承認ポリシーには少なくとも発行者のクレームが含まれている必要があります。<br>
-その Microsoft Entra ID の発行者の値は、https://sts.windows.net/ または https://login.microsoftonline.com/ (OAuth V2) のいずれかで始まります。<br>
+--- 抜粋 ---
+承認ポリシーには少なくとも発行者のクレームが含まれている必要があります。
+その Microsoft Entra ID の発行者の値は、https://sts.windows.net/ または https://login.microsoftonline.com/ (OAuth V2) のいずれかで始まります。
 --- 抜粋 ---<br>
 
 ロジック アプリにおける AAD ポリシーの有効化手順については、以下の公開技術情報がご参考いただけます。<br>
@@ -126,9 +126,9 @@ Azure Monitor のアクション グループは、Azure Monitor のデータを
 ![](./LogicApps-SecuredWebhook/image007.png)
 
 取得した URL をメモ帳等に貼り付けます。
-sp や sv 、sigといったパラメーター値は SAS 認証のために使用され、AAD 認証の場合には不要となるため、削除します。
-具体的には以下のようにSAS認証情報を含む URL 文字列から水色箇所を削除し、黄色箇所のみとなるようにします。<br>
- 
+SAS 認証のために使用されるパラメーター値は AAD 認証の場合には不要となるため、削除します。
+具体的には以下のように SAS 認証情報を含む URL 文字列から水色箇所を削除し、黄色箇所のみとなるようにします。<br>
+
 ![](./LogicApps-SecuredWebhook/image008.png)
  
 [ワークフロー内のアクセスとデータをセキュリティで保護する - Azure Logic Apps | Microsoft Learn
@@ -167,7 +167,7 @@ Microsoft Entra アプリケーションの所有者ロールをサービス プ
 [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃実行手順](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#how-to-run)
  
 1. 以下のスクリプトをコピーして作業端末上でテキスト エディタに貼り付け、tenantId と、アプリ登録の ObjectID を置き換えます。
-tenantIdt と アプリ登録の ObjectID の文字列は 登録したアプリの [概要] ページにて [ディレクトリ(テナント)ID] と [オブジェクト ID] にてご確認いただけます。
+tenantId と アプリ登録の ObjectID の文字列は 登録したアプリの [概要] ページにて [ディレクトリ(テナント) ID] と [オブジェクト ID] にてご確認いただけます。
 1. *.ps1 ファイルとして任意の名称でファイルを保存します。
 1. 作業端末上で PowerShell コマンドを開き、*.ps1 スクリプトを実行します。
  
@@ -270,4 +270,4 @@ Write-Host "====================================================================
 1. アクション グループを設定
 1. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
 
- のご理解の一助として、本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！
+ご理解の一助として、本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！
