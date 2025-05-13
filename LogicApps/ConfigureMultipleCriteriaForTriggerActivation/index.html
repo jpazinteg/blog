@@ -13,26 +13,26 @@
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
 <meta property="og:description" content="こんにちは。Azure Integration チームの武田です。 本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_001">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_002">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_003">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_004">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_005">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_006">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_007">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_008">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_009">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_010">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_011">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blog_001">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blog_002">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blog_003">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_004">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_005">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_006">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_007">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_008">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_009">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_010">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blob_011">
 <meta property="article:published_time" content="2024-05-12T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-13T07:52:48.890Z">
+<meta property="article:modified_time" content="2025-05-13T08:03:33.403Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Trigger">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_001">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/trigger-multiple-condition/blog_001">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -102,7 +102,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは。Azure Integration チームの武田です。</p>
-<p>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>
+<p>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br><br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>
 <span id="more"></span>
 
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
@@ -130,15 +130,15 @@
 </ul>
 <p>(<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference">https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference</a>)<br><br></p>
 <h2 id="基本的な設定例"><a href="#基本的な設定例" class="headerlink" title="基本的な設定例"></a>基本的な設定例</h2><p>では、実際にトリガー条件を設定して Logic Apps を起動させてみます。<br><br>今回は例として、Office 365 Outlook コネクタより [新しいメールが届いたとき (V3)] トリガーを使用します。<br><br></p>
-<p>まずは、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br><br>また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_001"></p>
-<p>宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_002"></p>
-<p>トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_003"></p>
+<p>まずは、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br><br>また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。<br><img src="./trigger-multiple-condition/blog_001"></p>
+<p>宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。<br><img src="./trigger-multiple-condition/blog_002"></p>
+<p>トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。<br><img src="./trigger-multiple-condition/blog_003"></p>
 <h3 id="1-同じ項目に-AND-条件を指定"><a href="#1-同じ項目に-AND-条件を指定" class="headerlink" title="1. 同じ項目に AND 条件を指定"></a>1. 同じ項目に AND 条件を指定</h3><p>ここからは、トリガーの発火条件に複数条件を設定していきます。今回は、件名に複数条件を設定して動作確認をします。<br><br></p>
-<p>先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。<br><br>条件として、『件名に “テスト” と “TEST” の表記が含まれる場合』という内容を設定してみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_004"></p>
-<p>トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_005"></p>
-<p>実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_006"></p>
-<h3 id="1-同じ項目に-OR-条件を指定"><a href="#1-同じ項目に-OR-条件を指定" class="headerlink" title="1. 同じ項目に OR 条件を指定"></a>1. 同じ項目に OR 条件を指定</h3><p>同じように、OR 条件も設定してみます。<br><br>先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_007"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_008"></p>
-<p>実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_009"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_010"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_011"></p>
+<p>先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。<br><br>条件として、『件名に “テスト” と “TEST” の表記が含まれる場合』という内容を設定してみます。<br><img src="./trigger-multiple-condition/blob_004"></p>
+<p>トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。<br><img src="./trigger-multiple-condition/blob_005"></p>
+<p>実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。<br><img src="./trigger-multiple-condition/blob_006"></p>
+<h3 id="2-同じ項目に-OR-条件を指定"><a href="#2-同じ項目に-OR-条件を指定" class="headerlink" title="2. 同じ項目に OR 条件を指定"></a>2. 同じ項目に OR 条件を指定</h3><p>同じように、OR 条件も設定してみます。<br><br>先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。<br><img src="./trigger-multiple-condition/blob_007"><br><img src="./trigger-multiple-condition/blob_008"></p>
+<p>実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。<br><img src="./trigger-multiple-condition/blob_009"><br><img src="./trigger-multiple-condition/blob_010"><br><img src="./trigger-multiple-condition/blob_011"></p>
 <h2 id="応用的な設定方法"><a href="#応用的な設定方法" class="headerlink" title="応用的な設定方法"></a>応用的な設定方法</h2><p>さて。ここまでで同じ項目に AND 条件と OR 条件を指定する基本的な設定方法をご案内いたしましたが、設定の組み合わせによっては、より高度な条件を設定することができます。<br><br>例えば、「日次起動の Logic Apps で、祝祭日は起動させない」、「Logic Apps を毎日 11:00 と 12:30 に起動させる」などが可能となります。<br><br></p>
 <p>高度な条件の設定方法については、別途ブログ記事でご紹介をしております。<br><br>そちらも併せてご参照いただけますと幸いです。</p>
 <ul>

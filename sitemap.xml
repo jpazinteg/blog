@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/actionGroupSetting/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/actionGroupSetting/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -135,14 +135,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
-    
-    <lastmod>2025-05-13</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
     
     <lastmod>2025-05-13</lastmod>
@@ -198,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -206,6 +199,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    
+    <lastmod>2025-05-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -261,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -366,13 +366,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/</loc>
-    
-    <lastmod>2025-05-13</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/ExcelOnlineGetaRow/</loc>
     
     <lastmod>2025-05-13</lastmod>
@@ -380,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -388,6 +381,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/</loc>
+    
+    <lastmod>2025-05-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/AzNotificationMail/</loc>
     
     <lastmod>2025-05-13</lastmod>
     
@@ -432,6 +432,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Azure-Integration/</loc>
+    <lastmod>2025-05-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2025-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -593,13 +600,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/VNet-Integration/</loc>
-    <lastmod>2025-05-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2025-05-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
