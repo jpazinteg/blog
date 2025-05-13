@@ -1,6 +1,6 @@
 ---
 title: Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法
-date: 2025-05-01 00:00:00
+date: 2025-05-13 00:00:00
 tags:
   - How-To
   - Tips
@@ -156,13 +156,13 @@ Microsoft Entra アプリケーションの所有者ロールをサービス プ
 ![](./LogicApps-SecuredWebhook/image011.png)<br>
 
 ### 5. アクション グループが Microsoft Entra アプリケーションを使用できるようにするための PowerShell スクリプトを実行
-以下の技術情報のセクションの手順に従い、スクリプトを実行します。<br>
+以下の技術情報のセクションの手順に従い、スクリプトを実行します。
 [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃ Secure Webhook PowerShell スクリプト](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#secure-webhook-powershell-script)
  
-前提条件として以下技術情報の Microsoft Graph PowerShell SDK を作業端末にインストールしておく必要がございます。<br>
+前提条件として以下技術情報の Microsoft Graph PowerShell SDK を作業端末にインストールしておく必要がございます。
 [Install the Microsoft Graph PowerShell SDK | Microsoft Learn](https://learn.microsoft.com/ja-jp/powershell/microsoftgraph/installation?view=graph-powershell-1.0&preserve-view=true)
  
-スクリプトの実行方法は以下となります。<br>
+スクリプトの実行方法は以下となります。
 [Azure Monitor のアクション グループ - Azure Monitor | Microsoft Learn ＃実行手順](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#how-to-run)
  
 1. 以下のスクリプトをコピーして作業端末上でテキスト エディタに貼り付け、tenantId と、アプリ登録の ObjectID を置き換えます。
