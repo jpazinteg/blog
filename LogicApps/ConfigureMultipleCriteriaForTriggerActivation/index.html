@@ -4,38 +4,35 @@
   <meta charset="utf-8">
   
   
-  <title>Logic Apps の送信 IP アドレスについて | Japan Azure Integration Support Blog</title>
+  <title>Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の送信 IP アドレスについて説明いたします。">
+  <meta name="description" content="こんにちは。Azure Integration チームの武田です。 本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logic Apps の送信 IP アドレスについて">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/index.html">
+<meta property="og:title" content="Japan Azure Integration Support Blog">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは。Azure Integration サポート チームの髙橋です。 Logic Apps の送信 IP アドレスについて説明いたします。">
+<meta property="og:description" content="こんにちは。Azure Integration チームの武田です。 本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress14.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress03.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress04.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress15.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress06.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress07.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress08.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress09.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress10.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress11.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress12.jpg">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress13.jpg">
-<meta property="article:published_time" content="2023-04-24T15:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-13T07:52:49.022Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_001">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_002">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_003">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_004">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_005">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_006">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_007">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_008">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_009">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_010">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblob_011">
+<meta property="article:published_time" content="2024-05-12T15:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-13T07:52:48.890Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Ip address">
+<meta property="article:tag" content="Trigger">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/.%5Ctrigger-multiple-condition%5Cblog_001">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -97,93 +94,64 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/outboundIpaddress" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/ConfigureMultipleCriteriaForTriggerActivation" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
     
-      <header class="article-header-single">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Logic Apps の送信 IP アドレスについて
-    </h1>
-  
-
-      </header>
-      <div class="article-share">
-        Last Update: 
-        <a href="" class="article-date-single">
-  <time datetime="2023-04-24T15:00:00.000Z" itemprop="datePublished">2023-04-25</time>
-</a>
-        
-        
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a8a732cd-e354-537e-b7f6-a94a7ac45fe1%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E9%80%81%E4%BF%A1+IP+%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FoutboundIpaddress%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FoutboundIpaddress.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FoutboundIpaddress.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
-        
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/outboundIpaddress/" data-id="cmam7sh4k002e0nn40tj3dzrl" class="article-share-link">共有</a>
-      </div>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
-<p>Logic Apps の送信 IP アドレスについて説明いたします。</p>
+        <p>こんにちは。Azure Integration チームの武田です。</p>
+<p>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>
 <span id="more"></span>
 
-<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
-<li>Logic Apps の送信 IP アドレスの情報を用いて、アクセス制限を行いたい方</li>
-</ul>
-<h2 id="Logic-Apps-のコネクタの種類"><a href="#Logic-Apps-のコネクタの種類" class="headerlink" title="Logic Apps のコネクタの種類"></a>Logic Apps のコネクタの種類</h2><p>Logic Apps では、組み込みのトリガーおよびアクションと、マネージド コネクタの大きく 2 種類があります。<br>それによって送信 IP アドレスが異なりますので、まずはコネクタの種類について説明いたします。</p>
-<h3 id="組み込みのトリガーおよびアクション"><a href="#組み込みのトリガーおよびアクション" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p><strong>&lt;従量課金タイプ&gt;</strong><br>従量課金タイプでは、トリガーおよびアクション追加時に、「ビルトイン」タブに表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress01.jpg"></p>
-<p><strong>&lt;Standard タイプ&gt;</strong><br>Standard タイプでは、「ランタイム」にて「アプリ内」を選択した際に表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress14.jpg"></p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard">Azure Logic Apps の組み込みコネクタ # 従量課金と Standard の組み込みコネクタの比較</a></li>
-</ul>
-<h3 id="マネージド-コネクタ"><a href="#マネージド-コネクタ" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p><strong>&lt;従量課金タイプ&gt;</strong><br>従量課金タイプでは、トリガーおよびアクション追加時に「標準」タブおよび「エンタープライズ」タブに表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress03.jpg"><br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress04.jpg"></p>
-<p><strong>&lt;Standard タイプ&gt;</strong><br>Standard タイプでは、「ランタイム」にて「Shared」を選択した際に表示されるものになります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress15.jpg"></p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">Azure Logic Apps のマネージド コネクタ</a></li>
-</ul>
-<h2 id="送信-IP-アドレス"><a href="#送信-IP-アドレス" class="headerlink" title="送信 IP アドレス"></a>送信 IP アドレス</h2><h3 id="組み込みのトリガーおよびアクション-1"><a href="#組み込みのトリガーおよびアクション-1" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p><strong>&lt;従量課金タイプ&gt;</strong><br>従量課金タイプの Logic Apps において「HTTP」アクションのような組み込みアクションで利用されます送信 IP アドレスは、<br>以下の公開情報の該当リージョンのものとなります。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#multitenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス</a></li>
-</ul>
-<p>たとえば、東日本リージョンに Logic Apps を配置されている場合、以下が対象となります。<br>ファイアウォール等で受信ルールをご設定いただいている場合には、該当リージョンのすべての IP アドレスを許可いただく必要がございます。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress06.jpg"></p>
-<p>また、こちらの IP アドレスは、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] の「ランタイム発信 IP アドレス」が該当いたします。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress07.jpg"></p>
-<p><strong>&lt;Standard タイプ&gt;</strong><br>Standard タイプの Logic Apps におきましては、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] にて、「追加の送信 IP アドレス」が該当いたします。<br>※ 「送信 IP アドレス」は、「追加の送信 IP アドレス」に含まれております。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress08.jpg"></p>
-<h3 id="マネージド-コネクタ-1"><a href="#マネージド-コネクタ-1" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p>マネージド コネクタは、従量課金タイプの Logic Apps でも Standard タイプの Logic Apps でも送信 IP アドレスは共通しております。<br>以下の公開情報の該当リージョンのものとなります。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps</a></li>
-</ul>
-<p>たとえば、東日本リージョンに Logic Apps を配置されている場合、以下が対象となります。<br>ファイアウォール等で受信ルールをご設定いただいている場合には、該当リージョンのすべての IP アドレスを許可いただく必要がございます。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress09.jpg"></p>
-<p>従量課金タイプの場合、こちらの IP アドレスは、[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [設定 - プロパティ] の「コネクタ発信 IP アドレス」が該当いたします。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress10.jpg"></p>
-<h2 id="サービス-タグ"><a href="#サービス-タグ" class="headerlink" title="サービス タグ"></a>サービス タグ</h2><p>Azure 上の VNet 等の一部の製品では、サービス タグをご利用いただくことが可能でございます。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/virtual-network/service-tags-overview">仮想ネットワーク サービス タグ</a></li>
-</ul>
-<p>Logic Apps に関連するサービス タグは以下になります。<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress11.jpg"></p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#firewall-ip-configuration-considerations">Azure Logic Apps の制約と構成の参考文献 # ファイアウォールの IP 構成に関する考慮事項</a></li>
-</ul>
-<h3 id="組み込みのトリガーおよびアクション-2"><a href="#組み込みのトリガーおよびアクション-2" class="headerlink" title="組み込みのトリガーおよびアクション"></a>組み込みのトリガーおよびアクション</h3><p>従量課金タイプの場合は、サービス タグは「<strong>LogicApps</strong>」になります。<br>※ Standard タイプでは、サービス タグのご用意がございません。</p>
-<h3 id="マネージド-コネクタ-2"><a href="#マネージド-コネクタ-2" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h3><p>マネージド コネクタの場合は、従量課金タイプ、Standard タイプ問わず、サービス タグは「<strong>AzureConnectors</strong>」になります。<br>「<strong>AzureConnectors.リージョン</strong>」とすることで、特定のリージョンのものを指定することが可能です。</p>
-<h2 id="IP-アドレスの変更"><a href="#IP-アドレスの変更" class="headerlink" title="IP アドレスの変更"></a>IP アドレスの変更</h2><p>以下に記載の送信 IP アドレスは、過去に変更された事例がございます。</p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#multitenant---outbound-ip-addresses">Azure Logic Apps の制約と構成の参考文献 # マルチテナント - 送信 IP アドレス</a></li>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/common/outbound-ip-addresses#azure-logic-apps">マネージド コネクタのアウトバウンド IP アドレス # Azure Logic Apps</a></li>
-</ul>
-<p>Azure のサブスクリプション管理者宛てにメールでの通知、およびサービス正常性での通知が行われましたので、<br>変更時には IP アドレスの設定の見直しをお願いいたします。<br>※ サービス タグをご利用の場合には、ご変更いただく必要はございません。</p>
-<p>ご参考までに過去のアナウンスのスケジュールにつきましてご案内いたします。</p>
-<p>・メールでのアナウンス：2020/7/16<br>・変更実施：2020/8/31<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress12.jpg"></p>
-<p>・メールでのアナウンス：2022/3/26<br>・変更実施：2022/5/15<br><img src="/blog/LogicApps/outboundIpaddress/outboundIpaddress13.jpg"></p>
-<h2 id="サービス正常性アラートの設定"><a href="#サービス正常性アラートの設定" class="headerlink" title="サービス正常性アラートの設定"></a>サービス正常性アラートの設定</h2><p>正常性アラートからメールで通知する方法がございます。</p>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
+<li><p>トリガーの発火条件に複数条件を設定する方法</p>
+</li>
+<li><p>基本的な設定例</p>
 <ol>
-<li>[Azure ポータル] - [サービス正常性] - [アラート - 正常性アラート] - [+ サービス正常性アラートの追加] を選択します。</li>
-<li>以下の項目を設定します。<br>[条件 - アラートの対象] - [サブスクリプション] : 対象のサブスクリプションを選択します。<br>[条件 - アラートの対象] - [サービス] : Logic Apps<br>[条件 - アラートの対象] - [リージョン] : Logic Apps をご利用頂いておりますリージョンを選択します。 [全体] を選択することも可能です。<br>[条件 - アラートの対象] - [Service Health の基準] : 全てにチェック入れます。<br>[アクション - アクショングループ名] : [アクショングループの追加] を選択し、メール通知を含むアクショングループを追加します。<br>[アラートルールに詳細 - アラートルール名] : 任意のアラートルール名を入力します。<br>[アラートルールの作成] を選択します。<br>アクショングループのご利用手順につきましては、以下の公開情報でご確認頂けます。</li>
+<li>同じ項目に AND 条件を指定</li>
+<li>同じ項目に OR 条件を指定</li>
 </ol>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups">Azure Portal でのアクション グループの作成および管理</a></li>
+</li>
+<li><p>応用的な設定方法</p>
+</li>
+<li><p>まとめ</p>
+</li>
 </ul>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Logic Apps の送信 IP アドレスについて説明いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
+<h2 id="トリガーの発火条件に複数条件を設定する方法"><a href="#トリガーの発火条件に複数条件を設定する方法" class="headerlink" title="トリガーの発火条件に複数条件を設定する方法"></a>トリガーの発火条件に複数条件を設定する方法</h2><p>通常、トリガーの [パラメーター] タブにてトリガーの起動方法をご設定いただきますが、パラメーター欄では同じ項目に複数の条件を付けること、例えば 「メールの件名に『日報』か『月報』が含まれる場合」 のような条件設定はできません。<br><br>このような設定が必要な場合、[パラメーター] タブではなく、[設定] タブ内にございます [トリガーの条件] を使用して、トリガーの起動条件を設定していきます。<br><br></p>
+<p>この時、[パラメーター] タブでご設定いただくのと違い、[トリガーの条件] 欄にて指定いただきます条件はコードで記載します。<br><br>詳細な設定方法は後述いたしますが、比較したい項目の記載方法と条件式に使用できる関数について、弊社公開ドキュメントに概要をおまとめしております。<br><br>ご一読いただけますと幸いです。<br><br></p>
+<ul>
+<li>[トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn]</li>
+</ul>
+<p>(<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers</a>)<br><br></p>
+<ul>
+<li>[式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn]</li>
+</ul>
+<p>(<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference">https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference</a>)<br><br></p>
+<h2 id="基本的な設定例"><a href="#基本的な設定例" class="headerlink" title="基本的な設定例"></a>基本的な設定例</h2><p>では、実際にトリガー条件を設定して Logic Apps を起動させてみます。<br><br>今回は例として、Office 365 Outlook コネクタより [新しいメールが届いたとき (V3)] トリガーを使用します。<br><br></p>
+<p>まずは、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br><br>また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_001"></p>
+<p>宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_002"></p>
+<p>トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblog_003"></p>
+<h3 id="1-同じ項目に-AND-条件を指定"><a href="#1-同じ項目に-AND-条件を指定" class="headerlink" title="1. 同じ項目に AND 条件を指定"></a>1. 同じ項目に AND 条件を指定</h3><p>ここからは、トリガーの発火条件に複数条件を設定していきます。今回は、件名に複数条件を設定して動作確認をします。<br><br></p>
+<p>先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。<br><br>条件として、『件名に “テスト” と “TEST” の表記が含まれる場合』という内容を設定してみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_004"></p>
+<p>トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_005"></p>
+<p>実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_006"></p>
+<h3 id="1-同じ項目に-OR-条件を指定"><a href="#1-同じ項目に-OR-条件を指定" class="headerlink" title="1. 同じ項目に OR 条件を指定"></a>1. 同じ項目に OR 条件を指定</h3><p>同じように、OR 条件も設定してみます。<br><br>先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_007"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_008"></p>
+<p>実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。<br><img src=".%5Ctrigger-multiple-condition%5Cblob_009"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_010"><br><img src=".%5Ctrigger-multiple-condition%5Cblob_011"></p>
+<h2 id="応用的な設定方法"><a href="#応用的な設定方法" class="headerlink" title="応用的な設定方法"></a>応用的な設定方法</h2><p>さて。ここまでで同じ項目に AND 条件と OR 条件を指定する基本的な設定方法をご案内いたしましたが、設定の組み合わせによっては、より高度な条件を設定することができます。<br><br>例えば、「日次起動の Logic Apps で、祝祭日は起動させない」、「Logic Apps を毎日 11:00 と 12:30 に起動させる」などが可能となります。<br><br></p>
+<p>高度な条件の設定方法については、別途ブログ記事でご紹介をしております。<br><br>そちらも併せてご参照いただけますと幸いです。</p>
+<ul>
+<li>Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog</li>
+</ul>
+<p>(<a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/">https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/</a>)</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしました。</p>
+<ul>
+<li>トリガーの発火条件に複数条件を設定する方法</li>
+<li>複数条件の基本的な設定例</li>
+<li>複数条件の応用的な設定方法</li>
+</ul>
+<p>トリガーに複数条件を設定する方法として、本記事が少しでもお役に立ちましたら幸いです。<br><br>最後までお読みいただき、ありがとうございました。</p>
 
       
       
@@ -197,10 +165,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/outboundIpaddress.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/ConfigureMultipleCriteriaForTriggerActivation.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -208,19 +176,19 @@
     
 <nav id="article-nav">
   
-    <a href="../StandardLogicAppsApiCancel/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../../MSMQ/MsmqTransaction/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">次の記事</strong>
       <div class="article-nav-title">
         
-          Standard Logic Apps のワークフローを API 操作でキャンセルする
+          MSMQ のトランザクション メッセージ
         
       </div>
     </a>
   
   
-    <a href="../AadAuthentication/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../LogicApps-AOAI/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Standard Logic Apps で AAD 認証する方法について</div>
+      <div class="article-nav-title">Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</div>
     </a>
   
 </nav>
