@@ -10,7 +10,7 @@ tags:
 
 こんにちは。Azure Integration チームの武田です。
 
-本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。
+本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br>
 なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。
 
 <!-- more -->
@@ -20,7 +20,7 @@ tags:
 - 基本的な設定例
 
     1. 同じ項目に AND 条件を指定
-    1. 同じ項目に OR 条件を指定
+    2. 同じ項目に OR 条件を指定
 - 応用的な設定方法
 - まとめ
 
@@ -49,15 +49,15 @@ tags:
 
 まずは、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br>
 また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。
-![](.\trigger-multiple-condition\blog_001)
+![](./trigger-multiple-condition/blog_001)
 
 
 宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。
-![](.\trigger-multiple-condition\blog_002)
+![](./trigger-multiple-condition/blog_002)
 
 
 トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。
-![](.\trigger-multiple-condition\blog_003)
+![](./trigger-multiple-condition/blog_003)
 
 
 ### 1. 同じ項目に AND 条件を指定
@@ -65,26 +65,26 @@ tags:
 
 先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。<br>
 条件として、『件名に "テスト" と "TEST" の表記が含まれる場合』という内容を設定してみます。
-![](.\trigger-multiple-condition\blob_004)
+![](./trigger-multiple-condition/blob_004)
 
 トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。
-![](.\trigger-multiple-condition\blob_005)
+![](./trigger-multiple-condition/blob_005)
 
 実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。
-![](.\trigger-multiple-condition\blob_006)
+![](./trigger-multiple-condition/blob_006)
 
 
-### 1. 同じ項目に OR 条件を指定
+### 2. 同じ項目に OR 条件を指定
 同じように、OR 条件も設定してみます。<br>
 先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。
-![](.\trigger-multiple-condition\blob_007)
-![](.\trigger-multiple-condition\blob_008)
+![](./trigger-multiple-condition/blob_007)
+![](./trigger-multiple-condition/blob_008)
 
 
 実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。
-![](.\trigger-multiple-condition\blob_009)
-![](.\trigger-multiple-condition\blob_010)
-![](.\trigger-multiple-condition\blob_011)
+![](./trigger-multiple-condition/blob_009)
+![](./trigger-multiple-condition/blob_010)
+![](./trigger-multiple-condition/blob_011)
 
 
 ## 応用的な設定方法
