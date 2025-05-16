@@ -1,6 +1,6 @@
 ---
 title: トリガーの発火条件で、1 つの項目に複数の条件を設定する
-date: 2024-05-13 00:00:00
+date: 2024-05-19 00:00:00
 tags:
   - How-To
   - Tips
@@ -19,7 +19,6 @@ tags:
 ## 目次
 - トリガーの発火条件に複数条件を設定する方法
 - 基本的な設定例
-
     1. 同じ項目に AND 条件を指定
     2. 同じ項目に OR 条件を指定
 - 応用的な設定方法
@@ -34,19 +33,17 @@ tags:
 詳細な設定方法は後述いたしますが、比較したい項目の記載方法と条件式に使用できる関数について、弊社公開ドキュメントに概要をおまとめしております。<br>
 ご一読いただけますと幸いです。<br><br>
 
-- [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn]
+- [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers)<br>
 
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers)<br><br>
-
-
-- [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn]
-
-(https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference)<br><br>
+- [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference)<br>
 
 
 ## 基本的な設定例
 では、実際にトリガー条件を設定して Logic Apps を起動させてみます。<br>
 今回は例として、Office 365 Outlook コネクタより [新しいメールが届いたとき (V3)] トリガーを使用します。<br><br>
+
+- [Office 365 Outlook - Connectors | Microsoft Learn # 新しいメールが届いたとき (V3)](https://learn.microsoft.com/ja-jp/connectors/office365/#%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%84%E3%81%9F%E3%81%A8%E3%81%8D-%28v3%29)<br>
+
 
 まず、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br>
 また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。
@@ -89,19 +86,17 @@ tags:
 
 
 ## 応用的な設定方法
-さて。ここまでで同じ項目に AND 条件と OR 条件を指定する基本的な設定方法をご案内いたしましたが、設定の組み合わせによっては、より高度な条件を設定することができます。<br>
+さて、ここまでで同じ項目に AND 条件と OR 条件を指定する基本的な設定方法をご案内いたしましたが、設定の組み合わせによっては、より高度な条件を設定することができます。<br>
 例えば、「日次起動の Logic Apps で、祝祭日は起動させない」、「Logic Apps を毎日 11:00 と 12:30 に起動させる」などが可能となります。<br><br>
 
 高度な条件の設定方法については、別途ブログ記事でご紹介をしております。<br>
-そちらも併せてご参照いただけますと幸いです。
+そちらも併せてご参照いただけますと幸いです。<br><br>
 
-- Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog
-
-(https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/)
+- [Logic Apps で日付や時刻を判定してワークフローを制御する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/)<br>
 
 
 ## まとめ
-本記事では、以下についてご案内いたしました。
+本記事では、以下についてご案内いたしました。<br>
 
 - トリガーの発火条件に複数条件を設定する方法
 - 複数条件の基本的な設定例
