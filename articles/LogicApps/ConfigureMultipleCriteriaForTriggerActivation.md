@@ -10,7 +10,6 @@ tags:
 ---
 
 こんにちは。Azure Integration チームの武田です。 
-
 本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br>
 なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。
 
@@ -30,8 +29,7 @@ tags:
 このような設定が必要な場合、[パラメーター] タブではなく、[設定] タブ内にございます [トリガーの条件] を使用して、トリガーの起動条件を設定していきます。<br>
 
 この時、[パラメーター] タブでご設定いただくのと違い、[トリガーの条件] 欄にて指定いただきます条件はコードで記載します。
-詳細な設定方法は後述いたしますが、比較したい項目の記載方法と条件式に使用できる関数について、弊社公開ドキュメントに概要をおまとめしております。<br>
-ご一読いただけますと幸いです。<br>
+詳細な設定方法は後述いたしますが、比較したい項目の記載方法と条件式に使用できる関数について、弊社公開ドキュメントに概要をおまとめしております。ご一読いただけますと幸いです。<br>
 
 - [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers)
 - [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference)
@@ -46,15 +44,15 @@ tags:
 
 まず、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br>
 また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_001)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_001.png)
 
 
 宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_002)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_002.png)
 
 
 トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_003)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_003.png)
 
 
 ### 1. 同じ項目に AND 条件を指定
@@ -62,26 +60,26 @@ tags:
 
 先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。
 条件として、『件名に "テスト" と "TEST" の表記が含まれる場合』という内容を設定してみます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_004)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_004.png)
 
 トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_005)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_005.png)
 
 実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_006)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_006.png)
 
 
 ### 2. 同じ項目に OR 条件を指定
 同じように、OR 条件も設定してみます。
 先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_007)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_008)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_007.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_008.png)
 
 
 実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_009)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_010)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_011)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_009.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_010.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_011.png)
 
 
 ## 応用的な設定方法
