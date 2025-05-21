@@ -57,24 +57,28 @@ tags:
 ここからは、トリガーの発火条件に複数条件を設定していきます。今回は、件名に複数条件を設定して動作確認をします。<br>
 
 先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。
-条件として、『件名に "テスト" と "TEST" の表記が含まれる場合』という内容を設定してみます。
+従いまして、[パラメーター] タブの [件名フィルター] には条件を記入いたしませんので、ご注意ください。
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_004.png)
+
+
+では、[設定] タブより『件名に "テスト" と "TEST" の表記が含まれる場合』というトリガー条件を設定してみます。
 ```
 @and(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
 ```
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_004.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_005.png)
 
 補足ですが、今回使用しております contains はコレクション関数のひとつで、この関数は指定したコレクションに特定の項目があるかどうかを返します。
 文字列の中から特定の文字を探す、配列の中から特定の値を探す際などにご利用いただける、大変便利な関数ですので、頭の片隅に置いておいていただけますと幸いです。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_005.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_006.png)
 
 - [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # contains](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains)<br>
 
 
 トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_006.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_007.png)
 
 実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_007.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_008.png)
 
 
 ### 2. 同じ項目に OR 条件を指定
@@ -83,14 +87,14 @@ tags:
 ```
 @or(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
 ```
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_008.png)
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_009.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_010.png)
 
 
 実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blog_010.png)
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_011.png)
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_012.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_013.png)
 
 
 ## 応用的な設定方法
