@@ -46,40 +46,51 @@ tags:
 また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_001.png)
 
-
 宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_002.png)
 
-
 トリガー発火条件を満たすメールを受信したことで、Logic Apps が起動していることが確認できます。
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_003.png)
-
+<br>
 
 ### 1. 同じ項目に AND 条件を指定
 ここからは、トリガーの発火条件に複数条件を設定していきます。今回は、件名に複数条件を設定して動作確認をします。<br>
 
 先述の通り、複数の条件を指定する場合、トリガーの [パラメーター] タブではなく、[設定] タブにございます [トリガーの条件] を使用します。
 条件として、『件名に "テスト" と "TEST" の表記が含まれる場合』という内容を設定してみます。
+```
+@and(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
+```
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blob_004.png)
 
+補足ですが、今回使用しております contains はコレクション関数のひとつで、この関数は指定したコレクションに特定の項目があるかどうかを返します。
+文字列の中から特定の文字を探す、配列の中から特定の値を探す際などにご利用いただける、大変便利な関数ですので、頭の片隅に置いておいていただけますと幸いです。
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_005.png)
+
+- [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # contains](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains)<br>
+
+
 トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_005.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_006.png)
 
 実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_006.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_007.png)
 
 
 ### 2. 同じ項目に OR 条件を指定
 同じように、OR 条件も設定してみます。
 先ほど設定した条件を AND 条件から OR 条件に変更し、先ほどと同じ件名でメールを出してみます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_007.png)
+```
+@or(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
+```
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blob_008.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_009.png)
 
 
 実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_009.png)
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blob_010.png)
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blob_011.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blob_012.png)
 
 
 ## 応用的な設定方法
