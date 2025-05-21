@@ -42,7 +42,7 @@ tags:
 - [Office 365 Outlook - Connectors | Microsoft Learn # 新しいメールが届いたとき (V3)](https://learn.microsoft.com/ja-jp/connectors/office365/#%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%84%E3%81%9F%E3%81%A8%E3%81%8D-%28v3%29)<br>
 
 
-まず、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br>
+まず、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。
 また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_001.png)
 
@@ -61,7 +61,7 @@ tags:
 ```
 @and(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
 ```
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_004.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_004.png)
 
 補足ですが、今回使用しております contains はコレクション関数のひとつで、この関数は指定したコレクションに特定の項目があるかどうかを返します。
 文字列の中から特定の文字を探す、配列の中から特定の値を探す際などにご利用いただける、大変便利な関数ですので、頭の片隅に置いておいていただけますと幸いです。
@@ -74,7 +74,7 @@ tags:
 ![](./ConfigureMultipleCriteriaForTriggerActivation/blog_006.png)
 
 実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_007.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_007.png)
 
 
 ### 2. 同じ項目に OR 条件を指定
@@ -83,14 +83,14 @@ tags:
 ```
 @or(contains(triggerBody()?['Subject'],'テスト'),contains(triggerBody()?['Subject'],'TEST'))
 ```
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_008.png)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_009.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_008.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_009.png)
 
 
 実行結果を確認しますと、OR 条件に変えたことで 3 通全てがトリガーの発火条件を満たすメールとなり、それぞれトリガーが発火していることが確認できます。
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_010.png)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_011.png)
-![](./ConfigureMultipleCriteriaForTriggerActivation/blob_012.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_010.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_011.png)
+![](./ConfigureMultipleCriteriaForTriggerActivation/blog_012.png)
 
 
 ## 応用的な設定方法
