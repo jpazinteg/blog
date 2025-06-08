@@ -35,7 +35,7 @@ Standard Logic Apps でも確認いただけます [アクティビティ ログ
 
 ## Standard Logic Apps バックアップからの復元
 
-Standard Logic Apps のワークフローは、バックアップ済みのアプリ コンテンツから復元できます。
+Standard Logic Apps のワークフローは、バックアップ済みのアプリ コンテンツから復元できます。こちらについては関連する以下記事がご参考になれば幸いです。
 
 [Logic Apps のバックアップ | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/)
 
@@ -44,7 +44,7 @@ Standard Logic Apps のワークフローは、バックアップ済みのアプ
 
 上記で取得されたアプリ コンテンツ (zip ファイル) を zip デプロイすることによって、削除されたワークフローの復元が可能です。
 
-もちろん、Azure DevOps 等を利用してソースのバージョンを管理されている場合には、そちらからの復元も考えられます。
+もちろん、Azure DevOps 等を利用してソースのバージョンを管理されている場合には、そちらからの復元も考えられます。こちらは以下記事がご参考になれば幸いです。
 
 [Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/)
 
@@ -61,9 +61,11 @@ Logic Apps と紐づくストレージ アカウント、およびファイル�
 - `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`: ストレージ アカウントの接続文字列より "AccountName=" にてストレージ アカウント名が確認いただけます。
 - `WEBSITE_CONTENTSHARE`： ファイル共有名が確認いただけます。
 
+こちらについては以下記事がご参考になれば幸いです。
+
 [Logic Apps Standard と関連するストレージ アカウント | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/)
 
 
 ## まとめ
 
-本記事では、Standard Logic Apps のワークフローを誤って削除してしまった際の調査と、リカバリ手段についてご紹介いたしました。定期的なバックアップのご検討含め、万が一の際のリカバリ手段としてご活用いただければ大変幸いです。最後までお読みいただきありがとうございました！
+本記事では、Standard Logic Apps のワークフローを誤って削除してしまった際の調査と、リカバリ手段についてご紹介いたしました。定期的なバックアップのご検討含め、万が一の際のリカバリ手段としてご活用いただければと思います。最後までお読みいただきありがとうございました！
