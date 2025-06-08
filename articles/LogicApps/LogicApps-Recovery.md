@@ -44,6 +44,8 @@ Standard Logic Apps のワークフローは、バックアップ済みのアプ
 
 上記で取得されたアプリ コンテンツ (zip ファイル) を zip デプロイすることによって、削除されたワークフローの復元が可能です。
 
+[シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ロジック アプリをデプロイする](https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app)
+
 もちろん、Azure DevOps 等を利用してソースのバージョンを管理されている場合には、そちらからの復元も考えられます。こちらは以下記事がご参考になれば幸いです。
 
 [Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/)
