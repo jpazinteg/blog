@@ -80,6 +80,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LogicApps/StandardLogicApps-GetAccessTokenWithMid" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="LogicApps/StandardLogicApps-GetAccessTokenWithMid/" class="article-date">
+  <time datetime="2025-06-02T07:00:00.000Z" itemprop="datePublished">2025-06-02</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="LogicApps/StandardLogicApps-GetAccessTokenWithMid/">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Azure Integration サポート チームの長坂です。</p>
+<p>Azure Logic Apps では多くのコネクタをサポートしており、様々な Azure サービスへの認証と接続を行うことが可能です。</p>
+<p>ただし、Azure Logic Apps の標準の機能として提供されるコネクタを使えないサービスやユース―ケースにおいては、認証と接続をワークフローの中で明示的に行うほかない場合があります。<br><br>例えば、Azure Logic Apps Standard を使用して仮想ネットワーク統合の機能を有効化し、Logic Apps から他の Azure サービスへの接続をプライベートなネットワーク経路で行う、といったユースケースでコネクタがその状況に対応していないということが起こり得ます。<br><br>コネクタが使えない状況で特定のサービスに対して REST API の要求を行うときは、多くの場合代替手段として HTTP アクションを使用することが考えられます。</p>
+<p>HTTP アクションの Authentication 機能でマネージド ID を選択することにより、Logic Apps の マネージド ID を使って取得したアクセストークンを <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc6750#section-2.1">RFC 6750</a> で定められた形式のヘッダーとして追加することが可能です。</p>
+<p>RFC 6750 に沿って Authorization ヘッダーを Bearer <code>token value</code> のような形式で定めている Azure サービスの REST API 要求であれば、HTTP アクションの機能でマネージド ID を選択することで有効なリクエスト形式の要求を送信することが可能です。<br><br>しかし、Azure サービスのデータプレーンへの要求では一部 Authorization ヘッダーが前述のものとは異なる形式となっている場合があり、そのようなサービスへの要求では HTTP アクションの Authentication 機能でマネージド ID を選択したとしても、Authorization ヘッダーの形式が合っていないために要求が失敗します。</p>
+<p>こういった状況に遭遇した場合の対処としては、アクセストークンも HTTP アクションによって取得した上で、アクセストークンの値を要求先のサービスが定めるヘッダー形式に合うように加工して後続の HTTP アクションで REST API の要求を行うという手法が有効です。</p>
+<p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>
+        
+          <p class="article-more-link">
+            <a href="LogicApps/StandardLogicApps-GetAccessTokenWithMid/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/" data-id="cmbysvte1001m0np4e2kra5dv" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LogicApps/LogicApps-SecuredWebhook" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -119,7 +175,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-SecuredWebhook/" data-id="cmam98jiv009f0no1ezju2pnj" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-SecuredWebhook/" data-id="cmbysvtfx00aa0np489cjgwyb" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E8%AA%8D%E8%A8%BC/" rel="tag">認証</a></li></ul>
@@ -170,7 +226,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/" data-id="cmam98jgu000n0no1fab8bjmf" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/" data-id="cmbysvtdp000w0np47ic7dabf" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -222,7 +278,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/general/TroubleLogCollection/" data-id="cmam98jhr00350no18hjublvq" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/general/TroubleLogCollection/" data-id="cmbysvtei002x0np4a6fh55ju" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/BizTalk/" rel="tag">BizTalk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/HIS/" rel="tag">HIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Log/" rel="tag">Log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Trouble/" rel="tag">Trouble</a></li></ul>
@@ -272,7 +328,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/" data-id="cmam98jh6001h0no10fupa6mj" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/" data-id="cmbysvte2001n0np4dq2t2lap" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -324,7 +380,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-StandardPricing/" data-id="cmam98jh100120no1h2me1vhv" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-StandardPricing/" data-id="cmbysvtdw00190np4alsoea9z" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li></ul>
@@ -375,7 +431,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/" data-id="cmam98jhi002g0no1e7ji194q" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/" data-id="cmbysvtee002i0np4gjjs94wo" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li></ul>
@@ -428,7 +484,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/" data-id="cmam98jgx000v0no10tfb2ydq" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions2/" data-id="cmbysvtdt00130np42ag47y7v" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -479,7 +535,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/apiConnection/" data-id="cmam98jix009j0no1hfhzcwsb" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/apiConnection/" data-id="cmbysvtfy00ae0np407xx1uw6" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -529,60 +585,10 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/" data-id="cmam98jgr000i0no10uft0bmi" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/" data-id="cmbysvtdo000t0np43rg7ad5b" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MSMQ/MsmqTransaction" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="MSMQ/MsmqTransaction/" class="article-date">
-  <time datetime="2024-07-09T15:00:00.000Z" itemprop="datePublished">2024-07-10</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="MSMQ/MsmqTransaction/">MSMQ のトランザクション メッセージ</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>こんにちは！Azure Integration サポート チームの 山田 です。<br>Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。今回は Windows に含まれる MSMQ というサービスのメッセージの種類についてご紹介します。</p>
-        
-          <p class="article-more-link">
-            <a href="MSMQ/MsmqTransaction/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/" data-id="cmam98jhp002y0no1go245yku" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li></ul>
 
     </footer>
   </div>
@@ -608,6 +614,10 @@
       <ul>
         
           <li>
+            <a href="LogicApps/StandardLogicApps-GetAccessTokenWithMid/">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</a>
+          </li>
+        
+          <li>
             <a href="LogicApps/LogicApps-SecuredWebhook/">Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</a>
           </li>
         
@@ -623,10 +633,6 @@
             <a href="LogicApps/StandardLogicApps-GetEnvironmentVariables/">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</a>
           </li>
         
-          <li>
-            <a href="LogicApps/LogicApps-StandardPricing/">Standard 版 Azure Logic Apps の料金体系を理解するポイント</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -637,7 +643,7 @@
     <h3 class="widget-title">タグ</h3>
     <div class="widget">
       <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/BizTalk/" rel="tag">BizTalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/HIS/" rel="tag">HIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="tags/%E8%AA%8D%E8%A8%BC/" rel="tag">認証</a></li></ul>  -->
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">49</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">49</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">42</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">50</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">50</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">43</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -647,7 +653,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">アーカイブ</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/03/">2022 / 03</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/06/">2025 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="archives/2022/03/">2022 / 03</a></li></ul>
     </div>
   </div>
 

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Azure Integration サポート チームの長坂です。 Azure Logic Apps では多くのコネクタをサポートしており、様々な Azure サービスへの認証と接続を行うことが可能です。 ただし、Azure Logic Apps の標準の機能として提供されるコネクタを使えないサービスやユース―ケースにおいては、認証と接続をワークフローの中で明示的に行うほかない場合があります。例えば">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="Azure Integration サポート チームの長坂です。 Azure Logic Apps では多くのコネクタをサポートしており、様々な Azure サービスへの認証と接続を行うことが可能です。 ただし、Azure Logic Apps の標準の機能として提供されるコネクタを使えないサービスやユース―ケースにおいては、認証と接続をワークフローの中で明示的に行うほかない場合があります。例えば">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-3.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-4.png">
+<meta property="article:published_time" content="2025-06-02T07:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-16T07:56:14.233Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-1.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/StandardLogicApps-GetAccessTokenWithMid" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2025-06-02T07:00:00.000Z" itemprop="datePublished">2025-06-02</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+4e46f42f-f09f-557e-9725-2adebd084e86%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+Standard+%E3%81%AE%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%89+ID+%E8%B3%87%E6%A0%BC%E6%83%85%E5%A0%B1%E3%81%A7+HTTP+%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8A%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E5%80%A4%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/" data-id="cmbysvte1001m0np4e2kra5dv" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Azure Integration サポート チームの長坂です。</p>
+<p>Azure Logic Apps では多くのコネクタをサポートしており、様々な Azure サービスへの認証と接続を行うことが可能です。</p>
+<p>ただし、Azure Logic Apps の標準の機能として提供されるコネクタを使えないサービスやユース―ケースにおいては、認証と接続をワークフローの中で明示的に行うほかない場合があります。<br><br>例えば、Azure Logic Apps Standard を使用して仮想ネットワーク統合の機能を有効化し、Logic Apps から他の Azure サービスへの接続をプライベートなネットワーク経路で行う、といったユースケースでコネクタがその状況に対応していないということが起こり得ます。<br><br>コネクタが使えない状況で特定のサービスに対して REST API の要求を行うときは、多くの場合代替手段として HTTP アクションを使用することが考えられます。</p>
+<p>HTTP アクションの Authentication 機能でマネージド ID を選択することにより、Logic Apps の マネージド ID を使って取得したアクセストークンを <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc6750#section-2.1">RFC 6750</a> で定められた形式のヘッダーとして追加することが可能です。</p>
+<p>RFC 6750 に沿って Authorization ヘッダーを Bearer <code>token value</code> のような形式で定めている Azure サービスの REST API 要求であれば、HTTP アクションの機能でマネージド ID を選択することで有効なリクエスト形式の要求を送信することが可能です。<br><br>しかし、Azure サービスのデータプレーンへの要求では一部 Authorization ヘッダーが前述のものとは異なる形式となっている場合があり、そのようなサービスへの要求では HTTP アクションの Authentication 機能でマネージド ID を選択したとしても、Authorization ヘッダーの形式が合っていないために要求が失敗します。</p>
+<p>こういった状況に遭遇した場合の対処としては、アクセストークンも HTTP アクションによって取得した上で、アクセストークンの値を要求先のサービスが定めるヘッダー形式に合うように加工して後続の HTTP アクションで REST API の要求を行うという手法が有効です。</p>
+<p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>
+<span id="more"></span>
+
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol>
+<li><a href="#header1">Logic Apps Standard (App Service) でマネージド ID の資格情報を使用してアクセストークンを取得する方法</a></li>
+<li><a href="#header2">アクセストークンを要求するエンドポイントとヘッダー</a></li>
+<li><a href="#header3">エンドポイントとヘッダーを取得する</a></li>
+<li><a href="#header4">レスポンスの値をワークフローの動的コンテンツとして取り扱う</a></li>
+<li><a href="#header5">HTTP アクションによるアクセストークンの要求</a></li>
+<li><a href="#header7">まとめ</a></li>
+</ol>
+<h2 id="header1">1. Logic Apps Standard (App Service) でマネージド ID の資格情報を使用してアクセストークンを取得する方法</h2>
+
+<p>Azure Logic Apps Standard (シングルテナント) は、ホスト環境を独自に指定する場合を除いて基本的には App Service プラン上で動作します。<br><br>App Service は環境変数として、ローカルのトークン要求エンドポイントを持っており、この URL に対して GET リクエストを送信することでアクセストークンを取得することができます。</p>
+<p>トークン要求のリクエストについては以下を参照してください。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a></p>
+<p>Azure Logic Apps Standard は App Service プラン上で動作するため、この仕組みを利用してアクセストークを取得することが可能です。</p>
+<h2 id="header2">2. アクセストークンを要求するエンドポイントとヘッダー</h2>
+
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a> に記載の通り、以下の環境変数にそれぞれエンドポイント URL とヘッダーの値が設定されております。</p>
+<blockquote>
+<ul>
+<li><code>IDENTITY_ENDPOINT</code> - ローカル トークン サービスに対する URL。</li>
+<li><code>IDENTITY_HEADER</code> - サーバー側のリクエスト フォージェリ (SSRF) 攻撃を回避するために使用するヘッダー。 値は、プラットフォームによってローテーションされます。</li>
+</ul>
+</blockquote>
+<h2 id="header3">3. エンドポイントとヘッダーを取得する</h2>
+
+<p>環境変数の値を取得する方法は別の記事でご紹介しております。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/#header3">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法 | Japan Azure Integration Support Blog</a></p>
+<p>一例として、<code>Execute Powershell Code</code> アクションで環境変数を取得するコードを記載します。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$envVariables</span> =  [<span class="type">PSCustomObject</span>]<span class="selector-tag">@</span>&#123;</span><br><span class="line">    IDENTITY_ENDPOINT = <span class="variable">$Env:IDENTITY_ENDPOINT</span></span><br><span class="line">    IDENTITY_HEADER = <span class="variable">$Env:IDENTITY_HEADER</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Push-WorkflowOutput</span> <span class="literal">-Output</span> <span class="variable">$envVariables</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-1.png"></p>
+<p>値はアクションの出力で JSON として返されます。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-2.png"></p>
+<p>後述する<code>Parse JSON</code>アクションなどで、JSON に含まれる値を動的コンテンツとして扱えるようにすると、後続のアクションでの値の指定が便利になります。</p>
+<h2 id="header4">4. レスポンスの値をワークフローの動的コンテンツとして取り扱う</h2>
+
+<p><code>Parse JSON</code>等のデータ操作向けのアクションを使用します。<br>使用例は以下のドキュメントをご参照ください。Parse JSON 以外にもデータ形式や特定のデータ型に適したアクションが提供されております。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action">データの操作の実行 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#parse-json-action">JSON の解析アクション</a></li>
+</ul>
+<p>例えば、<a href="#header3">3. エンドポイントとヘッダーを取得する</a> の出力 JSON のスキーマが以下の通りであるため、これを Parse JSON の Schema とすれば、前のアクションから受け取った Schema に一致する出力の JSON の各値を動的コンテンツとして扱えるようになります。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;object&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;body&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;object&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;IDENTITY_ENDPOINT&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;IDENTITY_HEADER&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-3.png"></p>
+<h2 id="header5">5. HTTP アクションによるアクセストークンの要求</h2>
+
+<p><code>IDENTITY_ENDPOINT</code> の URL に対して、<code>X-IDENTITY-HEADER</code>ヘッダーに<code>IDENTITY_HEADER</code>の値を入れて GET リクエストを送信することで、レスポンスでアクセストークンを取得できます。</p>
+<p>HTTP リクエストの送信には、HTTP アクションを使用します。</p>
+<p>参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http?tabs=standard#add-an-http-action">外部エンドポイントまたはその他のワークフローを呼び出すワークフローを作成する - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#http-action">HTTP アクション</a></li>
+</ul>
+<p>例えば、HTTP アクションの設定でトークン要求エンドポイントや<code>X-IDENTITY-HEADER</code> を以下のように入力すると、GET リクエストを送信します。</p>
+<p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-4.png"></p>
+<p>レスポンスは JSON のため、 <a href="#header4">4. レスポンスの値をワークフローの動的コンテンツとして取り扱う</a> と同様の方法でアクセストークンの値も動的コンテンツとして扱えるようにすることで、後続のアクションでトークンを使用したリクエストを送信する HTTP アクションにおける値の指定が便利になります。</p>
+<p>取得したアクセストークンを適宜加工することで、認可を伴う他のサービスへの要求において任意のヘッダー形式でリクエストを送信することができます。</p>
+<h2 id="header7">6. まとめ</h2>
+
+<p>本記事では、Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法をご紹介しました。</p>
+<p>今回ご紹介した内容は Microsoft ID プラットフォームにおけるトークン (JWT) の仕組みを基礎としております。<br>承認サーバーである Microsoft Entra へアクセストークンを要求する仕組みについては以下の Microsoft ID プラットフォームの公開情報に記載されておりますので、ご参照いただくことでより理解が深まるかと存じます。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/entra/identity-platform/security-tokens">トークンと要求の概要 - Microsoft identity platform | Microsoft Learn</a></p>
+<p>Logic Apps では様々なサービスとの接続用にコネクタが提供されているため、基本的にはコネクタで認証と接続が可能かを先に確認いただくことを推奨いたします。<br>Logic Apps で提供されているいずれのコネクタも要件やユースケースに合わず、独自のヘッダー形式でアクセストークンを指定して他のサービスに要求を送信する必要があるような場合に、今回ご紹介した方法が役に立つかと存じます。</p>
+<p>皆様の開発のご参考になれば幸いです。</p>
+<hr>
+<p>本記事の情報は、2025 年 6 月 2 日時点の内容となります。</p>
+<hr>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/StandardLogicApps-GetAccessTokenWithMid.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../LogicApps-SecuredWebhook/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-SecuredWebhook/">Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</a>
+          </li>
+        
+          <li>
+            <a href="../LogicApps-CustomRole/">従量課金タイプの Logic Apps 用のカスタム ロールを作成する</a>
+          </li>
+        
+          <li>
+            <a href="../../general/TroubleLogCollection/">MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について</a>
+          </li>
+        
+          <li>
+            <a href="../StandardLogicApps-GetEnvironmentVariables/">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/BizTalk/" rel="tag">BizTalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HIS/" rel="tag">HIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E8%AA%8D%E8%A8%BC/" rel="tag">認証</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">50</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">50</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">43</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Retry-Policy">Retry Policy</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Standard">Standard</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/06/">2025 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.57px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.43px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/BizTalk/" style="font-size: 10px;">BizTalk</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.43px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HIS/" style="font-size: 10px;">HIS</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 17.14px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 11.43px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 15.71px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 12.86px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.43px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 18.57px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 14.29px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 11.43px;">Trouble</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">サービス プロバイダー接続</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a> <a href="../../tags/%E8%AA%8D%E8%A8%BC/" style="font-size: 10px;">認証</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
