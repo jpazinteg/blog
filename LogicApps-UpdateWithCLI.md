@@ -1,6 +1,6 @@
 ---
 title: CLI から従量課金タイプの Logic Apps の設定を更新する
-date: 2025-06-16 11:00:00
+date: 2025-06-19 16:15:00
 tags:
   - Tips
   - Azure Integration
