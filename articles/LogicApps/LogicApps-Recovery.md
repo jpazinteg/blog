@@ -1,6 +1,6 @@
 ---
 title: Standard Logic Apps のワークフローを誤って削除してしまったとき
-date: 2025-06-13 11:00:00
+date: 2025-06-20 11:00:00
 tags:
   - How-To
   - Azure Integration
