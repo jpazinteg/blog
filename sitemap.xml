@@ -135,14 +135,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -184,13 +184,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/</loc>
-    
-    <lastmod>2025-06-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
     
     <lastmod>2025-06-19</lastmod>
@@ -205,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -213,6 +206,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    
+    <lastmod>2025-06-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -452,13 +452,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
-    <lastmod>2025-06-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/tags/Azure-Logic-Apps/</loc>
     <lastmod>2025-06-19</lastmod>
     <changefreq>daily</changefreq>
@@ -621,6 +614,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/VNet-Integration/</loc>
+    <lastmod>2025-06-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2025-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
