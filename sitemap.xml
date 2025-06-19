@@ -177,21 +177,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
-    
-    <lastmod>2025-06-19</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
-    
-    <lastmod>2025-06-19</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -205,7 +191,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
+    
+    <lastmod>2025-06-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -219,7 +212,21 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    
+    <lastmod>2025-06-19</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/</loc>
+    
+    <lastmod>2025-06-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-UpdateWithCLI/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -247,14 +254,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -516,6 +523,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Azure-Cosmos-DB/</loc>
+    <lastmod>2025-06-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/Azure-CLI/</loc>
     <lastmod>2025-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

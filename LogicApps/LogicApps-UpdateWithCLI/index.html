@@ -4,31 +4,24 @@
   <meta charset="utf-8">
   
   
-  <title>MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について | Japan Azure Integration Support Blog</title>
+  <title>CLI から従量課金タイプの Logic Apps の設定を更新する | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 山田 です。   Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。お客様環境のオンプレミス製品にて何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。 今回は Azure Integration サポート">
+  <meta name="description" content="こんにちは。  Azure Integration サポート チームの継松です。今回は、 従量課金タイプの Logic Apps の設定 (例: コンテンツの IP 範囲) を Azure CLI から更新する方法についてご紹介いたします！ 本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。同様の方法にてそのほかの設定なども更新可能ですの">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/general/TroubleLogCollection/index.html">
+<meta property="og:title" content="CLI から従量課金タイプの Logic Apps の設定を更新する">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-UpdateWithCLI/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 山田 です。   Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。お客様環境のオンプレミス製品にて何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。 今回は Azure Integration サポート">
+<meta property="og:description" content="こんにちは。  Azure Integration サポート チームの継松です。今回は、 従量課金タイプの Logic Apps の設定 (例: コンテンツの IP 範囲) を Azure CLI から更新する方法についてご紹介いたします！ 本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。同様の方法にてそのほかの設定なども更新可能ですの">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/general/TroubleLogCollection/TroubleLogCollection-1.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/general/TroubleLogCollection/TroubleLogCollection-3.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/general/TroubleLogCollection/TroubleLogCollection-2.png">
-<meta property="article:published_time" content="2025-02-26T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-19T07:20:54.278Z">
+<meta property="article:published_time" content="2025-06-19T07:15:00.000Z">
+<meta property="article:modified_time" content="2025-06-19T07:20:54.160Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="MSMQ">
-<meta property="article:tag" content="Trouble">
-<meta property="article:tag" content="Log">
-<meta property="article:tag" content="HIS">
-<meta property="article:tag" content="BizTalk">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Azure CLI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/general/TroubleLogCollection/TroubleLogCollection-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -90,7 +83,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-general/TroubleLogCollection" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/LogicApps-UpdateWithCLI" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -99,7 +92,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について
+      CLI から従量課金タイプの Logic Apps の設定を更新する
     </h1>
   
 
@@ -107,89 +100,54 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2025-02-26T02:00:00.000Z" itemprop="datePublished">2025-02-26</time>
+  <time datetime="2025-06-19T07:15:00.000Z" itemprop="datePublished">2025-06-19</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+62277e95-984b-5fac-88a8-16aa96b6ab73%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMSMQ%E3%80%81Host+Integration+Server%28HIS%29%E3%80%81BizTalk+Server+%E3%81%AA%E3%81%A9%E3%81%AE%E8%AA%BF%E6%9F%BB%E6%99%82%E3%81%AB%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88+%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%B8%E9%80%A3%E6%90%BA%E3%81%99%E3%82%8B%E3%83%AD%E3%82%B0%E3%81%AE%E5%8F%96%E5%BE%97%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2Fgeneral%2FTroubleLogCollection%2F%29%0A*+Content+Source%3A+%5Barticles%2Fgeneral%2FTroubleLogCollection.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2Fgeneral%2FTroubleLogCollection.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+305d73a5-335b-5abf-adf6-75823077d8c2%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BCLI+%E3%81%8B%E3%82%89%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE+Logic+Apps+%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-UpdateWithCLI%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-UpdateWithCLI.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-UpdateWithCLI.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/general/TroubleLogCollection/" data-id="cmc31xxng00300nkzdevbfxgu" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-UpdateWithCLI/" data-id="cmc31xxmr001c0nkz0vxc4aai" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 山田 です。  </p>
-<p>Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。<br>お客様環境のオンプレミス製品にて何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。</p>
-<p>今回は Azure Integration サポート チーム にて MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時に取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p>
+        <p>こんにちは。  Azure Integration サポート チームの継松です。<br>今回は、 従量課金タイプの Logic Apps の設定 (例: コンテンツの IP 範囲) を Azure CLI から更新する方法についてご紹介いたします！</p>
+<p>本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。<br>同様の方法にてそのほかの設定なども更新可能ですのでご参考いただけますと幸いでございます。</p>
 <span id="more"></span>
 
-<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>イベント ログ</li>
-<li>MSMQ 関連ログ</li>
-<li>その他</li>
-<li>まとめ</li>
-</ul>
-<h2 id="イベント-ログ"><a href="#イベント-ログ" class="headerlink" title="イベント ログ"></a>イベント ログ</h2><p>イベント ログはイベント ビューアーより採取いただけます。</p>
-<ol>
-<li>Windows Server 上にてイベント ビューアーを起動します（コマンド: eventvwr）</li>
-<li>[Windows Logs (Windows ログ)] を展開します</li>
-<li>以下をそれぞれ右クリックし、[Save All Events As (すべてのイベントを名前をつけて保存)] を選択します  </li>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol>
+<li><a href="#header1">従量課金タイプの Logic Apps に関しての Azure CLI コマンドについて</a></li>
+<li><a href="#header2">コマンド使用例: 既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加する</a></li>
+<li><a href="#header3">関連ドキュメント</a></li>
+<li><a href="#header4">まとめ</a></li>
 </ol>
-<ul>
-<li>Application (アプリケーション)</li>
-<li>System (システム)</li>
-<li>Security (セキュリティ)</li>
-</ul>
-<ol start="4">
-<li>任意の名前を入力し保存します。[Save as type (ファイルの種類)] は .evtx を選択します。</li>
-</ol>
-<p>ここまでの手順により、イベント ログの内容がエクスポートされたイベント ファイルが作成されます。</p>
-<p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-1.png"></p>
-<p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-3.png"></p>
-<p>なお、イベント ファイルを、イベントが記録された環境と異なる環境で開いた際には、イベント ビューアーでの表示に差異が生じる場合がございます。このため、続けて以下を実施いただけますと幸いです。</p>
-<p>再度手順 3 以降について、今回は [Save as type (ファイルの種類)] にて、テキスト (タブ区切り) (.txt)、または CSV (コンマ区切り) (.csv) を選択します。</p>
-<p>手順 4 で作成されるファイルの内容は、あくまでもイベント ログから一部項目を抜粋した内容となります。<br>しかしながら、前述したような表示の差異が生じず、イベントが記録された環境での表示情報を確認するのに役立つファイルとなります。</p>
-<p>以上の手順で作成した、以下 2 点のファイルをご提供いただけますと幸いです。</p>
-<ul>
-<li>イベント ファイル</li>
-<li>テキスト ファイル、または CSV ファイル</li>
-</ul>
-<p>他チームの記事にもイベント ログに関する参考情報がございます。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://jpwinsup.github.io/blog/2023/09/25/UserInterfaceAndApps/EventLog/How-to-check-Event-log/">イベント ログの確認方法 | Microsoft Japan Windows Technology Support Blog</a></p>
-<p>参考: <a target="_blank" rel="noopener" href="https://jpdsi.github.io/blog/web-apps/LogCollection1/#1-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88-%E3%83%AD%E3%82%B0">IIS の調査に必要な基本的なログ情報について # イベント ログ</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/host-integration-server/core/how-to-save-event-logs1">イベント ログを保存する方法1 - Host Integration Server | Microsoft Learn</a></p>
-<h2 id="MSMQ-関連ログ"><a href="#MSMQ-関連ログ" class="headerlink" title="MSMQ 関連ログ"></a>MSMQ 関連ログ</h2><p>MSMQ の調査に有用な End2End ログの採取手順は以下記事をご覧いただけます。</p>
-<p><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqEnd2Endlog/">MSMQ で End2End ログを取得する手順 | Japan Azure Integration Support Blog</a></p>
-<p>その他 MSMQ 関連の情報を取得するコマンドを依頼する場合がございます。以下はメッセージ キューの情報を取得する PowerShell コマンドとなります。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/msmq/get-msmqqueue?view=windowsserver2025-ps">Get-MsmqQueue (MSMQ) | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/msmq/get-msmqoutgoingqueue?view=windowsserver2025-ps">Get-MSMQOutgoingQueue (MSMQ) | Microsoft Learn</a></p>
-<p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-2.png"></p>
-<p>ほか、<a href="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/#MSMQ-%E3%82%92%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MSMQ の HTTP サポート</a> をご利用の場合に、IIS 関連のログ取得をお願いする場合がございます。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://jpdsi.github.io/blog/web-apps/LogCollection1/">IIS の調査に必要な基本的なログ情報について | Japan Developer Support Internet Team Blog</a> </p>
-<h2 id="その他"><a href="#その他" class="headerlink" title="その他"></a>その他</h2><p>必要に応じて、各種コマンドの実行結果や、ネットワーク キャプチャを取得いただく場合がございます。その際のコマンドのご利用方法などについて、以下にリンクをおまとめいたしております。</p>
-<h3 id="Systeminfo-Get-ComputerInfo-など"><a href="#Systeminfo-Get-ComputerInfo-など" class="headerlink" title="Systeminfo / Get-ComputerInfo など"></a>Systeminfo / Get-ComputerInfo など</h3><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/systeminfo">systeminfo | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-computerinfo">Get-ComputerInfo (Microsoft.PowerShell.Management) - PowerShell | Microsoft Learn</a></p>
-<h3 id="nslookup-Resolve-DnsName-など"><a href="#nslookup-Resolve-DnsName-など" class="headerlink" title="nslookup / Resolve-DnsName など"></a>nslookup / Resolve-DnsName など</h3><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/nslookup">nslookup | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/dnsclient/resolve-dnsname">Resolve-DnsName (DnsClient) | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues">DNS クライアントの名前解決に関する問題のトラブルシューティング - Windows Client | Microsoft Learn</a></p>
-<h3 id="ping-tracert-Test-NetConnection-など"><a href="#ping-tracert-Test-NetConnection-など" class="headerlink" title="ping / tracert / Test-NetConnection など"></a>ping / tracert / Test-NetConnection など</h3><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/ping">ping | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/tracert">tracert | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/test-netconnection">Test-NetConnection (NetTCPIP) | Microsoft Learn</a></p>
-<h3 id="netstat-Get-NetTCPConnection-など"><a href="#netstat-Get-NetTCPConnection-など" class="headerlink" title="netstat / Get-NetTCPConnection など"></a>netstat / Get-NetTCPConnection など</h3><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/netstat">netstat | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/get-nettcpconnection">Get-NetTCPConnection (NetTCPIP) | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/windows-client/networking/tcp-ip-port-exhaustion-troubleshooting">TCP/IP ポート不足のトラブルシューティング - Windows Client | Microsoft Learn</a></p>
-<h3 id="ipconfig-Get-NetIPConfiguration-など"><a href="#ipconfig-Get-NetIPConfiguration-など" class="headerlink" title="ipconfig / Get-NetIPConfiguration など"></a>ipconfig / Get-NetIPConfiguration など</h3><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/ipconfig">ipconfig | Microsoft Learn</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/get-netipconfiguration">Get-NetIPConfiguration (NetTCPIP) | Microsoft Learn</a></p>
-<h3 id="パケット-キャプチャーなど"><a href="#パケット-キャプチャーなど" class="headerlink" title="パケット キャプチャーなど"></a>パケット キャプチャーなど</h3><p>ネットワークの問題が疑われる場合に、Wireshark 等に代表されるネットワーク診断ツールからのログ取得をお願いする場合がございます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/developer/java/sdk/troubleshooting-network?tabs=windows">ネットワークに関する問題のトラブルシューティング</a></p>
-<p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/iis-support-blog/capture-a-network-trace--wireshark/4245529">How to Capture Simultaneous Wireshark Traces from Client and Server for Network Troubleshooting</a></p>
-<p>取得いただきましたログは一連、弊社サポート エンジニアより連携させていただきますファイル アップロード サイトにアップロード頂ければ幸いです。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>以上本記事では、オンプレミス製品の調査時にサポートよりお願い差し上げるログについてご案内いたしました。調査をご依頼の際はこちらの内容を基に本テクニカル サポートへお問合せいただければ幸いです。</p>
-<ul>
-<li>イベント ログ</li>
-<li>MSMQ 関連ログ</li>
-<li>その他</li>
-</ul>
+<h2 id="header1">1. 従量課金タイプの Logic Apps に関しての Azure CLI コマンドについて</h2>
+
+<p>Azure CLI では Azure CLI Logic Apps 拡張機能 (az logic) を使用し、 Azure Logic Apps で実行されるワークフローを作成、管理することが可能でございます。<br>例えば、コマンド “az logic workflow create” を使用し、Logic Apps のワークフロー定義の JSON ファイルを使用し、新規リソースを作成することが可能です。<br>その後、 “az logic workflow update” を使用し、ワークフロー定義の更新や状態の変更をすることが可能です。</p>
+<p>また、同コマンド “az logic workflow create” を使用し、上書きのような形で更新することも可能です。<br>“az logic workflow update” では変更不可能な設定内容 (access-control など) があるため、設定されたい内容によってお使い分けください。</p>
+<p>詳しくは以下資料をご参照ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/quickstart-logic-apps-azure-cli">クイックスタート - Azure CLI を使用してワークフローを作成して管理する - Azure Logic Apps | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logic?view=azure-cli-latest">az logic | Microsoft Learn</a></p>
+<div class="alert is-info"><p class="alert-title">Note</p><p>Standard タイプの Logic Apps に対して有効なコマンドは従量課金のものと異なります。</p>
+<p>　　従量課金: az logic</p><p>　　Standard: az logicapp</p>
+<p>az logicapp コマンドについては下記資料をご参照ください。</p><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logicapp?view=azure-cli-latest">az logicapp | Microsoft Learn</a></p></div>
+<h2 id="header2">2. コマンド使用例: 既存のリソースの "コンテンツの IP 範囲" に新しく IP アドレスを追加する</h2>
+
+<p>今回、更新したい項目は “コンテンツの IP 範囲” であり、こちらは access-control に含まれます。<br>よって、 “az logic workflow create” を使用して、上書きする形で更新します。</p>
+<p><strong>1. 設定を変更したいリソースの情報を取得する</strong></p>
+<p>“az logic workflow show” のコマンドや Azure Portal からワークフローのコードやその他設定を確認し、以下のファイルを用意します。<br>・ ワークフロー定義の JSON ファイル<br>・ アクセス制御の構成の JSON (または yaml) ファイル<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logic/workflow?view=azure-cli-latest#az-logic-workflow-show">az logic workflow | Microsoft Learn # az logic workflow show</a></p>
+<p>その他、 エンドポイントの構成なども設定されている場合には、それらのファイルも別途用意します。<br>詳しくは、以下資料をご参照ください。<br>“az logic workflow create”<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logic/workflow?view=azure-cli-latest#az-logic-workflow-create">az logic workflow | Microsoft Learn # az logic workflow create</a></p>
+<p>“access-control” ファイルの設定例:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;contents&quot;</span>: &#123;</span><br><span class="line">               <span class="attr">&quot;allowedCallerIpAddresses&quot;</span>: [</span><br><span class="line">                   &#123;</span><br><span class="line">                       <span class="attr">&quot;addressRange&quot;</span>: <span class="string">&quot;xxx.xxx.xxx.xxx/x&quot;</span></span><br><span class="line">                   &#125;</span><br><span class="line">               ]</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. コマンドを実行します。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az logic workflow create --resource-group &quot;&lt;リソース グループ名&gt;&quot; -n &quot;ワークフロー名&quot; --definition &quot;ワークフロー定義(コード) json ファイル&quot; --location &quot;&lt;リージョン (例: japaneast)&gt;&quot; --access-control &quot;json/yaml ファイル&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="header3">3. 関連ドキュメント</h2>
+
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/quickstart-logic-apps-azure-cli">クイックスタート - Azure CLI を使用してワークフローを作成して管理する - Azure Logic Apps | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logic?view=azure-cli-latest">az logic | Microsoft Learn</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/cli/azure/logicapp?view=azure-cli-latest">az logicapp | Microsoft Learn</a></p>
+<h2 id="header4">4. まとめ</h2>
+本記事では従量課金タイプの Logic Apps の設定 (例: コンテンツの IP 範囲) を Azure CLI から更新する方法についてご紹介いたしました。
+設定内容によっては方法が異なりますので、資料をご参考の上、お試しいただけますと幸いです。
+
 <p>最後までお読みいただき、ありがとうございました！</p>
 
       
@@ -204,10 +162,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/BizTalk/" rel="tag">BizTalk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/HIS/" rel="tag">HIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-CLI/" rel="tag">Azure CLI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/general/TroubleLogCollection.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-UpdateWithCLI.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -215,19 +173,10 @@
     
 <nav id="article-nav">
   
-    <a href="../../LogicApps/LogicApps-CustomRole/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          従量課金タイプの Logic Apps 用のカスタム ロールを作成する
-        
-      </div>
-    </a>
   
-  
-    <a href="../../LogicApps/StandardLogicApps-GetEnvironmentVariables/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../StandardLogicApps-GetAccessTokenWithMid/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</div>
+      <div class="article-nav-title">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</div>
     </a>
   
 </nav>
@@ -246,23 +195,23 @@
       <ul>
         
           <li>
-            <a href="../../LogicApps/LogicApps-UpdateWithCLI/">CLI から従量課金タイプの Logic Apps の設定を更新する</a>
+            <a href="">CLI から従量課金タイプの Logic Apps の設定を更新する</a>
           </li>
         
           <li>
-            <a href="../../LogicApps/StandardLogicApps-GetAccessTokenWithMid/">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</a>
+            <a href="../StandardLogicApps-GetAccessTokenWithMid/">Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</a>
           </li>
         
           <li>
-            <a href="../../LogicApps/ConfigureMultipleCriteriaForTriggerActivation/">トリガーの発火条件で、1 つの項目に複数の条件を設定する</a>
+            <a href="../ConfigureMultipleCriteriaForTriggerActivation/">トリガーの発火条件で、1 つの項目に複数の条件を設定する</a>
           </li>
         
           <li>
-            <a href="../../LogicApps/LogicApps-SecuredWebhook/">Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</a>
+            <a href="../LogicApps-SecuredWebhook/">Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</a>
           </li>
         
           <li>
-            <a href="../../LogicApps/LogicApps-CustomRole/">従量課金タイプの Logic Apps 用のカスタム ロールを作成する</a>
+            <a href="../LogicApps-CustomRole/">従量課金タイプの Logic Apps 用のカスタム ロールを作成する</a>
           </li>
         
       </ul>
