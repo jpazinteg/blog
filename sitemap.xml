@@ -114,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/actionGroupSetting/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/XmlBehaviorWithNumbers/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/actionGroupSetting/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -177,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -247,14 +247,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ResourceGraph/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -268,14 +268,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -303,14 +303,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/</loc>
     
     <lastmod>2025-06-19</lastmod>
     
@@ -439,6 +439,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Azure-Integration/</loc>
+    <lastmod>2025-06-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2025-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -600,13 +607,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/VNet-Integration/</loc>
-    <lastmod>2025-06-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2025-06-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
