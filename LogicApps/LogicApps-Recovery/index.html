@@ -4,36 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続 | Japan Azure Integration Support Blog</title>
+  <title>Standard Logic Apps のワークフローを誤って削除してしまったとき | Japan Azure Integration Support Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="こんにちは！Azure Integration サポート チームの 川合 です。  本記事は弊社海外ブログを日本語向けに解説した記事となります。  Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query  Azure Logic Apps では、以下の">
+  <meta name="description" content="こんにちは！ Azure Integration サポート チームの山田です。今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続">
-<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/index.html">
+<meta property="og:title" content="Standard Logic Apps のワークフローを誤って削除してしまったとき">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/index.html">
 <meta property="og:site_name" content="Japan Azure Integration Support Blog">
-<meta property="og:description" content="こんにちは！Azure Integration サポート チームの 川合 です。  本記事は弊社海外ブログを日本語向けに解説した記事となります。  Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query  Azure Logic Apps では、以下の">
+<meta property="og:description" content="こんにちは！ Azure Integration サポート チームの山田です。今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image000.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image0001.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image001.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image002.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image003.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image004.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image005.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image006.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image008.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image007.png">
-<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image009.png">
-<meta property="article:published_time" content="2023-06-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-20T07:28:19.523Z">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-2.png">
+<meta property="article:published_time" content="2025-06-20T02:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-20T07:28:19.511Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="How-To">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="JDBC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/image000.png">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-1.png">
   
     <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
   
@@ -95,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-LogicApps/PostgresqlJdbc" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LogicApps/LogicApps-Recovery" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -104,7 +93,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Standard Logic Apps で JDBC コネクタを利用した PostgreSQL 接続
+      Standard Logic Apps のワークフローを誤って削除してしまったとき
     </h1>
   
 
@@ -112,99 +101,51 @@
       <div class="article-share">
         Last Update: 
         <a href="" class="article-date-single">
-  <time datetime="2023-06-07T07:00:00.000Z" itemprop="datePublished">2023-06-07</time>
+  <time datetime="2025-06-20T02:00:00.000Z" itemprop="datePublished">2025-06-20</time>
 </a>
         
         
-        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+18a4aec8-07ca-5a13-87f9-1914c0c8f7cf%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%A7+JDBC+%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%9F+PostgreSQL+%E6%8E%A5%E7%B6%9A%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FPostgresqlJdbc%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FPostgresqlJdbc.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FPostgresqlJdbc.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a0ceb721-f541-5ad7-a997-fef46a56ebe8%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%AE%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E8%AA%A4%E3%81%A3%E3%81%A6%E5%89%8A%E9%99%A4%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-Recovery%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-Recovery.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-Recovery.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/PostgresqlJdbc/" data-id="cmc4hncm1001c0nodhuu1fi68" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/" data-id="cmc4hnclx00120noddvoqb583" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>こんにちは！Azure Integration サポート チームの 川合 です。 </p>
-<p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/configure-postgresql-connection-in-logic-apps-standard-with-jdbc/ba-p/3784988">Configure PostgreSQL Connection in Logic Apps (Standard) with JDBC, call Function with Execute Query</a></li>
-</ul>
-<p>Azure Logic Apps では、以下の PostgreSQL コネクタを利用してオンプレミス環境の PostgreSQL に接続することが可能です。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/postgresql/">PostgreSQL</a></li>
-</ul>
-<p>しかしながら、上記コネクタでは Azure Database for PostgreSQL への接続は本日 2023 年 6 月現在で不可でございます。<br>今回は、 Standard Logic Apps と JDBC コネクタを利用して、Azure Database for PostgreSQL へ接続する方法についてご案内します。</p>
+        <p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。</p>
 <span id="more"></span>
-<h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
-<li>Logic Apps から Azure Database for PostgreSQL へ接続されたい方</li>
-</ul>
+
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
-<li>JDBC コネクタについて</li>
-<li>事前準備</li>
-<li>設定例と実行結果</li>
+<li>アクティビティ ログからの調査</li>
+<li>Standard Logic Apps バックアップからの復元</li>
+<li>Azure Files 共有スナップショットからの復元</li>
+<li>まとめ</li>
 </ul>
-<h2 id="JDBC-コネクタについて"><a href="#JDBC-コネクタについて" class="headerlink" title="JDBC コネクタについて"></a>JDBC コネクタについて</h2><p>本ブログでは以下の JDBC コネクタを利用して、 Azure Database for PostgreSQL へ接続いたします。</p>
+<h2 id="アクティビティ-ログからの調査"><a href="#アクティビティ-ログからの調査" class="headerlink" title="アクティビティ ログからの調査"></a>アクティビティ ログからの調査</h2><p>Standard Logic Apps でも確認いただけます [アクティビティ ログ] にて、ユーザー情報を参照できる可能性があります。</p>
+<p>一例では Standard Logic Apps のワークフローを削除した際に、[Create the artifacts in a Logic App] というアクティビティ ログが出力されることが確認できます。</p>
+<p><img src="/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-1.png"></p>
+<p>こちらのレコードを選択することで、[JSON] タブより、”Caller” などにてユーザー情報がご確認いただけます。</p>
+<p><img src="/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-2.png"></p>
+<p>この [Create the artifacts in a Logic App] というアクティビティ ログ自体は、ワークフローを編集した場合に出力されますため、これだけでは削除か更新かの判断がつかないという留意点はあるものの、削除された時間がある程度分かるようであれば、このアクティビティ ログが一助になる可能性があります。</p>
+<h2 id="Standard-Logic-Apps-バックアップからの復元"><a href="#Standard-Logic-Apps-バックアップからの復元" class="headerlink" title="Standard Logic Apps バックアップからの復元"></a>Standard Logic Apps バックアップからの復元</h2><p>Standard Logic Apps のワークフローは、バックアップ済みのアプリ コンテンツから復元できます。こちらについては関連する以下記事がご参考になれば幸いです。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/">Logic Apps のバックアップ | Japan Azure Integration Support Blog</a></p>
+<blockquote>
+<p>Azure Portal から該当の Standard Logic Apps に移動し、概要 をご覧いただきます。<br>上部に [アプリ コンテンツのダウンロード] というメニューがございます。こちらから zip ファイル形式でダウンロードいただけます。</p>
+</blockquote>
+<p>上記で取得されたアプリ コンテンツ (zip ファイル) を zip デプロイすることによって、削除されたワークフローの復元が可能です。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ロジック アプリをデプロイする</a></p>
+<p>もちろん、Azure DevOps 等を利用してソースのバージョンを管理されている場合には、そちらからの復元も考えられます。こちらは以下記事がご参考になれば幸いです。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/">Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する | Japan Azure Integration Support Blog</a></p>
+<h2 id="Azure-Files-共有スナップショットからの復元"><a href="#Azure-Files-共有スナップショットからの復元" class="headerlink" title="Azure Files 共有スナップショットからの復元"></a>Azure Files 共有スナップショットからの復元</h2><p>Standard Logic Apps のワークフロー情報は、当該 Logic Apps が紐づくストレージ アカウントのファイル共有に保存されているため、ファイル共有側にてスナップショットを作成いただいている場合には、そちらから復元できる可能性があります。</p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/files/storage-snapshots-files?tabs=portal#smb-file-share-snapshots">Azure Files の共有スナップショットを使用する | Microsoft Learn # SMB ファイル共有のスナップショット</a></p>
+<p>Logic Apps と紐づくストレージ アカウント、およびファイル共有名は、[設定 - 環境変数] より以下の環境変数から確認いただけます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/logic-apps/connectors/built-in/reference/jdbc/">JDBC</a></li>
+<li><code>WEBSITE_CONTENTAZUREFILECONNECTIONSTRING</code>: ストレージ アカウントの接続文字列より “AccountName=” にてストレージ アカウント名が確認いただけます。</li>
+<li><code>WEBSITE_CONTENTSHARE</code>： ファイル共有名が確認いただけます。</li>
 </ul>
-<p>JDBC コネクタについては本日 2023 年 6 月現在で全てのアクションがプレビュー機能として提供されております。その為、今後予告なく仕様変更が発生する場合がございますので予めご了承下さい。</p>
-<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>上記コネクタを利用するにあたり、以下の事前準備が必要となります。</p>
-<ul>
-<li><ol>
-<li>Azure Database for PostgreSQL の設定</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>PostgreSQL の JDBC ドライバのダウンロード</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>Standard Logic Apps へ JDBC ドライバの配置</li>
-</ol>
-</li>
-</ul>
-<p>詳細については以下に記載していきます。</p>
-<ol>
-<li>Azure Database for PostgreSQL の設定<br>初めに、Azure Database for PostgreSQL の設定を実施いたします。<br>なお、こちらについてはデータベースやテーブルは既に作成されている前提で進めて参ります。</li>
-</ol>
-<p>Standard Logic Apps から Azure Database for PostgreSQL にアクセス可能にするために、[設定] - [接続のセキュリティ] より、以下の通り設定いたします。</p>
-<p><img src="/blog/LogicApps/PostgresqlJdbc/image000.png"></p>
-<p>・パブリック ネットワーク アクセスの拒否：いいえ<br>・ファイアウォール規則：はい<br>・SSL 接続を強制する：無効</p>
-<p>以上で Azure Database for PostgreSQL の設定は完了です。</p>
-<ol start="2">
-<li>PostgreSQL の JDBC ドライバのダウンロード</li>
-</ol>
-<p>参考基のブログ記事にもございます通り、以下のサイトより PostgreSQL の JDBC ドライバをダウンロードいたします。。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://jdbc.postgresql.org/">PostgreSQL JDBC Driver</a></li>
-</ul>
-<p>本ブログ記事では Java 7 の資材をダウンロードいたします。。</p>
-<p><img src="/blog/LogicApps/PostgresqlJdbc/image0001.png"></p>
-<p>以上で JDBC ドライバのダウンロードは完了です。</p>
-<ol start="3">
-<li>Standard Logic Apps へ JDBC ドライバの配置<br>これより、取得したドライバを Standard Logic Apps へ配置いたします。<br>ドライバを配置することにより JDBC コネクタで対象のドライバを呼び出し、Azure Database for PostgreSQL へ接続することが可能となります。</li>
-</ol>
-<p>まず、作成いただいている Standard Logic Apps のリソースを表示し、[開発ツール] - [高度なツール] より [移動→] のリンクを押下します。<br><img src="/blog/LogicApps/PostgresqlJdbc/image001.png"></p>
-<p>次に、画面上部の [Debug console] より、”CMD” を選択します。<br><img src="/blog/LogicApps/PostgresqlJdbc/image002.png"></p>
-<p>site\wwwroot ディレクトリへ遷移し、＋ マークを押下して以下のディレクトリを作成いたします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image003.png"></p>
-<p>・作成するパス<br>lib\builtinOperationSdks\JAR（C:\home\site\wwwroot\lib\builtinOperationSdks\JAR がフルパス）</p>
-<p>JAR ディレクトリを作成出来たらダウンロードした JDBC ドライバをドラッグアンドドロップします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image004.png"></p>
-<p>以上で、事前準備の完了となります。</p>
-<h2 id="設定例と実行結果"><a href="#設定例と実行結果" class="headerlink" title="設定例と実行結果"></a>設定例と実行結果</h2><p>それでは、Standard Logic Apps の設定に移ります。<br>まず、ワークフローを作成し、以下の通り JDBC コネクタを検索いたします。</p>
-<p><img src="/blog/LogicApps/PostgresqlJdbc/image005.png"><br><img src="/blog/LogicApps/PostgresqlJdbc/image006.png"></p>
-<p>サービス プロバイダー接続の設定について、以下の内容を設定いたします。<br><img src="/blog/LogicApps/PostgresqlJdbc/image008.png"></p>
-<p>・接続名：任意の値<br>・URL：Azure Database for PostgreSQL の [設定] - [接続文字列] より、JDBC の値を設定<br><img src="/blog/LogicApps/PostgresqlJdbc/image007.png"><br>{your_database}：設定いただいたデータベース<br>{your_password}：設定いただいたパスワード<br>User Identifier：ユーザー名<br>Password：設定いただいたパスワード</p>
-<p>＜実行結果＞<br><img src="/blog/LogicApps/PostgresqlJdbc/image009.png"></p>
-<p>以上より、JDBC コネクタを利用し、Azure Database for PostgreSQL へ接続することが可能でございます。</p>
-<p>なお、先にも申し上げました通り、本コネクタについてはプレビュー機能で提供されております。今後将来的に予告なく内容が変更される場合がございますので予めご了承下さい。</p>
-<p>こちらの仕組みをご利用になられる場合、お客様にて十分に検証を実施いただいたうえで採用要否についてご検討をいただきますようお願い申し上げます。</p>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
-<ul>
-<li>JDBC コネクタについて</li>
-<li>事前準備</li>
-<li>設定例と実行結果</li>
-</ul>
-<p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>こちらについては以下記事がご参考になれば幸いです。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/">Logic Apps Standard と関連するストレージ アカウント | Japan Azure Integration Support Blog</a></p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Standard Logic Apps のワークフローを誤って削除してしまった際の調査と、リカバリ手段についてご紹介いたしました。定期的なバックアップのご検討含め、万が一の際のリカバリ手段としてご活用いただければと思います。最後までお読みいただきありがとうございました！</p>
 
       
       
@@ -218,10 +159,10 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
 
         
-        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/PostgresqlJdbc.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-Recovery.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
         
     </footer>
   </div>
@@ -229,19 +170,10 @@
     
 <nav id="article-nav">
   
-    <a href="../retryPolicy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">次の記事</strong>
-      <div class="article-nav-title">
-        
-          Logic Apps における再試行について
-        
-      </div>
-    </a>
   
-  
-    <a href="../LogicApps-CosmosDB/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="../LogicApps-UpdateWithCLI/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前の記事</strong>
-      <div class="article-nav-title">Logic Apps で Cosmos DB からドキュメントをクエリする</div>
+      <div class="article-nav-title">CLI から従量課金タイプの Logic Apps の設定を更新する</div>
     </a>
   
 </nav>
@@ -260,7 +192,7 @@
       <ul>
         
           <li>
-            <a href="../LogicApps-Recovery/">Standard Logic Apps のワークフローを誤って削除してしまったとき</a>
+            <a href="">Standard Logic Apps のワークフローを誤って削除してしまったとき</a>
           </li>
         
           <li>
