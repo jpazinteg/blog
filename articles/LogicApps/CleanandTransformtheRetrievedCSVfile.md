@@ -90,7 +90,7 @@ CSV ファイルから取得したデータが JSON 形式の配列になって�
 軽量な処理や一時的な値の保管に使用できるもので、今回はこちらのアクションと [union] 関数による処理を組み合わせています。
 なお、後続処理でループ処理や分岐処理が行われる、値の更新や再利用が必要とされる場合は、[Variables] コネクタをご使用いただく方がよろしいかと存じます。
 
--[トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Compose](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#compose-action)
+- [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Compose](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#compose-action)
 <br/>
 
 こちらは簡単で、設定内容は以下の通りです。
@@ -108,7 +108,8 @@ CSV ファイルから取得したデータが JSON 形式の配列になって�
 最後に、一度は JSON 形式の配列にした CSV ファイルのデータを、再び CSV 形式に戻す方法をご紹介させていただきます。
 JSON オブジェクトのプロパティ値と値を配列に含むデータを CSV に変換するには [Create CSV Table] アクションを使用します。
 
--[データの操作の実行 - Azure Logic Apps | Microsoft Learn # CSV テーブルの作成アクション](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#create-csv-table-action)
+- [データの操作の実行 - Azure Logic Apps | Microsoft Learn # CSV テーブルの作成アクション](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#create-csv-table-action)
+- [Azure Logic Apps で各ファイルフォーマットを変換する Tips # 3．JSON → CSV](https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/#3%EF%BC%8EJSON-%E2%86%92-CSV)
 
 こちらも実際にやってみます。
 [Create CSV Table] を追加し、[From] 欄には「複数の配列を 1 の配列にまとめる」でご紹介をした [Compose] アクションの出力結果を設定します。
@@ -133,9 +134,10 @@ JSON 形式の配列が CSV 形式に変わっていることがわかります�
 そこに「複数の配列を 1 の配列にまとめる」内でご紹介している方法を組みあわせれば、CSV ファイルとログをマージする、ということも可能になるかと存じます。
 
 このように、基にするデータや組み合わせ次第では、Logic Apps 内で様々なデータ加工が可能になります。
-一方、この方法を組み合わせ、ループ処理で大量のデータを加工するとなりますと、Logic Apps の処理そのものが煩雑となること、また実行に時間を要することが考えられます。
 
-本記事でご紹介しております手順は、例えば KQL による大量データの加工処理の代替手順とはなり得ませんこと、お心に留めていただけますと幸いです。
+一方、Logic Apps にてループ処理を用い大量のデータを扱う場合には、処理が複雑になり時間を要する可能性がございます。
+本記事でご紹介している手順は、比較的少量のデータ処理やシンプルなワークフロー設計に適しているため、使い分けに関し留意をしていただきますと、より効果的にご活用いただけるものと存じます。
+
 <br/>
 
 ## まとめ
