@@ -1,6 +1,6 @@
 ---
 title: 取得した CSV ファイルのデータを加工する
-date: 2025-09-04 00:00:00
+date: 2025-09-25 00:00:00
 tags:
   - How-To
   - Tips
@@ -36,8 +36,8 @@ Azure Logic Apps を用いて、Azure Blob Storage などから複数の CSV フ
 その対応として、CSV ファイルから取得したデータを JSON 形式の配列に変換する方法がございます。
 
 では、実際にやってみます。
-本作業で使用するのは、[Select] アクション、[skip] 関数、および [split] 関数です。
-作業内容を簡単に説明致しますと、[skip] 関数で先頭のヘッダー行以外のデータ部分を取得し、[split] 関数でカラム単位にデータを分割、[Select] アクションでプロパティ名をつけなおして JSON 形式の配列に変換ます。
+本作業で使用するのは、[Select] アクション、 skip 関数、および split 関数です。
+作業内容を簡単に説明致しますと、 skip 関数で先頭のヘッダー行以外のデータ部分を取得し、split 関数でカラム単位にデータを分割、[Select] アクションでプロパティ名をつけなおして JSON 形式の配列に変換します。
 
 - [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Select action](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#select-action)
 - [式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # skip](https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#skip)
@@ -52,8 +52,17 @@ Azure Logic Apps を用いて、Azure Blob Storage などから複数の CSV フ
 
 ![](./CleanandTransformtheRetrievedCSVfile/image003.png)
 
+```
+// ソースコード抜粋
+"from": "@skip(split(body('BLOB_コンテンツを取得する_(V2)_1'), decodeUriComponent('%0D%0A')), 1)",
+    "select": {
+      "UserPrincipalName": "@split(item(), ',')[0]",
+      "emmployeeNum": "@split(item(), ',')[1]"
+    }
+```
 
-上記ではご紹介しておりませんが、[decodeUriComponent] 関数はエスケープ文字をデコード バージョンに置き換える関数でございます。
+<br />
+上記ではご紹介しておりませんが、decodeUriComponent 関数はエスケープ文字をデコード バージョンに置き換える関数でございます。
 今回は改行コードを置き換えています。
 
 - [ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # decodeUriComponent](https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#decodeuricomponent)
@@ -71,9 +80,9 @@ CSV ファイルから取得したデータが JSON 形式の配列になって�
 
 ## 複数の配列を 1 つの配列にまとめる
 続いて、複数の配列をひとつにまとめる方法でございます。
-複数の配列を 1 つの配列にまとめるには [union] 関数を使用します。
+複数の配列を 1 つの配列にまとめるには union 関数を使用します。
 
-[union] 関数は、引数に指定された複数のコレクションをまとめる関数でございます。
+union 関数は、引数に指定された複数のコレクションをまとめる関数でございます。
 この際、重複するデータは削除されますのでご注意ください。
 
 - [ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # union](https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#union)
@@ -81,26 +90,36 @@ CSV ファイルから取得したデータが JSON 形式の配列になって�
 
 では、実際にやってみます。
 まとめるデータとして、新たに以下の CSV ファイルを用意しました。
-先頭のデータが、[test_1.csv] ファイルのデータと重複しています。
+先頭のデータが、test_1.csv ファイルのデータと重複しています。
 
 <b>test_2.csv</b>
 ![](./CleanandTransformtheRetrievedCSVfile/image006.png)
 
+<b>参照：test_1.csv</b>
+![](./CleanandTransformtheRetrievedCSVfile/image013.png)
+
 少し横道にそれますが、複数の入力から単一の出力を作成するためのアクションとして、[Compose] アクションのご用意がございます。
-軽量な処理や一時的な値の保管に使用できるもので、今回はこちらのアクションと [union] 関数による処理を組み合わせています。
+軽量な処理や一時的な値の保管に使用できるもので、今回はこちらのアクションと union 関数による処理を組み合わせています。
 なお、後続処理でループ処理や分岐処理が行われる、値の更新や再利用が必要とされる場合は、[Variables] コネクタをご使用いただく方がよろしいかと存じます。
 
 - [トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Compose](https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#compose-action)
 <br/>
 
+本題に戻ります。
 こちらは簡単で、設定内容は以下の通りです。
 なお、本デモンストレーションを行うため、「データを分割して配列にする」でご紹介している内容を、新たに用意した CSV ファイルのデータにも行っております。
 ![](./CleanandTransformtheRetrievedCSVfile/image007.png)
 
 ![](./CleanandTransformtheRetrievedCSVfile/image008.png)
 
+```
+// ソースコード抜粋
+"inputs": "@union(body('Select-1'),body('Select-2'))",
+```
+
+
 [Compose] アクションの実行結果を見てみます。
-[test_1.csv] と [test_2.csv] で重複していたデータが削除された状態で、ふたつの配列がまとめられていることがわかります。
+test_1.csv と test_2.csv で重複していたデータが削除された状態で、ふたつの配列がまとめられていることがわかります。
 ![](./CleanandTransformtheRetrievedCSVfile/image009.png)
 <br/>
 
@@ -112,7 +131,7 @@ JSON オブジェクトのプロパティ値と値を配列に含むデータを
 - [Azure Logic Apps で各ファイルフォーマットを変換する Tips # 3．JSON → CSV](https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/#3%EF%BC%8EJSON-%E2%86%92-CSV)
 
 こちらも実際にやってみます。
-[Create CSV Table] を追加し、[From] 欄には「複数の配列を 1 の配列にまとめる」でご紹介をした [Compose] アクションの出力結果を設定します。
+[Create CSV Table] を追加し、From 欄には「複数の配列を 1 の配列にまとめる」でご紹介をした [Compose] アクションの出力結果を設定します。
 ![](./CleanandTransformtheRetrievedCSVfile/image010.png)
 
 実行結果を見てみます。
@@ -136,7 +155,7 @@ JSON 形式の配列が CSV 形式に変わっていることがわかります�
 このように、基にするデータや組み合わせ次第では、Logic Apps 内で様々なデータ加工が可能になります。
 
 一方、Logic Apps にてループ処理を用い大量のデータを扱う場合には、処理が複雑になり時間を要する可能性がございます。
-本記事でご紹介している手順は、比較的少量のデータ処理やシンプルなワークフロー設計に適しているため、使い分けに関し留意をしていただきますと、より効果的にご活用いただけるものと存じます。
+本記事でご紹介している手順は、比較的少量のデータ処理やシンプルなワークフロー設計に適しているため、使い分けに関してご留意いただけますと、より効果的にご活用いただけるものと存じます。
 
 <br/>
 
