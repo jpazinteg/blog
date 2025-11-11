@@ -1,6 +1,6 @@
 ---
 title: SharePoint から Azure Blob Storage に大容量ファイルをコピーする
-date: 2025-09-30 00:00:00
+date: 2025-11-11 00:00:00
 tags:
   - How-To
   - Tips
@@ -40,15 +40,15 @@ tags:
 
 ## Graph API を使用するための前準備
 本手順には、Graph API を使用する手順が含まれます。
-Graph API を使用するためにはアクセス許可を付与する必要がございますため、事前にその設定をしておく必要がございます。
-この設定方法については、当ブログの別記事にて詳細にご案内しております。
-後述する手順を実行される前に、上記ブログを参照の上、あらかじめ Graph API 実行のためのアクセス許可をご設定ください。
+Graph API の認証に必要なアプリケーションにアクセス許可を付与する必要がございますため、事前にその設定をしておく必要がございます。
+この設定方法については、当ブログの別記事にて詳細な手順をご案内しております。
+後述する手順を実行される前に、以下ブログを参照の上、あらかじめ Graph API 実行のためのアクセス許可をご設定ください。
 
 - [Logic Apps から Graph API を実行する | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/)
 
 付与いただくアクセス権は以下の通りです。
 今回使用する Graph API、「driveItem コンテンツのダウンロード」で必要とされるアクセス許可は、以下のいずれかとなります。
-お客様のご要件に合わせて付与するアクセス許可を選定ください。
+お客様のご要件に合わせて、付与するアクセス許可を選定ください。
 ![](./copyLargeFileFromSPO2BlobStorage/image001.png)
 
 <br/>
@@ -58,17 +58,53 @@ Graph API を使用するためにはアクセス許可を付与する必要が�
 この Graph API を使用するには、ダウンロードするファイルの siteId、driveId および itemId がわかっている必要があります。
 このうち siteId と driveId は通常固定となりますため、あらかじめ確認して固定値ないしはパラメーター等に設定することが可能ですが、ファイルごとに変わる itemId は都度取得する必要がございます。
 
-<b>siteId と driveId の取得方法</b>
-外部資料ではございますものの、以下サイトをご参照ください。
+本記事では、Shared Document 直下に配置されているファイルを取得するものとして、手順をご紹介します。
+![](./copyLargeFileFromSPO2BlobStorage/image017.png)
 
- - [【SharePoint】Microsoft GraphでサイトID, ドライブID, アイテムIDを調べる方法 #GraphAPI - Qiita](https://qiita.com/kyohets/items/d8d90ed5e398469fffd5)
-
-<b>itemId の取得方法</b> 
-SharePoint Online から、取得対象のファイルの itemId を取得してみます。
-今回は、SharePoint Online より、こちらの 500 MB のファイルを取得するものとします。
+余談ですが、こちらのファイルのサイズは 500 MB としております。
 ![](./copyLargeFileFromSPO2BlobStorage/image002.png)
 
-itemId の取得につきましては、次の URI を [HTTP] アクションに設定ただくことで取得可能です。
+
+<b>siteId と driveId の取得方法</b>
+siteId と driveId は、Graph Explorer よりあらかじめ確認することが可能です。
+
+ - [Graph Explorer | Try Microsoft Graph APIs - Microsoft Graph](https://developer.microsoft.com/en-us/graph/graph-explorer)
+
+では実際に、Graph Explorer から siteId と driveId を確認してみます。
+
+まずはGraph Explorer にアクセスし、ログインします。
+ログインしているユーザーが対象となるドライブやファイル、フォルダの閲覧権限以上を持っている必要がありますのでご注意ください。
+![](./copyLargeFileFromSPO2BlobStorage/image018.png)
+
+
+まずは siteId を取得します。
+Graph Explorer に以下の URL をセットして、Run query を押下します。
+検索する値は、SharePoint のサイト名やファイル名など、任意ものものを使用してください。
+```
+GET https://graph.microsoft.com/v1.0/sites?search=<検索する値>
+```
+
+以下は検索結果の例です。
+value 内に記載されている id が siteId です。siteId は後続処理でも使用しますので、値を控えておきます。
+![](./copyLargeFileFromSPO2BlobStorage/image019.png)
+
+siteId が取得できたので、続いては左記を使用して driveId を取得します。
+Graph Explorer に以下の URL をセットして、Run query を押下します。
+```
+GET https://graph.microsoft.com/v1.0/sites/<siteId>/drive
+```
+
+以下は検索結果の例です。
+黄色の枠で囲っている id が driveId です。driveId は後続処理でも使用しますので、値を控えておきます。
+なお、webUrl に記載されている URL が、参照先の SharePoint になっていることをご確認ください。
+![](./copyLargeFileFromSPO2BlobStorage/image020.png)
+
+以上で、siteId と driveId の取得は終了です。
+
+
+<b>itemId の取得方法</b> 
+siteId と driveId が取得できたので、これらを使って SharePoint Online から取得対象のファイルの itemId を取得します。
+itemId の取得につきましては、次の URI を [HTTP] アクションに設定いただくことで取得可能です。
 ```
 https://graph.microsoft.com/v1.0/sites/{siteId}/drives/{driveId}/root:/{fileName}
 ```
@@ -76,10 +112,7 @@ https://graph.microsoft.com/v1.0/sites/{siteId}/drives/{driveId}/root:/{fileName
 上記形式に落とし込んだ URL が正しく実行できるかは、Graph Exolorer よりご確認いただくことが可能です。
 [HTTP] アクションにご設定をいただきます前に、まずは Graph Explorer を使用して記述内容に問題がないかを確認することを、強くお勧めいたします。
 
- - [Graph Explorer | Try Microsoft Graph APIs - Microsoft Graph](https://developer.microsoft.com/en-us/graph/graph-explorer)
-
-
-上記を踏まえた、itemid を取得するための [HTTP] アクションの設定がこちらです。
+上記を踏まえた、itemid を取得するための [HTTP] アクションの設定例がこちらです。
 詳細パラメーターより設定する Authentication については、「Graph API を使用するための前準備」でご案内している内容に準拠しますため割愛します。
 ![](./copyLargeFileFromSPO2BlobStorage/image003.png)
 
