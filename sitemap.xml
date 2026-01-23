@@ -37,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/</loc>
-    
-    <lastmod>2026-01-23</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/</loc>
     
     <lastmod>2026-01-23</lastmod>
@@ -52,6 +45,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/MSMQ/KB5071544_202512/</loc>
+    
+    <lastmod>2026-01-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -331,14 +331,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
