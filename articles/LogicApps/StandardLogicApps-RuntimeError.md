@@ -134,7 +134,7 @@ ARM テンプレートや CLI のデプロイにより、意図せず以下の�
 こうした変更でも「ランタイムが起動しない」という事象が発生いたします。
 ご確認の上、構成を必要に応じて更新ください。
 
-<h2 id="header4">3. 関連ドキュメント</h2>
+<h2 id="header4">4. 関連ドキュメント</h2>
 
 - [Standard ワークフローと仮想ネットワーク間のトラフィックをセキュリティで保護する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/secure-single-tenant-workflow-virtual-network-private-endpoint)
 
@@ -144,7 +144,7 @@ ARM テンプレートや CLI のデプロイにより、意図せず以下の�
 
 - [Azure Portal からファイアウォール設定配下のストレージ アカウントに Standard Logic Apps を作成する方法 | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/)
 
-<h2 id="header5">4. まとめ</h2>
+<h2 id="header5">5. まとめ</h2>
 
 本記事では、閉域環境上の Standard Logic Apps での Runtime Error およびトラブルシュート方法についてご紹介しました。
 
