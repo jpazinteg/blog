@@ -205,6 +205,13 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/</loc>
+    
+    <lastmod>2026-01-23</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
     
     <lastmod>2026-01-23</lastmod>
@@ -213,13 +220,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/</loc>
-    
-    <lastmod>2026-01-23</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HeadFirst/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -331,14 +331,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-ConsumptionPricing/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/</loc>
     
     <lastmod>2026-01-23</lastmod>
     
@@ -473,21 +473,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/Azure-Integration/</loc>
-    <lastmod>2026-01-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
-    <lastmod>2026-01-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jpazinteg.github.io/blog/tags/Tips/</loc>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/Azure-Integration/</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -663,6 +656,13 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/VNet-Integration/</loc>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jpazinteg.github.io/blog/tags/MSMQ/</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
