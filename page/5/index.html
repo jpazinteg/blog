@@ -80,6 +80,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LogicApps/GetIterationIndexInForeachAction" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    <!-- post date -->
+    <div class="article-meta">
+      <a href="../../LogicApps/GetIterationIndexInForeachAction/" class="article-date">
+  <time datetime="2023-03-16T15:00:00.000Z" itemprop="datePublished">2023-03-17</time>
+</a>
+      
+    </div>
+
+    
+    <!-- post title -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="../../LogicApps/GetIterationIndexInForeachAction/">Foreachアクションでインデックスを取得した処理の比較</a>
+    </h1>
+  
+
+      </header>
+    
+
+    <!-- post caption -->
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
+<p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/get-iteration-index-in-foreach-action/ba-p/3730379">Get iteration index in Foreach action</a></li>
+</ul>
+<p>Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合があるかと思います。<br>その際は、コンカレンシ―制御を以下のように 1 に設定し、各繰り返し回数ごとに常に 1 ずつ加算されるインデックスとして変数を使用する手法がございます。</p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image01.png"></p>
+<p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image02.png"></p>
+<p>しかし、この方法では For each 処理がシーケンシャルな処理であるため、並列実行が出来ずパフォーマンスに影響を及ぼすことがあります。</p>
+<p>今回は、For each アクションを並列実行して、効率的にインデックスを利用する構成と、従来の処理との比較結果についてご案内いたします。</p>
+        
+          <p class="article-more-link">
+            <a href="../../LogicApps/GetIterationIndexInForeachAction/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    <footer class="article-footer">
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/" data-id="cmkw8j2kj000p0no0f4bnhggg" class="article-share-link">共有</a-->
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LogicApps/WorkflowRunsList" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -119,7 +178,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/" data-id="cmkq7wsuh002e0not2arib37l" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/WorkflowRunsList/" data-id="cmkw8j2la002g0no0fehp68e9" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -169,61 +228,10 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/" data-id="cmkq7wsud00210not0jhf8gqo" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-StorageAccount/" data-id="cmkw8j2l400250no02yl92l55" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LogicApps/triggerConcurrency" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    <!-- post date -->
-    <div class="article-meta">
-      <a href="../../LogicApps/triggerConcurrency/" class="article-date">
-  <time datetime="2023-02-27T15:00:00.000Z" itemprop="datePublished">2023-02-28</time>
-</a>
-      
-    </div>
-
-    
-    <!-- post title -->
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="../../LogicApps/triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
-    </h1>
-  
-
-      </header>
-    
-
-    <!-- post caption -->
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
-<p>トリガーに設定可能なコンカレンシー制御と最大実行待機数について説明します。</p>
-        
-          <p class="article-more-link">
-            <a href="../../LogicApps/triggerConcurrency/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/triggerConcurrency/" data-id="cmkq7wsur00330notdk9l2mgk" class="article-share-link">共有</a-->
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
 
     </footer>
   </div>
@@ -271,7 +279,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/" data-id="cmkq7wstn000b0not8yfabvx8" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/" data-id="cmkw8j2kh000m0no06ryheswg" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -322,7 +330,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/" data-id="cmkq7wstl000a0not3ob3f5l1" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FailedToFetch/" data-id="cmkw8j2kg000k0no0gk6gb11c" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
@@ -372,7 +380,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/" data-id="cmkq7wsto000d0notc8t1b0gb" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/FlowHistoryClearner/" data-id="cmkw8j2ki000n0no021r95v2u" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -427,7 +435,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cmkq7wsuh002b0notf6b26jnq" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/" data-id="cmkw8j2l9002e0no06pt2hv1y" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -482,7 +490,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="cmkq7wstj00050not4iqw4w2x" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ConditionsTips/" data-id="cmkw8j2kd000d0no0d1xa59w4" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li></ul>
@@ -532,7 +540,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/" data-id="cmkq7wsts000l0not79xh6mt9" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Backup/" data-id="cmkw8j2km000x0no0f8at2z9f" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li></ul>
@@ -591,7 +599,7 @@
     </div>
 
     <footer class="article-footer">
-      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="cmkq7wsu6001h0nothrl9cy1y" class="article-share-link">共有</a-->
+      <!--a data-url="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/" data-id="cmkw8j2ky001n0no0bi9s0qj3" class="article-share-link">共有</a-->
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li></ul>
@@ -620,6 +628,10 @@
       <ul>
         
           <li>
+            <a href="../../LogicApps/triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
+          </li>
+        
+          <li>
             <a href="../../LogicApps/StandardLogicApps-RuntimeError/">Standard Logic Apps でのランタイム エラー (ネットワーク問題)</a>
           </li>
         
@@ -633,10 +645,6 @@
         
           <li>
             <a href="../../LogicApps/CleanandTransformtheRetrievedCSVfile/">取得した CSV ファイルのデータを加工する</a>
-          </li>
-        
-          <li>
-            <a href="../../LogicApps/LogicApps-Recovery/">Standard Logic Apps のワークフローを誤って削除してしまったとき</a>
           </li>
         
       </ul>
