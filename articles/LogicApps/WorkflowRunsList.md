@@ -19,27 +19,37 @@ tags:
 トリガーのコンカレンシー制御以外の手段で、他の実行中の Logic Apps の状況を任意にフィルターして制御する方法を実装されたい方。
 
 ## 目次
-- 実行一覧 API
+- 実行一覧 API (従量課金版 Logic Apps)
+- 実行一覧 API (Standard 版 Logic Apps)
 - Logic Apps から HTTP コネクタによる API の実行
 - 状況判定
 - 関連ドキュメント
 - まとめ
 
-## 実行一覧 API
+## 実行一覧 API (従量課金版 Logic Apps)
 
 [Workflow Runs - List](https://learn.microsoft.com/ja-jp/rest/api/logic/workflow-runs/list?tabs=HTTP)
 
 ワークフローの実行の一覧を取得します。
 
-`https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2016-06-01&$filter={$filter}`
+`https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2019-05-01&$filter={$filter}`
 
 これにより、Filter で例として、実行中のフローを絞り込むことができます。実行中のものを絞り込むフィルタは `status eq 'running'` などとなります。エンコードを掛けますと以下のような URL になります。
 
-`https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2016-06-01&$filter=status%20eq%20%27running%27`
+`https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs?api-version=2019-05-01&$filter=status%20eq%20%27running%27`
 
 実行結果:
 
 ![](WorkflowRunsList/WorkflowRunsList-1.png)
+
+
+## 実行一覧 API (Standard 版 Logic Apps)
+
+[Workflow Runs - List - REST API (Azure App Service)](https://learn.microsoft.com/ja-jp/rest/api/appservice/workflow-runs/list?view=rest-appservice-2025-03-01&tabs=HTTP)
+
+`https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{logicappname}/hostruntime/runtime/webhooks/workflow/api/management/workflows/{workflowName}/runs?api-version=2025-03-01&$filter={$filter}`
+
+従量課金版同様、ワークフローの実行の一覧を取得します。
 
 ## Logic Apps から HTTP コネクタによる API の実行
 
