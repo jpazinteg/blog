@@ -61,9 +61,21 @@ tags:
 
 ![](WorkflowRunsList/WorkflowRunsList-3.png)
 
-この方法で当該の API を使用する際は Logic Apps のマネージド ID に対して、「Logic App Operator」ロールを割り当てます。
+この方法で当該の API を使用する際は Logic Apps のマネージド ID に対してロールを割り当てます。
 
-[Azure 組み込みロール # Logic App Operator](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles#logic-app-operator)
+従量課金版の場合: 以下のロールを割り当てます。
+
+- [統合用の Azure 組み込みロール # Logic App Operator](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration#logic-app-operator)
+
+Standard 版の場合: 以下のロールを割り当てます (プレビュー)。
+
+- [統合用の Azure 組み込みロール # Logic Apps Standard Operator (Preview)](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration#logic-apps-standard-operator-preview) 
+
+または以下 2 つのロールを割り当てます。詳細は [Logic Apps (Standard) を作成するために必要な最小権限 | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Authorization/) をご参考いただけます。
+
+- [Web および Mobile 用の Azure 組み込みロール # Web Plan Contributor](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/web-and-mobile#web-plan-contributor)
+- [Web および Mobile 用の Azure 組み込みロール # Website Contributor](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/web-and-mobile#website-contributor)
+
 
 
 ## 状況判定
