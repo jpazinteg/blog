@@ -26,7 +26,7 @@ Logic Apps では、実に多くのコネクタと、コネクタに含まれる
 <br/>
 
 ## コネクタとは
-用語のおさらいとなりますが、コネクタとは特定のアプリケーションなどへの操作をひとまとめにしたもののことを指し、トリガーないしはアクション、もしくはその両方を含むことがございます。
+用語のおさらいとなりますが、「コネクタ」とは特定のアプリケーションなどへの操作をひとまとめにしたもののことを指し、トリガーないしはアクション、もしくはその両方を含むことがございます。
 [Office 365 Outlook] コネクタを例にとりますと、このコネクタには以下のようなトリガーまたはアクションをご用意しています。
 
 <b>トリガー</b>
@@ -73,18 +73,18 @@ Logic Apps では、実に多くのコネクタと、コネクタに含まれる
 - [繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption)
 
 
-一方、サービス プロバイダーベースの組み込みコネクタに関しては、別途コネクタの詳細ページをご用意しております。
+一方、サービス プロバイダー ベースの組み込みコネクタに関しては、別途コネクタの詳細ページをご用意しております。
 ※ 2026 年 1 月 29 日現在、英語のみでのご案内となります。
 ![](./LogicAppsConnectorList/image003.png)
 - [Azure Logic Apps (Standard) built-in service provider connectors - Connectors | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/)
 <br/>
 
-サービス プロバイダーベースの組み込みコネクタの概要については、以下をご参照ください。
+サービス プロバイダー ベースの組み込みコネクタの概要については、以下をご参照ください。
 - [組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/connectors/built-in#service-provider-based-built-in-connectors)
 - [サービス プロバイダー接続について | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/)
 
 <b>注意事項</b>
-[こちらのブログ記事](https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/) でもご案内をしておりますが、サービス プロバイダーベースの組み込みコネクタをはじめ、従量課金版の Logic Apps と Standard Logic Apps では、使用できる組み込みコネクタに違いがございます。
+[こちらのブログ記事](https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/) でもご案内をしておりますが、サービス プロバイダー ベースの組み込みコネクタをはじめ、従量課金版の Logic Apps と Standard Logic Apps では、使用できる組み込みコネクタに違いがございます。
 ご使用されたい組み込みコネクタがある場合、どちらかの SKU でのみ提供している組み込みコネクタではないかを、あらかじめご確認ください。
 ![](./LogicAppsConnectorList/image004.png)
 
@@ -96,7 +96,8 @@ Logic Apps では、実に多くのコネクタと、コネクタに含まれる
 マネージド コネクタの場合、Logic Apps で使用できるコネクタの一覧ページをご用意してございます。
 - [すべての Logic Apps コネクタの一覧 | Microsoft Learn](https://learn.microsoft.com/ja-jp/connectors/connector-reference/connector-reference-logicapps-connectors)
 
-非常に多くのコネクタをご用意しておりますので、アプリケーションの名称などで、タイトルを検索いただくことも可能です。
+非常に多くのコネクタをご用意しておりますので、アプリケーションの名称などで検索いただくことも可能です。
+例：検索窓に「Outlook」と入力
 ![](./LogicAppsConnectorList/image005.png)
 
 コネクタ名を選択いただきますと、そのコネクタの詳細ページへ遷移します。
