@@ -16,7 +16,7 @@ Logic Apps をご利用いただく際に、ご考慮いただきたい制約事
 
 # こんな方におすすめです
 - 初めて Logic Apps での開発をされる方
-- Logic Apps で 429 が発生する方
+- Logic Apps で 429 エラーが発生する方
 
 ## 目次
 1. [Logic Apps に関する制約](#header1)
@@ -86,7 +86,7 @@ Logic Apps 全般の制約は以下にまとめられています。
 [API 接続について | Japan Azure Integration Support Blog](https://jpazinteg.github.io/blog/LogicApps/apiConnection/)
 
 従量課金タイプの Logic Apps が複数あり、それらで同一の API 接続を共有してご利用の場合、上記のような調整制限に抵触しやすくなります。
-調整制限を超えて Logic Apps が実行される場合に 429 が発生する場合がございます。
+調整制限を超えて Logic Apps が実行される場合に 429 エラーが発生する場合がございます。
 回避策としては、Logic Apps ごとに API 接続を分ける方法等が考えられます。
 一般的なハンドリング方法につきましては以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。
 [スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # コネクタの調整](https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#connector-throttling)
