@@ -97,7 +97,7 @@ Logic Apps では、実に多くのコネクタと、コネクタに含まれる
 - [すべての Logic Apps コネクタの一覧 | Microsoft Learn](https://learn.microsoft.com/ja-jp/connectors/connector-reference/connector-reference-logicapps-connectors)
 
 非常に多くのコネクタをご用意しておりますので、アプリケーションの名称などで検索いただくことも可能です。
-例：検索窓に「Outlook」と入力
+例：検索窓に「Outlook」と入力した場合
 ![](./LogicAppsConnectorList/image005.png)
 
 コネクタ名を選択いただきますと、そのコネクタの詳細ページへ遷移します。
@@ -155,9 +155,3 @@ Logic Apps では、実に多くのコネクタと、コネクタに含まれる
 - マネージド コネクタで発生しうる問題を確認する方法
 
 本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！
-
-<Azure Logic Apps の参考サイト>
--- 概要 - Azure Logic Apps とは
-https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview
-Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。
-Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。
