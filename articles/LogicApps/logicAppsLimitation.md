@@ -46,6 +46,11 @@ Logic Apps 全般の制約は以下にまとめられています。
 また、Logic Apps 独自のスループットの制約を超えた場合の一般的なハンドリング方法につきましては、以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。
 [スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # ロジック アプリのリソースの調整](https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#logic-app-resource-throttling)
 
+**参考:**
+制約とは異なりますが、Standard タイプの Logic Apps を作成する上でのベスト プラクティスと推奨事項につきまして、以下のようなものがございます。
+[Azure portal でサンプル Standard ワークフローを作成する - Azure Logic Apps | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations)
+![](./logicAppsLimitation/logicAppsLimitation06.jpg)
+
 <h2 id="header3"> 3. コネクタの制約 </h2>
 
 ### 3-1. 組み込みコネクタ
