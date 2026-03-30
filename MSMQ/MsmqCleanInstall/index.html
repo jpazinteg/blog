@@ -25,10 +25,10 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image10.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/image11.png">
 <meta property="article:published_time" content="2022-05-13T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.268Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.039Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="MSMQ">
 <meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
@@ -51,7 +51,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -69,7 +69,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -117,7 +117,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+0ef925af-f497-57cd-82a3-a9e84330c747%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMSMQ+%E3%82%92%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FMSMQ%2FMsmqCleanInstall%2F%29%0A*+Content+Source%3A+%5Barticles%2FMSMQ%2FMsmqCleanInstall.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FMSMQ%2FMsmqCleanInstall.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/" data-id="cmm8p5j8800030nlfh1309wrd" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/" data-id="cuidRDvRiVaeCT9VKxzh0rkaW" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -133,12 +133,12 @@
 </ul>
 <h2 id="MSMQ-について"><a href="#MSMQ-について" class="headerlink" title="MSMQ について"></a>MSMQ について</h2><p>MSMQ とは、弊社が提供するオンプレミス製品のメッセージ キューイング サービスです。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
 </ul>
 <p>通常のプログラムでは、実行中のプログラムはプログラム間のデータの送受信のタイミングを同期する必要があり、処理の開始・完了を待機する必要があります。<br>それに対してメッセージ キューイングでは、メッセージ ブローカーと呼ばれるソフトウェアがメッセージ キューと呼ばれるデータ保存領域に対してデータを管理し、データの送信側はデータの受信側の処理を待たなくてもデータをキューに書き出したタイミングで処理を完了させることができます。また、受信側も任意のタイミングでキューから取り出すことができ、非同期での処理が可能になります。</p>
 <h2 id="MSMQ-をドメインモードでインストールする手順について"><a href="#MSMQ-をドメインモードでインストールする手順について" class="headerlink" title="MSMQ をドメインモードでインストールする手順について"></a>MSMQ をドメインモードでインストールする手順について</h2><p>MSMQ のインストールに関する公開情報については以下に記載がありますので、ご興味あります方はぜひご覧ください。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/dotnet/framework/wcf/samples/installing-message-queuing-msmq">メッセージ キュー (MSMQ) のインストール</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/dotnet/framework/wcf/samples/installing-message-queuing-msmq">メッセージ キュー (MSMQ) のインストール</a></li>
 </ul>
 <p>公開情報には Windows Vista や Windows 7 等の記載がありますが、お使いの Windows 10 や Windows Server 2008 以降の Windows Server 製品であればご利用いただくことが可能です。<br>ドメインに参加せずに MSMQ をご利用になられたい場合は、以下のように設定いただくことでワークグループモードとしてご利用いただくことが可能です。</p>
 <p><img src="/blog/MSMQ/MsmqCleanInstall/image01.png"></p>
@@ -146,7 +146,7 @@
 <p><img src="/blog/MSMQ/MsmqCleanInstall/image02.png"></p>
 <p>この時、それ以外のチェックについてはお客様のご要件に合わせて必要な項目のみチェックいただく必要がございます。<br>マルチキャスティング サポートやルーティング サービスについては、以下の公開情報の通り Active Directory Domain Servicesで適切なアクセス許可設定が必要となります。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-US/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc730960(v=ws.11)?redirectedfrom=MSDN#to-grant-permissions-for-a-computer-object-to-the-servers-object-in-active-directory-domain-services-before-installing-the-routing-service-feature-on-a-computer-that-is-not-a-domain-controller">To grant permissions for a computer object to the Servers object in Active Directory Domain Services before installing the Routing Service feature on a computer that is not a domain controller</a></li>
+<li><a href="https://docs.microsoft.com/en-US/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc730960(v=ws.11)?redirectedfrom=MSDN#to-grant-permissions-for-a-computer-object-to-the-servers-object-in-active-directory-domain-services-before-installing-the-routing-service-feature-on-a-computer-that-is-not-a-domain-controller">To grant permissions for a computer object to the Servers object in Active Directory Domain Services before installing the Routing Service feature on a computer that is not a domain controller</a></li>
 </ul>
 <p>【翻訳】<br>ドメインコントローラーではない Windows Server 2008 R2 のコンピューターにルーティングサービス機能を、ドメインコントローラーである Windows Server 2008 R2 のコンピューターにメッセージキューイングのディレクトリサービス統合機能を正しくインストールするには、Active Directory Domain Servicesに特定のアクセス許可を設定することが必要です。これらの機能をインストールする前に、以下の手順に従ってActive Directory Domain Servicesで適切なアクセス許可を付与してください<br>※ここで Windows Server 2008 R2 といった記載がありますが他の OS に関しても同様です。</p>
 <p>上記の設定をせずにマルチキャスティング サポートやルーティング サービスのチェックボックスに設定をしてインストールした場合、正しくインストール出来ない場合がございますのでご留意ください。</p>
@@ -158,7 +158,7 @@
 <p>5．アンインストールが完了したら [閉じる] を選択する。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image06.png"></p>
 <p>※反映には再起動が必要となりますが、この時点では再起動はしません。</p>
 <p>6．Windows キー + R キーを同時に押下し、[ファイル名を指定して実行] に “ regedit ” と入力して [OK] を選択。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image07.png"></p>
-<p>7．以下のレジストリキーを確認し、 “Workgroup”=dword:00000001 の場合、値を0に変更する。</p>
+<p>7．以下のレジストリキーを確認し、 “Workgroup”&#x3D;dword:00000001 の場合、値を0に変更する。</p>
 <p>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSMQ\Parameters<br>存在しない場合は手順の実施は不要。<br><img src="/blog/MSMQ/MsmqCleanInstall/image08.png"></p>
 <p>8．ドメインコントローラーがインストールされているサーバーへログイン後、<br>[Active Directory ユーザーとコンピューター] を開き、[表示] を以下の設定にする。<br> <img src="/blog/MSMQ/MsmqCleanInstall/image09.png"></p>
 <p>9．MSMQ がインストールされているサーバーより、MSMQ オブジェクトを削除する。<br>存在しない場合は手順の実施は不要。<br><img src="/blog/MSMQ/MsmqCleanInstall/image10.png"></p>

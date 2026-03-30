@@ -25,13 +25,13 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/set_http01.PNG">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/result01.PNG">
 <meta property="article:published_time" content="2022-07-31T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.104Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.896Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta property="article:tag" content="Graph API">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/create_application01.PNG">
   
@@ -52,7 +52,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -70,7 +70,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -118,7 +118,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+80a9a11c-4bf9-5d54-9e19-755586c9d0c4%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%8B%E3%82%89+Graph+API+%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FIntegration-graphApi%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FIntegration-graphApi.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FIntegration-graphApi.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/" data-id="cmm8p5j8l000s0nlfd9cths3f" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/Integration-graphApi/" data-id="cuidOV6FA9bY8HuxPxcFswi6t" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -130,11 +130,11 @@
 <h1 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h1><ul>
 <li>今回の記事では従量課金版ロジック アプリを利用します。ただし、スタンダード版のロジック アプリでも問題ありません。</li>
 <li>Graph API は「アプリケーション」のアクセス許可を使用しています。<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/graph/auth-v2-service">ユーザーなしでアクセスを取得</a></li>
+<li>参考ドキュメント : <a href="https://docs.microsoft.com/ja-jp/graph/auth-v2-service">ユーザーなしでアクセスを取得</a></li>
 </ul>
 </li>
 <li>今回の記事では Azure Active Directory に登録されているユーザーの情報を取得する Graph API を利用しております。<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/graph/api/user-get?view=graph-rest-1.0&tabs=http">ユーザーの取得</a></li>
+<li>参考ドキュメント : <a href="https://docs.microsoft.com/ja-jp/graph/api/user-get?view=graph-rest-1.0&tabs=http">ユーザーの取得</a></li>
 </ul>
 </li>
 </ul>
@@ -142,11 +142,11 @@
 <p>また、Logic Apps の「HTTP」アクションでは、リクエスト内容に認証情報を含めることが可能です。<br>そのため、アプリの認証情報を「HTTP」アクションに設定し、実行時にはその認証情報を用いてまずトークンを取得し、<br>そのトークンを Authorization ヘッダーに格納し Graph API を実行する動作となります。</p>
 <h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="1-アプリを登録する"><a href="#1-アプリを登録する" class="headerlink" title="1. アプリを登録する"></a>1. アプリを登録する</h2><p>Azure Active Directory にて、アプリの登録 (サービス プリンシパルの作成) を行います。<br><strong>[Azure Active Directory] - [管理 - アプリの登録]</strong> と遷移し、「+ 新規登録」ボタンを押下します。<br><img src="/blog/LogicApps/Integration-graphApi/create_application01.PNG"></p>
 <p>アプリの名前を任意に設定し、今回は「サポートされているアカウントの種類」にて「この組織ディレクトリのみに含まれるアカウント (&lt;テナント名&gt; のみ - シングル テナント)」を選択し、<br>「登録」ボタンを押下します。<br><img src="/blog/LogicApps/Integration-graphApi/create_application02.PNG"></p>
-<p>作成が完了しましたら、**[管理 - アプリの登録]** にて該当するアプリを選択します。<br><strong>[概要]</strong> にて「アプリケーション (クライアント) ID」、および「ディレクトリ (テナント) ID」をコピーし、控えておきます。<br><img src="/blog/LogicApps/Integration-graphApi/create_application03.PNG"></p>
+<p>作成が完了しましたら、<strong>[管理 - アプリの登録]</strong> にて該当するアプリを選択します。<br><strong>[概要]</strong> にて「アプリケーション (クライアント) ID」、および「ディレクトリ (テナント) ID」をコピーし、控えておきます。<br><img src="/blog/LogicApps/Integration-graphApi/create_application03.PNG"></p>
 <p><strong>[管理 - 証明書とシークレット]</strong> に遷移し、「+ 新しいクライアント シークレット」を押下してシークレットを作成します。<br>作成されましたら、「値」をコピーし、こちらも控えておきます。<br>※ 「値」はシークレットを作成した直後のみに表示され、画面遷移等を行いますとマスクされますのでご注意ください。<br><img src="/blog/LogicApps/Integration-graphApi/create_application04.PNG"></p>
 <p><strong>[管理 - API のアクセス許可]</strong> に遷移します。<br>この画面で、Graph API に必要なアクセス許可を付与します。<br>Graph API によって必要なアクセス許可は異なりますので、ご利用の Graph API の公開情報の「アクセス許可」をご確認ください。<br>今回の記事では、以下が該当いたします。<br><img src="/blog/LogicApps/Integration-graphApi/create_application05.PNG"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://docs.microsoft.com/ja-jp/graph/api/user-get?view=graph-rest-1.0&tabs=http#permissions">ユーザーの取得</a></li>
+<li>参考ドキュメント : <a href="https://docs.microsoft.com/ja-jp/graph/api/user-get?view=graph-rest-1.0&tabs=http#permissions">ユーザーの取得</a></li>
 </ul>
 <p><strong>「+ アクセス許可の追加」</strong> を押下します。<br><img src="/blog/LogicApps/Integration-graphApi/create_application06.PNG"></p>
 <p>「Microsoft API」タブにて <strong>「Microsoft Graph」</strong> を選択します。<br><img src="/blog/LogicApps/Integration-graphApi/create_application07.PNG"></p>
@@ -155,12 +155,12 @@
 <h2 id="2-Logic-Apps-で「HTTP」アクションを設定する。"><a href="#2-Logic-Apps-で「HTTP」アクションを設定する。" class="headerlink" title="2. Logic Apps で「HTTP」アクションを設定する。"></a>2. Logic Apps で「HTTP」アクションを設定する。</h2><p><strong>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [開発ツール - ロジック アプリ デザイナー]</strong> と遷移します。<br>「HTTP」アクションを追加し、以下のように値を設定します。<br><img src="/blog/LogicApps/Integration-graphApi/set_http01.PNG"></p>
 <ul>
 <li>方法 : GET</li>
-<li>URI : <a target="_blank" rel="noopener" href="https://graph.microsoft.com/v1.0/users/">https://graph.microsoft.com/v1.0/users/</a>&lt;ユーザーのオブジェクト ID&gt;</li>
+<li>URI : <a href="https://graph.microsoft.com/v1.0/users/">https://graph.microsoft.com/v1.0/users/</a>&lt;ユーザーのオブジェクト ID&gt;</li>
 <li>認証</li>
 <li>認証の種類 : Active Directory OAuth</li>
 <li>機関 : 空欄</li>
 <li>テナント : 1. で控えておきました「ディレクトリ (テナント) ID」をペーストします。</li>
-<li>対象ユーザー : <a target="_blank" rel="noopener" href="https://graph.microsoft.com/">https://graph.microsoft.com</a></li>
+<li>対象ユーザー : <a href="https://graph.microsoft.com/">https://graph.microsoft.com</a></li>
 <li>クライアント ID : 1. で控えおきました「アプリケーション (クライアント) ID」をペーストします。</li>
 <li>資格情報の種類 : シークレット</li>
 <li>シークレット : 1. で控えておきましたシークレットの「値」をペーストします。<br>※ 「HTTP」アクションの「Add new paramter」を押下し、「認証」にチェックを入れますと「認証」の設定が行えます。<br>※ 「方法」および「URI」の設定内容につきましては、ご利用いただく Graph API の公開情報をご参照ください。</li>

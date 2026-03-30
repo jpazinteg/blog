@@ -16,12 +16,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_CurrentTime.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_SpecificTime.png">
 <meta property="article:published_time" content="2022-11-02T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.204Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.985Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Unix Time">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/UnixTime/unixTime_CurrentTime.png">
@@ -43,7 +43,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -61,7 +61,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7fbc8df8-ae00-5c5a-9901-cc7f3ce56b79%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E5%BC%8F%E9%96%A2%E6%95%B0%E3%81%A7+Unix+Time+%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FUnixTime%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FUnixTime.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FUnixTime.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/UnixTime/" data-id="cmm8p5j99002d0nlf390khbd9" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/UnixTime/" data-id="cuidnX7Gz7xUoys-l08vZ0-LE" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -122,7 +122,7 @@
 </ul>
 <h2 id="Unix-Time-の取得サンプル"><a href="#Unix-Time-の取得サンプル" class="headerlink" title="Unix Time の取得サンプル"></a>Unix Time の取得サンプル</h2><p>Logic Apps が備える Unix Time と類似の機能として ticks 関数がございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
 </ul>
 <p>1 tick はグレゴリオ暦の 0001 年 1 月 1 日午前 12 時 00 分 00 分からの 100 ナノ秒単位の経過時間を表します。<br>ticks 関数は指定のタイムスタンプの tick 数を返す関数でございます。</p>
 <p>また、Unix Time は UTC 時間の 1970 年 1 月 1 日午前 12 時 00 分 00 分からの経過秒数を表します。<br>そのため、1970 年 1 月 1 日午前 12 時 00 分 00 分の tick 数と対象日時の tick 数に関する差分を 100 ナノ秒単位から秒単位に変換する事で対象日時の Unix Time を取得する事が可能です。<br>100 ナノ秒単位から秒単位への変換は 10^7 で割る事により行えます。</p>
@@ -140,10 +140,10 @@
 </ul>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では Logic Apps の式関数で Unix Time を取得する方法について説明いたしました。 Unix Time は Rest API で多く活用されているため、本記事がお客様のシステム構築の一助になりますと幸いです。</p>
 <h2 id="参考情報"><a href="#参考情報" class="headerlink" title="参考情報"></a>参考情報</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#sub">sub 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#div">div 関数に関する公開情報</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#formatdatetime">formatDateTime 関数に関する公開情報</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#ticks">ticks 関数に関する公開情報</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#sub">sub 関数に関する公開情報</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#div">div 関数に関する公開情報</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#formatdatetime">formatDateTime 関数に関する公開情報</a></li>
 </ul>
 
       

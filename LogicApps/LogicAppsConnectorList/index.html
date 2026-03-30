@@ -26,14 +26,14 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/image010.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/image011.png">
 <meta property="article:published_time" content="2026-01-28T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.142Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.931Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Troubleshooting">
 <meta property="article:tag" content="Connector">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Troubleshooting">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/image000.png">
   
@@ -54,7 +54,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -72,7 +72,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -120,7 +120,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+f5b1655b-e9c9-5a6d-a15f-07a6d41fd1bd%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%A7%E4%BD%BF%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicAppsConnectorList%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicAppsConnectorList.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicAppsConnectorList.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/" data-id="cmm8p5j8y001l0nlf04lj835b" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/" data-id="cuid78J1AbpReBKrkjCEOl6U3" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -144,43 +144,47 @@
 <p>上記は [Office 365 Outlook] コネクタでご用意しているトリガーとアクションの、ほんの一例です。<br>これらの操作をまとめたものを「コネクタ」と呼んでおりますことを、お心に留めておいていただけますと幸いです。<br>なお、本記事ではカスタム コネクタについてのご説明は割愛させていただきます。</p>
 <p>コネクタの詳細、および組み込みコネクタとマネージド コネクタの違いについては、本記事の趣旨から外れますためご説明を控えます。<br>一方、弊社公開ドキュメントにて詳細をご案内しておりますので、そちらをご参照いただけますと幸いです。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/introduction">コネクタとは - Azure Logic Apps | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">マネージド コネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/introduction">コネクタとは - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">マネージド コネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <br/>
 
 <h2 id="組み込みコネクタ"><a href="#組み込みコネクタ" class="headerlink" title="組み込みコネクタ"></a>組み込みコネクタ</h2><p>では早速、Logic Apps で使用できるコネクタにはどのようなものがあるのか、その探し方をご紹介させていただきます。</p>
 <p>まず、組み込みコネクタについてご紹介をさせていただきます。<br>ご用意している組み込みコネクタ (Built-in コネクタ) は、以下ページにて一覧をご確認いただけます。<br>一覧にて、それぞれのコネクタでご用意しているトリガーないしはアクションの概要、各コネクタ名より遷移するリンク先にて詳細や実装例をご紹介しております。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <p>例：スケジュール コネクタの場合<br>組み込みコネクタの一覧より。<br>スケジュール コネクタでご用意しているトリガーもしくはアクションについて、簡単な説明を記載しております。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image000.png"></p>
 <p>先頭の「スケジュール」を押下しますと、スケジュール (繰り返し) 処理に関する詳細ページへ遷移します。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image001.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows">ワークフローで繰り返し実行されるトリガーのスケジュールについて - Azure Logic Apps | Microsoft Learn</a><br/></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows">ワークフローで繰り返し実行されるトリガーのスケジュールについて - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
+<br/>
+
 <p>「繰り返し」を押下しますと、繰り返しトリガー (Reccurence トリガー) の実装例をご案内するページへ遷移します。<br>※ 遷移先の記載内容がわかりやすいよう、カーソル位置をずらしています。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image002.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <p>一方、サービス プロバイダー ベースの組み込みコネクタに関しては、別途コネクタの詳細ページをご用意しております。<br>※ 2026 年 1 月 29 日現在、英語のみでのご案内となります。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image003.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/">Azure Logic Apps (Standard) built-in service provider connectors - Connectors | Microsoft Learn</a><br/></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/">Azure Logic Apps (Standard) built-in service provider connectors - Connectors | Microsoft Learn</a></li>
 </ul>
+<br/>
+
 <p>サービス プロバイダー ベースの組み込みコネクタの概要については、以下をご参照ください。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#service-provider-based-built-in-connectors">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#service-provider-based-built-in-connectors">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
 <li><a href="https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/">サービス プロバイダー接続について | Japan Azure Integration Support Blog</a></li>
 </ul>
 <p><b>注意事項</b><br><a href="https://jpazinteg.github.io/blog/LogicApps/serviceProviderConnection/">こちらのブログ記事</a> でもご案内をしておりますが、サービス プロバイダー ベースの組み込みコネクタをはじめ、従量課金版の Logic Apps と Standard Logic Apps では、使用できる組み込みコネクタに違いがございます。<br>ご使用されたい組み込みコネクタがある場合、どちらかの SKU でのみ提供している組み込みコネクタではないかを、あらかじめご確認ください。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image004.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in#built-in-connectors-in-consumption-versus-standard">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <br/>
 
 <h2 id="マネージド-コネクタ"><a href="#マネージド-コネクタ" class="headerlink" title="マネージド コネクタ"></a>マネージド コネクタ</h2><p>マネージド コネクタの場合、Logic Apps で使用できるコネクタの一覧ページをご用意してございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/connector-reference/connector-reference-logicapps-connectors">すべての Logic Apps コネクタの一覧 | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/connectors/connector-reference/connector-reference-logicapps-connectors">すべての Logic Apps コネクタの一覧 | Microsoft Learn</a></li>
 </ul>
 <p>非常に多くのコネクタをご用意しておりますので、アプリケーションの名称などで検索いただくことも可能です。<br>例：検索窓に「Outlook」と入力した場合<br><img src="/blog/LogicApps/LogicAppsConnectorList/image005.png"></p>
 <p>コネクタ名を選択いただきますと、そのコネクタの詳細ページへ遷移します。<br>本記事では、[Office 365 Outlook] コネクタの詳細ページへ遷移してみます。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image006.png"></p>
@@ -194,11 +198,11 @@
 <p>いずれも、項目の名称通り、該当のコネクタで確認されている事象やコネクタ使用時の制限事項、当該コネクタ使用時によく発生するエラーとその解決方法、当該コネクタ使用時の調整に関するご案内などをまとめております。<br>お手元でなんらかの問題が確認された場合、該当の問題がコネクタ詳細ページに記載されていることがございますので、初動調査として是非ご活用ください。</p>
 <p>例：[Office 365 Outlook] コネクタの、トリガーに関する既知の問題と制限事項<br>指定のトリガーにおいて、トリガーの起動遅延が発生する可能性をご案内しております。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image010.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/office365/#known-issues-and-limitations-with-triggers">Office 365 Outlook - Connectors | Microsoft Learn # トリガーに関する既知の問題と制限事項</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/connectors/office365/#known-issues-and-limitations-with-triggers">Office 365 Outlook - Connectors | Microsoft Learn # トリガーに関する既知の問題と制限事項</a></li>
 </ul>
 <p>例：[Office 365 Outlook] コネクタの、一般的なエラー<br>「REST API は、このメールボックスではまだサポートされていません」というエラーが発生する原因と対応方法が記載されています。<br><img src="/blog/LogicApps/LogicAppsConnectorList/image011.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/office365/#common-errors">Office 365 Outlook - Connectors | Microsoft Learn # 一般的なエラー</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/connectors/office365/#common-errors">Office 365 Outlook - Connectors | Microsoft Learn # 一般的なエラー</a></li>
 </ul>
 <br/>
 

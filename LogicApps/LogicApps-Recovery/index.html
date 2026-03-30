@@ -16,11 +16,11 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-1.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-2.png">
 <meta property="article:published_time" content="2025-06-20T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.130Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.919Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/LogicApps-Recovery-1.png">
   
@@ -41,7 +41,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -59,7 +59,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -107,7 +107,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+a0ceb721-f541-5ad7-a997-fef46a56ebe8%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%AE%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E8%AA%A4%E3%81%A3%E3%81%A6%E5%89%8A%E9%99%A4%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-Recovery%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-Recovery.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-Recovery.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/" data-id="cmm8p5j8v001d0nlfg3a41nwi" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/" data-id="cuidWxoN8Fq8ZHT_mpZypNghA" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -133,14 +133,14 @@
 <p>Azure Portal から該当の Standard Logic Apps に移動し、概要 をご覧いただきます。<br>上部に [アプリ コンテンツのダウンロード] というメニューがございます。こちらから zip ファイル形式でダウンロードいただけます。</p>
 </blockquote>
 <p>上記で取得されたアプリ コンテンツ (zip ファイル) を zip デプロイすることによって、削除されたワークフローの復元が可能です。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ロジック アプリをデプロイする</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/set-up-devops-deployment-single-tenant-azure-logic-apps?tabs=azure-cli#deploy-logic-app">シングルテナントの Azure Logic Apps に Standard ロジック アプリの DevOps デプロイを設定する # ロジック アプリをデプロイする</a></p>
 <p>もちろん、Azure DevOps 等を利用してソースのバージョンを管理されている場合には、そちらからの復元も考えられます。こちらは以下記事がご参考になれば幸いです。</p>
-<p><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/">Standard Logic Apps と Azure DevOps で CI/CD 環境を構成する | Japan Azure Integration Support Blog</a></p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsCdci/">Standard Logic Apps と Azure DevOps で CI&#x2F;CD 環境を構成する | Japan Azure Integration Support Blog</a></p>
 <h2 id="Azure-Files-共有スナップショットからの復元"><a href="#Azure-Files-共有スナップショットからの復元" class="headerlink" title="Azure Files 共有スナップショットからの復元"></a>Azure Files 共有スナップショットからの復元</h2><p>Standard Logic Apps のワークフロー情報は、当該 Logic Apps が紐づくストレージ アカウントのファイル共有に保存されているため、ファイル共有側にてスナップショットを作成いただいている場合には、そちらから復元できる可能性があります。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/files/storage-snapshots-files?tabs=portal#smb-file-share-snapshots">Azure Files の共有スナップショットを使用する | Microsoft Learn # SMB ファイル共有のスナップショット</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/storage/files/storage-snapshots-files?tabs=portal#smb-file-share-snapshots">Azure Files の共有スナップショットを使用する | Microsoft Learn # SMB ファイル共有のスナップショット</a></p>
 <p>Logic Apps と紐づくストレージ アカウント、およびファイル共有名は、[設定 - 環境変数] より以下の環境変数から確認いただけます。</p>
 <ul>
-<li><code>WEBSITE_CONTENTAZUREFILECONNECTIONSTRING</code>: ストレージ アカウントの接続文字列より “AccountName=” にてストレージ アカウント名が確認いただけます。</li>
+<li><code>WEBSITE_CONTENTAZUREFILECONNECTIONSTRING</code>: ストレージ アカウントの接続文字列より “AccountName&#x3D;” にてストレージ アカウント名が確認いただけます。</li>
 <li><code>WEBSITE_CONTENTSHARE</code>： ファイル共有名が確認いただけます。</li>
 </ul>
 <p>こちらについては以下記事がご参考になれば幸いです。</p>

@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory13.jpg">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory14.jpg">
 <meta property="article:published_time" content="2026-02-19T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.246Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.021Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
@@ -53,7 +53,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -71,7 +71,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -119,7 +119,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+57867c3a-cddc-5665-8f86-d3fb562881d6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%A7+CPU+%E3%82%84%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%8C%E9%AB%98%E9%A8%B0%E3%81%99%E3%82%8B%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E5%8E%9F%E5%9B%A0%E3%81%A8%E3%81%9D%E3%81%AE%E5%AF%BE%E5%87%A6%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FstandardLogicAppsCpuMemory%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FstandardLogicAppsCpuMemory.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FstandardLogicAppsCpuMemory.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/standardLogicAppsCpuMemory/" data-id="cmm8p5jb600c30nlfhgq1cta2" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/standardLogicAppsCpuMemory/" data-id="cuidoF_6-mvSQdJKc1CXxLHiX" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -133,7 +133,7 @@
 <li>初めて Standard Logic Apps での開発をされる方</li>
 <li>Standard Logic Apps でしばしば CPU やメモリが高騰することがある方</li>
 </ul>
-<p>本記事は以下の記事の一部を翻訳および大まかにまとめたものになります。<br>こちらも併せてご確認ください。<br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub</a></p>
+<p>本記事は以下の記事の一部を翻訳および大まかにまとめたものになります。<br>こちらも併せてご確認ください。<br><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub</a></p>
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol>
 <li><a href="#header1">CPU やメモリの高騰が処理に与える影響</a></li>
 <li><a href="#header2">CPU やメモリが高騰する例</a></li>
@@ -143,14 +143,14 @@
 </ol>
 <h2 id="header1"> 1. CPU やメモリの高騰が処理に与える影響 </h2>
 
-<p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub # How High Memory and high CPU affects the processing</a></p>
+<p><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub # How High Memory and high CPU affects the processing</a></p>
 <p>一般的に、Standard Logic Apps の CPU やメモリ使用率が高騰すると、ワークフローの実行時間が長くなり、内部的な再試行 (リトライ) が増加します。</p>
 <p>ワークフローの実行に使用される命令やデータは、メモリ上に読み込まれます。<br>メモリの占有量が増えると、OS は必要な命令セットを探したり、情報を読み書きするのに通常より多くの時間を要するようになります。<br>その分、ワークフローの実際の処理に割ける計算資源が減り、処理速度が低下します。</p>
 <p>CPU 使用率が高い状態では、ランタイムのワーカーが複数の処理を同時に捌くことができなくなり、結果として全体の処理速度が低下します。</p>
 <p>CPU やメモリ使用量が閾値に達すると、実行が遅くなり、アクションやタスクに設定されているタイムアウト制限に抵触しやすくなります。<br>このため、内部でリトライが発生し、さらに負荷が増加する悪循環が起こる可能性があります。</p>
 <h2 id="header2"> 2. CPU やメモリが高騰する例 </h2>
 
-<p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub # How High Memory and high CPU affects the processing</a></p>
+<p><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub # How High Memory and high CPU affects the processing</a></p>
 <h3 id="2-1-メモリが高騰する例"><a href="#2-1-メモリが高騰する例" class="headerlink" title="2-1. メモリが高騰する例"></a>2-1. メモリが高騰する例</h3><p>たとえば、[Read blob content] アクション (組み込みの Azure Blob Storage コネクタ) では、Blob の内容をすべてメモリに読み込みます。<br>そのため、非常に大きな Blob を取得すると、その分だけメモリの占有量が増加します。<br>さらに、[For each] アクションによるループ処理内でこのアクションを使用し、大きな Blob を並列で読み込む場合や、<br>複数のワークフローが同時に同様の処理を実行する場合には、メモリ使用率が急激に高騰する可能性があるため注意が必要です。</p>
 <p>一般的に、メモリ使用率が 70% を超えると、バックグラウンド タスクが予期せぬ動作を起こす可能性があるため、メモリの状態を継続的に監視することが重要です。</p>
 <h3 id="2-2-CPU-が高騰する例"><a href="#2-2-CPU-が高騰する例" class="headerlink" title="2-2. CPU が高騰する例"></a>2-2. CPU が高騰する例</h3><p>CPU についても同様で、負荷が高まるほど処理速度は低下します。<br>メモリ使用量が低い場合でも、XML 変換や組み込みのデータ変換といった複雑なタスクを実行している際には、CPU ワーカーが多くの計算処理を行う必要があるため、CPU 使用率が急上昇することがあります。</p>
@@ -161,15 +161,15 @@
 <li>マネージド コネクタで大量のデータを処理し、CPU による処理時間が増加する場合</li>
 </ul>
 <p>ファイルサイズが大きくなるほど、解析・変換・バリデーションなどの内部処理に必要な CPU による処理時間が長くなり、結果として CPU 使用率が高騰します。</p>
-<div class="alert is-info"><p class="alert-title">Note</p><p>ワークフローが空の場合でも、Logic Apps Standard は Azure Functions ランタイム上で動作しているため、System / Platform プロセスが一定量の CPU / メモリを常に消費します。</p><p>下図資料にて Platform / System プロセスが一定のリソースを消費する旨が説明されています。</p><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/web-apps-performance-faqs#my-app-service-plan-displaying-cpumemory-usage-even-when-all-web-apps-are-stopped">Azure App Service に関する FAQ - 可用性、パフォーマンス、アプリケーションに関する問題 - Azure | Microsoft Learn # すべての Web アプリが停止した場合でも CPU/メモリ使用量を表示する App Service プラン</a></p></div>
+<div class="alert is-info"><p class="alert-title">Note</p><p>ワークフローが空の場合でも、Logic Apps Standard は Azure Functions ランタイム上で動作しているため、System &#x2F; Platform プロセスが一定量の CPU &#x2F; メモリを常に消費します。</p><p>下図資料にて Platform &#x2F; System プロセスが一定のリソースを消費する旨が説明されています。</p><p><a href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/web-apps-performance-faqs#my-app-service-plan-displaying-cpumemory-usage-even-when-all-web-apps-are-stopped">Azure App Service に関する FAQ - 可用性、パフォーマンス、アプリケーションに関する問題 - Azure | Microsoft Learn # すべての Web アプリが停止した場合でも CPU&#x2F;メモリ使用量を表示する App Service プラン</a></p></div>
 <h2 id="header3"> 3. CPU やメモリの確認方法 </h2>
 
-<p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub # How to check memory/CPU</a></p>
+<p><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub # How to check memory&#x2F;CPU</a></p>
 <h3 id="3-1-App-Service-Plan-ASP-から確認する方法"><a href="#3-1-App-Service-Plan-ASP-から確認する方法" class="headerlink" title="3-1. App Service Plan (ASP) から確認する方法"></a>3-1. App Service Plan (ASP) から確認する方法</h3><p>Standard Logic Apps が紐づけられた App Service plan を開き、[監視 – メトリック] にて <strong>[CpuPercentage]</strong> を選択しますと、<br>プランの全インスタンスで使用された平均 CPU がご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory01.jpg"></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-serverfarms-metrics">サポートされているメトリック - Microsoft.Web/serverfarms - Azure Monitor | Microsoft Learn</a><br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory02.jpg"></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-serverfarms-metrics">サポートされているメトリック - Microsoft.Web&#x2F;serverfarms - Azure Monitor | Microsoft Learn</a><br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory02.jpg"></p>
 <p>また、 <strong>[MemoryPercentage]</strong> を選択しますと、プランの全インスタンスで使用された平均メモリがご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory03.jpg"></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-serverfarms-metrics">サポートされているメトリック - Microsoft.Web/serverfarms - Azure Monitor | Microsoft Learn</a><br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory04.jpg"></p>
-<p>ASP で確認可能なこれらの値は <strong>プラン全体のインスタンス</strong> に対する CPU / メモリ使用率となります。<br>そのため、 1 つの ASP 上に複数の Standard Logic Apps を配置されている場合には、Standard Logic Apps 側の挙動や実行状況についても併せてご確認いただきますようお願いいたします。</p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-serverfarms-metrics">サポートされているメトリック - Microsoft.Web&#x2F;serverfarms - Azure Monitor | Microsoft Learn</a><br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory04.jpg"></p>
+<p>ASP で確認可能なこれらの値は <strong>プラン全体のインスタンス</strong> に対する CPU &#x2F; メモリ使用率となります。<br>そのため、 1 つの ASP 上に複数の Standard Logic Apps を配置されている場合には、Standard Logic Apps 側の挙動や実行状況についても併せてご確認いただきますようお願いいたします。</p>
 <h3 id="3-2-Standard-Logic-Apps-の-問題の診断と解決-から確認する方法"><a href="#3-2-Standard-Logic-Apps-の-問題の診断と解決-から確認する方法" class="headerlink" title="3-2. Standard Logic Apps の [問題の診断と解決] から確認する方法"></a>3-2. Standard Logic Apps の [問題の診断と解決] から確認する方法</h3><p>Standard Logic Apps の [問題の診断と解決] から [Availability and Performance] を選択します。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory05.jpg"></p>
 <p><strong>[高 CPU 解析]</strong> より、インスタンスあたりの CPU 使用率をご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory06.jpg"></p>
 <p>[CPU ドリルダウン] を押下しますと、各プロセス単位 (ランタイム プロセスなどの特定プロセス) の CPU 使用率をご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory07.jpg"></p>
@@ -177,22 +177,22 @@
 <p><strong>[記憶分析] (メモリ分析)</strong> より、インスタンスあたりのメモリ使用量をご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory09.jpg"></p>
 <p>[メモリ ドリルダウン] を押下しますと、各プロセス単位のメモリ使用率をご確認いただけます。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory10.jpg"></p>
 <p><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory11.jpg"></p>
-<div class="alert is-info"><p class="alert-title">Note</p><p>Standard Logic Apps 側の [CPU ドリルダウン] や [メモリ ドリルダウン] では、 Standard Logic Apps のランタイム プロセスなどの特定プロセスの CPU / メモリ使用率をご確認いただけますが、</p><p>ASP での [CpuPercentage] や [MemoryPercentage] は Logic Apps のプロセス、プラットフォーム維持のための System/Platform プロセスなどすべてを合算したインスタンス全体の使用率となります。</p><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/web-apps-performance-faqs#my-app-service-plan-displaying-cpumemory-usage-even-when-all-web-apps-are-stopped">Azure App Service に関する FAQ - 可用性、パフォーマンス、アプリケーションに関する問題 - Azure | Microsoft Learn # すべての Web アプリが停止した場合でも CPU/メモリ使用量を表示する App Service プラン</a></p></div>
-<p>また、Standard Logic Apps 側でご利用いただけるメトリックにつきましては、以下の公開情報に記載があります。<br>※ 一部、「FunctionApps のみが対象。」、「Flex 従量課金の関数アプリ のみが対象。」など、Standard Logic Apps ではご利用いただけないメトリックもございます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-sites-metrics">サポートされているメトリック - Microsoft.Web/sites - Azure Monitor | Microsoft Learn</a></p>
-<p>[WorkflowJobExecutionDelay] / [WorkflowRunsCompleted] など、ワークフローの健全性 (実行状態) を示すメトリックもご利用いただけます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/view-workflow-metrics?tabs=standard#find-and-view-metrics">ワークフローの正常性とパフォーマンスのメトリックを表示する - Azure Logic Apps | Microsoft Learn # メトリックを見つけて表示する</a></p>
-<p>CPU およびメモリの直接的な監視ではありませんが、Standard Logic Apps が正常に動作しているかについて監視する機能もございます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/monitor-health-standard-workflows">正常性チェックを使用して Standard ワークフローを監視する - Azure Logic Apps | Microsoft Learn</a></p>
+<div class="alert is-info"><p class="alert-title">Note</p><p>Standard Logic Apps 側の [CPU ドリルダウン] や [メモリ ドリルダウン] では、 Standard Logic Apps のランタイム プロセスなどの特定プロセスの CPU &#x2F; メモリ使用率をご確認いただけますが、</p><p>ASP での [CpuPercentage] や [MemoryPercentage] は Logic Apps のプロセス、プラットフォーム維持のための System&#x2F;Platform プロセスなどすべてを合算したインスタンス全体の使用率となります。</p><p><a href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/web-apps-performance-faqs#my-app-service-plan-displaying-cpumemory-usage-even-when-all-web-apps-are-stopped">Azure App Service に関する FAQ - 可用性、パフォーマンス、アプリケーションに関する問題 - Azure | Microsoft Learn # すべての Web アプリが停止した場合でも CPU&#x2F;メモリ使用量を表示する App Service プラン</a></p></div>
+<p>また、Standard Logic Apps 側でご利用いただけるメトリックにつきましては、以下の公開情報に記載があります。<br>※ 一部、「FunctionApps のみが対象。」、「Flex 従量課金の関数アプリ のみが対象。」など、Standard Logic Apps ではご利用いただけないメトリックもございます。<br><a href="https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-web-sites-metrics">サポートされているメトリック - Microsoft.Web&#x2F;sites - Azure Monitor | Microsoft Learn</a></p>
+<p>[WorkflowJobExecutionDelay] &#x2F; [WorkflowRunsCompleted] など、ワークフローの健全性 (実行状態) を示すメトリックもご利用いただけます。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/view-workflow-metrics?tabs=standard#find-and-view-metrics">ワークフローの正常性とパフォーマンスのメトリックを表示する - Azure Logic Apps | Microsoft Learn # メトリックを見つけて表示する</a></p>
+<p>CPU およびメモリの直接的な監視ではありませんが、Standard Logic Apps が正常に動作しているかについて監視する機能もございます。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/monitor-health-standard-workflows">正常性チェックを使用して Standard ワークフローを監視する - Azure Logic Apps | Microsoft Learn</a></p>
 <h2 id="header4"> 4. CPU やメモリの使用率の高騰を抑えるために考えられること </h2>
 
-<p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub # How to mitigate - a few possibilities</a></p>
-<h3 id="4-1-Standard-Logic-Apps-を構築する上での推奨事項"><a href="#4-1-Standard-Logic-Apps-を構築する上での推奨事項" class="headerlink" title="4-1. Standard Logic Apps を構築する上での推奨事項"></a>4-1. Standard Logic Apps を構築する上での推奨事項</h3><p>デザイナーの応答性とパフォーマンスを最適なものにするために、以下のような推奨事項がありますので、こちらをご考慮の上ご構築ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations">Azure portal でサンプル Standard ワークフローを作成する - Azure Logic Apps | Microsoft Learn # ベスト プラクティスと推奨事項</a></p>
+<p><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub # How to mitigate - a few possibilities</a></p>
+<h3 id="4-1-Standard-Logic-Apps-を構築する上での推奨事項"><a href="#4-1-Standard-Logic-Apps-を構築する上での推奨事項" class="headerlink" title="4-1. Standard Logic Apps を構築する上での推奨事項"></a>4-1. Standard Logic Apps を構築する上での推奨事項</h3><p>デザイナーの応答性とパフォーマンスを最適なものにするために、以下のような推奨事項がありますので、こちらをご考慮の上ご構築ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations">Azure portal でサンプル Standard ワークフローを作成する - Azure Logic Apps | Microsoft Learn # ベスト プラクティスと推奨事項</a></p>
 <p><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory13.jpg"></p>
 <p><strong>参考:</strong><br>Logic Apps を構築する上で過度な負荷がかかることを避けるため、以下のような制約事項につきましてもご考慮いただけますと幸いです。<br><a href="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/">Logic Apps を利用する上でご考慮いただきたい制約 | Japan Azure Integration Support Blog</a></p>
 <h3 id="4-2-プロセス-ビット数を確認する"><a href="#4-2-プロセス-ビット数を確認する" class="headerlink" title="4-2. プロセス ビット数を確認する"></a>4-2. プロセス ビット数を確認する</h3><p>現在、Standard Logic Apps ではプロセスビット数を 64bit に設定いただくことを推奨しております。<br>直近に作成された Standard Logic Apps ではデフォルトで 64bit が設定されておりますが、数年前に作成された Standard Logic Apps では 32bit に設定されている可能性があります。</p>
-<p>もしメモリが常時高騰しておりプロセスビット数が 32bit である場合には、64 bit に変更することでより多くのメモリが割り当てられるため、メモリの過剰消費を回避することが可能となります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/capture-memory-dumps-app-service#excessive-memory-consumption-scenario">Azure アプリ サービス プラットフォームでメモリ ダンプをキャプチャする - Azure | Microsoft Learn # 過剰なメモリ消費のシナリオ</a></p>
+<p>もしメモリが常時高騰しておりプロセスビット数が 32bit である場合には、64 bit に変更することでより多くのメモリが割り当てられるため、メモリの過剰消費を回避することが可能となります。<br><a href="https://learn.microsoft.com/ja-jp/troubleshoot/azure/app-service/capture-memory-dumps-app-service#excessive-memory-consumption-scenario">Azure アプリ サービス プラットフォームでメモリ ダンプをキャプチャする - Azure | Microsoft Learn # 過剰なメモリ消費のシナリオ</a></p>
 <p>プロセス ビット数は、[設定 - 構成 (プレビュー)] &gt; [全般設定 - プラットフォーム設定] より確認、ご変更いただけます。<br>32bit から 64bit への変更は構成変更にあたるため、基盤が再起動される見込みですのでご注意ください。<br><img src="/blog/LogicApps/standardLogicAppsCpuMemory/standardLogicAppsCpuMemory14.jpg"></p>
 <p>そのほかの設定には特に影響はごなく、変更後についても 32 bit に戻すことは可能です。<br>また、これによる追加料金は発生いたしません。</p>
 <h3 id="4-3-完了できずに滞留している実行を確認する"><a href="#4-3-完了できずに滞留している実行を確認する" class="headerlink" title="4-3. 完了できずに滞留している実行を確認する"></a>4-3. 完了できずに滞留している実行を確認する</h3><p>さまざまな理由により、一部のワークフロー実行が正常に完了せず、長時間実行されたまま、または例外によって終了できないことがあります。<br>このような実行は メモリ上の情報がアンロードされないまま残留するため、メモリ使用量の増加を引き起こします。<br>完了できずに滞留している実行は検出されない限りリソースを消費し続け、CPU やメモリを圧迫し、パフォーマンス低下の原因となります。</p>
-<p>そのため、ワークフローの実行履歴を定期的に確認し、想定終了時刻を大幅に過ぎて実行中のままになっている実行を特定することが重要です。<br>実行履歴はステータスでフィルタリングすることができ、「実行中」の状態を効率的に見つけることができます。<br>さらに、診断設定を有効化したうえでログアラートを設定することで、こうした実行状態の異常を早期に検知する運用も有効です。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/monitor-workflows-collect-diagnostic-data?tabs=standard">ワークフローの診断データを収集する - Azure Logic Apps | Microsoft Learn</a></p>
+<p>そのため、ワークフローの実行履歴を定期的に確認し、想定終了時刻を大幅に過ぎて実行中のままになっている実行を特定することが重要です。<br>実行履歴はステータスでフィルタリングすることができ、「実行中」の状態を効率的に見つけることができます。<br>さらに、診断設定を有効化したうえでログアラートを設定することで、こうした実行状態の異常を早期に検知する運用も有効です。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/monitor-workflows-collect-diagnostic-data?tabs=standard">ワークフローの診断データを収集する - Azure Logic Apps | Microsoft Learn</a></p>
 <h3 id="4-4-大きなペイロード"><a href="#4-4-大きなペイロード" class="headerlink" title="4-4. 大きなペイロード"></a>4-4. 大きなペイロード</h3><ol start="2">
 <li>でご紹介したように、大きなサイズのペイロードはメモリ消費を大幅に増加させるため、Logic Apps のパフォーマンスに大きな影響を与えます。</li>
 </ol>
@@ -200,8 +200,8 @@
 <p>OOM が発生すると、該当実行が完了できずに滞留している状態になり、ランタイムは内部的に複数回の再試行を行いますが、状態が回復不能な場合はワーカーが再びクラッシュすることもあります。<br>こうした状況を早期に検知するため、CPU やメモリ使用量を継続的に監視することが重要です。</p>
 <p>一方、マネージドコネクタではデータが ASP メモリに直接読み込まれることはありませんが、大量のデータは CPU による処理時間を大幅に増加させます。<br>Logic Apps 自体は大容量データを処理できますが、<strong>大きなペイロード × 大量の同時実行 × 多数のアクション・入出力リクエスト</strong> が重なると、<br>負荷が指数的に増加しスケールアウトを繰り返した結果、時間の経過とともにパフォーマンス問題を引き起こす可能性があります。</p>
 <p>そのため、ワークフロー設計においては、処理の分散、ペイロードの分割、ステートレスな子ワークフローの活用などを検討し、1 回あたりの処理負荷を抑制することが推奨されます。</p>
-<h3 id="4-3-スケールアップを検討する"><a href="#4-3-スケールアップを検討する" class="headerlink" title="4-3. スケールアップを検討する"></a>4-3. スケールアップを検討する</h3><p>4-1. および 4-4. について見直していただき、かつ常時 CPU やメモリが高騰している場合には、スケールアップすることも適宜ご検討ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing#pricing-tiers-in-the-standard-model">使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn</a></p>
-<p>明確に「○% 以上でスケールアップすべき」といった公式な指標はございませんが、一般的には、メモリ使用率が 70〜80% を継続的に超える場合、処理遅延や例外発生の可能性が高まることが報告されています。<br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub</a></p>
+<h3 id="4-3-スケールアップを検討する"><a href="#4-3-スケールアップを検討する" class="headerlink" title="4-3. スケールアップを検討する"></a>4-3. スケールアップを検討する</h3><p>4-1. および 4-4. について見直していただき、かつ常時 CPU やメモリが高騰している場合には、スケールアップすることも適宜ご検討ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-pricing#pricing-tiers-in-the-standard-model">使用量の測定、課金、価格 - Azure Logic Apps | Microsoft Learn</a></p>
+<p>明確に「○% 以上でスケールアップすべき」といった公式な指標はございませんが、一般的には、メモリ使用率が 70〜80% を継続的に超える場合、処理遅延や例外発生の可能性が高まることが報告されています。<br><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub</a></p>
 <p>※「70～80%」 の目安は、インスタンス単位のメモリ使用率を指しています。<br>以下 いずれかのインスタンス単位のメモリ使用をご考慮ください。</p>
 <ul>
 <li>[Logic Apps] &gt; [問題の診断と解決] &gt; [Availability and Performance] &gt; [記憶分析 (メモリ分析)] &gt; インスタンス メモリ使用量（App Service Plan）</li>
@@ -217,7 +217,7 @@
 <li>CPU やメモリの確認方法</li>
 <li>CPU やメモリの使用率の高騰を抑えるために考えられること</li>
 </ul>
-<p><strong>参考:</strong><br><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory / CPU usage strikes and what to do | Microsoft Community Hub</a></p>
+<p><strong>参考:</strong><br><a href="https://techcommunity.microsoft.com/blog/integrationsonazureblog/logic-app-standard---when-high-memory--cpu-usage-strikes-and-what-to-do/4425155">Logic App Standard - When High Memory &#x2F; CPU usage strikes and what to do | Microsoft Community Hub</a></p>
 <p>本記事が少しでもお役に立ちましたら幸いです。</p>
 
       

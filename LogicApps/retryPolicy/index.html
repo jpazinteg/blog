@@ -26,13 +26,13 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/retryPolicy11.jpg">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/retryPolicy12.jpg">
 <meta property="article:published_time" content="2023-06-20T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.240Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.015Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Retry Policy">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/retryPolicy01.jpg">
   
@@ -53,7 +53,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -71,7 +71,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -119,7 +119,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+5ea62cb2-b3ae-52f2-b39b-87d21a4fadb0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%86%8D%E8%A9%A6%E8%A1%8C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FretryPolicy%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FretryPolicy.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FretryPolicy.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/" data-id="cmm8p5j9i00320nlfbaqh48xs" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/" data-id="cuidPN3QjltitGwbLD3xMcKRp" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -135,12 +135,12 @@
 </ul>
 <h2 id="Logic-Apps-の再試行ポリシー"><a href="#Logic-Apps-の再試行ポリシー" class="headerlink" title="Logic Apps の再試行ポリシー"></a>Logic Apps の再試行ポリシー</h2><p>Logic Apps では、「HTTP」アクション等一部のトリガーおよびアクションにて、再試行ポリシーを設定することが可能です。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy01.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#retry-policies">Azure Logic Apps におけるエラーと例外の処理 # 再試行ポリシー</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#retry-policies">Azure Logic Apps におけるエラーと例外の処理 # 再試行ポリシー</a></li>
 </ul>
 <p>上記に記載がございますように、特定のレスポンス コード (<strong>408、429、または 5xx 応答</strong>) を受け取った場合にのみ自動的に再試行されます。</p>
 <h2 id="再試行ポリシーのデフォルト設定"><a href="#再試行ポリシーのデフォルト設定" class="headerlink" title="再試行ポリシーのデフォルト設定"></a>再試行ポリシーのデフォルト設定</h2><p>既定の設定では、再試行ポリシーは有効化されています。<br>具体的な設定値は以下となります。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy02.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#default-retry-policy">Azure Logic Apps におけるエラーと例外の処理 # 既定の再試行ポリシー</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#default-retry-policy">Azure Logic Apps におけるエラーと例外の処理 # 既定の再試行ポリシー</a></li>
 </ul>
 <h2 id="再試行ポリシーの設定変更"><a href="#再試行ポリシーの設定変更" class="headerlink" title="再試行ポリシーの設定変更"></a>再試行ポリシーの設定変更</h2><p>再試行ポリシーは無効化したり、回数および間隔をご変更いただくことが可能です。</p>
 <p><strong>&lt;従量課金タイプ&gt;</strong><br>対象のトリガーまたはアクションを展開し、右上の「…」を押下して「設定」を選択します。<br>以下は「HTTP」アクションでの例になります。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy03.jpg"></p>
@@ -148,35 +148,35 @@
 <p><strong>&lt;Standard タイプ&gt;</strong><br>Standard Logic Apps でも対象のトリガーまたはアクションを選択し、「Settings」タブを開きます。<br>[ネットワーク - Retry Policy] にてご変更いただけます。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy05.jpg"></p>
 <p>再試行ポリシーの種類といたしましては「既定」以外に、「なし」、「指数間隔」、「固定間隔」がございます。<br>たとえば「HTTP」アクションで外部システムへリクエストを送信されているようなシナリオですと、安易に再試行できない場合もあるかと存じます。<br>その場合には、こちらで「なし」とご設定いただくことが可能です。<br>なお、弊社として推奨値は特にございませんので、以下の公開情報をご参照の上、お客様のご要件を照らし合わせましてご検討いただけますと幸いでございます。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy06.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#retry-policy-types">Azure Logic Apps におけるエラーと例外の処理 # 再試行ポリシーの種類</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#retry-policy-types">Azure Logic Apps におけるエラーと例外の処理 # 再試行ポリシーの種類</a></li>
 </ul>
 <p>再試行ポリシーの制限につきましては、以下の公開情報もございます。</p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#retry-policy-limits">Azure Logic Apps の制約と構成の参考文献 # 再試行ポリシーの制限</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption,azure-portal#retry-policy-limits">Azure Logic Apps の制約と構成の参考文献 # 再試行ポリシーの制限</a></li>
 </ul>
 <h2 id="再試行ポリシー対象外の場合"><a href="#再試行ポリシー対象外の場合" class="headerlink" title="再試行ポリシー対象外の場合"></a>再試行ポリシー対象外の場合</h2><p>上述の通り、再試行ポリシーは特定のレスポンス コード (<strong>408、429、または 5xx 応答</strong>) を受け取った場合にのみ自動的に再試行されます。<br>これら以外のレスポンス コードを受け取った場合には、再試行されません。<br>もしこの場合にも再試行をご希望の場合には、適宜作り込みが必要となります。</p>
 <p>Logic Apps では、「まで」アクションや「条件」アクション等のご用意がございますので、これらを組み合わせる方法が考えられます。<br><strong>「まで」アクション</strong><br><img src="/blog/LogicApps/retryPolicy/retryPolicy07.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#until-loop">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # “Until” ループ</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#until-loop">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # “Until” ループ</a></li>
 </ul>
 <p><strong>「条件」アクション</strong><br><img src="/blog/LogicApps/retryPolicy/retryPolicy08.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-conditional-statement">Azure Logic Apps のワークフロー アクションを制御する条件を追加する</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-conditional-statement">Azure Logic Apps のワークフロー アクションを制御する条件を追加する</a></li>
 </ul>
 <p>少し時間を空けてから再試行されたい場合には、「待ち時間」アクションのご用意もございます。<br><strong>「「待ち時間」アクション</strong><br><img src="/blog/LogicApps/retryPolicy/retryPolicy09.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-delay">Azure Logic Apps で次のアクションの実行を遅延させる</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-delay">Azure Logic Apps で次のアクションの実行を遅延させる</a></li>
 </ul>
 <p>また、Logic Apps では「実行条件の構成」の設定によって、前段のアクションが失敗した場合でも後続処理を続けることが可能です。</p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#manage-the-run-after-behavior">Azure Logic Apps におけるエラーと例外の処理 # “実行条件” の動作を管理する</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-exception-handling?tabs=consumption#manage-the-run-after-behavior">Azure Logic Apps におけるエラーと例外の処理 # “実行条件” の動作を管理する</a></li>
 </ul>
 <p>以下に従量課金タイプの Logic Apps で、「HTTP」アクションと「まで」アクションを利用した場合についてのサンプルをご案内いたします。</p>
 <p><img src="/blog/LogicApps/retryPolicy/retryPolicy10.jpg"></p>
-<p>「まで」アクション内に「HTTP」アクションを追加します。<br>「まで」アクションの条件式として、「状態コード / 次の値に等しい / 200」と設定しております。<br>※ 「状態コード」につきましては、「動的なコンテンツの追加」を押下して追加することが可能でございます。</p>
+<p>「まで」アクション内に「HTTP」アクションを追加します。<br>「まで」アクションの条件式として、「状態コード &#x2F; 次の値に等しい &#x2F; 200」と設定しております。<br>※ 「状態コード」につきましては、「動的なコンテンツの追加」を押下して追加することが可能でございます。</p>
 <p>「制限の変更」にてループ回数 (再試行回数) をご設定いただけます。<br>無限ループとならないよう、ご注意ください。</p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#prevent-endless-loops">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # 無限ループを防ぐ</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-loops#prevent-endless-loops">Azure Logic Apps 内のワークフロー アクションを繰り返す、または配列を処理するループを作成する # 無限ループを防ぐ</a></li>
 </ul>
 <p>実行した結果が以下となります。<br>レスポンス コードが 400 (200 ではない) 場合には、「まで」アクションの「制限の変更」にて設定されている回数分、繰り返し「HTTP」アクションを実行しております。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy11.jpg"></p>
 <p>レスポンス コードが 200 の場合では、「HTTP」アクションを一回実行したのみでございます。<br><img src="/blog/LogicApps/retryPolicy/retryPolicy12.jpg"></p>

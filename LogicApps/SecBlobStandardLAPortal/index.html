@@ -34,13 +34,13 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/image019.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/image020.png">
 <meta property="article:published_time" content="2023-12-05T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.159Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.946Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Standard Logic Apps">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/image001.png">
   
@@ -61,7 +61,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -79,7 +79,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -127,7 +127,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+004ecfe1-baa3-5a1d-bf4d-80e8b6c06ef2%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Portal+%E3%81%8B%E3%82%89%E3%83%95%E3%82%A1%E3%82%A4%E3%82%A2%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%AB%E8%A8%AD%E5%AE%9A%E9%85%8D%E4%B8%8B%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8+%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AB+Standard+Logic+Apps+%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FSecBlobStandardLAPortal%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FSecBlobStandardLAPortal.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FSecBlobStandardLAPortal.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/" data-id="cmm8p5j91001v0nlfespp0311" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/" data-id="cuidcIN9v0HOuGkJHkpsLRXEM" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -146,11 +146,11 @@
 </ul>
 <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>本ブログ記事の前提として、予め VNet を作成し、サブネットを二つ用意いたします。これは、ストレージ アカウント側のプライベート エンドポイントと Standard Logic Apps 側の VNet 統合で利用するものになります。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/virtual-network/manage-virtual-network">仮想ネットワークの作成、変更、削除</a><br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image001.png"> </li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/virtual-network/manage-virtual-network">仮想ネットワークの作成、変更、削除</a><br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image001.png"></li>
 </ul>
 <p>ストレージ アカウントについては汎用 V2 アカウントを利用します。その為、ストレージ アカウントが汎用 V1 の場合は以下のようにストレージ アカウントの種類を変更いたします。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-account-upgrade?tabs=azure-portal">汎用 v2 ストレージ アカウントにアップグレードする</a><br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image002.png"> </li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-account-upgrade?tabs=azure-portal">汎用 v2 ストレージ アカウントにアップグレードする</a><br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image002.png"></li>
 </ul>
 <p>また、Standard Logic Apps をデプロイするまでは、対象のストレージ アカウントについてはパブリック アクセスを許可しておく必要がございます。<br>プライベート エンドポイントの作成や VNet 統合の設定については本記事の中で説明します。</p>
 <h2 id="Standard-Logic-Apps-のデプロイ"><a href="#Standard-Logic-Apps-のデプロイ" class="headerlink" title="Standard Logic Apps のデプロイ"></a>Standard Logic Apps のデプロイ</h2><p>始めに、Azure Portal の [ロジック アプリ] のメニューより、Standard Logic Apps のリソースをデプロイします。リージョンや 価格プランなどは任意ですが、[プラン] - [プランの種類] は 消費ではなく Standard を選択してください。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image003.png"> </p>
@@ -164,7 +164,7 @@
 <p>次に、ストレージ アカウントにプライベート エンドポイントを設定します。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image009.png"> </p>
 <p>プライベート エンドポイントについては、前回の記事でもご案内しました通り、[blob] [table] [queue] [file] の四つが必須になります。GUI ではこれらを一度に作成することが出来ませんので、お手数ですが、それぞれに対してのリソース作成操作をお願いします。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-private-endpoints">Azure Storage のプライベート エンドポイントを使用する</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/storage/common/storage-private-endpoints">Azure Storage のプライベート エンドポイントを使用する</a></li>
 </ul>
 <p>＜設定例＞<br>・対象サブリソースを選択する。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image010.png"></p>
 <p>・サブネットを選択する。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image011.png"></p>
@@ -176,7 +176,7 @@
 <p>以下のような画面が表示されましたら設定は完了です。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image016.png"></p>
 <p>最後に、VNet 統合にかかる環境変数の設定を行い、画面下部の [適用] ボタンを選択して保存します。<br>Standard Logic Apps の [設定] - [環境変数] より、[アプリ設定] を選択し、以下の値を設定します。<br><strong>・設定値：WEBSITE_CONTENTOVERVNET</strong><br><strong>・値：1</strong></p>
 <p><img src="/blog/LogicApps/SecBlobStandardLAPortal/image017.png"></p>
-<p>こちらは Standard Logic Apps が接続するストレージ アカウントが VNet に制限されている場合に設定する値となります。詳しくは以下の App Service の環境変数に関する公開情報をご覧ください。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/reference-app-settings?tabs=kudu,dotnet#networking">Azure App Service の環境変数とアプリ設定</a></p>
+<p>こちらは Standard Logic Apps が接続するストレージ アカウントが VNet に制限されている場合に設定する値となります。詳しくは以下の App Service の環境変数に関する公開情報をご覧ください。<br><a href="https://learn.microsoft.com/ja-jp/azure/app-service/reference-app-settings?tabs=kudu,dotnet#networking">Azure App Service の環境変数とアプリ設定</a></p>
 <p>環境変数を保存し、少し時間を置いて概要画面より [最新の情報に更新] ボタンにて画面を更新すると、最初に表示されていたエラーメッセージ (System.Private.CoreLib: Access to the path ‘C:\home\data\Functions\secrets\Sentinels’ is denied.) が表示されなくなり、Standard Logic Apps のワークフローの作成や実行が可能となります。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image018.png"></p>
 <p>ワークフローも問題なく作成できることを確認。<br><img src="/blog/LogicApps/SecBlobStandardLAPortal/image019.png"></p>
 <p><img src="/blog/LogicApps/SecBlobStandardLAPortal/image020.png"></p>
@@ -191,7 +191,7 @@
 <li>まとめ</li>
 </ul>
 <p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       

@@ -19,12 +19,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/LogicApps-AOAI-3.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/LogicApps-AOAI-2.png">
 <meta property="article:published_time" content="2024-04-05T07:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.116Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.906Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta property="article:tag" content="Azure OpenAI">
+<meta property="article:tag" content="How-To">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/LogicApps-AOAI-1.png">
   
@@ -45,7 +45,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -63,7 +63,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -111,13 +111,13 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+32efdd22-ff01-5c7c-9f0d-bc8e44141ef7%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%A7+Azure+OpenAI+%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%82%B3%E3%83%8D%E3%82%AF%E3%82%BF%E3%81%8C%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF+%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-AOAI%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-AOAI.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-AOAI.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/" data-id="cmm8p5j8m000u0nlf3fygghpo" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-AOAI/" data-id="cuid6PPH57jW1OEwwTcO-dp8t" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Azure Logic Apps でパブリック プレビューとなっている Azure OpenAI コネクタを利用する方法を、英語記事を引用する形でご紹介いたします。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> </p>
+<p>参考: <a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> </p>
 <span id="more"></span>
 
 <h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul>
@@ -130,7 +130,7 @@
 </li>
 <li>まとめ</li>
 </ul>
-<h2 id="Standard-Logic-Apps-で-Azure-OpenAI-アプリ内コネクタがパブリック-プレビュー"><a href="#Standard-Logic-Apps-で-Azure-OpenAI-アプリ内コネクタがパブリック-プレビュー" class="headerlink" title="Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー"></a>Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</h2><h3 id="紹介"><a href="#紹介" class="headerlink" title="紹介"></a>紹介</h3><p>「<a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a>」</p>
+<h2 id="Standard-Logic-Apps-で-Azure-OpenAI-アプリ内コネクタがパブリック-プレビュー"><a href="#Standard-Logic-Apps-で-Azure-OpenAI-アプリ内コネクタがパブリック-プレビュー" class="headerlink" title="Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー"></a>Standard Logic Apps で Azure OpenAI アプリ内コネクタがパブリック プレビュー</h2><h3 id="紹介"><a href="#紹介" class="headerlink" title="紹介"></a>紹介</h3><p>「<a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a>」</p>
 <p>この記事は、Azure OpenAI と Azure AI Search の2つの新しい組み込みコネクタの紹介記事です。</p>
 <blockquote>
 <p>Azure OpenAI と AI Search を使用することで、Logic Apps 内で Azure Open-AI と AI Search サービスによって提供されるジェネレーティブ AI 機能とエンタープライズ データとサービスを統合し、強力な自動化を構築できるようになります。</p>
@@ -164,12 +164,12 @@
 <li>Azure Active Directory OAuth: テナント、クライアント識別子、パスワードなどの Active Directory パラメータを使用して、コネクタを認証できます。</li>
 <li>マネージドID: AI サービス用にマネージド ID を作成し、その ID を使用してコネクタを認証できます。</li>
 </ul>
-<h3 id="その他のリソース"><a href="#その他のリソース" class="headerlink" title="その他のリソース"></a>その他のリソース</h3><p><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> に紹介されておりますとおり、GitHub、Youtube に関連リソースがございます。</p>
+<h3 id="その他のリソース"><a href="#その他のリソース" class="headerlink" title="その他のリソース"></a>その他のリソース</h3><p><a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> に紹介されておりますとおり、GitHub、Youtube に関連リソースがございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/Azure/logicapps/tree/master/ai-sample">logicapps/ai-sample at master · Azure/logicapps</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tiU5yCvMW9o">(240) Learn how to build AI applications using logic apps - YouTube</a></li>
+<li><a href="https://github.com/Azure/logicapps/tree/master/ai-sample">logicapps&#x2F;ai-sample at master · Azure&#x2F;logicapps</a></li>
+<li><a href="https://www.youtube.com/watch?v=tiU5yCvMW9o">(240) Learn how to build AI applications using logic apps - YouTube</a></li>
 </ul>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> の記事を基に、Standard Logic Apps でパブリック プレビューとなった Azure OpenAI アプリ内コネクタのごくシンプルなご利用方法をご紹介しました。Logic Apps のワークフローと皆様の Azure OpenAI テクノロジーの活用に、ご参考になれば幸いです。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a href="https://techcommunity.microsoft.com/t5/azure-integration-services-blog/public-preview-of-azure-openai-and-ai-search-in-app-connectors/ba-p/4049584">Public Preview of Azure OpenAI and AI Search in-app connectors for Logic Apps (Standard)</a> の記事を基に、Standard Logic Apps でパブリック プレビューとなった Azure OpenAI アプリ内コネクタのごくシンプルなご利用方法をご紹介しました。Logic Apps のワークフローと皆様の Azure OpenAI テクノロジーの活用に、ご参考になれば幸いです。</p>
 
       
       

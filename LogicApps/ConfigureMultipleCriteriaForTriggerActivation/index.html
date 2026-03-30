@@ -27,12 +27,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_012.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_013.png">
 <meta property="article:published_time" content="2025-05-20T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.061Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.858Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Trigger">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_001.png">
@@ -54,7 +54,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -72,7 +72,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -120,7 +120,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+67046843-0153-50b5-8f28-08d9637a1d76%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E3%83%88%E3%83%AA%E3%82%AC%E3%83%BC%E3%81%AE%E7%99%BA%E7%81%AB%E6%9D%A1%E4%BB%B6%E3%81%A7%E3%80%811+%E3%81%A4%E3%81%AE%E9%A0%85%E7%9B%AE%E3%81%AB%E8%A4%87%E6%95%B0%E3%81%AE%E6%9D%A1%E4%BB%B6%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FConfigureMultipleCriteriaForTriggerActivation%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FConfigureMultipleCriteriaForTriggerActivation.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FConfigureMultipleCriteriaForTriggerActivation.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/" data-id="cmm8p5j8g000f0nlf7gqe42ri" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/" data-id="cuidf39eFvBEXDTEtV0PqcXQg" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -141,12 +141,12 @@
 <h2 id="トリガーの発火条件に複数条件を設定する方法"><a href="#トリガーの発火条件に複数条件を設定する方法" class="headerlink" title="トリガーの発火条件に複数条件を設定する方法"></a>トリガーの発火条件に複数条件を設定する方法</h2><p>通常、トリガーの [パラメーター] タブにてトリガーの起動方法をご設定いただきますが、パラメーター欄では同じ項目に複数の条件を付けること、例えば 「メールの件名に『日報』か『月報』が含まれる場合」 のような条件設定はできません。<br>このような設定が必要な場合、[パラメーター] タブではなく、[設定] タブ内にございます [トリガーの条件] を使用して、トリガーの起動条件を設定していきます。<br></p>
 <p>この時、[パラメーター] タブでご設定いただくのと違い、[トリガーの条件] 欄にて指定いただきます条件はコードで記載します。<br>詳細な設定方法は後述いたしますが、比較したい項目の記載方法と条件式に使用できる関数について、弊社公開ドキュメントに概要をおまとめしております。ご一読いただけますと幸いです。<br></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <h2 id="基本的な設定例"><a href="#基本的な設定例" class="headerlink" title="基本的な設定例"></a>基本的な設定例</h2><p>では、実際にトリガー条件を設定して Logic Apps を起動させてみます。<br>今回は例として、Office 365 Outlook コネクタより [新しいメールが届いたとき (V3)] トリガーを使用します。<br></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/office365/#%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%84%E3%81%9F%E3%81%A8%E3%81%8D-%28v3%29">Office 365 Outlook - Connectors | Microsoft Learn # 新しいメールが届いたとき (V3)</a><br></li>
+<li><a href="https://learn.microsoft.com/ja-jp/connectors/office365/#%E6%96%B0%E3%81%97%E3%81%84%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%8C%E5%B1%8A%E3%81%84%E3%81%9F%E3%81%A8%E3%81%8D-%28v3%29">Office 365 Outlook - Connectors | Microsoft Learn # 新しいメールが届いたとき (V3)</a><br></li>
 </ul>
 <p>まず、基本形として宛先メールアドレスと件名の条件を設定したトリガーの動作を確認します。<br>また、トリガーの挙動がわかりやすいよう、トリガーの後続処理として受信した (トリガー発火の起因となった) メールの件名を取得するアクションを設定しておきます。<br><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_001.png"></p>
 <p>宛先に設定したアドレス宛に、件名が『テスト』のメールを送ってみます。<br><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_002.png"></p>
@@ -158,7 +158,7 @@
 <p><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_005.png"></p>
 <p>補足ですが、今回使用しております contains はコレクション関数のひとつで、この関数は指定したコレクションに特定の項目があるかどうかを返します。<br>文字列の中から特定の文字を探す、配列の中から特定の値を探す際などにご利用いただける、大変便利な関数ですので、頭の片隅に置いておいていただけますと幸いです。<br><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_006.png"></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # contains</a><br></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # contains</a><br></li>
 </ul>
 <p>トリガー発火の確認をするため、それぞれ件名が『テスト』、『TEST』、『テスト_TEST』となっているメールを、宛先に指定したアドレス宛に送ります。<br><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_007.png"></p>
 <p>実行結果を確認しますと、件名が『テスト_TEST』のメールを受信した時だけトリガーが発火したことが確認できます。<br><img src="/blog/LogicApps/ConfigureMultipleCriteriaForTriggerActivation/blog_008.png"></p>

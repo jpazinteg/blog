@@ -29,12 +29,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image011.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image012.png">
 <meta property="article:published_time" content="2025-09-24T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.057Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.855Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image000.png">
   
@@ -55,7 +55,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -73,7 +73,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -121,7 +121,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+c79127d0-d4e3-5806-859b-e1122fc52cae%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%8F%96%E5%BE%97%E3%81%97%E3%81%9F+CSV+%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8A%A0%E5%B7%A5%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FCleanandTransformtheRetrievedCSVfile%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FCleanandTransformtheRetrievedCSVfile.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FCleanandTransformtheRetrievedCSVfile.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/" data-id="cmm8p5j8d000b0nlfh3rofoa0" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/" data-id="cuidKbo5iP1F-BCMUuX911QCF" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -135,18 +135,22 @@
 <li>複数の配列を 1 つの配列にまとめる</li>
 <li>配列にしたデータを CSV 形式に戻す</li>
 <li>留意点</li>
-<li>まとめ<br /></li>
+<li>まとめ</li>
 </ul>
+<br />
+
 <h2 id="データを分割して配列にする"><a href="#データを分割して配列にする" class="headerlink" title="データを分割して配列にする"></a>データを分割して配列にする</h2><p>大前提としまして、Azure Blob Stotage などから取得した CSV ファイルは、そのままだとデータがひとつの塊になってしまっています。<br>例えば、以下のような CSV ファイルを用意して、[Azure Blob Storage] コネクタの [BLOB コンテンツを取得する (V2)] アクションでデータを取得してみたとします。</p>
 <p><b>test_1.csv</b><br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image000.png"></p>
 <p>上記の CSV ファイルを Azure Blob Storage から取得した結果がこちらです。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image001.png"></p>
 <p>取得した結果を転記するだけでしたらこのままでも問題ないかもしれませんが、これでは取得結果に対してループ処理を行うようなことができません。<br>その対応として、CSV ファイルから取得したデータを JSON 形式の配列に変換する方法がございます。</p>
 <p>では、実際にやってみます。<br>本作業で使用するのは、[Select] アクション、 skip 関数、および split 関数です。<br>作業内容を簡単に説明致しますと、 skip 関数で先頭のヘッダー行以外のデータ部分を取得し、split 関数でカラム単位にデータを分割、[Select] アクションでプロパティ名をつけなおして JSON 形式の配列に変換します。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#select-action">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Select action</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#skip">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # skip</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#split">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # split</a><br /></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#select-action">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Select action</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#skip">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # skip</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#split">式関数のリファレンス ガイド - Azure Logic Apps | Microsoft Learn # split</a></li>
 </ul>
+<br />
+
 <p>あらためて、分割するデータは以下です。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image001.png"></p>
 <p>そして、[Select] アクションの設定内容が以下となります。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image002.png"></p>
 <p><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image003.png"></p>
@@ -157,23 +161,29 @@
 今回は改行コードを置き換えています。
 
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#decodeuricomponent">ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # decodeUriComponent</a><br/></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#decodeuricomponent">ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # decodeUriComponent</a></li>
 </ul>
+<br/>
+
 <p>この処理を実行した結果が以下です。<br>CSV ファイルから取得したデータが JSON 形式の配列になっていることが確認できます。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image004.png"></p>
 <p><b>Output 全体</b><br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image005.png"></p>
 <p>これで、取得した CSV ファイルのデータをループ処理などで使用できるようになりました。<br><br/></p>
 <h2 id="複数の配列を-1-つの配列にまとめる"><a href="#複数の配列を-1-つの配列にまとめる" class="headerlink" title="複数の配列を 1 つの配列にまとめる"></a>複数の配列を 1 つの配列にまとめる</h2><p>続いて、複数の配列をひとつにまとめる方法でございます。<br>複数の配列を 1 つの配列にまとめるには union 関数を使用します。</p>
 <p>union 関数は、引数に指定された複数のコレクションをまとめる関数でございます。<br>この際、重複するデータは削除されますのでご注意ください。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#union">ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # union</a><br/></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/expression-functions-reference#union">ワークフロー式の関数のリファレンス - Azure Logic Apps | Microsoft Learn # union</a></li>
 </ul>
+<br/>
+
 <p>では、実際にやってみます。<br>まとめるデータとして、新たに以下の CSV ファイルを用意しました。<br>先頭のデータが、test_1.csv ファイルのデータと重複しています。</p>
 <p><b>test_2.csv</b><br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image006.png"></p>
 <p><b>参照：test_1.csv</b><br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image013.png"></p>
 <p>少し横道にそれますが、複数の入力から単一の出力を作成するためのアクションとして、[Compose] アクションのご用意がございます。<br>軽量な処理や一時的な値の保管に使用できるもので、今回はこちらのアクションと union 関数による処理を組み合わせています。<br>なお、後続処理でループ処理や分岐処理が行われる、値の更新や再利用が必要とされる場合は、[Variables] コネクタをご使用いただく方がよろしいかと存じます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#compose-action">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Compose</a><br/></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#compose-action">トリガーとアクションの種類のスキーマ リファレンス - Azure Logic Apps | Microsoft Learn # Compose</a></li>
 </ul>
+<br/>
+
 <p>本題に戻ります。<br>こちらは簡単で、設定内容は以下の通りです。<br>なお、本デモンストレーションを行うため、「データを分割して配列にする」でご紹介している内容を、新たに用意した CSV ファイルのデータにも行っております。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image007.png"></p>
 <p><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image008.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ソースコード抜粋</span><br><span class="line">&quot;inputs&quot;: &quot;@union(body(&#x27;Select-1&#x27;),body(&#x27;Select-2&#x27;))&quot;,</span><br></pre></td></tr></table></figure>
@@ -182,7 +192,7 @@
 <p>[Compose] アクションの実行結果を見てみます。<br>test_1.csv と test_2.csv で重複していたデータが削除された状態で、ふたつの配列がまとめられていることがわかります。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image009.png"><br><br/></p>
 <h2 id="配列にしたデータを-CSV-形式に戻す"><a href="#配列にしたデータを-CSV-形式に戻す" class="headerlink" title="配列にしたデータを CSV 形式に戻す"></a>配列にしたデータを CSV 形式に戻す</h2><p>最後に、一度は JSON 形式の配列にした CSV ファイルのデータを、再び CSV 形式に戻す方法をご紹介させていただきます。<br>JSON オブジェクトのプロパティ値と値を配列に含むデータを CSV に変換するには [Create CSV Table] アクションを使用します。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#create-csv-table-action">データの操作の実行 - Azure Logic Apps | Microsoft Learn # CSV テーブルの作成アクション</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#create-csv-table-action">データの操作の実行 - Azure Logic Apps | Microsoft Learn # CSV テーブルの作成アクション</a></li>
 <li><a href="https://jpazinteg.github.io/blog/LogicApps/FileFormatConversion/#3%EF%BC%8EJSON-%E2%86%92-CSV">Azure Logic Apps で各ファイルフォーマットを変換する Tips # 3．JSON → CSV</a></li>
 </ul>
 <p>こちらも実際にやってみます。<br>[Create CSV Table] を追加し、From 欄には「複数の配列を 1 の配列にまとめる」でご紹介をした [Compose] アクションの出力結果を設定します。<br><img src="/blog/LogicApps/CleanandTransformtheRetrievedCSVfile/image010.png"></p>
@@ -202,7 +212,7 @@
 <li>配列のデータを CSV 形式に変換する</li>
 </ul>
 <p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       

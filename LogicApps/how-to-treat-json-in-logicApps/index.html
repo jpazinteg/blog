@@ -18,12 +18,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image03.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image04.png">
 <meta property="article:published_time" content="2022-09-06T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.230Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.007Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/image01.png">
   
@@ -44,7 +44,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -62,7 +62,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -110,7 +110,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+fbb69c14-712f-56c9-b11a-243820911eb9%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+%E3%81%A7+JSON+%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%8B%E3%82%89%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AE%E5%80%A4%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2Fhow-to-treat-json-in-logicApps%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2Fhow-to-treat-json-in-logicApps.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2Fhow-to-treat-json-in-logicApps.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/" data-id="cmm8p5j9f002u0nlf0yg6b08q" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/how-to-treat-json-in-logicApps/" data-id="cuidHyKQej0mWN5devOz9TR7r" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -128,18 +128,18 @@
 </ul>
 <h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>以下のように変数初期化アクションを追加し、変数 obj を定義します。<br><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image01.png"></p>
 <ul>
-<li>各パラメーターの設定<br>名前 : obj<br>種類 : オブジェクト<br>値 : (以下の JSON を入力します)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msgList&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;always&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>各パラメーターの設定<br>名前 : obj<br>種類 : オブジェクト<br>値 : (以下の JSON を入力します)</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;msgList&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good morming.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;morning&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Hello.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;always&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good night.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;when you sleep&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg&quot;: &quot;Good evening.&quot;,</span><br><span class="line">      &quot;time&quot;: &quot;evening&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="構築"><a href="#構築" class="headerlink" title="構築"></a>構築</h2><ol>
 <li><p>変数初期化アクションの次のステップとして、作成アクションを追加します。<br><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image02.png"></p>
 </li>
 <li><p>作成アクションの [入力] パラメーターに以下の関数を入力します。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variables(&#x27;obj&#x27;)[&#x27;msgList&#x27;][1][&#x27;msg&#x27;]</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image03.png"></p>
-</li>
-<li><p>ワークフローを保存します。</p>
 </li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variables(&#x27;obj&#x27;)[&#x27;msgList&#x27;][1][&#x27;msg&#x27;]</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/LogicApps/how-to-treat-json-in-logicApps/image03.png"><br>3. ワークフローを保存します。</p>
 <h2 id="確認"><a href="#確認" class="headerlink" title="確認"></a>確認</h2><ol>
 <li>Azure ポータル上で、Logic Apps の概要ページの [トリガーの実行 - 実行] を選択し、トリガーを手動実行します。</li>
 <li>Azure ポータル上で、Logic Apps の概要ページの [実行の履歴] タブから、手動実行した実行のアクションの実行履歴を開きます。</li>

@@ -43,14 +43,14 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image024.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image025.png">
 <meta property="article:published_time" content="2023-11-30T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.196Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.978Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
-<meta property="article:tag" content="Trouble">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Log">
+<meta property="article:tag" content="Tips">
+<meta property="article:tag" content="Trouble">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/image001.png">
   
@@ -71,7 +71,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -89,7 +89,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -137,7 +137,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7b22141b-15d4-5c1b-b059-21361864e0bc%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE%E8%AA%BF%E6%9F%BB%E6%99%82%E3%81%AB%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88+%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%B8%E9%80%A3%E6%90%BA%E3%81%99%E3%82%8B%E3%83%AD%E3%82%B0%E3%81%AE%E5%8F%96%E5%BE%97%E6%96%B9%E6%B3%95%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FTroubleLogCollection%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FTroubleLogCollection.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FTroubleLogCollection.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/" data-id="cmm8p5j98002a0nlf3yl26nw6" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/TroubleLogCollection/" data-id="cuideX0JP629o9_J_3yb1qWQv" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -219,7 +219,7 @@
 <p>エクスポートした HAR ファイルを弊社までお寄せください。</p>
 <h3 id="Standard-Logic-Apps-のパケットキャプチャ"><a href="#Standard-Logic-Apps-のパケットキャプチャ" class="headerlink" title="Standard Logic Apps のパケットキャプチャ"></a>Standard Logic Apps のパケットキャプチャ</h3><p><u><strong>提供方法：圧縮ファイル形式</strong></u></p>
 <ol>
-<li><p>以下のサイトより、「使ってみる」ボタンを押下し、事象の発生している Standard Logic Apps を参照可能なユーザーでサインインします。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/appservice/web-apps/start-network-trace?tabs=HTTP">Web Apps - Start Network Trace</a><br><img src="/blog/LogicApps/TroubleLogCollection/image020.png"></p>
+<li><p>以下のサイトより、「使ってみる」ボタンを押下し、事象の発生している Standard Logic Apps を参照可能なユーザーでサインインします。<br><a href="https://learn.microsoft.com/ja-jp/rest/api/appservice/web-apps/start-network-trace?tabs=HTTP">Web Apps - Start Network Trace</a><br><img src="/blog/LogicApps/TroubleLogCollection/image020.png"></p>
 </li>
 <li><p>ネットワーク キャプチャの採取を開始します。設定項目については公開情報にも記載がございますが以下の通りとなります。<br>設定できましたら、画面下部の「実行」ボタンを押下します。</p>
 </li>
@@ -228,13 +228,13 @@
 <ol start="3">
 <li><p>対象の Standard Logic Apps を開き、ワークフローを実行して事象を再現します。</p>
 </li>
-<li><p>ワークフローの実行が完了しましたら、以下のサイトより、「使ってみる」ボタンを押下し、ネットワーク キャプチャの採取を終了します。こちらも設定項目は同様でございます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/rest/api/appservice/web-apps/stop-network-trace?tabs=HTTP">Web Apps - Stop Network Trace</a></p>
+<li><p>ワークフローの実行が完了しましたら、以下のサイトより、「使ってみる」ボタンを押下し、ネットワーク キャプチャの採取を終了します。こちらも設定項目は同様でございます。<br><a href="https://learn.microsoft.com/ja-JP/rest/api/appservice/web-apps/stop-network-trace?tabs=HTTP">Web Apps - Stop Network Trace</a></p>
 </li>
 <li><p>ネットワーク キャプチャを取得します。<br>[ロジック アプリ] - [&lt;対象の ロジック アプリ&gt;] - [開発ツール - 高度なツール] と遷移し、「移動」ボタンを押下して Kudu を開きます。<br><img src="/blog/LogicApps/TroubleLogCollection/image022.png"></p>
 </li>
 <li><p>Kudu にログインできましたら、画面上部より「Debug console &gt; CMD」を選択します。<br><img src="/blog/LogicApps/TroubleLogCollection/image023.png"></p>
 </li>
-<li><p>停止いただくと、以下の通り / LogFiles / networktrace 内に Zip ファイルが生成されますので、出力されたファイル全てダウンロードします。<br><img src="/blog/LogicApps/TroubleLogCollection/image024.png"></p>
+<li><p>停止いただくと、以下の通り &#x2F; LogFiles &#x2F; networktrace 内に Zip ファイルが生成されますので、出力されたファイル全てダウンロードします。<br><img src="/blog/LogicApps/TroubleLogCollection/image024.png"></p>
 </li>
 <li><p>ファイルのダウンロードは以下の通り画面左のダウンロード アイコンからお願いいたします。<br><img src="/blog/LogicApps/TroubleLogCollection/image025.png"></p>
 </li>
@@ -250,7 +250,7 @@
 <li>まとめ</li>
 </ul>
 <p>最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       

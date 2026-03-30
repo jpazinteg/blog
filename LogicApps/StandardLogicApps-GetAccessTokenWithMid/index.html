@@ -18,12 +18,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-3.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-4.png">
 <meta property="article:published_time" content="2025-06-02T07:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.176Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.960Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-1.png">
   
@@ -44,7 +44,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -62,7 +62,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -110,7 +110,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+4e46f42f-f09f-557e-9725-2adebd084e86%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BAzure+Logic+Apps+Standard+%E3%81%AE%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%89+ID+%E8%B3%87%E6%A0%BC%E6%83%85%E5%A0%B1%E3%81%A7+HTTP+%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%82%88%E3%82%8A%E6%98%8E%E7%A4%BA%E7%9A%84%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%88%E3%83%BC%E3%82%AF%E3%83%B3%E3%81%AE%E5%80%A4%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicApps-GetAccessTokenWithMid.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/" data-id="cmm8p5j93001y0nlf78b44fro" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/" data-id="cuidKLrPKEjDMDR0R7LeTKXQj" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -118,7 +118,7 @@
         <p>Azure Integration サポート チームの長坂です。</p>
 <p>Azure Logic Apps では多くのコネクタをサポートしており、様々な Azure サービスへの認証と接続を行うことが可能です。</p>
 <p>ただし、Azure Logic Apps の標準の機能として提供されるコネクタを使えないサービスやユース―ケースにおいては、認証と接続をワークフローの中で明示的に行うほかない場合があります。<br><br>例えば、Azure Logic Apps Standard を使用して仮想ネットワーク統合の機能を有効化し、Logic Apps から他の Azure サービスへの接続をプライベートなネットワーク経路で行う、といったユースケースでコネクタがその状況に対応していないということが起こり得ます。<br><br>コネクタが使えない状況で特定のサービスに対して REST API の要求を行うときは、多くの場合代替手段として HTTP アクションを使用することが考えられます。</p>
-<p>HTTP アクションの Authentication 機能でマネージド ID を選択することにより、Logic Apps の マネージド ID を使って取得したアクセストークンを <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc6750#section-2.1">RFC 6750</a> で定められた形式のヘッダーとして追加することが可能です。</p>
+<p>HTTP アクションの Authentication 機能でマネージド ID を選択することにより、Logic Apps の マネージド ID を使って取得したアクセストークンを <a href="https://datatracker.ietf.org/doc/html/rfc6750#section-2.1">RFC 6750</a> で定められた形式のヘッダーとして追加することが可能です。</p>
 <p>RFC 6750 に沿って Authorization ヘッダーを Bearer <code>token value</code> のような形式で定めている Azure サービスの REST API 要求であれば、HTTP アクションの機能でマネージド ID を選択することで有効なリクエスト形式の要求を送信することが可能です。<br><br>しかし、Azure サービスのデータプレーンへの要求では一部 Authorization ヘッダーが前述のものとは異なる形式となっている場合があり、そのようなサービスへの要求では HTTP アクションの Authentication 機能でマネージド ID を選択したとしても、Authorization ヘッダーの形式が合っていないために要求が失敗します。</p>
 <p>こういった状況に遭遇した場合の対処としては、アクセストークンも HTTP アクションによって取得した上で、アクセストークンの値を要求先のサービスが定めるヘッダー形式に合うように加工して後続の HTTP アクションで REST API の要求を行うという手法が有効です。</p>
 <p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>
@@ -136,11 +136,11 @@
 
 <p>Azure Logic Apps Standard (シングルテナント) は、ホスト環境を独自に指定する場合を除いて基本的には App Service プラン上で動作します。<br><br>App Service は環境変数として、ローカルのトークン要求エンドポイントを持っており、この URL に対して GET リクエストを送信することでアクセストークンを取得することができます。</p>
 <p>トークン要求のリクエストについては以下を参照してください。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a></p>
 <p>Azure Logic Apps Standard は App Service プラン上で動作するため、この仕組みを利用してアクセストークを取得することが可能です。</p>
 <h2 id="header2">2. アクセストークンを要求するエンドポイントとヘッダー</h2>
 
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a> に記載の通り、以下の環境変数にそれぞれエンドポイント URL とヘッダーの値が設定されております。</p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/app-service/overview-managed-identity?tabs=portal,http#rest-endpoint-reference">マネージド ID - Azure App Service | Microsoft Learn</a> に記載の通り、以下の環境変数にそれぞれエンドポイント URL とヘッダーの値が設定されております。</p>
 <blockquote>
 <ul>
 <li><code>IDENTITY_ENDPOINT</code> - ローカル トークン サービスに対する URL。</li>
@@ -162,11 +162,11 @@
 
 <p><code>Parse JSON</code>等のデータ操作向けのアクションを使用します。<br>使用例は以下のドキュメントをご参照ください。Parse JSON 以外にもデータ形式や特定のデータ型に適したアクションが提供されております。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action">データの操作の実行 - Azure Logic Apps | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#parse-json-action">JSON の解析アクション</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-perform-data-operations?tabs=consumption#parse-json-action">データの操作の実行 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#parse-json-action">JSON の解析アクション</a></li>
 </ul>
 <p>例えば、<a href="#header3">3. エンドポイントとヘッダーを取得する</a> の出力 JSON のスキーマが以下の通りであるため、これを Parse JSON の Schema とすれば、前のアクションから受け取った Schema に一致する出力の JSON の各値を動的コンテンツとして扱えるようになります。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;object&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;body&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;object&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;properties&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;IDENTITY_ENDPOINT&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;IDENTITY_HEADER&quot;</span>: &#123;</span><br><span class="line">          <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;object&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;object&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;IDENTITY_ENDPOINT&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;IDENTITY_HEADER&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-3.png"></p>
 <h2 id="header5">5. HTTP アクションによるアクセストークンの要求</h2>
@@ -175,8 +175,8 @@
 <p>HTTP リクエストの送信には、HTTP アクションを使用します。</p>
 <p>参考</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http?tabs=standard#add-an-http-action">外部エンドポイントまたはその他のワークフローを呼び出すワークフローを作成する - Azure Logic Apps | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#http-action">HTTP アクション</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http?tabs=standard#add-an-http-action">外部エンドポイントまたはその他のワークフローを呼び出すワークフローを作成する - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#http-action">HTTP アクション</a></li>
 </ul>
 <p>例えば、HTTP アクションの設定でトークン要求エンドポイントや<code>X-IDENTITY-HEADER</code> を以下のように入力すると、GET リクエストを送信します。</p>
 <p><img src="/blog/LogicApps/StandardLogicApps-GetAccessTokenWithMid/StandardLogicApps-GetAccessTokenWithMid-4.png"></p>
@@ -186,7 +186,7 @@
 
 <p>本記事では、Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法をご紹介しました。</p>
 <p>今回ご紹介した内容は Microsoft ID プラットフォームにおけるトークン (JWT) の仕組みを基礎としております。<br>承認サーバーである Microsoft Entra へアクセストークンを要求する仕組みについては以下の Microsoft ID プラットフォームの公開情報に記載されておりますので、ご参照いただくことでより理解が深まるかと存じます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/entra/identity-platform/security-tokens">トークンと要求の概要 - Microsoft identity platform | Microsoft Learn</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/entra/identity-platform/security-tokens">トークンと要求の概要 - Microsoft identity platform | Microsoft Learn</a></p>
 <p>Logic Apps では様々なサービスとの接続用にコネクタが提供されているため、基本的にはコネクタで認証と接続が可能かを先に確認いただくことを推奨いたします。<br>Logic Apps で提供されているいずれのコネクタも要件やユースケースに合わず、独自のヘッダー形式でアクセストークンを指定して他のサービスに要求を送信する必要があるような場合に、今回ご紹介した方法が役に立つかと存じます。</p>
 <p>皆様の開発のご参考になれば幸いです。</p>
 <hr>

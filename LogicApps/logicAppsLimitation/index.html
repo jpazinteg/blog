@@ -20,12 +20,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/logicAppsLimitation04.jpg">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/logicAppsLimitation05.jpg">
 <meta property="article:published_time" content="2026-02-05T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.231Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.008Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/logicAppsLimitation01.jpg">
   
@@ -46,7 +46,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -64,7 +64,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -112,7 +112,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+b53c63a1-f0c6-5676-aff9-b118eface1f6%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%82%92%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B%E4%B8%8A%E3%81%A7%E3%81%94%E8%80%83%E6%85%AE%E3%81%84%E3%81%9F%E3%81%A0%E3%81%8D%E3%81%9F%E3%81%84%E5%88%B6%E7%B4%84%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FlogicAppsLimitation%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FlogicAppsLimitation.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FlogicAppsLimitation.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/" data-id="cmm8p5j9g002x0nlf018zhbjh" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/logicAppsLimitation/" data-id="cuid0bay_NRUBJRcZFxHaPJ7e" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -143,29 +143,29 @@
 </ul>
 <h2 id="header2"> 2. Logic Apps 全般の制約 </h2>
 
-<p>Logic Apps 全般の制約は以下にまとめられています。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption">制約と構成の参考ガイド - Azure Logic Apps | Microsoft Learn</a></p>
+<p>Logic Apps 全般の制約は以下にまとめられています。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption">制約と構成の参考ガイド - Azure Logic Apps | Microsoft Learn</a></p>
 <p>たとえば、[単一のトリガーまたはアクション - 入力または出力の最大サイズ] は 105 MB まで、との制約があります。<br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation01.jpg"></p>
 <p>何等かのアクションで大きなサイズのデータを取得するような場合や、一つの変数に繰り返しデータを追加するような処理がある場合には注意が必要です。</p>
-<p>また、Logic Apps 独自のスループットの制約を超えた場合の一般的なハンドリング方法につきましては、以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#logic-app-resource-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # ロジック アプリのリソースの調整</a></p>
-<p><strong>参考:</strong><br>制約とは異なりますが、Standard タイプの Logic Apps を作成する上でのベスト プラクティスと推奨事項につきまして、以下のようなものがございます。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations">Azure portal でサンプル Standard ワークフローを作成する - Azure Logic Apps | Microsoft Learn</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation06.jpg"></p>
+<p>また、Logic Apps 独自のスループットの制約を超えた場合の一般的なハンドリング方法につきましては、以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#logic-app-resource-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # ロジック アプリのリソースの調整</a></p>
+<p><strong>参考:</strong><br>制約とは異なりますが、Standard タイプの Logic Apps を作成する上でのベスト プラクティスと推奨事項につきまして、以下のようなものがございます。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-single-tenant-workflows-azure-portal#best-practices-and-recommendations">Azure portal でサンプル Standard ワークフローを作成する - Azure Logic Apps | Microsoft Learn</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation06.jpg"></p>
 <h2 id="header3"> 3. コネクタの制約 </h2>
 
-<h3 id="3-1-組み込みコネクタ"><a href="#3-1-組み込みコネクタ" class="headerlink" title="3-1. 組み込みコネクタ"></a>3-1. 組み込みコネクタ</h3><p>組み込みコネクタの概要につきましては、以下の公開情報に記載があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></p>
-<p>たとえば、[HTTP] アクションの制約は、以下に記載があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption#http-request-limits">制約と構成の参考ガイド - Azure Logic Apps | Microsoft Learn # HTTP 要求の制限</a></p>
+<h3 id="3-1-組み込みコネクタ"><a href="#3-1-組み込みコネクタ" class="headerlink" title="3-1. 組み込みコネクタ"></a>3-1. 組み込みコネクタ</h3><p>組み込みコネクタの概要につきましては、以下の公開情報に記載があります。<br><a href="https://learn.microsoft.com/ja-jp/azure/connectors/built-in">組み込みコネクタの概要 - Azure Logic Apps | Microsoft Learn</a></p>
+<p>たとえば、[HTTP] アクションの制約は、以下に記載があります。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption#http-request-limits">制約と構成の参考ガイド - Azure Logic Apps | Microsoft Learn # HTTP 要求の制限</a></p>
 <p>また、組み込みコネクタの中でも Standard Logic Apps でのみご利用いただけますサービス プロバイダー ベースの組み込みコネクタの場合、各コネクタについて説明した公開情報がございます。<br>詳細な検索方法につきましては、以下をご参照ください。<br><a href="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/">Logic Apps で使用できるコネクタについて</a></p>
-<p>たとえば、[Azure Blob Storage] コネクタ (サービス プロバイダー ベース) の場合、[Connector how-to guide] という項目があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/azureblob/">Azure Blob Storage - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation02.jpg"></p>
-<p>リンク先に遷移しますと、以下のように制限事項の記載があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-azureblobstorage?tabs=standard#limitations">ワークフローから Azure Blob Storage に接続する - Azure Logic Apps | Microsoft Learn # 制限事項</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation03.jpg"></p>
-<h3 id="3-2-マネージド-コネクタ"><a href="#3-2-マネージド-コネクタ" class="headerlink" title="3-2.マネージド コネクタ"></a>3-2.マネージド コネクタ</h3><p>マネージド コネクタの概要につきましては、以下の公開情報に記載があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">マネージド コネクタの概要 - Azure Logic Apps | Microsoft Learn</a></p>
+<p>たとえば、[Azure Blob Storage] コネクタ (サービス プロバイダー ベース) の場合、[Connector how-to guide] という項目があります。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/connectors/built-in/reference/azureblob/">Azure Blob Storage - Connectors | Microsoft Learn</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation02.jpg"></p>
+<p>リンク先に遷移しますと、以下のように制限事項の記載があります。<br><a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-create-api-azureblobstorage?tabs=standard#limitations">ワークフローから Azure Blob Storage に接続する - Azure Logic Apps | Microsoft Learn # 制限事項</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation03.jpg"></p>
+<h3 id="3-2-マネージド-コネクタ"><a href="#3-2-マネージド-コネクタ" class="headerlink" title="3-2.マネージド コネクタ"></a>3-2.マネージド コネクタ</h3><p>マネージド コネクタの概要につきましては、以下の公開情報に記載があります。<br><a href="https://learn.microsoft.com/ja-jp/azure/connectors/managed">マネージド コネクタの概要 - Azure Logic Apps | Microsoft Learn</a></p>
 <p>マネージド コネクタの詳細な検索方法につきましては、以下をご参照ください。<br><a href="https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/">Logic Apps で使用できるコネクタについて</a></p>
-<p>たとえば、[Microsoft Teams] コネクタといたしましては、以下のような制約があります。<br>※ このような調整制限はコネクタごとに異なります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/teams/?tabs=text1,dotnet#limits">Microsoft Teams - Connectors | Microsoft Learn # 調整制限</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation04.jpg"></p>
+<p>たとえば、[Microsoft Teams] コネクタといたしましては、以下のような制約があります。<br>※ このような調整制限はコネクタごとに異なります。<br><a href="https://learn.microsoft.com/ja-jp/connectors/teams/?tabs=text1,dotnet#limits">Microsoft Teams - Connectors | Microsoft Learn # 調整制限</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation04.jpg"></p>
 <p>一番上の [接続ごとの API 呼び出し] とは、”API 接続ごと” を意味します。<br>※ API 接続につきましては、以下のブログもご参照ください。<br><a href="https://jpazinteg.github.io/blog/LogicApps/apiConnection/">API 接続について | Japan Azure Integration Support Blog</a></p>
-<p>従量課金タイプの Logic Apps が複数あり、それらで同一の API 接続を共有してご利用の場合、上記のような調整制限に抵触しやすくなります。<br>調整制限を超えて Logic Apps が実行される場合に 429 エラーが発生する場合がございます。<br>回避策としては、Logic Apps ごとに API 接続を分ける方法等が考えられます。<br>一般的なハンドリング方法につきましては以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#connector-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # コネクタの調整</a></p>
+<p>従量課金タイプの Logic Apps が複数あり、それらで同一の API 接続を共有してご利用の場合、上記のような調整制限に抵触しやすくなります。<br>調整制限を超えて Logic Apps が実行される場合に 429 エラーが発生する場合がございます。<br>回避策としては、Logic Apps ごとに API 接続を分ける方法等が考えられます。<br>一般的なハンドリング方法につきましては以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#connector-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # コネクタの調整</a></p>
 <p>エラー メッセージから調整が発生しているように見受けられるものの、再試行ポリシーの対象とならないエラー コードが返却されている場合の再試行方法につきましては、以下の記事がご参考になりますと幸いです。<br><a href="https://jpazinteg.github.io/blog/LogicApps/retryPolicy/">Logic Apps における再試行について | Japan Azure Integration Support Blog</a></p>
 <h2 id="header4"> 4. 接続先サービスの制約 </h2>
 
-<p>たとえば、マネージド コネクタの [Office 365 Outlook] コネクタでは、以下のような注意書きがあります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/office365/#throttling-limits-on-the-office-side">Office 365 Outlook - Connectors | Microsoft Learn # Office 側での調整の制限</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation05.jpg"></p>
-<p>リンク先に遷移しますと、メッセージ サイズの上限や件名の長さの制限等について記載があります。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/office365/servicedescriptions/exchange-online-service-description/exchange-online-limits#message-limits">Exchange Online の制限 - Service Descriptions | Microsoft Learn # メッセージの制限</a></p>
-<p>このようにコネクタで接続する先のサービス自体の制約についてもご考慮いただく必要があります。<br>一般的なハンドリング方法につきましては以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#destination-service-or-system-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # 接続先のサービスまたはシステムの調整</a></p>
+<p>たとえば、マネージド コネクタの [Office 365 Outlook] コネクタでは、以下のような注意書きがあります。<br><a href="https://learn.microsoft.com/ja-jp/connectors/office365/#throttling-limits-on-the-office-side">Office 365 Outlook - Connectors | Microsoft Learn # Office 側での調整の制限</a><br><img src="/blog/LogicApps/logicAppsLimitation/logicAppsLimitation05.jpg"></p>
+<p>リンク先に遷移しますと、メッセージ サイズの上限や件名の長さの制限等について記載があります。<br><a href="https://learn.microsoft.com/ja-jp/office365/servicedescriptions/exchange-online-service-description/exchange-online-limits#message-limits">Exchange Online の制限 - Service Descriptions | Microsoft Learn # メッセージの制限</a></p>
+<p>このようにコネクタで接続する先のサービス自体の制約についてもご考慮いただく必要があります。<br>一般的なハンドリング方法につきましては以下の公開情報もございますので、本記事と併せましてご一読いただけますと幸いです。<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption#destination-service-or-system-throttling">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn # 接続先のサービスまたはシステムの調整</a></p>
 <h2 id="header5"> まとめ </h2>
 
 <p>Logic Apps をご利用の際には、大きく以下 3 つの制約についてご確認いただき、実装をご検討いただけますと幸いです。</p>
@@ -176,7 +176,7 @@
 </ul>
 <p><strong>参考:</strong></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/handle-throttling-problems-429-errors?tabs=consumption">スロットリング問題の対処または429エラーレスポンス(リクエストが多すぎます)の処理 - Azure Logic Apps | Microsoft Learn</a></li>
 </ul>
 <p>本記事が少しでもお役に立ちましたら幸いです。</p>
 

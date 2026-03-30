@@ -21,12 +21,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image005.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image006.png">
 <meta property="article:published_time" content="2025-02-26T03:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.121Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.911Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/image000.png">
   
@@ -47,7 +47,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -65,7 +65,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -113,7 +113,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+e9a8925e-bd75-53f0-b814-a3d88afae530%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B%E5%BE%93%E9%87%8F%E8%AA%B2%E9%87%91%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE+Logic+Apps+%E7%94%A8%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0+%E3%83%AD%E3%83%BC%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-CustomRole%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-CustomRole.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-CustomRole.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/" data-id="cmm8p5j8r00130nlfavgp84uo" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-CustomRole/" data-id="cuidJQIu1cWfu6WitNQiNjVfs" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -131,10 +131,10 @@
 <h2 id="Azure-カスタム-ロールについて"><a href="#Azure-カスタム-ロールについて" class="headerlink" title="Azure カスタム ロールについて"></a>Azure カスタム ロールについて</h2><p>Azure のロール定義とは、アクセス許可のコレクションです。<br>このロールをユーザー、グループなどに割り当て、 Azure リソースへのアクセスを与えることが可能です。</p>
 <p>既定で各リソース操作の許可をまとめた「組み込みロール」がご用意されております。<br>「組み込みロール」ではお客様のご要件を満たさない場合には独自の Azure カスタム ロールを作成することが可能です。</p>
 <p>カスタム ロールを作成する場合には、これら既存の組み込みロールを複製して、要件に沿って特定の権限 (アクション) を追加・削除する形が簡単です。</p>
-<p>参考ドキュメント:<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/overview">Azure ロールベースのアクセス制御 (Azure RBAC) とは</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles">Azure 組み込みロール</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
+<p>参考ドキュメント:<br><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/overview">Azure ロールベースのアクセス制御 (Azure RBAC) とは</a><br><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles">Azure 組み込みロール</a><br><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
 <div class="alert is-info"><p class="alert-title">Note</p><p>必要となる権限 (アクション) の組み合わせについてはお客様のご要件に併せてご検討いただきますようお願いいたします。</p><p>Azure サポート窓口にて、カスタム ロールの作成の代行は難しい事、あらかじめご了承ください。</p></div>
 <h2 id="カスタム-ロールを作成する"><a href="#カスタム-ロールを作成する" class="headerlink" title="カスタム ロールを作成する"></a>カスタム ロールを作成する</h2><p>まず、従量課金タイプの Logic Apps にて有用な組み込みロールとしましては以下がございます。<br>・ Logic App Contributor (ロジック アプリの共同作成者): ロジック アプリを管理できますが、アクセス権を変更することはできません。<br>・ Logic App Operator (ロジック アプリのオペレーター): ロジック アプリの読み取り、有効化、無効化ができますが、編集または更新はできません。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
 <p>本記事では前述の通り、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成しますので、今回の場合、 Logic App Contributor (ロジック アプリの共同作成者) を複製したうえで、調整する形が簡単かと考えます。</p>
 <p>以下にて手順をまとめましたのでご参考ください。</p>
 <ol>
@@ -145,23 +145,23 @@
 </ol>
 <p><img src="/blog/LogicApps/LogicApps-CustomRole/image000.png"> </p>
 <ol start="3">
-<li>[基本] にて任意のカスタム ロール名の入力など、以下の通り構成します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image001.png"> </li>
+<li>[基本] にて任意のカスタム ロール名の入力など、以下の通り構成します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image001.png"></li>
 </ol>
 <p>4.[アクセス許可] にて、[+ 権限を除外する] を押下します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image002.png"> </p>
 <ol start="5">
-<li>除外されたい権限を入力、選択、追加します。<br>今回の場合は削除の権限を除外したいため “Microsoft.Logic/workflows/delete” を検索します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image003.png"> </li>
+<li>除外されたい権限を入力、選択、追加します。<br>今回の場合は削除の権限を除外したいため “Microsoft.Logic&#x2F;workflows&#x2F;delete” を検索します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image003.png"></li>
 </ol>
 <p>なお、従量課金タイプの Logic Apps に関しての権限 (アクション) については下記資料にまとめられております。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
 <ol start="6">
-<li>[確認と作成] まで進み、カスタム ロールを作成します。<br>NotAction: Microsoft.Logic/workflows/delete が記載されていることを確認します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image004.png"> </li>
+<li>[確認と作成] まで進み、カスタム ロールを作成します。<br>NotAction: Microsoft.Logic&#x2F;workflows&#x2F;delete が記載されていることを確認します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image004.png"></li>
 </ol>
 <p>※ 作成後、 [アクセス制御 (IAM)] にて反映されるまで数分かかる場合がございます。<br>少々時間をおいた後、 [+ 追加] &gt;&gt; [ロールの割り当ての追加] から作成したカスタム ロールの付与をお試しください。</p>
 <p>作成完了後は、下図のように表示されます。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image005.png"> </p>
 <p>結果:<br>上記手順にて作成したカスタム ロールを割り当てたユーザーが削除を試みると、下図のようなエラーが発生します。<br><img src="/blog/LogicApps/LogicApps-CustomRole/image006.png"> </p>
-<h2 id="関連ドキュメントまとめ"><a href="#関連ドキュメントまとめ" class="headerlink" title="関連ドキュメントまとめ"></a>関連ドキュメントまとめ</h2><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
+<h2 id="関連ドキュメントまとめ"><a href="#関連ドキュメントまとめ" class="headerlink" title="関連ドキュメントまとめ"></a>関連ドキュメントまとめ</h2><p><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/custom-roles-portal">Azure portal を使用して Azure カスタム ロールを作成または更新する</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/integration">統合のための Azure 組み込みロール</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/role-based-access-control/permissions/integration#microsoftlogic">統合に対する Azure のアクセス許可 - Microsoft.Logic</a></p>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では従量課金タイプの Logic Apps にてお使いいただけるカスタム ロールの作成方法についてご紹介いたしました。</p>
 <p>最後までお読みいただき、ありがとうございました！</p>
 

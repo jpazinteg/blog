@@ -40,12 +40,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image23.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image24.png">
 <meta property="article:published_time" content="2023-03-16T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.077Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.873Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
 <meta property="article:tag" content="Azure Logic Apps">
 <meta property="article:tag" content="For each">
+<meta property="article:tag" content="How-To">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/image01.png">
   
@@ -66,7 +66,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -84,7 +84,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -132,7 +132,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+148866a3-84c5-542d-affa-71a77906eba0%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BForeach%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%82%92%E5%8F%96%E5%BE%97%E3%81%97%E3%81%9F%E5%87%A6%E7%90%86%E3%81%AE%E6%AF%94%E8%BC%83%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FGetIterationIndexInForeachAction%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FGetIterationIndexInForeachAction.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FGetIterationIndexInForeachAction.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/" data-id="cmm8p5j8k000p0nlfc1pu94fi" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/GetIterationIndexInForeachAction/" data-id="cuidllmhOnZSdHBpCwabgp1Ef" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -140,7 +140,7 @@
         <p>こんにちは！Azure Integration サポート チームの 川合 です。  </p>
 <p>本記事は弊社海外ブログを日本語向けに解説した記事となります。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/get-iteration-index-in-foreach-action/ba-p/3730379">Get iteration index in Foreach action</a></li>
+<li><a href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/get-iteration-index-in-foreach-action/ba-p/3730379">Get iteration index in Foreach action</a></li>
 </ul>
 <p>Logic Apps で配列内のデータを処理する際、For each アクションのループでインデックスを取得し（現在何番目の配列に対する処理かを判断）、処理を行いたい場合があるかと思います。<br>その際は、コンカレンシ―制御を以下のように 1 に設定し、各繰り返し回数ごとに常に 1 ずつ加算されるインデックスとして変数を使用する手法がございます。</p>
 <p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image01.png"></p>
@@ -160,9 +160,9 @@
 <p>一つ目のアクションでは、テストで使用する配列のデータを用意いたします。<br>本記事では Azure Monitor ログ コネクタを基に以下の range 演算子で配列データを動的に作成しておりますが、配列形式のアクションであれば変数アクションで設定いただいても構いません。任意の構成で配列データを準備いただければと思います。</p>
 <p><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image04.png"></p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/azuremonitorlogs/">Azure Monitor Logs</a></p>
+<li><p><a href="https://learn.microsoft.com/ja-jp/connectors/azuremonitorlogs/">Azure Monitor Logs</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/data-explorer/kusto/query/rangeoperator">range 演算子</a></p>
+<li><p><a href="https://learn.microsoft.com/ja-JP/azure/data-explorer/kusto/query/rangeoperator">range 演算子</a></p>
 </li>
 </ul>
 <p>参考までに、本アクションでは以下のような結果となります。</p>
@@ -173,7 +173,7 @@
 <p>こちらは For each 内で配列のインデックスとして利用いたします。</p>
 <p>なお、元記事の構成では上記の通り Azure Monitor ログコネクタを利用しておりますが、以下の通り range 式関数でも配列を作成することが可能でございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#range">range</a><br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image25.png"></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#range">range</a><br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image25.png"></li>
 </ul>
 <p>&lt;結果&gt;<br><img src="/blog/LogicApps/GetIterationIndexInForeachAction/image26.png"></p>
 <p>こちらも参考までにご確認いただけますと幸いです。</p>
@@ -221,7 +221,7 @@
 <li>3． 本手法での構成および処理時間の比較</li>
 </ul>
 <p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       

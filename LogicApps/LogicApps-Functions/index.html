@@ -23,11 +23,11 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/LogicApps-Functions3.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/LogicApps-Functions10.png">
 <meta property="article:published_time" content="2023-10-06T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.126Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.916Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/LogicApps-Functions8.png">
   
@@ -48,7 +48,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -66,7 +66,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -114,13 +114,13 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d4646dc8-3669-50fe-9040-d1d74394d633%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%A7%E6%97%A5%E4%BB%98%E3%82%84%E6%99%82%E5%88%BB%E3%82%92%E5%88%A4%E5%AE%9A%E3%81%97%E3%81%A6%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92%E5%88%B6%E5%BE%A1%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-Functions%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-Functions.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-Functions.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/" data-id="cmm8p5j8t00160nlf4es21lci" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/" data-id="cuiddvvTZY6nyNhJy7AS66ZpU" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは！  Azure Integration サポート チームの 山田 です。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start/Stop VMs v2</a> をご利用いただく際に、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。</p>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start&#x2F;Stop VMs v2</a> をご利用いただく際に、「もう少し柔軟に日付や時刻を条件判定して利用したい」というケースが多くあると思います。</p>
 <p>今回はそうしたときに便利な、 Logic Apps における日付や時刻の判定に使えるシナリオをご紹介いたします。</p>
 <span id="more"></span>
 
@@ -133,11 +133,11 @@
 </ul>
 <h2 id="シナリオ-1-平日-8-時に-VM-を起動したい。ただし-特定の日-祝日など-を除外したい"><a href="#シナリオ-1-平日-8-時に-VM-を起動したい。ただし-特定の日-祝日など-を除外したい" class="headerlink" title="シナリオ 1: 平日 8 時に VM を起動したい。ただし 特定の日 (祝日など) を除外したい"></a>シナリオ 1: 平日 8 時に VM を起動したい。ただし 特定の日 (祝日など) を除外したい</h2><p>「平日 8 時に VM を起動したい。ただし 特定の日 (祝日など) を除外したい」。例としてこの場合、以下のように毎週 月曜日 ～ 金曜日 の 8:00 にワークフローを動作させるよう、繰り返しトリガーを設定しておきます。</p>
 <p><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions8.png"></p>
-<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn</a></p>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption">繰り返しワークフローをスケジュール設定および実行する - Azure Logic Apps | Microsoft Learn</a></p>
 <h3 id="トリガーの条件"><a href="#トリガーの条件" class="headerlink" title="トリガーの条件"></a>トリガーの条件</h3><p>一方トリガーには条件式というものを設定できます。</p>
 <p><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions9.png"></p>
 <p>こちらに「月曜日 ～ 金曜日、ただし 特定の日 (祝日など) を除外する」を満たす式を記述します。以下フォーラムとドキュメントを引用いたします。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/what-you-need-to-know-about-trigger-conditions/ba-p/2320757">What you need to know about trigger conditions?</a></p>
+<p>参考: <a href="https://techcommunity.microsoft.com/t5/integrations-on-azure-blog/what-you-need-to-know-about-trigger-conditions/ba-p/2320757">What you need to know about trigger conditions?</a></p>
 <blockquote>
 <p>Trigger conditions is a trigger setting used to specify one or more conditional expressions which must be true for the trigger to fire.<br>Trigger conditions can be set using logic app designer or manually using code view; for schema reference for trigger conditions</p>
 <ol>
@@ -160,7 +160,7 @@
 <li>[完了]をクリックします。</li>
 </ol>
 </blockquote>
-<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#trigger-conditions">Azure Logic Apps でのトリガーとアクションの種類のスキーマ リファレンス ガイド # トリガーの条件</a></p>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-workflow-actions-triggers#trigger-conditions">Azure Logic Apps でのトリガーとアクションの種類のスキーマ リファレンス ガイド # トリガーの条件</a></p>
 <blockquote>
 <p>どのトリガーにも、ワークフローを実行するかどうかを決める条件を表した 1 つまたは複数の式を含む配列を追加できます。</p>
 </blockquote>
@@ -174,7 +174,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convertFromUtc(UtcNow(), &#x27;Tokyo Standard Time&#x27;, &#x27;MMdd&#x27;)</span><br></pre></td></tr></table></figure>
 
 <p>また例として 2023 年の日本の祝日 (MMdd) を示すアレイを作成いたしますと、以下となります。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html">国民の祝日について - 内閣府</a></p>
+<p>参考: <a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html">国民の祝日について - 内閣府</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">createArray(&#x27;0101&#x27;,</span><br><span class="line">            &#x27;0102&#x27;,</span><br><span class="line">            &#x27;0109&#x27;,</span><br><span class="line">            &#x27;0211&#x27;,</span><br><span class="line">            &#x27;0223&#x27;,</span><br><span class="line">            &#x27;0321&#x27;,</span><br><span class="line">            &#x27;0429&#x27;,</span><br><span class="line">            &#x27;0503&#x27;,</span><br><span class="line">            &#x27;0504&#x27;,</span><br><span class="line">            &#x27;0505&#x27;,</span><br><span class="line">            &#x27;0717&#x27;,</span><br><span class="line">            &#x27;0811&#x27;,</span><br><span class="line">            &#x27;0918&#x27;,</span><br><span class="line">            &#x27;0923&#x27;,</span><br><span class="line">            &#x27;1009&#x27;,</span><br><span class="line">            &#x27;1103&#x27;,</span><br><span class="line">            &#x27;1123&#x27;</span><br><span class="line">           )</span><br></pre></td></tr></table></figure>
 
 <p>以上を用いると、「今日が 2023 年の祝日ではない」ことを表す判定式は以下となります。こちらを「トリガーの条件」欄に記載致します。「トリガーの条件」欄では式の先頭に ＠ を記載します点をご注意ください。</p>
@@ -182,13 +182,13 @@
 
 <p>参考: </p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # convertFromUtc</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#createArray">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # createArray</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # contains</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#not">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # not</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#convertFromUtc">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # convertFromUtc</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#createArray">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # createArray</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#contains">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # contains</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/workflow-definition-language-functions-reference#not">Azure Logic Apps および Power Automate のワークフロー式関数のリファレンス ガイド # not</a></li>
 </ul>
 <p>またここでは「日本の祝日」となる日付を静的にアレイに記述しましたが、カレンダーなどから取得して構築することも考えられます。詳細割愛いたしますが以下などがご活用いただけます。</p>
-<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/connectors/office365/#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC-%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E5%8F%96%E5%BE%97-(v3)">Office 365 Outlook - Connectors | Microsoft Learn # イベントのカレンダー ビューの取得 (V3)</a>)<br>ほか 2024 年の日本の祝日 (MMdd) を示すアレイは以下となります。</p>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/connectors/office365/#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%AE%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC-%E3%83%93%E3%83%A5%E3%83%BC%E3%81%AE%E5%8F%96%E5%BE%97-(v3)">Office 365 Outlook - Connectors | Microsoft Learn # イベントのカレンダー ビューの取得 (V3)</a>)<br>ほか 2024 年の日本の祝日 (MMdd) を示すアレイは以下となります。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">createArray(&#x27;0101&#x27;,</span><br><span class="line">            &#x27;0108&#x27;,</span><br><span class="line">            &#x27;0211&#x27;,</span><br><span class="line">            &#x27;0212&#x27;,</span><br><span class="line">            &#x27;0223&#x27;,</span><br><span class="line">            &#x27;0320&#x27;,</span><br><span class="line">            &#x27;0429&#x27;,</span><br><span class="line">            &#x27;0503&#x27;,</span><br><span class="line">            &#x27;0504&#x27;,</span><br><span class="line">            &#x27;0505&#x27;,</span><br><span class="line">            &#x27;0506&#x27;,</span><br><span class="line">            &#x27;0715&#x27;,</span><br><span class="line">            &#x27;0811&#x27;,</span><br><span class="line">            &#x27;0812&#x27;,</span><br><span class="line">            &#x27;0916&#x27;,</span><br><span class="line">            &#x27;0922&#x27;,</span><br><span class="line">            &#x27;0923&#x27;,</span><br><span class="line">            &#x27;1014&#x27;,</span><br><span class="line">            &#x27;1103&#x27;,</span><br><span class="line">            &#x27;1104&#x27;,</span><br><span class="line">            &#x27;1123&#x27;</span><br><span class="line">           )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -202,7 +202,7 @@
 <h2 id="シナリオ-2-平日-6-時に-VM1-を起動し、8-時に-VM2-を起動したい"><a href="#シナリオ-2-平日-6-時に-VM1-を起動し、8-時に-VM2-を起動したい" class="headerlink" title="シナリオ 2: 平日 6 時に VM1 を起動し、8 時に VM2 を起動したい"></a>シナリオ 2: 平日 6 時に VM1 を起動し、8 時に VM2 を起動したい</h2><p>「平日 6 時に VM1 を起動し、8 時に VM2 を起動したい」。例としてこの場合は、以下のように毎週 月曜日 ～ 金曜日 の 6:00、8:00 にワークフローを動作させるよう繰り返しトリガーを設定しておきます。</p>
 <p><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions7.png"></p>
 <p>前提として、パラメーターにて VM1 を起動する際のパラメーター、VM2 を起動する際のパラメーターを作成しておきます。<br><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions2.png"></p>
-<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-parameters-workflows?tabs=consumption">ワークフロー入力ためのパラメーターを作成する - Azure Logic Apps | Microsoft Learn</a></p>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/create-parameters-workflows?tabs=consumption">ワークフロー入力ためのパラメーターを作成する - Azure Logic Apps | Microsoft Learn</a></p>
 <p>またこちらも前処理として、VM の引数を格納する変数を初期化しておきます。</p>
 <p><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions1.png"></p>
 <p>そのうえで スイッチ を利用してまいります。スイッチするための式は、ここでは以下のようにしています。</p>
@@ -215,7 +215,7 @@
 <p>ケース内では “06”、つまり 6 時に「VM1」を起動する際の引数をセットします。同様、”08” の時に「VM2」を起動する際の引数を ケース 2 にてセットすれば「平日 6 時に VM1 を起動し、8 時に VM2 を起動」という条件を利用して、日付に応じて意図した VM を起動する制御ができます。なおそのどちらにも該当しない「既定」時は、ワークフローを終了することとしておきます。</p>
 <p><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions3.png"></p>
 <p>例:<br><img src="/blog/LogicApps/LogicApps-Functions/LogicApps-Functions10.png"></p>
-<p>参考: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-switch-statement">スイッチ アクションをワークフローに追加する - Azure Logic Apps | Microsoft Learn</a></p>
+<p>参考: <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-control-flow-switch-statement">スイッチ アクションをワークフローに追加する - Azure Logic Apps | Microsoft Learn</a></p>
 <h2 id="関連ドキュメント"><a href="#関連ドキュメント" class="headerlink" title="関連ドキュメント"></a>関連ドキュメント</h2><p>ほか Logic Apps と日付関数に言及した記事には、以下のようなものがございます。</p>
 <ul>
 <li><a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-DateTime/">Logic Apps で簡単に日付や時刻を用いる | Japan Azure Integration Support Blog</a></li>
@@ -223,12 +223,12 @@
 <li><a href="https://jpazinteg.github.io/blog/LogicApps/UnixTime/">Logic Apps の式関数で Unix Time を取得する方法 | Japan Azure Integration Support Blog</a></li>
 </ul>
 <p>今回の記事では日付に対して 6 時 や 8 時という時刻を例に紹介いたしましたが、0 時を起動時刻に設定し日付を条件判定する際には、<a href="https://jpazinteg.github.io/blog/LogicApps/ScheduleTriggerStrattime/">「繰り返し (Recurrence)」トリガーの起動時刻の差異について</a> にありますように起動時刻仕様についてもご確認いただけますと幸いです。</p>
-<p>また今回の「Start/Stop VMs v2」に関する参考ドキュメントや記事は、以下のようなものがございます。</p>
+<p>また今回の「Start&#x2F;Stop VMs v2」に関する参考ドキュメントや記事は、以下のようなものがございます。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start/Stop VMs v2 を Azure サブスクリプションにデプロイする | Microsoft Learn</a></li>
-<li><a target="_blank" rel="noopener" href="https://jpazpaas.github.io/blog/2021/11/29/introduce-Start-Stop-VMs-v2.html">Start/Stop VMs v2 のご紹介 - Japan PaaS Support Team Blog</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start&#x2F;Stop VMs v2 を Azure サブスクリプションにデプロイする | Microsoft Learn</a></li>
+<li><a href="https://jpazpaas.github.io/blog/2021/11/29/introduce-Start-Stop-VMs-v2.html">Start&#x2F;Stop VMs v2 のご紹介 - Japan PaaS Support Team Blog</a></li>
 </ul>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start/Stop VMs v2</a> をはじめとした繰り返しトリガー利用時に便利な、日付や時刻の判定方法についてご紹介しました。引き続き皆様のお役に立てる情報を発信してまいります。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、<a href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start&#x2F;Stop VMs v2</a> をはじめとした繰り返しトリガー利用時に便利な、日付や時刻の判定方法についてご紹介しました。引き続き皆様のお役に立てる情報を発信してまいります。</p>
 
       
       

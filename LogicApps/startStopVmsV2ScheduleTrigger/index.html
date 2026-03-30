@@ -21,12 +21,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger06.jpg">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger07.jpg">
 <meta property="article:published_time" content="2023-12-12T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.253Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.027Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Trigger">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger01.jpg">
@@ -48,7 +48,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -66,7 +66,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -114,55 +114,52 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+7f3326c5-0549-5a4b-b43d-fe73e39bab25%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStart%2FStop+VMs+v2+%E3%81%A7+Logic+Apps+%E3%81%8C%E5%8D%B3%E6%99%82%E8%B5%B7%E5%8B%95%E3%81%97%E3%81%A6%E3%81%97%E3%81%BE%E3%81%86%E4%BA%8B%E8%B1%A1%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FstartStopVmsV2ScheduleTrigger%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FstartStopVmsV2ScheduleTrigger.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FstartStopVmsV2ScheduleTrigger.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/startStopVmsV2ScheduleTrigger/" data-id="cmm8p5j9j00370nlf1ri3gq1r" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/startStopVmsV2ScheduleTrigger/" data-id="cuidNSBYu0_dRGCWJTbeoJE8m" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
       
         <p>こんにちは。Azure Integration サポート チームの髙橋です。</p>
-<p>Start/Stop VMs v2 機能利用時に、Logic Apps を有効化すると即時で起動してしまう原因と、回避策について説明します。</p>
+<p>Start&#x2F;Stop VMs v2 機能利用時に、Logic Apps を有効化すると即時で起動してしまう原因と、回避策について説明します。</p>
 <span id="more"></span>
 
 <h2 id="こんな方におすすめです"><a href="#こんな方におすすめです" class="headerlink" title="こんな方におすすめです"></a>こんな方におすすめです</h2><ul>
-<li>Start/Stop VMs v2 機能利用時に、Logic Apps が即時起動することを避けたい方</li>
+<li>Start&#x2F;Stop VMs v2 機能利用時に、Logic Apps が即時起動することを避けたい方</li>
 <li>「繰り返し (Recurrence)」トリガーを利用している場合に、即時起動を避けたい方</li>
 </ul>
-<h2 id="Start-Stop-VMs-v2"><a href="#Start-Stop-VMs-v2" class="headerlink" title="Start/Stop VMs v2"></a>Start/Stop VMs v2</h2><p>Start/Stop VMs v2 につきましては、以下の公開情報やブログがあります。</p>
+<h2 id="Start-Stop-VMs-v2"><a href="#Start-Stop-VMs-v2" class="headerlink" title="Start&#x2F;Stop VMs v2"></a>Start&#x2F;Stop VMs v2</h2><p>Start&#x2F;Stop VMs v2 につきましては、以下の公開情報やブログがあります。</p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/overview">Start/Stop VMs v2 の概要</a></li>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://jpazpaas.github.io/blog/2021/11/29/introduce-Start-Stop-VMs-v2.html">Start/Stop VMs v2 のご紹介</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/overview">Start&#x2F;Stop VMs v2 の概要</a></li>
+<li>参考ドキュメント : <a href="https://jpazpaas.github.io/blog/2021/11/29/introduce-Start-Stop-VMs-v2.html">Start&#x2F;Stop VMs v2 のご紹介</a></li>
 </ul>
-<p>Start/Stop VMs v2 は、以下よりデプロイすることが可能です。</p>
+<p>Start&#x2F;Stop VMs v2 は、以下よりデプロイすることが可能です。</p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start/Stop VMs v2 を Azure サブスクリプションにデプロイする</a></li>
-<li>参考ドキュメント : <a href="/blog/main/README/">Start/Stop VMs during off-hours overview (V2)</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/azure-functions/start-stop-vms/deploy">Start&#x2F;Stop VMs v2 を Azure サブスクリプションにデプロイする</a></li>
+<li>参考ドキュメント : <a href="/blog/main/README/">Start&#x2F;Stop VMs during off-hours overview (V2)</a></li>
 </ul>
-<h2 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h2><p>Start/Stop VMs v2 をデプロイしますと、以下のリソースが作成されます。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger01.jpg"></p>
+<h2 id="事象"><a href="#事象" class="headerlink" title="事象"></a>事象</h2><p>Start&#x2F;Stop VMs v2 をデプロイしますと、以下のリソースが作成されます。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger01.jpg"></p>
 <p>Logic Apps は無効化された状態でデプロイされておりますが、この状態で有効化しますとトリガーが即時に起動いたします。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger02.jpg"></p>
 <h2 id="「繰り返し-Recurrence-」トリガーが即時起動してしまう原因"><a href="#「繰り返し-Recurrence-」トリガーが即時起動してしまう原因" class="headerlink" title="「繰り返し (Recurrence)」トリガーが即時起動してしまう原因"></a>「繰り返し (Recurrence)」トリガーが即時起動してしまう原因</h2><p>本事象は、仕様の動作になります。</p>
 <p>Logic Apps がデプロイされた時点では、「繰り返し (Recurrence)」トリガーの [開始時刻] パラメーターが設定されていないため、<br>有効化されたタイミングで即座に実行するよう、予約済みの初回実行のジョブが既に作成されていることに起因いたします。</p>
 <p>※ デプロイ後かつ有効化前に [開始時刻] をご設定いただいた場合でも、既にジョブが作成されておりますので、有効化後に即時起動いたします。<br>当該ツールのデプロイ方法およびトリガーの仕様に起因した事象でございます。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger03.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption#add-the-recurrence-trigger">Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する # 繰り返しトリガーを追加する</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption#add-the-recurrence-trigger">Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する # 繰り返しトリガーを追加する</a></li>
 </ul>
-<p>なお、Start/Stop VMs v2 機能ではなく、Logic Apps を Azure ポータル上で手動で作成し、初めて「繰り返し (Recurrence)」トリガーを設定した場合におきましても、<br>[開始時刻] が設定されていない場合には Logic Apps 保存後に即時に起動いたします。<br>即時起動後には、設定された値に基づいてトリガーが起動いたします。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger04.jpg"></p>
+<p>なお、Start&#x2F;Stop VMs v2 機能ではなく、Logic Apps を Azure ポータル上で手動で作成し、初めて「繰り返し (Recurrence)」トリガーを設定した場合におきましても、<br>[開始時刻] が設定されていない場合には Logic Apps 保存後に即時に起動いたします。<br>即時起動後には、設定された値に基づいてトリガーが起動いたします。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger04.jpg"></p>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows#patterns-for-start-date-and-time">Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール # 開始日時のパターン</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows#patterns-for-start-date-and-time">Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール # 開始日時のパターン</a></li>
 </ul>
-<h2 id="回避策"><a href="#回避策" class="headerlink" title="回避策"></a>回避策</h2><p>以下の例では、Start/Stop VMs v2 における即時起動の回避策についてご案内いたします。<br>考え方といたしましては、デプロイ時に予約されたジョブをリセットする方法になります。</p>
+<h2 id="回避策"><a href="#回避策" class="headerlink" title="回避策"></a>回避策</h2><p>以下の例では、Start&#x2F;Stop VMs v2 における即時起動の回避策についてご案内いたします。<br>考え方といたしましては、デプロイ時に予約されたジョブをリセットする方法になります。</p>
 <p>有効化する前に、トリガー名を一時的に変更し、[開始時刻] パラメーターの設定をご実施ください。<br>トリガー名を変更することにより、予約済みのジョブがリセットされ、[開始時刻] に従ってトリガーを起動するよう新しくジョブを設定することが可能です。</p>
 <ol>
-<li>[Start/Stop VMs during off hours - V2] をデプロイ</li>
+<li>[Start&#x2F;Stop VMs during off hours - V2] をデプロイ</li>
 <li>ロジック アプリ [ststv2_vms_Scheduled_start] を開き、ロジック アプリ デザイナーを開く</li>
 <li>[Recurrence] トリガーにて、トリガー名を変更 (Reccurence1)</li>
 <li>[Recurrence] トリガーにて、以下のパラメーターを変更 (開始時刻は変更必須ですが、「設定時刻 (時間)」および「設定時刻 (分)」は必要に応じて変更ください。)<br>・タイム ゾーン : (UTC+09:00) 大阪、札幌、東京<br>・設定時刻<br>・開始時刻: 2022-11-06T14:00:00 (過去、未来いずれも設定いただくことが可能です。詳細については、下記の資料をご参考ください)</li>
 </ol>
 <ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows#patterns-for-start-date-and-time">Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール # 開始日時のパターン</a><br>※ 開始時刻の項目は [Add new parameter] より追加いただけます。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger05.jpg"></li>
-</ul>
-<p><strong>タイムゾーンを指定した場合、[開始時刻] の最後に「Z」は不要です。</strong><br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger06.jpg"></p>
-<ul>
-<li>参考ドキュメント : <a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption#add-the-recurrence-trigger">Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する # 繰り返しトリガーを追加する</a></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/concepts-schedule-automated-recurring-tasks-workflows#patterns-for-start-date-and-time">Azure Logic Apps ワークフローで繰り返し実行されるトリガーのスケジュール # 開始日時のパターン</a><br>※ 開始時刻の項目は [Add new parameter] より追加いただけます。<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger05.jpg"><br><strong>タイムゾーンを指定した場合、[開始時刻] の最後に「Z」は不要です。</strong><br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger06.jpg"></li>
+<li>参考ドキュメント : <a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-recurrence?tabs=consumption#add-the-recurrence-trigger">Azure Logic Apps で Recurrence トリガーを使用して繰り返しワークフローをスケジュール設定および実行する # 繰り返しトリガーを追加する</a></li>
 </ul>
 <ol start="5">
 <li>ワークフローを保存<br><img src="/blog/LogicApps/startStopVmsV2ScheduleTrigger/startStopVmV2ScheduleTrigger07.jpg"></li>
@@ -170,7 +167,7 @@
 <li>VM 指定のコードを編集し、ワークフローを保存</li>
 <li>有効化</li>
 </ol>
-<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Start/Stop VMs v2 機能利用時に、Logic Apps を有効化すると即時で起動してしまう原因と、回避策についてご案内いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、Start&#x2F;Stop VMs v2 機能利用時に、Logic Apps を有効化すると即時で起動してしまう原因と、回避策についてご案内いたしました。<br>本記事が少しでもお役に立ちましたら幸いです。</p>
 <h2 id="関連記事"><a href="#関連記事" class="headerlink" title="関連記事"></a>関連記事</h2><p>以下、「繰り返し (Recurrence)」トリガーに関連した記事になります。</p>
 <ul>
 <li><a href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-Functions/">Logic Apps で日付や時刻を判定してワークフローを制御する</a></li>

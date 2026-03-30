@@ -17,10 +17,10 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-2.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/MsmqTransaction-3.png">
 <meta property="article:published_time" content="2024-07-09T15:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.272Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:37.043Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="MSMQ">
 <meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
@@ -43,7 +43,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -61,7 +61,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -109,7 +109,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+d7cb2729-70be-52a3-a575-8b2317fe8b9b%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BMSMQ+%E3%81%AE%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3+%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FMSMQ%2FMsmqTransaction%2F%29%0A*+Content+Source%3A+%5Barticles%2FMSMQ%2FMsmqTransaction.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FMSMQ%2FMsmqTransaction.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/" data-id="cmm8p5j8900050nlf6kboc55e" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/MSMQ/MsmqTransaction/" data-id="cuid-DYYHIjc3J4L4zxtXmGba" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -126,7 +126,7 @@
 </ul>
 <h2 id="MSMQ-について"><a href="#MSMQ-について" class="headerlink" title="MSMQ について"></a>MSMQ について</h2><p>MSMQ とは、弊社が提供するオンプレミス製品のメッセージ キューイング サービスです。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms711472(v=vs.85)">Message Queuing (MSMQ)</a></li>
 </ul>
 <blockquote>
 <p>Message Queuing (MSMQ) technology enables applications running at different times to communicate across heterogeneous networks and systems that may be temporarily offline. Applications send messages to queues and read messages from queues. </p>
@@ -142,7 +142,7 @@
 <p>上記にも関連記事がございます。</p>
 <h2 id="MSMQ-のトランザクション-メッセージ"><a href="#MSMQ-のトランザクション-メッセージ" class="headerlink" title="MSMQ のトランザクション メッセージ"></a>MSMQ のトランザクション メッセージ</h2><p>トランザクション キューで扱われるメッセージと、非トランザクション キューで扱われるメッセージの違いについてご説明します。端的にトランザクション キューでは、「順序を保証する」点が特徴になります。</p>
 <p>以下のようなドキュメントをご覧いただけます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/feature-details/queuing-in-wcf#msmq">WCF でのキュー - WCF | Microsoft Learn</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/feature-details/queuing-in-wcf#msmq">WCF でのキュー - WCF | Microsoft Learn</a></p>
 <blockquote>
 <p>MSMQ では、キューをトランザクションまたは非トランザクションとして設定できます。<br>トランザクション キューの場合、トランザクションによるメッセージの取り込みと配信が可能です。<br>メッセージは、キューに永続的に格納されます。トランザクション キューに送信されたメッセージは、正確に 1 回だけ、順序どおりに転送されます。 </p>
 </blockquote>
@@ -162,7 +162,7 @@
 <p>トランザクション メッセージを送信すると、受信したサーバーから送信元の order_queue$ へ返答を送り返していることが分かります。</p>
 <p><img src="/blog/MSMQ/MsmqTransaction/MsmqTransaction-3.png"></p>
 <p>一方、一般的なネットワーク・通信エラーやその他の問題が発生した場合、TCP セッションが切断される状況もあります。その場合、送信された返答は送信キューに入れられますが、MSMQ 送信メッセージの送信再試行ポリシーで再試行されます。</p>
-<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></p>
+<p><a href="https://learn.microsoft.com/ja-jp/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></p>
 <blockquote>
 <p>Determines how often outgoing, transacted messages are resent because they are unacknowledged.<br>The value of this entry specifies the interval between resends for the first three times the message is resent. If, after the third resend, the sender still does not receive an acknowledgement from the intended recipient, the message is resent at intervals determined by the values of the following entries: SeqResend46Time , SeqResend79Time , SeqResend10Time</p>
 </blockquote>
@@ -171,12 +171,12 @@
 </blockquote>
 <p>既定では、MSMQ は以下の間隔でメッセージの再送信を試みます。</p>
 <ul>
-<li>SeqResend13Time:試行1-3 回:30秒:<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></li>
-<li>SeqResend46Time:試行4-6 回:300秒(5分):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957505(v=technet.10)?redirectedfrom=MSDN">SeqResend46Time | Microsoft Learn</a></li>
-<li>SeqResend79Time:試行7-9 回:1800秒(30分):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957506(v=technet.10)?redirectedfrom=MSDN">SeqResend79Time | Microsoft Learn</a></li>
-<li>SeqResend10Time:試行10+ 回:21600秒(6時間):<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957503(v=technet.10)?redirectedfrom=MSDN">SeqResend10Time | Microsoft Learn</a></li>
+<li>SeqResend13Time:試行1-3 回:30秒:<a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957504(v=technet.10)?redirectedfrom=MSDN">SeqResend13Time | Microsoft Learn</a></li>
+<li>SeqResend46Time:試行4-6 回:300秒(5分):<a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957505(v=technet.10)?redirectedfrom=MSDN">SeqResend46Time | Microsoft Learn</a></li>
+<li>SeqResend79Time:試行7-9 回:1800秒(30分):<a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957506(v=technet.10)?redirectedfrom=MSDN">SeqResend79Time | Microsoft Learn</a></li>
+<li>SeqResend10Time:試行10+ 回:21600秒(6時間):<a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc957503(v=technet.10)?redirectedfrom=MSDN">SeqResend10Time | Microsoft Learn</a></li>
 </ul>
-<p>関連: <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msmq/ms699870(v=vs.85)">Message Queuing Transactions | Microsoft Learn</a></p>
+<p>関連: <a href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/msmq/ms699870(v=vs.85)">Message Queuing Transactions | Microsoft Learn</a></p>
 <p>以上、トランザクション メッセージの特徴として、参考になりましたら幸いです。</p>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしました。</p>
 <ul>

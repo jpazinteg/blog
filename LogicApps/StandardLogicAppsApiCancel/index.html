@@ -24,12 +24,12 @@
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image009.png">
 <meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image010.png">
 <meta property="article:published_time" content="2023-05-02T07:00:00.000Z">
-<meta property="article:modified_time" content="2026-03-02T04:46:34.181Z">
+<meta property="article:modified_time" content="2026-03-30T07:16:36.964Z">
 <meta property="article:author" content="Japan Azure Integration Support Team">
-<meta property="article:tag" content="How-To">
 <meta property="article:tag" content="Azure Integration">
-<meta property="article:tag" content="Tips">
 <meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="How-To">
+<meta property="article:tag" content="Tips">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/image001.png">
   
@@ -50,7 +50,7 @@
   
 <link rel="stylesheet" href="../../css/style.css">
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -68,7 +68,7 @@
         
           <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        <a class="main-nav-link" target="_blank" rel="noopener" href="https://cssjpn.github.io/">サポート情報</a>
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
       </nav>
       <nav id="sub-nav">
         
@@ -116,7 +116,7 @@
         
         <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+b19243a9-d9d4-5c8c-8465-ae424301c3f5%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BStandard+Logic+Apps+%E3%81%AE%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%92+API+%E6%93%8D%E4%BD%9C%E3%81%A7%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E3%81%99%E3%82%8B%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FStandardLogicAppsApiCancel%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FStandardLogicAppsApiCancel.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FStandardLogicAppsApiCancel.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/" data-id="cmm8p5j9700290nlf7x8s4dri" class="article-share-link">共有</a>
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/StandardLogicAppsApiCancel/" data-id="cuid2S9Bfu8vdXYFHY1Z6HQRx" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -125,7 +125,7 @@
 <p>API 操作による Standard Logic Apps の処理のキャンセル方法についてご説明いたします。</p>
 <p>まず、従量課金タイプの Logic Apps では以下の API を利用することでワークフローを API 操作でキャンセルすることが可能です。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/rest/api/logic/workflow-runs/cancel?tabs=HTTP">Workflow Runs - Cancel</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/rest/api/logic/workflow-runs/cancel?tabs=HTTP">Workflow Runs - Cancel</a></li>
 </ul>
 <p>しかしながら、Standard Logic Apps のワークフローについてはキャンセル処理に関する API の情報を公開しておりません。<br>そこで今回は、Standard Logic Apps の実行中のワークフローを API を用いてキャンセルする方法についてブログにてご案内致します。</p>
 <span id="more"></span>
@@ -138,16 +138,16 @@
 </ul>
 <h2 id="キャンセル処理の-API-の確認方法"><a href="#キャンセル処理の-API-の確認方法" class="headerlink" title="キャンセル処理の API の確認方法"></a>キャンセル処理の API の確認方法</h2><p>まず、先にもご案内しました通り、Standard Logic Apps のワークフローの処理をキャンセルする API については公開情報はございません。<br>その為、今回の記事では以下のリソース プロバイダーに対してキャンセル処理の API を直接実行することで、ワークフローのキャンセル処理を実装致します。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-US/azure/templates/microsoft.web/sites/hostruntime/webhooks/api/workflows/runs?pivots=deployment-language-arm-template">Microsoft.Web sites/hostruntime/webhooks/api/workflows/runs</a></li>
+<li><a href="https://learn.microsoft.com/en-US/azure/templates/microsoft.web/sites/hostruntime/webhooks/api/workflows/runs?pivots=deployment-language-arm-template">Microsoft.Web sites&#x2F;hostruntime&#x2F;webhooks&#x2F;api&#x2F;workflows&#x2F;runs</a></li>
 </ul>
 <p>実際にどのような方法で設定するかにつきましてですが、こちらブラウザの開発者ツールにて GUI 操作時のリクエストを解析することで確認可能でございます。<br>確認方法につきまして、以下に参考例を記載いたします。</p>
 <p>＜確認方法＞</p>
 <ol>
 <li><p>ブラウザを起動し、開発者ツール (F12) を実行します。本例では chromium 版 Edge を利用しております。</p>
 </li>
-<li><p> 実際に実行中のワークフローを [実行の取り消し] ボタンでキャンセルいたします。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image001.png"> </p>
+<li><p>実際に実行中のワークフローを [実行の取り消し] ボタンでキャンセルいたします。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image001.png"> </p>
 </li>
-<li><p>実際のリクエストとして “cancel?api-version=2018-11-01” の実行結果が出力されますので、こちらのヘッダに記載されている要求 URL を確認します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image002.png"> </p>
+<li><p>実際のリクエストとして “cancel?api-version&#x3D;2018-11-01” の実行結果が出力されますので、こちらのヘッダに記載されている要求 URL を確認します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image002.png"></p>
 </li>
 </ol>
 <p>以上より、以下のような API が実行されていることを確認出来ます。</p>
@@ -155,31 +155,31 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://management.azure.com/subscriptions/&#123;SubscriptionId&#125;/resourceGroups/&#123;ResourceGroupName&#125;/providers/Microsoft.Web/sites/&#123;LogicAppsName&#125;/hostruntime/runtime/webhooks/workflow/api/management/workflows/&#123;WorkFlowName&#125;/runs/&#123;RunId&#125;/cancel?api-version=2018-11-01</span><br></pre></td></tr></table></figure>
 
 <p>・SubscriptionId：Standard Logic Apps の存在するサブスクリプション ID<br>・ResourceGroupName：Standard Logic Apps の存在するリソース グループ名<br>・LogicAppsName：Standard Logic Apps 名<br>・WorkFlowName：Standard Logic Apps 内に作成した ワークフロー名<br>・RunId：実行 ID</p>
-<p>なお、こちらの API の内容については 2023/05/01 現在の内容となります。<br>今後将来的に予告なく内容が変更される場合がございますので予めご了承下さい。</p>
+<p>なお、こちらの API の内容については 2023&#x2F;05&#x2F;01 現在の内容となります。<br>今後将来的に予告なく内容が変更される場合がございますので予めご了承下さい。</p>
 <p>これらを基に、以下の通りキャンセル処理の設定例を記載いたします。</p>
 <h2 id="設定例と実行結果"><a href="#設定例と実行結果" class="headerlink" title="設定例と実行結果"></a>設定例と実行結果</h2><p>本例では、マネージド ID を有効にした従量課金タイプの Logic Apps より、上記 API を実行して処理のキャンセルを実装いたします。<br>まず、Standard Logic Apps とは別で従量課金タイプの Logic Apps を用意し、事前にマネージド ID を有効に致します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image003.png"> </p>
 <p>次に、そのまま同一画面上の [Azure ロールの割り当て] ボタンを選択し、マネージド ID に “Web サイト共同作成者” ロールを付与します。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image004.png"> </p>
 <p><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image005.png"> </p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-JP/azure/role-based-access-control/built-in-roles#website-contributor">Azure 組み込みロール # Website Contributor</a></li>
+<li><a href="https://learn.microsoft.com/ja-JP/azure/role-based-access-control/built-in-roles#website-contributor">Azure 組み込みロール # Website Contributor</a></li>
 </ul>
 <p>次に、従量課金タイプのワークフローにて、HTTP アクションを設定いたします。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http">Azure Logic Apps から HTTP または HTTPS でサービス エンドポイントを呼び出す</a></li>
+<li><a href="https://learn.microsoft.com/ja-jp/azure/connectors/connectors-native-http">Azure Logic Apps から HTTP または HTTPS でサービス エンドポイントを呼び出す</a></li>
 </ul>
 <p>以下の通りパラメーターを指定し、認証方法にマネージド ID を指定いたします。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image006.png"><br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image007.png"> </p>
 <p>以上の設定より、マネージド ID を基にリクエストを行うことで API を実行し、実行中のワークフローの処理をキャンセルすることが可能でございます。</p>
 <p>＜実行例＞<br>・Standard Logic Apps にてワークフロー実行中。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image008.png"> </p>
 <p>・従量課金タイプよりワークフローを実行。<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image009.png"> </p>
 <p>・結果<br><img src="/blog/LogicApps/StandardLogicAppsApiCancel/image010.png"> </p>
-<p>以上より、API 操作を基に Standard Logic Apps のワークフローの実行をキャンセルすることが可能でございます。<br>なお、先にも申しました通り、こちら公開情報がございませんことと、2023/05/01 現在の情報となりますので、今後内容が変更される可能性が十分にございます。<br>お手数をおかけして申し訳ございませんが、上記を踏まえまして、お客様にて十分に検証を実施いただいたうえで採用要否についてご検討をいただきますようお願い申し上げます。</p>
+<p>以上より、API 操作を基に Standard Logic Apps のワークフローの実行をキャンセルすることが可能でございます。<br>なお、先にも申しました通り、こちら公開情報がございませんことと、2023&#x2F;05&#x2F;01 現在の情報となりますので、今後内容が変更される可能性が十分にございます。<br>お手数をおかけして申し訳ございませんが、上記を踏まえまして、お客様にて十分に検証を実施いただいたうえで採用要否についてご検討をいただきますようお願い申し上げます。</p>
 <h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>本記事では、以下についてご案内いたしましたが、ご理解いただけましたでしょうか。</p>
 <ul>
 <li>キャンセル処理の API の確認方法</li>
 <li>設定例と実行結果</li>
 </ul>
 <p>本記事が少しでもお役に立ちましたら幸いです。最後までお読みいただき、ありがとうございました！</p>
-<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
+<p>&lt;Azure Logic Apps の参考サイト&gt;<br>– 概要 - Azure Logic Apps とは<br><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview">https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-overview</a><br>Azure Logic Apps とは、ロジック アプリ デザイナーでフロー チャートを用いて作成したワークフローを自動実行するソリューションです。<br>Azure Logic Apps では、条件分岐などを実装することができ、ワークフローの実行状況に応じて実行する処理を分岐することが可能です。</p>
 
       
       
