@@ -1,6 +1,6 @@
 ---
 title: Logic Apps の HTTP アクションにおけるタイムアウトの考え方
-date: 2026-03-31 00:00:00
+date: 2026-04-14 00:00:00
 tags:
   - Troubleshooting
   - Azure Integration
@@ -60,9 +60,11 @@ Logic Apps における HTTP アクションには、同期的な応答を待つ
 
 具体例として、Azure Virtual Machines の Run Command API が挙げられます。Run Command API のレスポンス仕様では、コマンドの実行が即時に完了しない場合、HTTP ステータスコードとして 202 Accepted が返却され、レスポンス ヘッダーの Location に、実行結果を取得するための URL が設定されます。その後、当該 URL に対して状態確認を行い、処理が完了したタイミングで最終的な結果が取得できる仕様となっています。
 
+[Virtual Machines - Run Command - REST API (Azure Compute) | Microsoft Learn#応答](https://learn.microsoft.com/ja-jp/rest/api/compute/virtual-machines/run-command?view=rest-compute-2025-04-01&tabs=HTTP#response)
+
 [処理例]
 
-![処理例](./LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png)
+![](./LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png)
 
 **非同期操作の待機中は、同期応答時の 120 秒タイムアウトは適用されず、HTTP アクションは成功または失敗が確定するまで継続されます。**
 
