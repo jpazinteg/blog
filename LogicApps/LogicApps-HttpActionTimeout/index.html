@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Logic Apps の HTTP アクションにおけるタイムアウトの考え方 | Japan Azure Integration Support Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="こんにちは。Azure Integration サポート チームの中田です。 Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logic Apps の HTTP アクションにおけるタイムアウトの考え方">
+<meta property="og:url" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/index.html">
+<meta property="og:site_name" content="Japan Azure Integration Support Blog">
+<meta property="og:description" content="こんにちは。Azure Integration サポート チームの中田です。 Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-2.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png">
+<meta property="og:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-3.png">
+<meta property="article:published_time" content="2026-04-13T15:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-15T04:20:06.052Z">
+<meta property="article:author" content="Japan Azure Integration Support Team">
+<meta property="article:tag" content="Azure Integration">
+<meta property="article:tag" content="Azure Logic Apps">
+<meta property="article:tag" content="Troubleshooting">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-2.png">
+  
+    <link rel="alternate" href="../../atom.xml" title="Japan Azure Integration Support Blog" type="application/atom+xml">
+  
+
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="site-header-logo"></div>
+  <div id="site-header-blog-wrapper"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        <div id="ms-logo"></div>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+        <a class="main-nav-link" href="https://cssjpn.github.io/">サポート情報</a>
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSSフィード"></a>
+        
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.bing.com/search" method="get" accept-charset="UTF-8" name="bing-search" onsubmit="var f=this;if(f['q'].value){var searchUrl =  'https://www.bing.com/search?q=' +  encodeURIComponent(f['q'].value + ' site:' + f['sitesearch'].value) ;window.open(searchUrl, 'blank') };return false;" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="検索"><button type="submit" id="nav-search-btn" class="search-form-submit"></button><input type="hidden" name="sitesearch" value="https://jpazinteg.github.io/blog"></form>
+      </div>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../index.html" id="logo">Japan Azure Integration Support Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="../../index.html" id="subtitle">日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-LogicApps/LogicApps-HttpActionTimeout" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header-single">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Logic Apps の HTTP アクションにおけるタイムアウトの考え方
+    </h1>
+  
+
+      </header>
+      <div class="article-share">
+        Last Update: 
+        <a href="" class="article-date-single">
+  <time datetime="2026-04-13T15:00:00.000Z" itemprop="datePublished">2026-04-14</time>
+</a>
+        
+        
+        <a href="https://github.com/jpazinteg/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+28d3740e-cdc7-5348-b24e-93a2125f3a05%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5BLogic+Apps+%E3%81%AE+HTTP+%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%A2%E3%82%A6%E3%83%88%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9%5D%28https%3A%2F%2Fjpazinteg.github.io%2Fblog%2FLogicApps%2FLogicApps-HttpActionTimeout%2F%29%0A*+Content+Source%3A+%5Barticles%2FLogicApps%2FLogicApps-HttpActionTimeout.md%5D%28https%3A%2F%2Fgithub.com%2Fjpazinteg%2Fblog%2Fblob%2Fmain%2Farticles%2FLogicApps%2FLogicApps-HttpActionTimeout.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
+        
+        <a data-url="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/" data-id="cuid-57lnidR5JyX97gbRHa16" class="article-share-link">共有</a>
+      </div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>こんにちは。Azure Integration サポート チームの中田です。</p>
+<p>Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。</p>
+<p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p>
+<ul>
+<li>Logic Apps の HTTP アクションのタイムアウト挙動が分かりづらいと感じている方</li>
+<li>120 秒を超えて HTTP アクションが成功している理由を理解したい方</li>
+</ul>
+<h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol>
+<li><a href="#header1">HTTP アクションのタイムアウトに関する前提</a></li>
+<li><a href="#header2">同期応答の HTTP アクション</a></li>
+<li><a href="#header3">非同期応答 (非同期操作パターン) の HTTP アクション</a></li>
+<li><a href="#header4">まとめ</a></li>
+</ol>
+<hr>
+<h3 id="1-HTTP-アクションのタイムアウトに関する前提"><a href="#1-HTTP-アクションのタイムアウトに関する前提" class="headerlink" title="1. HTTP アクションのタイムアウトに関する前提 "></a>1. HTTP アクションのタイムアウトに関する前提 <a id="header1"></a></h3><p>Logic Apps における HTTP アクションには、同期的な応答を待つ場合の既定タイムアウト時間が定められています。</p>
+<h4 id="HTTP-要求の制限-タイムアウト時間"><a href="#HTTP-要求の制限-タイムアウト時間" class="headerlink" title="[HTTP 要求の制限 - タイムアウト時間]"></a>[HTTP 要求の制限 - タイムアウト時間]</h4><table>
+<thead>
+<tr>
+<th>名前</th>
+<th>マルチテナント (従量課金)</th>
+<th>シングルテナント (Standard)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>送信要求</td>
+<td>120 秒 (2 分)</td>
+<td>225 秒 (3 分 45 秒) (既定値・変更可)</td>
+</tr>
+<tr>
+<td>受信要求</td>
+<td>120 秒 (2 分)</td>
+<td>225 秒 (3 分 45 秒) (既定値・変更可)</td>
+</tr>
+</tbody></table>
+<p><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption#http-request-limits">制限と構成リファレンス ガイド - Azure Logic Apps | Microsoft Learn#HTTP 要求の制限</a></p>
+<p>一般的に参照される「HTTP アクションのタイムアウトは 120 秒」という値は、Logic Apps (従量課金) のこの同期応答を前提とした制限を指しています。そのため、この数値だけを見ると、120 秒を超えた HTTP アクションは必ず失敗すると理解されがちですが、実際の挙動は呼び出し先 API の応答方式によって異なります。</p>
+<hr>
+<h3 id="2-同期応答の-HTTP-アクション"><a href="#2-同期応答の-HTTP-アクション" class="headerlink" title="2. 同期応答の HTTP アクション "></a>2. 同期応答の HTTP アクション <a id="header2"></a></h3><p>呼び出し先の API が、リクエストを受信してから処理を完了し、最終結果を 1 回の HTTP 応答で返却する場合、Logic Apps はその応答を同期的に待機します。</p>
+<p>この場合、応答がタイムアウト時間内に返却されなければ、HTTP アクションはタイムアウト エラーとして失敗します。比較的処理時間の短い REST API を呼び出す場合は、この同期応答の挙動になることが一般的です。</p>
+<hr>
+<h3 id="3-非同期応答-非同期操作パターン-の-HTTP-アクション"><a href="#3-非同期応答-非同期操作パターン-の-HTTP-アクション" class="headerlink" title="3. 非同期応答 (非同期操作パターン) の HTTP アクション "></a>3. 非同期応答 (非同期操作パターン) の HTTP アクション <a id="header3"></a></h3><p>一方で、呼び出し先 API が、リクエストを受信した時点で 202 Accepted を返却し、あわせて Location ヘッダーに処理結果取得用の URL を返すケースがあります。</p>
+<p>このような API は、処理をバック グラウンドで継続する非同期操作パターンを採用しています。<br>Logic Apps の HTTP アクションは、この応答を検知すると、内部的に Location ヘッダーに指定された URL に対してポーリングを行い、最終的な処理結果として 200 OK が返却されるまで待機します。</p>
+<p>HTTP アクションでは、この非同期操作パターンを利用するかどうかを<strong>Asynchronous pattern</strong> の設定で制御できます。<br>この設定は既定で有効 (オン) になっており、特別な設定を行わなくても、202 Accepted + Location ヘッダーを返す API に対しては、自動的にポーリングが実行されます。</p>
+<p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-2.png"></p>
+<p>具体例として、Azure Virtual Machines の Run Command API が挙げられます。Run Command API のレスポンス仕様では、コマンドの実行が即時に完了しない場合、HTTP ステータス コードとして 202 Accepted が返却され、レスポンス ヘッダーの Location に、実行結果を取得するための URL が設定されます。その後、当該 URL に対して状態確認を行い、処理が完了したタイミングで最終的な結果が取得できる仕様となっています。</p>
+<p><a href="https://learn.microsoft.com/ja-jp/rest/api/compute/virtual-machines/run-command?view=rest-compute-2025-04-01&tabs=HTTP#response">Virtual Machines - Run Command - REST API (Azure Compute) | Microsoft Learn#応答</a></p>
+<p>[処理例]</p>
+<p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png"></p>
+<p><strong>非同期操作の待機中は、同期応答時の 120 秒タイムアウトは適用されず、HTTP アクションは成功または失敗が確定するまで継続されます。</strong></p>
+<p>なお、「非同期処理は利用したいが、一定時間以上かかる場合はアクションを失敗として扱いたい」といった要件がある場合には、HTTP アクションの <strong>Action timeout</strong> を利用することで、アクションの最大実行時間を制御できます。</p>
+<p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-3.png"></p>
+<p>非同期操作パターンの詳細は下記ブログで説明しておりますので、併せてご参照ください。</p>
+<p><a href="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a></p>
+<hr>
+<h3 id="4-まとめ"><a href="#4-まとめ" class="headerlink" title="4. まとめ "></a>4. まとめ <a id="header4"></a></h3><p>本記事では、Logic Apps の HTTP アクションにおけるタイムアウトの考え方について、同期応答と非同期応答の違いを中心に整理しました。</p>
+<ul>
+<li>HTTP アクションの 120 秒タイムアウトは、同期応答を前提とした制限である</li>
+<li>202 Accepted と Location ヘッダーを返す API は、非同期操作パターンとして扱われる</li>
+<li>非同期操作パターンでは、120 秒を超えてもアクションが成功する</li>
+</ul>
+<p>HTTP アクションの挙動は、単なる秒数の制限ではなく、呼び出し先 API の応答方式と関係しています。本記事が、ワークフロー設計やトラブルシューティングの理解整理の一助となれば幸いです。</p>
+
+      
+      
+        <div class="article-disclaimer">
+        
+          <p>※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。</p>
+        
+        </div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../tags/Troubleshooting/" rel="tag">Troubleshooting</a></li></ul>
+
+        
+        <a href="https://github.com/jpazinteg/blog/edit/main/articles/LogicApps/LogicApps-HttpActionTimeout.md" class="article-github-edit-link" target="_blank" rel="noopener noreferrer">GitHub で編集</a>
+        
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="../standardLogicAppsCpuMemory/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前の記事</strong>
+      <div class="article-nav-title">Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその対処法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近の投稿</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="">Logic Apps の HTTP アクションにおけるタイムアウトの考え方</a>
+          </li>
+        
+          <li>
+            <a href="../standardLogicAppsCpuMemory/">Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその対処法</a>
+          </li>
+        
+          <li>
+            <a href="../logicAppsLimitation/">Logic Apps を利用する上でご考慮いただきたい制約</a>
+          </li>
+        
+          <li>
+            <a href="../LogicAppsConnectorList/">Logic Apps で使用できるコネクタについて</a>
+          </li>
+        
+          <li>
+            <a href="../triggerConcurrency/">トリガーのコンカレンシー制御と最大実行待機数について</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグ</h3>
+    <div class="widget">
+      <!-- <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/API-%E6%8E%A5%E7%B6%9A/" rel="tag">API 接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Automation/" rel="tag">Azure Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-CLI/" rel="tag">Azure CLI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Cosmos-DB/" rel="tag">Azure Cosmos DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-DevOps/" rel="tag">Azure DevOps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Integration/" rel="tag">Azure Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/" rel="tag">Azure Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor/" rel="tag">Azure Monitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Monitor-Logs/" rel="tag">Azure Monitor Logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-OpenAI/" rel="tag">Azure OpenAI</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/BizTalk/" rel="tag">BizTalk</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Connector/" rel="tag">Connector</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Excel-Onlne/" rel="tag">Excel Onlne</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/For-each/" rel="tag">For each</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/General/" rel="tag">General</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Google-Sheets/" rel="tag">Google Sheets</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Graph-API/" rel="tag">Graph API</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HIS/" rel="tag">HIS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" rel="tag">HTTP アクション</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/How-To/" rel="tag">How-To</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Ip-address/" rel="tag">Ip address</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Issues/" rel="tag">Issues</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/JDBC/" rel="tag">JDBC</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/MSMQ/" rel="tag">MSMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Retry-Policy/" rel="tag">Retry Policy</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard/" rel="tag">Standard</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Standard-Logic-Apps/" rel="tag">Standard Logic Apps</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Storage-Account/" rel="tag">Storage Account</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Tips/" rel="tag">Tips</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trigger/" rel="tag">Trigger</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Trouble/" rel="tag">Trouble</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Troubleshooting/" rel="tag">Troubleshooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Unix-Time/" rel="tag">Unix Time</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/VNet-Integration/" rel="tag">VNet Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" rel="tag">サービス プロバイダー接続</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" rel="tag">チーム紹介</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E8%AA%8D%E8%A8%BC/" rel="tag">認証</a></li></ul>  -->
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/Azure-Logic-Apps/">Azure Logic Apps</a><span class="tag-list-count">60</span><ul><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/API-%E6%8E%A5%E7%B6%9A">API 接続</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Automation">Azure Automation</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-CLI">Azure CLI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Cosmos-DB">Azure Cosmos DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-DevOps">Azure DevOps</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Integration">Azure Integration</a><span class="tag-list-count">60</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor">Azure Monitor</a><span class="tag-list-count">2</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-Monitor-Logs">Azure Monitor Logs</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Azure-OpenAI">Azure OpenAI</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Connector">Connector</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Excel-Onlne">Excel Onlne</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/For-each">For each</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Google-Sheets">Google Sheets</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Graph-API">Graph API</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">HTTP アクション</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/How-To">How-To</a><span class="tag-list-count">50</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Ip-address">Ip address</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Issues">Issues</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/JDBC">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item tag-list-item-child-tag"><a class="tag-list-link tag-list-link-child" href="../../tags/Azure-Logic-Apps/Log">Log</a><span class="tag-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">アーカイブ</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2026/04/">2026 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2026/02/">2026 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2026/01/">2026 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/12/">2025 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/11/">2025 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/09/">2025 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/06/">2025 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/05/">2025 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/02/">2025 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2025/01/">2025 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/11/">2024 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/07/">2024 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2024/04/">2024 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/12/">2023 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/11/">2023 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/10/">2023 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/09/">2023 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/08/">2023 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/07/">2023 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/06/">2023 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/05/">2023 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/04/">2023 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/03/">2023 / 03</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/02/">2023 / 02</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2023/01/">2023 / 01</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/12/">2022 / 12</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/11/">2022 / 11</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/10/">2022 / 10</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/09/">2022 / 09</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/08/">2022 / 08</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/07/">2022 / 07</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/06/">2022 / 06</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/05/">2022 / 05</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/04/">2022 / 04</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2022/03/">2022 / 03</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">タグクラウド</h3>
+    <div class="widget tagcloud">
+      <a href="../../tags/API-%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">API 接続</a> <a href="../../tags/Azure-Automation/" style="font-size: 10px;">Azure Automation</a> <a href="../../tags/Azure-CLI/" style="font-size: 10px;">Azure CLI</a> <a href="../../tags/Azure-Cosmos-DB/" style="font-size: 10px;">Azure Cosmos DB</a> <a href="../../tags/Azure-DevOps/" style="font-size: 10px;">Azure DevOps</a> <a href="../../tags/Azure-Integration/" style="font-size: 20px;">Azure Integration</a> <a href="../../tags/Azure-Logic-Apps/" style="font-size: 18.75px;">Azure Logic Apps</a> <a href="../../tags/Azure-Monitor/" style="font-size: 11.25px;">Azure Monitor</a> <a href="../../tags/Azure-Monitor-Logs/" style="font-size: 10px;">Azure Monitor Logs</a> <a href="../../tags/Azure-OpenAI/" style="font-size: 10px;">Azure OpenAI</a> <a href="../../tags/BizTalk/" style="font-size: 10px;">BizTalk</a> <a href="../../tags/Connector/" style="font-size: 10px;">Connector</a> <a href="../../tags/Excel-Onlne/" style="font-size: 10px;">Excel Onlne</a> <a href="../../tags/For-each/" style="font-size: 10px;">For each</a> <a href="../../tags/General/" style="font-size: 11.25px;">General</a> <a href="../../tags/Google-Sheets/" style="font-size: 10px;">Google Sheets</a> <a href="../../tags/Graph-API/" style="font-size: 10px;">Graph API</a> <a href="../../tags/HIS/" style="font-size: 10px;">HIS</a> <a href="../../tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/" style="font-size: 10px;">HTTP アクション</a> <a href="../../tags/How-To/" style="font-size: 17.5px;">How-To</a> <a href="../../tags/Ip-address/" style="font-size: 10px;">Ip address</a> <a href="../../tags/Issues/" style="font-size: 10px;">Issues</a> <a href="../../tags/JDBC/" style="font-size: 10px;">JDBC</a> <a href="../../tags/Log/" style="font-size: 11.25px;">Log</a> <a href="../../tags/MSMQ/" style="font-size: 15px;">MSMQ</a> <a href="../../tags/Retry-Policy/" style="font-size: 10px;">Retry Policy</a> <a href="../../tags/Standard/" style="font-size: 10px;">Standard</a> <a href="../../tags/Standard-Logic-Apps/" style="font-size: 13.75px;">Standard Logic Apps</a> <a href="../../tags/Storage-Account/" style="font-size: 11.25px;">Storage Account</a> <a href="../../tags/Tips/" style="font-size: 16.25px;">Tips</a> <a href="../../tags/Trigger/" style="font-size: 13.75px;">Trigger</a> <a href="../../tags/Trouble/" style="font-size: 11.25px;">Trouble</a> <a href="../../tags/Troubleshooting/" style="font-size: 12.5px;">Troubleshooting</a> <a href="../../tags/Unix-Time/" style="font-size: 10px;">Unix Time</a> <a href="../../tags/VNet-Integration/" style="font-size: 10px;">VNet Integration</a> <a href="../../tags/%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%83%BC%E6%8E%A5%E7%B6%9A/" style="font-size: 10px;">サービス プロバイダー接続</a> <a href="../../tags/%E3%83%81%E3%83%BC%E3%83%A0%E7%B4%B9%E4%BB%8B/" style="font-size: 10px;">チーム紹介</a> <a href="../../tags/%E8%AA%8D%E8%A8%BC/" style="font-size: 10px;">認証</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2026 Japan Azure Integration Support Team<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+<script src="../../js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
