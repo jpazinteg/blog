@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan Azure Integration Support Team</rights>
   <subtitle>日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</subtitle>
   <title>Japan Azure Integration Support Blog</title>
-  <updated>2026-04-15T04:20:06.052Z</updated>
+  <updated>2026-04-15T04:31:06.090Z</updated>
   <entry>
     <author>
       <name>Japan Azure Integration Support Team</name>
@@ -19,17 +19,18 @@
     <category term="Azure Logic Apps" scheme="https://jpazinteg.github.io/blog/tags/Azure-Logic-Apps/"/>
     <category term="Troubleshooting" scheme="https://jpazinteg.github.io/blog/tags/Troubleshooting/"/>
     <content>
-      <![CDATA[<p>こんにちは。Azure Integration サポート チームの中田です。</p><p>Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。</p><p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p><ul><li>Logic Apps の HTTP アクションのタイムアウト挙動が分かりづらいと感じている方</li><li>120 秒を超えて HTTP アクションが成功している理由を理解したい方</li></ul><h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol><li><a href="#header1">HTTP アクションのタイムアウトに関する前提</a></li><li><a href="#header2">同期応答の HTTP アクション</a></li><li><a href="#header3">非同期応答 (非同期操作パターン) の HTTP アクション</a></li><li><a href="#header4">まとめ</a></li></ol><hr><h3 id="1-HTTP-アクションのタイムアウトに関する前提"><a href="#1-HTTP-アクションのタイムアウトに関する前提" class="headerlink" title="1. HTTP アクションのタイムアウトに関する前提 "></a>1. HTTP アクションのタイムアウトに関する前提 <a id="header1"></a></h3><p>Logic Apps における HTTP アクションには、同期的な応答を待つ場合の既定タイムアウト時間が定められています。</p><h4 id="HTTP-要求の制限-タイムアウト時間"><a href="#HTTP-要求の制限-タイムアウト時間" class="headerlink" title="[HTTP 要求の制限 - タイムアウト時間]"></a>[HTTP 要求の制限 - タイムアウト時間]</h4><table><thead><tr><th>名前</th><th>マルチテナント (従量課金)</th><th>シングルテナント (Standard)</th></tr></thead><tbody><tr><td>送信要求</td><td>120 秒 (2 分)</td><td>225 秒 (3 分 45 秒) (既定値・変更可)</td></tr><tr><td>受信要求</td><td>120 秒 (2 分)</td><td>225 秒 (3 分 45 秒) (既定値・変更可)</td></tr></tbody></table><p><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption#http-request-limits">制限と構成リファレンス ガイド - Azure Logic Apps | Microsoft Learn#HTTP 要求の制限</a></p><p>一般的に参照される「HTTP アクションのタイムアウトは 120 秒」という値は、Logic Apps (従量課金) のこの同期応答を前提とした制限を指しています。そのため、この数値だけを見ると、120 秒を超えた HTTP アクションは必ず失敗すると理解されがちですが、実際の挙動は呼び出し先 API の応答方式によって異なります。</p><hr><h3 id="2-同期応答の-HTTP-アクション"><a href="#2-同期応答の-HTTP-アクション" class="headerlink" title="2. 同期応答の HTTP アクション "></a>2. 同期応答の HTTP アクション <a id="header2"></a></h3><p>呼び出し先の API が、リクエストを受信してから処理を完了し、最終結果を 1 回の HTTP 応答で返却する場合、Logic Apps はその応答を同期的に待機します。</p><p>この場合、応答がタイムアウト時間内に返却されなければ、HTTP アクションはタイムアウト エラーとして失敗します。比較的処理時間の短い REST API を呼び出す場合は、この同期応答の挙動になることが一般的です。</p><hr><h3 id="3-非同期応答-非同期操作パターン-の-HTTP-アクション"><a href="#3-非同期応答-非同期操作パターン-の-HTTP-アクション" class="headerlink" title="3. 非同期応答 (非同期操作パターン) の HTTP アクション "></a>3. 非同期応答 (非同期操作パターン) の HTTP アクション <a id="header3"></a></h3><p>一方で、呼び出し先 API が、リクエストを受信した時点で 202 Accepted を返却し、あわせて Location ヘッダーに処理結果取得用の URL を返すケースがあります。</p><p>このような API は、処理をバック グラウンドで継続する非同期操作パターンを採用しています。<br>Logic Apps の HTTP アクションは、この応答を検知すると、内部的に Location ヘッダーに指定された URL に対してポーリングを行い、最終的な処理結果として 200 OK が返却されるまで待機します。</p><p>HTTP アクションでは、この非同期操作パターンを利用するかどうかを<strong>Asynchronous pattern</strong> の設定で制御できます。<br>この設定は既定で有効 (オン) になっており、特別な設定を行わなくても、202 Accepted + Location ヘッダーを返す API に対しては、自動的にポーリングが実行されます。</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-2.png"></p><p>具体例として、Azure Virtual Machines の Run Command API が挙げられます。Run Command API のレスポンス仕様では、コマンドの実行が即時に完了しない場合、HTTP ステータス コードとして 202 Accepted が返却され、レスポンス ヘッダーの Location に、実行結果を取得するための URL が設定されます。その後、当該 URL に対して状態確認を行い、処理が完了したタイミングで最終的な結果が取得できる仕様となっています。</p><p><a href="https://learn.microsoft.com/ja-jp/rest/api/compute/virtual-machines/run-command?view=rest-compute-2025-04-01&tabs=HTTP#response">Virtual Machines - Run Command - REST API (Azure Compute) | Microsoft Learn#応答</a></p><p>[処理例]</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png"></p><p><strong>非同期操作の待機中は、同期応答時の 120 秒タイムアウトは適用されず、HTTP アクションは成功または失敗が確定するまで継続されます。</strong></p><p>なお、「非同期処理は利用したいが、一定時間以上かかる場合はアクションを失敗として扱いたい」といった要件がある場合には、HTTP アクションの <strong>Action timeout</strong> を利用することで、アクションの最大実行時間を制御できます。</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-3.png"></p><p>非同期操作パターンの詳細は下記ブログで説明しておりますので、併せてご参照ください。</p><p><a href="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a></p><hr><h3 id="4-まとめ"><a href="#4-まとめ" class="headerlink" title="4. まとめ "></a>4. まとめ <a id="header4"></a></h3><p>本記事では、Logic Apps の HTTP アクションにおけるタイムアウトの考え方について、同期応答と非同期応答の違いを中心に整理しました。</p><ul><li>HTTP アクションの 120 秒タイムアウトは、同期応答を前提とした制限である</li><li>202 Accepted と Location ヘッダーを返す API は、非同期操作パターンとして扱われる</li><li>非同期操作パターンでは、120 秒を超えてもアクションが成功する</li></ul><p>HTTP アクションの挙動は、単なる秒数の制限ではなく、呼び出し先 API の応答方式と関係しています。本記事が、ワークフロー設計やトラブルシューティングの理解整理の一助となれば幸いです。</p>]]>
+      <![CDATA[<p>こんにちは。Azure Integration サポート チームの中田です。</p><p>Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。</p><p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p><span id="more"></span><ul><li>Logic Apps の HTTP アクションのタイムアウト挙動が分かりづらいと感じている方</li><li>120 秒を超えて HTTP アクションが成功している理由を理解したい方</li></ul><h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ol><li><a href="#header1">HTTP アクションのタイムアウトに関する前提</a></li><li><a href="#header2">同期応答の HTTP アクション</a></li><li><a href="#header3">非同期応答 (非同期操作パターン) の HTTP アクション</a></li><li><a href="#header4">まとめ</a></li></ol><hr><h3 id="1-HTTP-アクションのタイムアウトに関する前提"><a href="#1-HTTP-アクションのタイムアウトに関する前提" class="headerlink" title="1. HTTP アクションのタイムアウトに関する前提 "></a>1. HTTP アクションのタイムアウトに関する前提 <a id="header1"></a></h3><p>Logic Apps における HTTP アクションには、同期的な応答を待つ場合の既定タイムアウト時間が定められています。</p><h4 id="HTTP-要求の制限-タイムアウト時間"><a href="#HTTP-要求の制限-タイムアウト時間" class="headerlink" title="[HTTP 要求の制限 - タイムアウト時間]"></a>[HTTP 要求の制限 - タイムアウト時間]</h4><table><thead><tr><th>名前</th><th>マルチテナント (従量課金)</th><th>シングルテナント (Standard)</th></tr></thead><tbody><tr><td>送信要求</td><td>120 秒 (2 分)</td><td>225 秒 (3 分 45 秒) (既定値・変更可)</td></tr><tr><td>受信要求</td><td>120 秒 (2 分)</td><td>225 秒 (3 分 45 秒) (既定値・変更可)</td></tr></tbody></table><p><a href="https://learn.microsoft.com/ja-jp/azure/logic-apps/logic-apps-limits-and-config?tabs=consumption#http-request-limits">制限と構成リファレンス ガイド - Azure Logic Apps | Microsoft Learn#HTTP 要求の制限</a></p><p>一般的に参照される「HTTP アクションのタイムアウトは 120 秒」という値は、Logic Apps (従量課金) のこの同期応答を前提とした制限を指しています。そのため、この数値だけを見ると、120 秒を超えた HTTP アクションは必ず失敗すると理解されがちですが、実際の挙動は呼び出し先 API の応答方式によって異なります。</p><hr><h3 id="2-同期応答の-HTTP-アクション"><a href="#2-同期応答の-HTTP-アクション" class="headerlink" title="2. 同期応答の HTTP アクション "></a>2. 同期応答の HTTP アクション <a id="header2"></a></h3><p>呼び出し先の API が、リクエストを受信してから処理を完了し、最終結果を 1 回の HTTP 応答で返却する場合、Logic Apps はその応答を同期的に待機します。</p><p>この場合、応答がタイムアウト時間内に返却されなければ、HTTP アクションはタイムアウト エラーとして失敗します。比較的処理時間の短い REST API を呼び出す場合は、この同期応答の挙動になることが一般的です。</p><hr><h3 id="3-非同期応答-非同期操作パターン-の-HTTP-アクション"><a href="#3-非同期応答-非同期操作パターン-の-HTTP-アクション" class="headerlink" title="3. 非同期応答 (非同期操作パターン) の HTTP アクション "></a>3. 非同期応答 (非同期操作パターン) の HTTP アクション <a id="header3"></a></h3><p>一方で、呼び出し先 API が、リクエストを受信した時点で 202 Accepted を返却し、あわせて Location ヘッダーに処理結果取得用の URL を返すケースがあります。</p><p>このような API は、処理をバック グラウンドで継続する非同期操作パターンを採用しています。<br>Logic Apps の HTTP アクションは、この応答を検知すると、内部的に Location ヘッダーに指定された URL に対してポーリングを行い、最終的な処理結果として 200 OK が返却されるまで待機します。</p><p>HTTP アクションでは、この非同期操作パターンを利用するかどうかを<strong>Asynchronous pattern</strong> の設定で制御できます。<br>この設定は既定で有効 (オン) になっており、特別な設定を行わなくても、202 Accepted + Location ヘッダーを返す API に対しては、自動的にポーリングが実行されます。</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-2.png"></p><p>具体例として、Azure Virtual Machines の Run Command API が挙げられます。Run Command API のレスポンス仕様では、コマンドの実行が即時に完了しない場合、HTTP ステータス コードとして 202 Accepted が返却され、レスポンス ヘッダーの Location に、実行結果を取得するための URL が設定されます。その後、当該 URL に対して状態確認を行い、処理が完了したタイミングで最終的な結果が取得できる仕様となっています。</p><p><a href="https://learn.microsoft.com/ja-jp/rest/api/compute/virtual-machines/run-command?view=rest-compute-2025-04-01&tabs=HTTP#response">Virtual Machines - Run Command - REST API (Azure Compute) | Microsoft Learn#応答</a></p><p>[処理例]</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-1.png"></p><p><strong>非同期操作の待機中は、同期応答時の 120 秒タイムアウトは適用されず、HTTP アクションは成功または失敗が確定するまで継続されます。</strong></p><p>なお、「非同期処理は利用したいが、一定時間以上かかる場合はアクションを失敗として扱いたい」といった要件がある場合には、HTTP アクションの <strong>Action timeout</strong> を利用することで、アクションの最大実行時間を制御できます。</p><p><img src="/blog/LogicApps/LogicApps-HttpActionTimeout/LogicApps-HttpActionTimeout-3.png"></p><p>非同期操作パターンの詳細は下記ブログで説明しておりますので、併せてご参照ください。</p><p><a href="https://jpazinteg.github.io/blog/LogicApps/HttpAction-AsyncPattern-Polling/">HTTP アクションでのタイムアウト エラーの回避方法 - 非同期ポーリング パターン</a></p><hr><h3 id="4-まとめ"><a href="#4-まとめ" class="headerlink" title="4. まとめ "></a>4. まとめ <a id="header4"></a></h3><p>本記事では、Logic Apps の HTTP アクションにおけるタイムアウトの考え方について、同期応答と非同期応答の違いを中心に整理しました。</p><ul><li>HTTP アクションの 120 秒タイムアウトは、同期応答を前提とした制限である</li><li>202 Accepted と Location ヘッダーを返す API は、非同期操作パターンとして扱われる</li><li>非同期操作パターンでは、120 秒を超えてもアクションが成功する</li></ul><p>HTTP アクションの挙動は、単なる秒数の制限ではなく、呼び出し先 API の応答方式と関係しています。本記事が、ワークフロー設計やトラブルシューティングの理解整理の一助となれば幸いです。</p>]]>
     </content>
     <id>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/</id>
     <link href="https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/"/>
     <published>2026-04-13T15:00:00.000Z</published>
     <summary>
       <![CDATA[<p>こんにちは。Azure Integration サポート チームの中田です。</p>
-<p>Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴]]>
+<p>Logic Apps の HTTP アクションを利用したワークフローでは、「HTTP アクションのタイムアウトは 120 秒」という情報を目にする機会が多くあります。一方で、実行履歴を確認すると、120 秒を超えているように見えるにもかかわらず、アクションが成功しているケースもあり、挙動に疑問を持たれることがあります。</p>
+<p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p>]]>
     </summary>
     <title>Logic Apps の HTTP アクションにおけるタイムアウトの考え方</title>
-    <updated>2026-04-15T04:20:06.052Z</updated>
+    <updated>2026-04-15T04:31:06.090Z</updated>
   </entry>
   <entry>
     <author>
@@ -50,7 +51,7 @@
 <p>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその確認方法、対処法について説明いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその対処法</title>
-    <updated>2026-04-15T04:20:06.138Z</updated>
+    <updated>2026-04-15T04:31:06.176Z</updated>
   </entry>
   <entry>
     <author>
@@ -71,7 +72,7 @@
 <p>Logic Apps をご利用いただく際に、ご考慮いただきたい制約事項について説明いたします。</p>]]>
     </summary>
     <title>Logic Apps を利用する上でご考慮いただきたい制約</title>
-    <updated>2026-04-15T04:20:06.127Z</updated>
+    <updated>2026-04-15T04:31:06.165Z</updated>
   </entry>
   <entry>
     <author>
@@ -93,7 +94,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Logic Apps では、実に多くのコネクタと、コネクタに含まれるトリガーとアクションをご用意しております。<br>そこで今回は、Logic Apps でご使用いただけるコネクタと、各種コネクタで用意されているトリガーとアクションを確認する方法を紹介させていただきます。</p>]]>
     </summary>
     <title>Logic Apps で使用できるコネクタについて</title>
-    <updated>2026-04-15T04:20:06.063Z</updated>
+    <updated>2026-04-15T04:31:06.100Z</updated>
   </entry>
   <entry>
     <author>
@@ -115,7 +116,7 @@
 <p>トリガーに設定可能なコンカレンシー制御と最大実行待機数について説明します。</p>]]>
     </summary>
     <title>トリガーのコンカレンシー制御と最大実行待機数について</title>
-    <updated>2026-04-15T04:20:06.146Z</updated>
+    <updated>2026-04-15T04:31:06.183Z</updated>
   </entry>
   <entry>
     <author>
@@ -137,7 +138,7 @@
 <p><em>新規構築時</em>と<em>既存環境のエラー発生時</em>の 2 パターンに分けて確認ポイントをご紹介します。</p>]]>
     </summary>
     <title>Standard Logic Apps でのランタイム エラー (ネットワーク問題)</title>
-    <updated>2026-04-15T04:20:06.090Z</updated>
+    <updated>2026-04-15T04:31:06.127Z</updated>
   </entry>
   <entry>
     <author>
@@ -156,7 +157,7 @@
       <![CDATA[<p>本記事では、2025 年 12 月の Windows セキュリティ更新プログラム <a href="https://support.microsoft.com/ja-jp/topic/2025-%E5%B9%B4-12-%E6%9C%88-9-%E6%97%A5-kb5071544-os-%E3%83%93%E3%83%AB%E3%83%89-17763-8146-630aa62e-f399-4e42-9f7a-2a4d38dd1210">KB5071544</a> 等にて、MSMQ に関わる事象として報告されている内容の補足をご案内しております。</p>]]>
     </summary>
     <title>2025 年 12 月の Windows セキュリティ更新プログラム KB5071544 等に関連する MSMQ のご案内</title>
-    <updated>2026-04-15T04:20:06.153Z</updated>
+    <updated>2026-04-15T04:31:06.190Z</updated>
   </entry>
   <entry>
     <author>
@@ -176,7 +177,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>頻繁にいただくお問い合わせに、SharePoint Online からファイルを取得して Azure Blob Storage にアップロードしたいけれど、ファイルサイズが大きいためにコネクタを使用できない、というものがございます。<br>そこで今回は、SharePoint Online から Azure Blob Storage へ、大容量ファイルをコピーする方法を紹介させていただきます。</p>]]>
     </summary>
     <title>SharePoint から Azure Blob Storage に大容量ファイルをコピーする</title>
-    <updated>2026-04-15T04:20:06.123Z</updated>
+    <updated>2026-04-15T04:31:06.160Z</updated>
   </entry>
   <entry>
     <author>
@@ -196,7 +197,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Azure Logic Apps を用いて、Azure Blob Storage などから複数の CSV ファイルを取得、そのデータを加工したいというご質問を、しばしばいただくことがございます。<br>そこで今回は、CSV ファイルの加工方法をいくつか紹介させていただきます。</p>]]>
     </summary>
     <title>取得した CSV ファイルのデータを加工する</title>
-    <updated>2026-04-15T04:20:05.999Z</updated>
+    <updated>2026-04-15T04:31:06.036Z</updated>
   </entry>
   <entry>
     <author>
@@ -215,7 +216,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps のワークフローを誤って削除してしまったとき</title>
-    <updated>2026-04-15T04:20:06.053Z</updated>
+    <updated>2026-04-15T04:31:06.091Z</updated>
   </entry>
   <entry>
     <author>
@@ -237,7 +238,7 @@
 <p>本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。<br>同様の方法にてそのほかの設定なども更新可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>CLI から従量課金タイプの Logic Apps の設定を更新する</title>
-    <updated>2026-04-15T04:20:06.063Z</updated>
+    <updated>2026-04-15T04:31:06.100Z</updated>
   </entry>
   <entry>
     <author>
@@ -263,7 +264,7 @@
 <p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</title>
-    <updated>2026-04-15T04:20:06.088Z</updated>
+    <updated>2026-04-15T04:31:06.125Z</updated>
   </entry>
   <entry>
     <author>
@@ -284,7 +285,7 @@
       <![CDATA[<p>こんにちは。Azure Integration チームの武田です。<br>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br><br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>]]>
     </summary>
     <title>トリガーの発火条件で、1 つの項目に複数の条件を設定する</title>
-    <updated>2026-04-15T04:20:06.001Z</updated>
+    <updated>2026-04-15T04:31:06.039Z</updated>
   </entry>
   <entry>
     <author>
@@ -305,7 +306,7 @@
 <p>Azure Monitor のアクション グループは、Azure Monitor のデータをもとにインフラストラクチャやアプリケーションに問題が発生したことを検知した際に、アラートをトリガーするための機能です。<br>アラートがトリガーされたときに実行されるアクションのうち、ロジック アプリを呼び出すことができるアクションとして [ロジック アプリ] と [セキュリティ保護された Webhook] の 2 種類がございます。<br><br>この記事では Azure Monitor のアクション グループからロジック アプリを呼び出す際に [セキュリティで保護された Webhook] アクションを利用するシナリオと、その際に必要となる手順をご紹介します。<br></p>]]>
     </summary>
     <title>Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</title>
-    <updated>2026-04-15T04:20:06.056Z</updated>
+    <updated>2026-04-15T04:31:06.093Z</updated>
   </entry>
   <entry>
     <author>
@@ -326,7 +327,7 @@
 <p>本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。<br>ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>従量課金タイプの Logic Apps 用のカスタム ロールを作成する</title>
-    <updated>2026-04-15T04:20:06.046Z</updated>
+    <updated>2026-04-15T04:31:06.083Z</updated>
   </entry>
   <entry>
     <author>
@@ -352,7 +353,7 @@
 <p>今回は Azure Integration サポート チーム にて MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時に取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p>]]>
     </summary>
     <title>MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について</title>
-    <updated>2026-04-15T04:20:06.179Z</updated>
+    <updated>2026-04-15T04:31:06.215Z</updated>
   </entry>
   <entry>
     <author>
@@ -372,7 +373,7 @@
       <![CDATA[<p>Azure Integration サポート チームの長坂です。<br><br>Azure Logic Apps Standard は内部で Azure App Services をホスティングリソースとして活用しており、今回はその仕組みを応用したテクニックをご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</title>
-    <updated>2026-04-15T04:20:06.089Z</updated>
+    <updated>2026-04-15T04:31:06.126Z</updated>
   </entry>
   <entry>
     <author>
@@ -393,7 +394,7 @@
 <p>今回の記事では続編として、Standard 版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>]]>
     </summary>
     <title>Standard 版 Azure Logic Apps の料金体系を理解するポイント</title>
-    <updated>2026-04-15T04:20:06.062Z</updated>
+    <updated>2026-04-15T04:31:06.099Z</updated>
   </entry>
   <entry>
     <author>
@@ -415,7 +416,7 @@
 <p>Logic Apps の [サービス プロバイダー接続] について説明いたします。</p>]]>
     </summary>
     <title>サービス プロバイダー接続について</title>
-    <updated>2026-04-15T04:20:06.136Z</updated>
+    <updated>2026-04-15T04:31:06.173Z</updated>
   </entry>
   <entry>
     <author>
@@ -437,6 +438,6 @@
 <p>今回はさらに Logic Apps における日付や時刻の判定に使えるシナリオとして「毎月第 1 月曜日に起動したい」場合の設定例をご紹介いたします。</p>]]>
     </summary>
     <title>Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</title>
-    <updated>2026-04-15T04:20:06.051Z</updated>
+    <updated>2026-04-15T04:31:06.088Z</updated>
   </entry>
 </feed>
