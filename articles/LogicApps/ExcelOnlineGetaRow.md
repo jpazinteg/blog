@@ -1,5 +1,5 @@
 ---
-title: Excel Onlne コネクタでテーブルが一覧表示されない場合の回避策
+title: Excel Online コネクタでテーブルが一覧表示されない場合の回避策
 date: 2022-10-18 00:00:00
 tags:
   - How-To
