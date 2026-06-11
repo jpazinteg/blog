@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan Azure Integration Support Team</rights>
   <subtitle>日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</subtitle>
   <title>Japan Azure Integration Support Blog</title>
-  <updated>2026-04-15T04:31:06.090Z</updated>
+  <updated>2026-06-11T01:19:56.052Z</updated>
   <entry>
     <author>
       <name>Japan Azure Integration Support Team</name>
@@ -30,7 +30,7 @@
 <p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p>]]>
     </summary>
     <title>Logic Apps の HTTP アクションにおけるタイムアウトの考え方</title>
-    <updated>2026-04-15T04:31:06.090Z</updated>
+    <updated>2026-06-11T01:19:56.052Z</updated>
   </entry>
   <entry>
     <author>
@@ -51,7 +51,7 @@
 <p>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその確認方法、対処法について説明いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその対処法</title>
-    <updated>2026-04-15T04:31:06.176Z</updated>
+    <updated>2026-06-11T01:19:56.162Z</updated>
   </entry>
   <entry>
     <author>
@@ -72,7 +72,7 @@
 <p>Logic Apps をご利用いただく際に、ご考慮いただきたい制約事項について説明いたします。</p>]]>
     </summary>
     <title>Logic Apps を利用する上でご考慮いただきたい制約</title>
-    <updated>2026-04-15T04:31:06.165Z</updated>
+    <updated>2026-06-11T01:19:56.149Z</updated>
   </entry>
   <entry>
     <author>
@@ -94,7 +94,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Logic Apps では、実に多くのコネクタと、コネクタに含まれるトリガーとアクションをご用意しております。<br>そこで今回は、Logic Apps でご使用いただけるコネクタと、各種コネクタで用意されているトリガーとアクションを確認する方法を紹介させていただきます。</p>]]>
     </summary>
     <title>Logic Apps で使用できるコネクタについて</title>
-    <updated>2026-04-15T04:31:06.100Z</updated>
+    <updated>2026-06-11T01:19:56.065Z</updated>
   </entry>
   <entry>
     <author>
@@ -116,7 +116,7 @@
 <p>トリガーに設定可能なコンカレンシー制御と最大実行待機数について説明します。</p>]]>
     </summary>
     <title>トリガーのコンカレンシー制御と最大実行待機数について</title>
-    <updated>2026-04-15T04:31:06.183Z</updated>
+    <updated>2026-06-11T01:19:56.171Z</updated>
   </entry>
   <entry>
     <author>
@@ -138,7 +138,7 @@
 <p><em>新規構築時</em>と<em>既存環境のエラー発生時</em>の 2 パターンに分けて確認ポイントをご紹介します。</p>]]>
     </summary>
     <title>Standard Logic Apps でのランタイム エラー (ネットワーク問題)</title>
-    <updated>2026-04-15T04:31:06.127Z</updated>
+    <updated>2026-06-11T01:19:56.100Z</updated>
   </entry>
   <entry>
     <author>
@@ -157,7 +157,7 @@
       <![CDATA[<p>本記事では、2025 年 12 月の Windows セキュリティ更新プログラム <a href="https://support.microsoft.com/ja-jp/topic/2025-%E5%B9%B4-12-%E6%9C%88-9-%E6%97%A5-kb5071544-os-%E3%83%93%E3%83%AB%E3%83%89-17763-8146-630aa62e-f399-4e42-9f7a-2a4d38dd1210">KB5071544</a> 等にて、MSMQ に関わる事象として報告されている内容の補足をご案内しております。</p>]]>
     </summary>
     <title>2025 年 12 月の Windows セキュリティ更新プログラム KB5071544 等に関連する MSMQ のご案内</title>
-    <updated>2026-04-15T04:31:06.190Z</updated>
+    <updated>2026-06-11T01:19:56.181Z</updated>
   </entry>
   <entry>
     <author>
@@ -177,7 +177,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>頻繁にいただくお問い合わせに、SharePoint Online からファイルを取得して Azure Blob Storage にアップロードしたいけれど、ファイルサイズが大きいためにコネクタを使用できない、というものがございます。<br>そこで今回は、SharePoint Online から Azure Blob Storage へ、大容量ファイルをコピーする方法を紹介させていただきます。</p>]]>
     </summary>
     <title>SharePoint から Azure Blob Storage に大容量ファイルをコピーする</title>
-    <updated>2026-04-15T04:31:06.160Z</updated>
+    <updated>2026-06-11T01:19:56.142Z</updated>
   </entry>
   <entry>
     <author>
@@ -197,7 +197,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Azure Logic Apps を用いて、Azure Blob Storage などから複数の CSV ファイルを取得、そのデータを加工したいというご質問を、しばしばいただくことがございます。<br>そこで今回は、CSV ファイルの加工方法をいくつか紹介させていただきます。</p>]]>
     </summary>
     <title>取得した CSV ファイルのデータを加工する</title>
-    <updated>2026-04-15T04:31:06.036Z</updated>
+    <updated>2026-06-11T01:19:55.982Z</updated>
   </entry>
   <entry>
     <author>
@@ -216,7 +216,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps のワークフローを誤って削除してしまったとき</title>
-    <updated>2026-04-15T04:31:06.091Z</updated>
+    <updated>2026-06-11T01:19:56.052Z</updated>
   </entry>
   <entry>
     <author>
@@ -238,7 +238,7 @@
 <p>本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。<br>同様の方法にてそのほかの設定なども更新可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>CLI から従量課金タイプの Logic Apps の設定を更新する</title>
-    <updated>2026-04-15T04:31:06.100Z</updated>
+    <updated>2026-06-11T01:19:56.065Z</updated>
   </entry>
   <entry>
     <author>
@@ -264,7 +264,7 @@
 <p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</title>
-    <updated>2026-04-15T04:31:06.125Z</updated>
+    <updated>2026-06-11T01:19:56.096Z</updated>
   </entry>
   <entry>
     <author>
@@ -285,7 +285,7 @@
       <![CDATA[<p>こんにちは。Azure Integration チームの武田です。<br>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br><br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>]]>
     </summary>
     <title>トリガーの発火条件で、1 つの項目に複数の条件を設定する</title>
-    <updated>2026-04-15T04:31:06.039Z</updated>
+    <updated>2026-06-11T01:19:55.986Z</updated>
   </entry>
   <entry>
     <author>
@@ -306,7 +306,7 @@
 <p>Azure Monitor のアクション グループは、Azure Monitor のデータをもとにインフラストラクチャやアプリケーションに問題が発生したことを検知した際に、アラートをトリガーするための機能です。<br>アラートがトリガーされたときに実行されるアクションのうち、ロジック アプリを呼び出すことができるアクションとして [ロジック アプリ] と [セキュリティ保護された Webhook] の 2 種類がございます。<br><br>この記事では Azure Monitor のアクション グループからロジック アプリを呼び出す際に [セキュリティで保護された Webhook] アクションを利用するシナリオと、その際に必要となる手順をご紹介します。<br></p>]]>
     </summary>
     <title>Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</title>
-    <updated>2026-04-15T04:31:06.093Z</updated>
+    <updated>2026-06-11T01:19:56.056Z</updated>
   </entry>
   <entry>
     <author>
@@ -327,7 +327,7 @@
 <p>本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。<br>ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>従量課金タイプの Logic Apps 用のカスタム ロールを作成する</title>
-    <updated>2026-04-15T04:31:06.083Z</updated>
+    <updated>2026-06-11T01:19:56.043Z</updated>
   </entry>
   <entry>
     <author>
@@ -337,10 +337,10 @@
     <category term="Azure Integration" scheme="https://jpazinteg.github.io/blog/tags/Azure-Integration/"/>
     <category term="MSMQ" scheme="https://jpazinteg.github.io/blog/tags/MSMQ/"/>
     <category term="Tips" scheme="https://jpazinteg.github.io/blog/tags/Tips/"/>
-    <category term="HIS" scheme="https://jpazinteg.github.io/blog/tags/HIS/"/>
-    <category term="BizTalk" scheme="https://jpazinteg.github.io/blog/tags/BizTalk/"/>
     <category term="Trouble" scheme="https://jpazinteg.github.io/blog/tags/Trouble/"/>
     <category term="Log" scheme="https://jpazinteg.github.io/blog/tags/Log/"/>
+    <category term="HIS" scheme="https://jpazinteg.github.io/blog/tags/HIS/"/>
+    <category term="BizTalk" scheme="https://jpazinteg.github.io/blog/tags/BizTalk/"/>
     <content>
       <![CDATA[<p>こんにちは！Azure Integration サポート チームの 山田 です。  </p><p>Azure Integration サポート チームでは Azure 製品以外にもオンプレミス製品を取り扱っております。<br>お客様環境のオンプレミス製品にて何らかの問題が発生した際に、本テクニカル サポートとしましてお客様にログの採取をお願いする場合がございます。</p><p>今回は Azure Integration サポート チーム にて MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時に取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p><span id="more"></span><h2 id="目次"><a href="#目次" class="headerlink" title="目次"></a>目次</h2><ul><li>イベント ログ</li><li>MSMQ 関連ログ</li><li>その他</li><li>まとめ</li></ul><h2 id="イベント-ログ"><a href="#イベント-ログ" class="headerlink" title="イベント ログ"></a>イベント ログ</h2><p>イベント ログはイベント ビューアーより採取いただけます。</p><ol><li>Windows Server 上にてイベント ビューアーを起動します（コマンド: eventvwr）</li><li>[Windows Logs (Windows ログ)] を展開します</li><li>以下をそれぞれ右クリックし、[Save All Events As (すべてのイベントを名前をつけて保存)] を選択します</li></ol><ul><li>Application (アプリケーション)</li><li>System (システム)</li><li>Security (セキュリティ)</li></ul><ol start="4"><li>任意の名前を入力し保存します。[Save as type (ファイルの種類)] は .evtx を選択します。</li></ol><p>ここまでの手順により、イベント ログの内容がエクスポートされたイベント ファイルが作成されます。</p><p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-1.png"></p><p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-3.png"></p><p>なお、イベント ファイルを、イベントが記録された環境と異なる環境で開いた際には、イベント ビューアーでの表示に差異が生じる場合がございます。このため、続けて以下を実施いただけますと幸いです。</p><p>再度手順 3 以降について、今回は [Save as type (ファイルの種類)] にて、テキスト (タブ区切り) (.txt)、または CSV (コンマ区切り) (.csv) を選択します。</p><p>手順 4 で作成されるファイルの内容は、あくまでもイベント ログから一部項目を抜粋した内容となります。<br>しかしながら、前述したような表示の差異が生じず、イベントが記録された環境での表示情報を確認するのに役立つファイルとなります。</p><p>以上の手順で作成した、以下 2 点のファイルをご提供いただけますと幸いです。</p><ul><li>イベント ファイル</li><li>テキスト ファイル、または CSV ファイル</li></ul><p>他チームの記事にもイベント ログに関する参考情報がございます。</p><p>参考: <a href="https://jpwinsup.github.io/blog/2023/09/25/UserInterfaceAndApps/EventLog/How-to-check-Event-log/">イベント ログの確認方法 | Microsoft Japan Windows Technology Support Blog</a></p><p>参考: <a href="https://jpdsi.github.io/blog/web-apps/LogCollection1/#1-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88-%E3%83%AD%E3%82%B0">IIS の調査に必要な基本的なログ情報について # イベント ログ</a></p><p><a href="https://learn.microsoft.com/ja-jp/host-integration-server/core/how-to-save-event-logs1">イベント ログを保存する方法1 - Host Integration Server | Microsoft Learn</a></p><h2 id="MSMQ-関連ログ"><a href="#MSMQ-関連ログ" class="headerlink" title="MSMQ 関連ログ"></a>MSMQ 関連ログ</h2><p>MSMQ の調査に有用な End2End ログの採取手順は以下記事をご覧いただけます。</p><p><a href="https://jpazinteg.github.io/blog/MSMQ/MsmqEnd2Endlog/">MSMQ で End2End ログを取得する手順 | Japan Azure Integration Support Blog</a></p><p>その他 MSMQ 関連の情報を取得するコマンドを依頼する場合がございます。以下はメッセージ キューの情報を取得する PowerShell コマンドとなります。</p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/msmq/get-msmqqueue?view=windowsserver2025-ps">Get-MsmqQueue (MSMQ) | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/msmq/get-msmqoutgoingqueue?view=windowsserver2025-ps">Get-MSMQOutgoingQueue (MSMQ) | Microsoft Learn</a></p><p><img src="/blog/general/TroubleLogCollection/TroubleLogCollection-2.png"></p><p>ほか、<a href="https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/#MSMQ-%E3%82%92%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E6%89%8B%E9%A0%86%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">MSMQ の HTTP サポート</a> をご利用の場合に、IIS 関連のログ取得をお願いする場合がございます。</p><p>参考: <a href="https://jpdsi.github.io/blog/web-apps/LogCollection1/">IIS の調査に必要な基本的なログ情報について | Japan Developer Support Internet Team Blog</a> </p><h2 id="その他"><a href="#その他" class="headerlink" title="その他"></a>その他</h2><p>必要に応じて、各種コマンドの実行結果や、ネットワーク キャプチャを取得いただく場合がございます。その際のコマンドのご利用方法などについて、以下にリンクをおまとめいたしております。</p><h3 id="Systeminfo-Get-ComputerInfo-など"><a href="#Systeminfo-Get-ComputerInfo-など" class="headerlink" title="Systeminfo &#x2F; Get-ComputerInfo など"></a>Systeminfo &#x2F; Get-ComputerInfo など</h3><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/systeminfo">systeminfo | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.management/get-computerinfo">Get-ComputerInfo (Microsoft.PowerShell.Management) - PowerShell | Microsoft Learn</a></p><h3 id="nslookup-Resolve-DnsName-など"><a href="#nslookup-Resolve-DnsName-など" class="headerlink" title="nslookup &#x2F; Resolve-DnsName など"></a>nslookup &#x2F; Resolve-DnsName など</h3><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/nslookup">nslookup | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/dnsclient/resolve-dnsname">Resolve-DnsName (DnsClient) | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/troubleshoot/windows-client/networking/troubleshoot-dns-client-resolution-issues">DNS クライアントの名前解決に関する問題のトラブルシューティング - Windows Client | Microsoft Learn</a></p><h3 id="ping-tracert-Test-NetConnection-など"><a href="#ping-tracert-Test-NetConnection-など" class="headerlink" title="ping &#x2F; tracert &#x2F; Test-NetConnection など"></a>ping &#x2F; tracert &#x2F; Test-NetConnection など</h3><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/ping">ping | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/tracert">tracert | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/test-netconnection">Test-NetConnection (NetTCPIP) | Microsoft Learn</a></p><h3 id="netstat-Get-NetTCPConnection-など"><a href="#netstat-Get-NetTCPConnection-など" class="headerlink" title="netstat &#x2F; Get-NetTCPConnection など"></a>netstat &#x2F; Get-NetTCPConnection など</h3><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/netstat">netstat | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/get-nettcpconnection">Get-NetTCPConnection (NetTCPIP) | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/troubleshoot/windows-client/networking/tcp-ip-port-exhaustion-troubleshooting">TCP&#x2F;IP ポート不足のトラブルシューティング - Windows Client | Microsoft Learn</a></p><h3 id="ipconfig-Get-NetIPConfiguration-など"><a href="#ipconfig-Get-NetIPConfiguration-など" class="headerlink" title="ipconfig &#x2F; Get-NetIPConfiguration など"></a>ipconfig &#x2F; Get-NetIPConfiguration など</h3><p><a href="https://learn.microsoft.com/ja-jp/windows-server/administration/windows-commands/ipconfig">ipconfig | Microsoft Learn</a></p><p><a href="https://learn.microsoft.com/ja-jp/powershell/module/nettcpip/get-netipconfiguration">Get-NetIPConfiguration (NetTCPIP) | Microsoft Learn</a></p><h3 id="パケット-キャプチャーなど"><a href="#パケット-キャプチャーなど" class="headerlink" title="パケット キャプチャーなど"></a>パケット キャプチャーなど</h3><p>ネットワークの問題が疑われる場合に、Wireshark 等に代表されるネットワーク診断ツールからのログ取得をお願いする場合がございます。</p><p><a href="https://learn.microsoft.com/ja-jp/azure/developer/java/sdk/troubleshooting-network?tabs=windows">ネットワークに関する問題のトラブルシューティング</a></p><p><a href="https://techcommunity.microsoft.com/blog/iis-support-blog/capture-a-network-trace--wireshark/4245529">How to Capture Simultaneous Wireshark Traces from Client and Server for Network Troubleshooting</a></p><p>取得いただきましたログは一連、弊社サポート エンジニアより連携させていただきますファイル アップロード サイトにアップロード頂ければ幸いです。</p><h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>以上本記事では、オンプレミス製品の調査時にサポートよりお願い差し上げるログについてご案内いたしました。調査をご依頼の際はこちらの内容を基に本テクニカル サポートへお問合せいただければ幸いです。</p><ul><li>イベント ログ</li><li>MSMQ 関連ログ</li><li>その他</li></ul><p>最後までお読みいただき、ありがとうございました！</p>]]>
     </content>
@@ -353,7 +353,7 @@
 <p>今回は Azure Integration サポート チーム にて MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時に取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p>]]>
     </summary>
     <title>MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について</title>
-    <updated>2026-04-15T04:31:06.215Z</updated>
+    <updated>2026-06-11T01:19:56.213Z</updated>
   </entry>
   <entry>
     <author>
@@ -373,7 +373,7 @@
       <![CDATA[<p>Azure Integration サポート チームの長坂です。<br><br>Azure Logic Apps Standard は内部で Azure App Services をホスティングリソースとして活用しており、今回はその仕組みを応用したテクニックをご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</title>
-    <updated>2026-04-15T04:31:06.126Z</updated>
+    <updated>2026-06-11T01:19:56.097Z</updated>
   </entry>
   <entry>
     <author>
@@ -394,7 +394,7 @@
 <p>今回の記事では続編として、Standard 版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>]]>
     </summary>
     <title>Standard 版 Azure Logic Apps の料金体系を理解するポイント</title>
-    <updated>2026-04-15T04:31:06.099Z</updated>
+    <updated>2026-06-11T01:19:56.063Z</updated>
   </entry>
   <entry>
     <author>
@@ -416,7 +416,7 @@
 <p>Logic Apps の [サービス プロバイダー接続] について説明いたします。</p>]]>
     </summary>
     <title>サービス プロバイダー接続について</title>
-    <updated>2026-04-15T04:31:06.173Z</updated>
+    <updated>2026-06-11T01:19:56.159Z</updated>
   </entry>
   <entry>
     <author>
@@ -438,6 +438,6 @@
 <p>今回はさらに Logic Apps における日付や時刻の判定に使えるシナリオとして「毎月第 1 月曜日に起動したい」場合の設定例をご紹介いたします。</p>]]>
     </summary>
     <title>Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</title>
-    <updated>2026-04-15T04:31:06.088Z</updated>
+    <updated>2026-06-11T01:19:56.049Z</updated>
   </entry>
 </feed>
