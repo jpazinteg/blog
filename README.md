@@ -1,6 +1,6 @@
-# Blog Example
+# Japan Azure Integration Support Blog
 
-[template] Microsoft CSS Japan example blog repository.
+Japan Azure Integration Support Team のブログリポジトリです。
 
 ## Getting Started
 
@@ -26,22 +26,31 @@ docker-compose down
 ## Directory structure
 
 ```
-example
-├── .github
-│   └── workflows      # Workflows for GitHub Actions
-│       └── upload-gh-pages.yml
+jpazinteg-blog
+├── .azuredevops
+│   └── pull_request_template  # PR templates
+│       ├── add.md
+│       └── fix.md
 ├── .gitignore
 ├── .textlintrc
 ├── README.md
-├── _config.yml        # Site configration
-├── articles           # Blog articles
+├── _config.yml                # Site configuration
+├── articles                   # Blog articles
 │   └── information
-│       └── test.md    # Example post
-├── docker-compose.yaml    # Configuration for containers (local-preview)
-├── docs               # Documents
+│       └── test.md            # Example post
+├── docker-compose.yaml        # Configuration for containers (local-preview)
+├── docs                       # Documents
 ├── github-issue-template.md
+├── pipelines                  # Azure Pipelines
+│   ├── prod-pipeline.yml
+│   ├── pr-pipeline.yml
+│   ├── stages
+│   │   ├── generate-blog.yml
+│   │   └── publish-to-ghpages.yml
+│   └── scripts
+│       └── prepare-preview.js
 ├── scaffolds
 ├── source
-└── themes             # Blog themes
+└── themes                     # Blog themes
     └── jpazure (git submodule)
 ```

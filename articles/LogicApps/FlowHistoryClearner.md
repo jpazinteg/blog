@@ -74,7 +74,7 @@ FlowHistoryCleaner.exe
 
 ```
 C:\home\FlowHistoryCleaner\FlowHistoryCleaner\bin\Debug\netcoreapp3.1\publish>FlowHistoryCleaner.exe
-will use the connection string DefaultEndpointsProtocol=https;AccountName=playgroundeastjapan9aea;AccountKey=uwx+LUhDpdjeqVf5riH0MMUwaDF4a1eJIx+0Yc2CRnZ49O09abVvpYobK3iWf4I/65CQumhq7GrD+ASt2DJaSg==;EndpointSuffix=core.windows.net 
+will use the connection string DefaultEndpointsProtocol=https;AccountName=<your-storage-account>;AccountKey=<your-account-key>;EndpointSuffix=core.windows.net 
 Are you sure you want to clean all  Tables and Queues ? [y/n] : y
 ```
 

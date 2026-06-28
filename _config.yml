@@ -5,10 +5,9 @@
 # Title (display)
 title: Japan Azure Integration Support Blog
 # Sub Title (display)
-subtitle: 日本マイクロソフトの Azure Integration に関するサポート情報のブログです。
-
+subtitle: '日本マイクロソフトの Azure Integration に関するサポート情報のブログです。'
 # Description
-description: 日本マイクロソフトの Azure Integration に関するサポート情報のブログです。
+description: '日本マイクロソフトの Azure Integration に関するサポート情報のブログです。'
 
 # Keywords
 keywords:
@@ -31,6 +30,8 @@ github:
   url: https://github.com/jpazinteg/blog/
   posts_dir: articles
   default_branch: main
+  # show last update and contributors from GitHub API and show in post header
+  show_additional_info: false
 
 skip_render:
   - '_data/*.png'
@@ -79,7 +80,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -88,7 +89,7 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -123,4 +124,5 @@ feed:
 # date: 2020-04-30 10:00
 # disableDisclaimer: true
 # ---
-disclaimer: ※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。
+disclaimer:
+  ※本情報の内容（添付文書、リンク先などを含む）は、作成日時点でのものであり、予告なく変更される場合があります。
