@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/</loc>
+    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCheckInstall/</loc>
+    <loc>https://jpazinteg.github.io/blog/MSMQ/MsmqCleanInstall/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/Utf82SJIS/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/UnixTime/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -281,7 +281,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-GetEnvironmentVariables/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/StandardLogicApps-Ping/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLA/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/SecBlobStandardLAPortal/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -344,7 +344,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-UpdateWithCLI/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -353,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicAppsConnectorList/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-UpdateWithCLI/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -389,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -398,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-HttpActionTimeout/</loc>
+    <loc>https://jpazinteg.github.io/blog/LogicApps/LogicApps-Recovery/</loc>
     
     <lastmod>2026-06-28</lastmod>
     
@@ -681,14 +681,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/Standard/</loc>
+    <loc>https://jpazinteg.github.io/blog/tags/For-each/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/For-each/</loc>
+    <loc>https://jpazinteg.github.io/blog/tags/Standard/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -702,14 +702,14 @@
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/Graph-API/</loc>
+    <loc>https://jpazinteg.github.io/blog/tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jpazinteg.github.io/blog/tags/HTTP-%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/</loc>
+    <loc>https://jpazinteg.github.io/blog/tags/Graph-API/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -786,6 +786,13 @@
   </url>
   
   <url>
+    <loc>https://jpazinteg.github.io/blog/tags/Unix-Time/</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jpazinteg.github.io/blog/tags/Trouble/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -794,13 +801,6 @@
   
   <url>
     <loc>https://jpazinteg.github.io/blog/tags/Log/</loc>
-    <lastmod>2026-06-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jpazinteg.github.io/blog/tags/Unix-Time/</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

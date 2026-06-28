@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Japan Azure Integration Support Team</rights>
   <subtitle>日本マイクロソフトの Azure Integration に関するサポート情報のブログです。</subtitle>
   <title>Japan Azure Integration Support Blog</title>
-  <updated>2026-06-28T22:31:39.102Z</updated>
+  <updated>2026-06-28T22:32:19.406Z</updated>
   <entry>
     <author>
       <name>Japan Azure Integration Support Team</name>
@@ -30,7 +30,7 @@
 <p>本記事では、HTTP アクションにおける同期応答 &#x2F; 非同期応答の違いに着目し、タイムアウトの考え方について整理します。</p>]]>
     </summary>
     <title>Logic Apps の HTTP アクションにおけるタイムアウトの考え方</title>
-    <updated>2026-06-28T22:31:39.102Z</updated>
+    <updated>2026-06-28T22:32:19.406Z</updated>
   </entry>
   <entry>
     <author>
@@ -51,7 +51,7 @@
 <p>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその確認方法、対処法について説明いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps で CPU やメモリが高騰する一般的な原因とその対処法</title>
-    <updated>2026-06-28T22:31:39.200Z</updated>
+    <updated>2026-06-28T22:32:19.537Z</updated>
   </entry>
   <entry>
     <author>
@@ -72,7 +72,7 @@
 <p>Logic Apps をご利用いただく際に、ご考慮いただきたい制約事項について説明いたします。</p>]]>
     </summary>
     <title>Logic Apps を利用する上でご考慮いただきたい制約</title>
-    <updated>2026-06-28T22:31:39.188Z</updated>
+    <updated>2026-06-28T22:32:19.519Z</updated>
   </entry>
   <entry>
     <author>
@@ -94,7 +94,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Logic Apps では、実に多くのコネクタと、コネクタに含まれるトリガーとアクションをご用意しております。<br>そこで今回は、Logic Apps でご使用いただけるコネクタと、各種コネクタで用意されているトリガーとアクションを確認する方法を紹介させていただきます。</p>]]>
     </summary>
     <title>Logic Apps で使用できるコネクタについて</title>
-    <updated>2026-06-28T22:31:39.114Z</updated>
+    <updated>2026-06-28T22:32:19.418Z</updated>
   </entry>
   <entry>
     <author>
@@ -116,7 +116,7 @@
 <p>トリガーに設定可能なコンカレンシー制御と最大実行待機数について説明します。</p>]]>
     </summary>
     <title>トリガーのコンカレンシー制御と最大実行待機数について</title>
-    <updated>2026-06-28T22:31:39.209Z</updated>
+    <updated>2026-06-28T22:32:19.549Z</updated>
   </entry>
   <entry>
     <author>
@@ -138,7 +138,7 @@
 <p><em>新規構築時</em>と<em>既存環境のエラー発生時</em>の 2 パターンに分けて確認ポイントをご紹介します。</p>]]>
     </summary>
     <title>Standard Logic Apps でのランタイム エラー (ネットワーク問題)</title>
-    <updated>2026-06-28T22:31:39.146Z</updated>
+    <updated>2026-06-28T22:32:19.455Z</updated>
   </entry>
   <entry>
     <author>
@@ -157,7 +157,7 @@
       <![CDATA[<p>本記事では、2025 年 12 月の Windows セキュリティ更新プログラム <a href="https://support.microsoft.com/ja-jp/topic/2025-%E5%B9%B4-12-%E6%9C%88-9-%E6%97%A5-kb5071544-os-%E3%83%93%E3%83%AB%E3%83%89-17763-8146-630aa62e-f399-4e42-9f7a-2a4d38dd1210">KB5071544</a> 等にて、MSMQ に関わる事象として報告されている内容の補足をご案内しております。</p>]]>
     </summary>
     <title>2025 年 12 月の Windows セキュリティ更新プログラム KB5071544 等に関連する MSMQ のご案内</title>
-    <updated>2026-06-28T22:31:39.217Z</updated>
+    <updated>2026-06-28T22:32:19.568Z</updated>
   </entry>
   <entry>
     <author>
@@ -177,7 +177,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>頻繁にいただくお問い合わせに、SharePoint Online からファイルを取得して Azure Blob Storage にアップロードしたいけれど、ファイルサイズが大きいためにコネクタを使用できない、というものがございます。<br>そこで今回は、SharePoint Online から Azure Blob Storage へ、大容量ファイルをコピーする方法を紹介させていただきます。</p>]]>
     </summary>
     <title>SharePoint から Azure Blob Storage に大容量ファイルをコピーする</title>
-    <updated>2026-06-28T22:31:39.183Z</updated>
+    <updated>2026-06-28T22:32:19.510Z</updated>
   </entry>
   <entry>
     <author>
@@ -197,7 +197,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの 武田 です。<br>Azure Logic Apps を用いて、Azure Blob Storage などから複数の CSV ファイルを取得、そのデータを加工したいというご質問を、しばしばいただくことがございます。<br>そこで今回は、CSV ファイルの加工方法をいくつか紹介させていただきます。</p>]]>
     </summary>
     <title>取得した CSV ファイルのデータを加工する</title>
-    <updated>2026-06-28T22:31:39.040Z</updated>
+    <updated>2026-06-28T22:32:19.338Z</updated>
   </entry>
   <entry>
     <author>
@@ -216,7 +216,7 @@
       <![CDATA[<p>こんにちは！ Azure Integration サポート チームの山田です。<br>今回は、Standard Logic Apps のワークフローを誤って削除してしまった際の調査、リカバリ手段についてご紹介いたします。</p>]]>
     </summary>
     <title>Standard Logic Apps のワークフローを誤って削除してしまったとき</title>
-    <updated>2026-06-28T22:31:39.103Z</updated>
+    <updated>2026-06-28T22:32:19.406Z</updated>
   </entry>
   <entry>
     <author>
@@ -238,7 +238,7 @@
 <p>本記事では、具体例として既存のリソースの “コンテンツの IP 範囲” に新しく IP アドレスを追加します。<br>同様の方法にてそのほかの設定なども更新可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>CLI から従量課金タイプの Logic Apps の設定を更新する</title>
-    <updated>2026-06-28T22:31:39.114Z</updated>
+    <updated>2026-06-28T22:32:19.417Z</updated>
   </entry>
   <entry>
     <author>
@@ -264,7 +264,7 @@
 <p>以下、Azure Logic Apps Standard プランを使用する前提でこれを実現する方法についてご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard のマネージド ID 資格情報で HTTP アクションにより明示的にアクセストークンの値を取得する方法</title>
-    <updated>2026-06-28T22:31:39.143Z</updated>
+    <updated>2026-06-28T22:32:19.451Z</updated>
   </entry>
   <entry>
     <author>
@@ -285,7 +285,7 @@
       <![CDATA[<p>こんにちは。Azure Integration チームの武田です。<br>本記事では、トリガー発火条件として、1 つの項目に複数の条件を設定する方法についてご案内させていただきます。<br><br>なお、本記事では従量課金プランの Logic Apps を用いてご説明をしておりますが、Standard Logic Apps をご使用の場合でも、同じように設定をすることが可能です。</p>]]>
     </summary>
     <title>トリガーの発火条件で、1 つの項目に複数の条件を設定する</title>
-    <updated>2026-06-28T22:31:39.044Z</updated>
+    <updated>2026-06-28T22:32:19.344Z</updated>
   </entry>
   <entry>
     <author>
@@ -306,7 +306,7 @@
 <p>Azure Monitor のアクション グループは、Azure Monitor のデータをもとにインフラストラクチャやアプリケーションに問題が発生したことを検知した際に、アラートをトリガーするための機能です。<br>アラートがトリガーされたときに実行されるアクションのうち、ロジック アプリを呼び出すことができるアクションとして [ロジック アプリ] と [セキュリティ保護された Webhook] の 2 種類がございます。<br><br>この記事では Azure Monitor のアクション グループからロジック アプリを呼び出す際に [セキュリティで保護された Webhook] アクションを利用するシナリオと、その際に必要となる手順をご紹介します。<br></p>]]>
     </summary>
     <title>Azure Monitor のアクション グループから [セキュリティで保護された Webhook] アクションでロジック アプリを呼び出す方法</title>
-    <updated>2026-06-28T22:31:39.106Z</updated>
+    <updated>2026-06-28T22:32:19.410Z</updated>
   </entry>
   <entry>
     <author>
@@ -327,7 +327,7 @@
 <p>本記事では、既に作成済みのリソースに対して保守するための編集・読み取り権限を付与しつつ、削除は出来ないようなロールを作成します。<br>ご要件に沿って、必要な権限を付与・除外することが可能ですのでご参考いただけますと幸いでございます。</p>]]>
     </summary>
     <title>従量課金タイプの Logic Apps 用のカスタム ロールを作成する</title>
-    <updated>2026-06-28T22:31:39.094Z</updated>
+    <updated>2026-06-28T22:32:19.398Z</updated>
   </entry>
   <entry>
     <author>
@@ -353,7 +353,7 @@
 <p>今回は Azure Integration サポート チーム にて MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時に取得いただきたいログの内容と、その取得方法についてご案内申し上げます。</p>]]>
     </summary>
     <title>MSMQ、Host Integration Server(HIS)、BizTalk Server などの調査時にサポート エンジニアへ連携するログの取得方法について</title>
-    <updated>2026-06-28T22:31:39.247Z</updated>
+    <updated>2026-06-28T22:32:19.624Z</updated>
   </entry>
   <entry>
     <author>
@@ -373,7 +373,7 @@
       <![CDATA[<p>Azure Integration サポート チームの長坂です。<br><br>Azure Logic Apps Standard は内部で Azure App Services をホスティングリソースとして活用しており、今回はその仕組みを応用したテクニックをご紹介いたします。</p>]]>
     </summary>
     <title>Azure Logic Apps Standard がホストされた App Service の OS 情報を取得してワークフロー内で使用する方法</title>
-    <updated>2026-06-28T22:31:39.144Z</updated>
+    <updated>2026-06-28T22:32:19.453Z</updated>
   </entry>
   <entry>
     <author>
@@ -394,7 +394,7 @@
 <p>今回の記事では続編として、Standard 版 Azure Logic Apps で料金をお見積りいただく際に、各資料を読み解いて理解するためのポイントをご紹介してまいります。</p>]]>
     </summary>
     <title>Standard 版 Azure Logic Apps の料金体系を理解するポイント</title>
-    <updated>2026-06-28T22:31:39.113Z</updated>
+    <updated>2026-06-28T22:32:19.416Z</updated>
   </entry>
   <entry>
     <author>
@@ -416,7 +416,7 @@
 <p>Logic Apps の [サービス プロバイダー接続] について説明いたします。</p>]]>
     </summary>
     <title>サービス プロバイダー接続について</title>
-    <updated>2026-06-28T22:31:39.198Z</updated>
+    <updated>2026-06-28T22:32:19.533Z</updated>
   </entry>
   <entry>
     <author>
@@ -438,6 +438,6 @@
 <p>今回はさらに Logic Apps における日付や時刻の判定に使えるシナリオとして「毎月第 1 月曜日に起動したい」場合の設定例をご紹介いたします。</p>]]>
     </summary>
     <title>Logic Apps で日付や時刻を判定してワークフローを制御する (2) - 毎月第 1 月曜日に起動したい</title>
-    <updated>2026-06-28T22:31:39.100Z</updated>
+    <updated>2026-06-28T22:32:19.403Z</updated>
   </entry>
 </feed>
